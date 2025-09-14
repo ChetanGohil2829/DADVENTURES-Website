@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>DADVENTURES</title>
+<link rel='stylesheet' href='css/style.css'>
+<link rel='stylesheet' href='css/responsive.css'>
+</head>
+<body>
+<header>
+<img src='images/logo.png' alt='DADVENTURES Logo' class='logo'>
+<nav>
+<ul>
+<li><a href='index.html' class='active'>Home</a></li>
+<li><a href='about.html'>About</a></li>
+<li><a href='events.html'>Events</a></li>
+<li><a href='contact.html'>Contact</a></li>
+</ul>
+</nav>
+</header>
+<main>
+<section class='hero'>
+<img src='images/hero-banner.jpg' alt='Nature Adventure Banner'>
+<h1>Welcome to DADVENTURES</h1>
+</section>
+<section class='audio-player'>
+<audio id='bg-audio' src='audio/relaxing-piano-ambient.mp3' preload='auto'></audio>
+<button id='play-pause'>Play</button>
+<input type='range' id='volume-slider' min='0' max='1' step='0.01'>
+</section>
+</main>
+<script src='js/audioPlayer.js'></script>
+<script src='js/main.js'></script>
+</body>
+</html>

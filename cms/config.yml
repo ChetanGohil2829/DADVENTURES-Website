@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: 'images/uploads'
+public_folder: '/images/uploads'
+collections:
+  - name: 'pages'
+    label: 'Pages'
+    folder: 'content/pages'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {label: 'Title', name: 'title', widget: 'string'}
+      - {label: 'Body', name: 'body', widget: 'markdown'}
+  - name: 'events'
+    label: 'Events'
+    folder: 'content/events'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {label: 'Event Name', name: 'name', widget: 'string'}
+      - {label: 'Date', name: 'date', widget: 'datetime'}
+      - {label: 'Description', name: 'description', widget: 'markdown'}
+  - name: 'audio'
+    label: 'Audio'
+    folder: 'content/audio'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - {label: 'Audio Title', name: 'title', widget: 'string'}
+      - {label: 'Audio File', name: 'file', widget: 'file'}
