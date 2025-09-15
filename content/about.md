@@ -1,1 +1,1 @@
-## About DADVENTURES\nWe create meaningful, memory-rich adventures for dads and kids.\n
+## About DADVENTURES\nAdventures for dads & kids.

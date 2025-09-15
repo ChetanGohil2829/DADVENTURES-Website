@@ -1,1 +1,1 @@
-# Welcome to DADVENTURES\nThis is your hub for adventures, hikes, skills and quality time together.\n
+# Welcome to DADVENTURES\nThis is your hub.
