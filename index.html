@@ -1,36 +1,85 @@
-<!DOCTYPE html>
-<html lang='en'>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<title>DADVENTURES</title>
-<link rel='stylesheet' href='css/style.css'>
-<link rel='stylesheet' href='css/responsive.css'>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dadventures</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 </head>
 <body>
-<header>
-<img src='images/logo.png' alt='DADVENTURES Logo' class='logo'>
-<nav>
-<ul>
-<li><a href='index.html' class='active'>Home</a></li>
-<li><a href='about.html'>About</a></li>
-<li><a href='events.html'>Events</a></li>
-<li><a href='contact.html'>Contact</a></li>
-</ul>
-</nav>
-</header>
-<main>
-<section class='hero'>
-<img src='images/hero-banner.jpg' alt='Nature Adventure Banner'>
-<h1>Welcome to DADVENTURES</h1>
-</section>
-<section class='audio-player'>
-<audio id='bg-audio' src='audio/relaxing-piano-ambient.mp3' preload='auto'></audio>
-<button id='play-pause'>Play</button>
-<input type='range' id='volume-slider' min='0' max='1' step='0.01'>
-</section>
-</main>
-<script src='js/audioPlayer.js'></script>
-<script src='js/main.js'></script>
+  <!-- Intro -->
+  <div id="intro" class="intro visible">
+    <img src="images/logo.png" alt="Dadventures Logo" class="intro-logo"/>
+    <img src="images/WELCOME_IMAGE.png" alt="Dadventures Welcome" class="welcome-art"/>
+    <div class="intro-message"><span id="typewriter"></span></div>
+    <div class="intro-controls"><button id="skipBtn" class="btn">Skip to Home</button></div>
+    <div class="audio-ui">
+      <button id="playPause" class="btn">â¸</button>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/>
+    </div>
+    <audio id="bgm" src="audio/relaxing-piano-ambient.mp3" preload="auto" loop></audio>
+  </div>
+
+  <!-- Main Pages -->
+  <header class="site-header">
+    <img src="images/logo.png" class="logo-top clickable" data-route="home" alt="Dadventures Logo"/>
+    <nav class="nav">
+      <a data-route="home">Home</a>
+      <a data-route="about">About</a>
+      <a data-route="events">Events</a>
+      <a data-route="contact">Contact</a>
+      <a data-route="shop">Shop</a>
+    </nav>
+  </header>
+
+  <main id="app">
+    <section id="home" class="route">
+      <h1>Home</h1>
+      <div class="card"><p id="home-hero"></p></div>
+      <div class="gallery-4">
+        <img src="images/gallery1.png" alt="Gallery 1"/>
+        <img src="images/gallery2.png" alt="Gallery 2"/>
+        <img src="images/gallery3.png" alt="Gallery 3"/>
+        <img src="images/gallery4.png" alt="Gallery 4"/>
+      </div>
+    </section>
+
+    <section id="about" class="route hidden">
+      <h1>About Us</h1>
+      <div class="card"><div id="about-content"></div></div>
+    </section>
+
+    <section id="events" class="route hidden">
+      <h1>Events</h1>
+      <div id="calendar" class="card"></div>
+    </section>
+
+    <section id="contact" class="route hidden">
+      <h1>Contact Us</h1>
+      <form name="contact" method="POST" data-netlify="true" class="card form">
+        <input type="hidden" name="form-name" value="contact" />
+        <label>Name <input type="text" name="name" required></label>
+        <label>Email <input type="email" name="email" required></label>
+        <label>Message <textarea name="message" rows="4"></textarea></label>
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </section>
+
+    <section id="shop" class="route hidden">
+      <h1>Shop</h1>
+      <div class="card">
+        <ul id="shop-items"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Â© 2025 Dadventures</p>
+    <p><a href="guides/Dadventures-Guides.zip" target="_blank">ðŸ“– Help / User Guide</a></p>
+  </footer>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
