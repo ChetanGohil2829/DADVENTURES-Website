@@ -16,33 +16,37 @@ a{color:var(--gold); text-decoration:none}
 .hidden{display:none}
 .visible{display:block}
 
-/* Intro layout (full screen overlay) */
+/* Intro full-screen cover */
 .intro{
   position:fixed; inset:0; z-index:1000;
   display:flex; flex-direction:column; align-items:center;
-  justify-content:flex-start; gap:20px; background:#000;
-  animation: fadeIn .4s ease;
+  justify-content:flex-start; gap:16px; background:#000;
+  animation: fadeIn .3s ease;
 }
 .welcome-art{
-  width:100%; height:auto; display:block; margin:0 auto;
+  width:100vw; height:100vh; object-fit:cover; display:block;
   background:transparent; mix-blend-mode:screen;
 }
 .intro-message{
-  margin: 6px auto 0; padding:0 24px;
-  font-size: clamp(18px, 2.2vw, 26px);
-  text-align:center;
-  text-shadow:2px 2px 6px rgba(0,0,0,.6);
-  max-width: 1100px;
-}
-.audio-ui{
-  position:absolute; right:20px; bottom:20px; display:flex; gap:8px; align-items:center;
-}
-.btn{
-  background:var(--bronze); color:#fff; border:none;
-  padding:10px 16px; border-radius:8px; cursor:pointer; font-size:16px;
-  box-shadow:0 0 12px rgba(255,210,117,.25);
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom:100px; width:min(1100px, 90vw);
+  text-align:center; font-size:clamp(18px,2.2vw,26px);
+  color: var(--paper); text-shadow:2px 2px 6px rgba(0,0,0,.7);
+  padding:0 16px;
 }
 #skipBtn{ position:absolute; left:20px; bottom:20px }
+
+/* Floating music controls */
+#music-controls{
+  position:fixed; bottom:20px; right:20px; z-index:1100;
+  display:flex; align-items:center; gap:10px;
+  background:rgba(0,0,0,0.6); border-radius:12px; padding:8px 12px;
+  box-shadow:0 0 12px rgba(255,200,100,.4);
+}
+#music-controls button{
+  background:none; border:none; color:var(--gold); font-size:20px; cursor:pointer;
+}
+#music-controls input[type=range]{ accent-color: var(--gold); cursor:pointer; width:140px; }
 
 /* Header / Nav */
 .site-header{
@@ -52,20 +56,25 @@ a{color:var(--gold); text-decoration:none}
   display:flex; align-items:center; justify-content:space-between;
   padding:10px 16px;
 }
-.logo-top{ height:48px; mix-blend-mode:screen; background:transparent; cursor:pointer }
+.logo-top{ height:70px; max-height:10vh; width:auto; object-fit:contain; cursor:pointer; transition:transform .2s ease; mix-blend-mode:screen }
+.logo-top:hover{ transform:scale(1.05) }
 .nav a{ margin-left:16px }
 
-/* Cards + sections */
+/* Layout + readability */
 main{ width:min(1200px, 96%); margin: 30px auto 40px }
-.card{ background: rgba(0,0,0,.60); border-radius:12px; padding:18px; box-shadow:0 0 20px rgba(255,210,117,.15) }
+.card{ background: rgba(0,0,0,.60); border-radius:12px; padding:18px; box-shadow:0 0 20px rgba(255,210,117,.12) }
+.home-textbox{ background: rgba(0,0,0,0.68)!important; color:#f7f7f7; line-height:1.6; font-size:1.1rem }
+h1,h2{ color:#FFD56B }
+
 .gallery-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px }
-.gallery-4 img{ width:100%; border-radius:12px; background:transparent; mix-blend-mode:screen; box-shadow:0 0 20px rgba(255,210,117,.28) }
+.gallery-4 img{ width:100%; border-radius:12px; background:transparent; mix-blend-mode:screen; box-shadow:0 4px 20px rgba(0,0,0,.5) }
 img{ max-width:100%; height:auto }
 
-/* Calendar skin */
+/* Calendar skin + readability */
 .fc{ background:rgba(0,0,0,.6); border-radius:12px; padding:10px }
 .fc .fc-toolbar-title{ color:var(--gold) }
-.fc .fc-event{ background:#c0803c; border:none; border-radius:6px; padding:2px 4px }
+.fc .fc-event{ background:rgba(0,0,0,.8); color:#FFD56B; border:none; border-radius:6px; padding:2px 6px }
+.fc .fc-daygrid-day-number{ color:#f0e6c8 }
 
 /* Footer */
 .site-footer{ text-align:center; padding:18px; background:rgba(0,0,0,.65) }
@@ -75,15 +84,10 @@ img{ max-width:100%; height:auto }
 @keyframes fadeOut{ to { opacity:0; visibility:hidden } }
 @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
 
-/* Range input styling (volume) */
-input[type=range]{
-  -webkit-appearance:none; appearance:none; width:140px; height:6px; border-radius:6px;
-  background:rgba(255,255,255,.25); outline:none;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%;
-  background:var(--gold); cursor:pointer; box-shadow:0 0 6px rgba(255,210,117,.5);
-}
-input[type=range]::-moz-range-thumb{
-  width:18px; height:18px; border-radius:50%; background:var(--gold); border:none; cursor:pointer;
-}
+/* Shop */
+.shop-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:16px }
+.product{ background:rgba(0,0,0,.55); border-radius:12px; padding:14px; text-align:center; box-shadow:0 0 14px rgba(0,0,0,.35) }
+.p-thumb{ height:120px; border-radius:10px; background:linear-gradient(135deg, rgba(255,210,117,.25), rgba(139,94,60,.25)); margin-bottom:10px }
+.p-name{ color:#FFD56B; font-weight:700; margin-bottom:6px }
+.p-price{ color:#f4e9cf; margin-bottom:8px }
+.p-buy{ display:inline-block; background:#8b5e3c; color:#fff; padding:6px 12px; border-radius:8px }
