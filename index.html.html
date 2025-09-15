@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DADVENTURES</title>
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/styles.css">
 <script defer src="js/app.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js" defer></script>
@@ -15,16 +15,18 @@
 </audio>
 <div id="music-controls">
   <button id="music-toggle">Play</button>
-  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.7" />
+  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.7">
 </div>
 <div id="intro" class="intro visible">
-  <img src="images/WELCOME_IMAGE.png" class="welcome-art" alt="welcome" />
+  <img src="images/logo.png" alt="Logo" class="intro-logo">
+  <h1 class="site-title">DADVENTURES</h1>
   <div id="intro-message" class="intro-message"></div>
+  <img src="images/WELCOME_IMAGE.png" alt="Bonsai" class="bonsai">
   <button id="skipBtn">Skip to Home</button>
   <button id="enableSound" class="hidden">Enable Sound</button>
 </div>
 <header class="site-header">
-  <img src="images/logo.png" class="logo-top clickable" data-route="home" alt="logo" />
+  <img src="images/logo.png" class="logo-top clickable" data-route="home" alt="logo">
   <nav>
     <a data-route="home">Home</a>
     <a data-route="about">About</a>
@@ -38,10 +40,10 @@
 <h1>Home</h1>
 <div class="card home-textbox"><div id="home-hero"></div></div>
 <div class="gallery-4">
-  <img src="images/gallery1.png" />
-  <img src="images/gallery2.png" />
-  <img src="images/gallery3.png" />
-  <img src="images/gallery4.png" />
+  <img src="images/gallery1.png">
+  <img src="images/gallery2.png">
+  <img src="images/gallery3.png">
+  <img src="images/gallery4.png">
 </div>
 </section>
 <section id="about" class="route hidden">
@@ -55,9 +57,9 @@
 <section id="contact" class="route hidden">
 <h1>Contact Us</h1>
 <form name="contact" method="POST" data-netlify="true" class="card form">
-<input type="hidden" name="form-name" value="contact" />
-<label>Name <input type="text" name="name" required /></label>
-<label>Email <input type="email" name="email" required /></label>
+<input type="hidden" name="form-name" value="contact">
+<label>Name <input type="text" name="name" required></label>
+<label>Email <input type="email" name="email" required></label>
 <label>Message <textarea name="message"></textarea></label>
 <button type="submit">Send</button>
 </form>
