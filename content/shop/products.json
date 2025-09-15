@@ -1,17 +1,14 @@
 [
   {
-    "name": "DADVENTURES T-Shirt",
-    "price": 20,
-    "link": "#"
+    "name": "T-Shirt",
+    "price": 20
   },
   {
-    "name": "Adventure Mug",
-    "price": 12,
-    "link": "#"
+    "name": "Mug",
+    "price": 12
   },
   {
-    "name": "Explorer Hoodie",
-    "price": 35,
-    "link": "#"
+    "name": "Hoodie",
+    "price": 35
   }
 ]
