@@ -1,20 +1,19 @@
-﻿body { margin:0; font-family: Arial, sans-serif; background:url('../images/BACKGROUND.png') no-repeat center center fixed; background-size:cover; color:#f4e9cf;}
-.intro{position:fixed; inset:0; background:#000; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; z-index:1000; padding:20px;}
-.intro-logo{max-height:120px; margin-bottom:20px;}
-.welcome-art{max-width:80%; height:auto; margin-top:auto; margin-bottom:20px;}
-.intro-message{margin:40px auto; font-size:1.5rem; text-align:center; color:#f4e9cf; text-shadow:2px 2px 6px rgba(0,0,0,0.6); max-width:80%;}
-.audio-ui{position:absolute; bottom:20px; right:20px;}
-.btn{background:#7a4d27; color:#fff; border:none; padding:10px 20px; margin:5px; border-radius:8px; cursor:pointer;}
-.site-header{display:flex; justify-content:space-between; align-items:center; padding:10px; background:rgba(0,0,0,0.5);}
-.logo-top{height:50px; cursor:pointer;}
-.nav a{margin-left:15px; color:#ffd275; text-decoration:none;}
-.card{background:rgba(0,0,0,0.6); padding:20px; margin:20px 0; border-radius:10px;}
-.gallery-4{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
-.gallery-4 img{width:100%; border-radius:8px;}
-.route.hidden{display:none;}
-.fc{background:rgba(0,0,0,0.6); border-radius:12px; padding:10px;}
-.fc-toolbar-title{color:#ffd275;}
-.fc-event{background:#c0803c; border:none; border-radius:6px; padding:2px 4px;}
-.form label{display:block; margin:.5rem 0;}
-.site-footer{background:rgba(0,0,0,0.7); padding:1rem; text-align:center; font-size:0.9rem;}
-.site-footer a{color:#ffd275;}
+﻿body { margin:0; font-family: Arial, sans-serif; background:url('../images/BACKGROUND.png') no-repeat center center fixed; background-size:cover; color:#f4e9cf; }
+.intro { position:fixed; inset:0; background:#000; display:flex; flex-direction:column; justify-content:flex-start; align-items:center; z-index:1000; padding:20px; }
+.welcome-art { max-width:90%; height:auto; display:block; margin:0 auto; mix-blend-mode:screen; background:transparent; }
+.intro-message { margin:40px auto; font-size:1.5rem; text-align:center; color:#f4e9cf; text-shadow:2px 2px 6px rgba(0,0,0,0.6); max-width:80%; }
+.audio-ui { position:absolute; bottom:20px; right:20px; }
+.btn { background:#7a4d27; color:#fff; border:none; padding:10px 20px; margin:5px; border-radius:8px; cursor:pointer; }
+.site-header { display:flex; justify-content:space-between; align-items:center; padding:10px; background:rgba(0,0,0,0.5); }
+.logo-top { height:50px; cursor:pointer; mix-blend-mode:screen; background:transparent; }
+.nav a { margin-left:15px; color:#ffd275; text-decoration:none; }
+.card { background:rgba(0,0,0,0.6); padding:20px; margin:20px 0; border-radius:10px; }
+.gallery-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.gallery-4 img { width:100%; border-radius:12px; mix-blend-mode:screen; background:transparent; box-shadow:0 0 20px rgba(255,210,117,0.3); }
+.route.hidden { display:none; }
+.fc { background:rgba(0,0,0,0.6); border-radius:12px; padding:10px; }
+.fc-toolbar-title { color:#ffd275; }
+.fc-event { background:#c0803c; border:none; border-radius:6px; padding:2px 4px; }
+.form label { display:block; margin:.5rem 0; }
+.site-footer { background:rgba(0,0,0,0.7); padding:1rem; text-align:center; font-size:0.9rem; }
+.site-footer a { color:#ffd275; }
