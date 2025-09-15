@@ -1,29 +1,32 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dadventures</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DADVENTURES</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 </head>
 <body>
-  <!-- Intro -->
-  <div id="intro" class="intro visible">
-    <img src="images/WELCOME_IMAGE.png" alt="Dadventures Welcome" class="welcome-art"/>
+
+  <!-- Intro (welcome image only; message typed by JS; no duplicate logo here) -->
+  <div id="intro" class="intro visible" role="dialog" aria-label="Welcome">
+    <img src="images/WELCOME_IMAGE.png" alt="Welcome artwork" class="welcome-art" />
     <div class="intro-message"><span id="typewriter"></span></div>
-    <div class="intro-controls"><button id="skipBtn" class="btn">Skip to Home</button></div>
+
     <div class="audio-ui">
-      <button id="playPause" class="btn">â¯</button>
-      <input id="volume" type="range" min="0" max="1" step="0.01" value="1"/>
+      <button id="playPause" class="btn" aria-label="Play/Pause">⏯</button>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"/>
     </div>
+
+    <button id="skipBtn" class="btn">Skip to Home</button>
     <audio id="bgm" src="audio/relaxing-piano-ambient.mp3" preload="auto" loop></audio>
   </div>
 
-  <!-- Main Pages -->
+  <!-- Header / Nav (logo top-left) -->
   <header class="site-header">
-    <img src="images/logo.png" class="logo-top clickable" data-route="home" alt="Dadventures Logo"/>
+    <img src="images/logo.png" class="logo-top clickable" data-route="home" alt="DADVENTURES logo"/>
     <nav class="nav">
       <a data-route="home">Home</a>
       <a data-route="about">About</a>
@@ -33,10 +36,11 @@
     </nav>
   </header>
 
+  <!-- Pages -->
   <main id="app">
     <section id="home" class="route">
       <h1>Home</h1>
-      <div class="card"><p id="home-hero"></p></div>
+      <div class="card"><div id="home-hero"></div></div>
       <div class="gallery-4">
         <img src="images/gallery1.png" alt="Gallery 1"/>
         <img src="images/gallery2.png" alt="Gallery 2"/>
@@ -58,7 +62,7 @@
     <section id="contact" class="route hidden">
       <h1>Contact Us</h1>
       <form name="contact" method="POST" data-netlify="true" class="card form">
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value="contact"/>
         <label>Name <input type="text" name="name" required></label>
         <label>Email <input type="email" name="email" required></label>
         <label>Message <textarea name="message" rows="4"></textarea></label>
@@ -68,15 +72,15 @@
 
     <section id="shop" class="route hidden">
       <h1>Shop</h1>
-      <div class="card">
-        <ul id="shop-items"></ul>
-      </div>
+      <div class="card"><ul id="shop-items"></ul></div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Â© 2025 Dadventures</p>
-    <p><a href="guides/Dadventures-Guides.zip" target="_blank">ðŸ“– Help / User Guide</a></p>
+    <p>© <span id="y"></span> DADVENTURES</p>
+    <p><a href="guides/Dadventures-Guides.zip" target="_blank" rel="noopener">📖 Help / User Guide</a></p>
+    <p class="social">Follow: <a href="#">Facebook</a> • <a href="#">Instagram</a></p>
+    <p><a href="selftest.html" target="_blank" rel="noopener">🔧 Run Self-Test</a></p>
   </footer>
 
   <script src="js/app.js"></script>

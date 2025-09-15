@@ -1,0 +1,38 @@
+
+backend:
+  name: git-gateway
+  branch: main
+media_folder: 'images'
+public_folder: '/images'
+collections:
+  - name: 'home'
+    label: 'Home'
+    files:
+      - file: 'content/home.md'
+        label: 'Home Content'
+        name: 'home'
+        fields: [{label:'Body', name:'body', widget:'markdown'}]
+  - name: 'about'
+    label: 'About'
+    files:
+      - file: 'content/about.md'
+        label: 'About Content'
+        name: 'about'
+        fields: [{label:'Body', name:'body', widget:'markdown'}]
+  - name: 'events'
+    label: 'Events'
+    files:
+      - file: 'content/events/events.json'
+        label: 'Events JSON'
+        name: 'events'
+        fields:
+          - label: Items
+            name: items
+            widget: list
+            fields:
+              - {label: Title,   name: title,   widget: string}
+              - {label: Start,   name: start,   widget: datetime}
+              - {label: End,     name: end,     widget: datetime, required: false}
+              - {label: Location,name: location,widget: string, required: false}
+              - {label: Map,     name: map,     widget: string, required: false}
+              - {label: Details, name: details, widget: text,    required: false}
