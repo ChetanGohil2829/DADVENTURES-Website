@@ -1,0 +1,122 @@
+﻿[
+    {
+        "title":  "Dadventures - Spring Ridge Walk",
+        "start":  "2025-09-26T09:00:00",
+        "end":  "2025-09-26T14:00:00",
+        "location":  "Box Hill, Surrey",
+        "map":  "https://maps.google.com/?q=Box+Hill+Surrey",
+        "route":  "Stepping Stones â†’ Broadwood Tower â†’ Juniper Top",
+        "image":  "images/event-1.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Forest Camp",
+        "start":  "2025-10-21T09:00:00",
+        "end":  "2025-10-21T14:00:00",
+        "location":  "Ashdown Forest, East Sussex",
+        "map":  "https://maps.google.com/?q=Ashdown+Forest",
+        "route":  "Base â†’ Pine Ridge â†’ Campfire",
+        "image":  "images/event-2.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Richmond Deer Trail",
+        "start":  "2025-11-20T09:00:00",
+        "end":  "2025-11-20T14:00:00",
+        "location":  "Richmond Park, London",
+        "map":  "https://maps.google.com/?q=Richmond+Park",
+        "route":  "Sheen Gate â†’ Pen Ponds â†’ Isabella",
+        "image":  "images/event-3.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Clifftop Coastal Hike",
+        "start":  "2025-12-20T09:00:00",
+        "end":  "2025-12-20T14:00:00",
+        "location":  "Seven Sisters, Sussex",
+        "map":  "https://maps.google.com/?q=Seven+Sisters+Sussex",
+        "route":  "Visitor Centre â†’ Birling Gap",
+        "image":  "images/event-4.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Family Orienteering",
+        "start":  "2026-01-19T09:00:00",
+        "end":  "2026-01-19T14:00:00",
+        "location":  "Windsor Great Park",
+        "map":  "https://maps.google.com/?q=Windsor+Great+Park",
+        "route":  "Savill Garden â†’ Totem Trail",
+        "image":  "images/event-5.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Night Sky Camp",
+        "start":  "2026-02-18T09:00:00",
+        "end":  "2026-02-18T14:00:00",
+        "location":  "South Downs",
+        "map":  "https://maps.google.com/?q=South+Downs",
+        "route":  "Meadow Base â†’ Star Field",
+        "image":  "images/event-6.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Riverbank Walk",
+        "start":  "2026-03-20T09:00:00",
+        "end":  "2026-03-20T14:00:00",
+        "location":  "Thames Path",
+        "map":  "https://maps.google.com/?q=Thames+Path",
+        "route":  "Kew â†’ Hammersmith",
+        "image":  "images/event-7.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Woodcraft Skills",
+        "start":  "2026-04-19T09:00:00",
+        "end":  "2026-04-19T14:00:00",
+        "location":  "Epping Forest",
+        "map":  "https://maps.google.com/?q=Epping+Forest",
+        "route":  "Ranger Hut â†’ Crafts Circle",
+        "image":  "images/event-8.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Hill Fort Loop",
+        "start":  "2026-05-19T09:00:00",
+        "end":  "2026-05-19T14:00:00",
+        "location":  "Old Sarum",
+        "map":  "https://maps.google.com/?q=Old+Sarum",
+        "route":  "Museum â†’ Hill Fort",
+        "image":  "images/event-9.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Autumn Colours Hike",
+        "start":  "2026-06-18T09:00:00",
+        "end":  "2026-06-18T14:00:00",
+        "location":  "New Forest",
+        "map":  "https://maps.google.com/?q=New+Forest",
+        "route":  "Brockenhurst â†’ Tall Trees",
+        "image":  "images/event-10.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - Frosty Morning Walk",
+        "start":  "2026-07-18T09:00:00",
+        "end":  "2026-07-18T14:00:00",
+        "location":  "Hampstead Heath",
+        "map":  "https://maps.google.com/?q=Hampstead+Heath",
+        "route":  "Kenwood â†’ Parliament Hill",
+        "image":  "images/event-11.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    },
+    {
+        "title":  "Dadventures - New Year Kickoff",
+        "start":  "2026-08-17T09:00:00",
+        "end":  "2026-08-17T14:00:00",
+        "location":  "Greenwich Park",
+        "map":  "https://maps.google.com/?q=Greenwich+Park",
+        "route":  "Royal Observatory Loop",
+        "image":  "images/event-12.jpg",
+        "description":  "Family-friendly. Bring water/snacks and good shoes."
+    }
+]

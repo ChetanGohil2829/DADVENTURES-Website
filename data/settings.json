@@ -1,0 +1,25 @@
+﻿{
+  "theme":{
+    "primary":"#f0d080",
+    "text":"#f7e9c0",
+    "bg":"#0b0b0b",
+    "glow":0.28,
+    "buttonRadius":12,
+    "buttonPadding":"10px 18px",
+    "fontHead":"Montserrat, Arial, sans-serif",
+    "fontBody":"Inter, Arial, sans-serif",
+    "welcomeSpeedMs":28,
+    "welcomeDelayToHomeSec":30
+  },
+  "links":{
+    "facebook":"https://facebook.com",
+    "instagram":"https://instagram.com"
+  },
+  "payments":{
+    "stripeTestLink":"https://buy.stripe.com/test_4gw5kF0Ck6KQfke5kk",
+    "paypalSandboxLink":"https://www.sandbox.paypal.com/donate?hosted_button_id=TESTBUTTONID"
+  },
+  "owner":{
+    "email_bcc":"owner@example.com"
+  }
+}

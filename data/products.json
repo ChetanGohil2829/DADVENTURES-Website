@@ -1,0 +1,5 @@
+﻿[
+  {"name":"Dadventures T-Shirt","price":15,"img":"images/shop-shirt.jpg","pay":"https://buy.stripe.com/test_4gw5kF0Ck6KQfke5kk"},
+  {"name":"Dadventures Mug","price":10,"img":"images/shop-mug.jpg","pay":"https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TESTBUTTONID"},
+  {"name":"Dadventures Hoodie","price":25,"img":"images/shop-hoodie.jpg","pay":"https://buy.stripe.com/test_7sI4hR7Qk8yY9C8dQQ"}
+]

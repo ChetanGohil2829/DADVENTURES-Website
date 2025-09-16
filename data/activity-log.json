@@ -1,0 +1,9 @@
+﻿[
+  {"ts":"2025-09-12T09:30:00Z","user":"Chetan","action":"Page Edit","details":"Updated Home Page [Demo]"},
+  {"ts":"2025-09-12T09:45:00Z","user":"Emma","action":"Event Added","details":"Added Spring Ridge Walk [Demo]"},
+  {"ts":"2025-09-12T10:10:00Z","user":"Chetan","action":"Shop Update","details":"Added T-Shirt (Â£15) [Demo]"},
+  {"ts":"2025-09-12T11:05:00Z","user":"Emma","action":"Donation","details":"Sarah donated Â£20 [Demo]"},
+  {"ts":"2025-09-12T11:30:00Z","user":"Chetan","action":"Purchase","details":"John purchased Cap (Â£12) [Demo]"},
+  {"ts":"2025-09-12T12:00:00Z","user":"Emma","action":"Rollback","details":"Restored Events backup [Demo]"},
+  {"ts":"2025-09-12T14:00:00Z","user":"Emma","action":"Contact Form","details":"Lucy submitted Join Dadventures [Demo]"}
+]

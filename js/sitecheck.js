@@ -1,45 +1,62 @@
-(async function(){
-  const panel = document.getElementById('debugPanel');
-  const log = (msg, cls='ok')=>{ const d=document.createElement('div'); d.textContent=msg; d.className=cls; panel.appendChild(d); };
-  const pass = m => log('✓ '+m,'ok');
-  const warn = m => log('! '+m,'warn');
-  const fail = m => log('✖ '+m,'err');
+﻿(function(){
+  const log=[]; const add = m=>{log.push(m);};
+  function render(){ const el=document.getElementById("debugLog"); if(el){ el.textContent=log.join("\n"); } }
+  async function urlOk(u){ try{ const r=await fetch(u,{method:"HEAD"}); return r.ok; }catch(e){ return false; } }
+  async function check(){
+    add(`[${new Date().toLocaleTimeString()}] Site Check Started`);
 
-  // 1. Navigation routes present
-  const must = ['home','about','events','contact','shop'];
-  const missing = must.filter(id=>!document.getElementById(id));
-  missing.length? fail('Routes missing: '+missing.join(', ')) : pass('All routes present');
+    // Music
+    try{
+      const a = document.getElementById("bgAudio");
+      const playBtn = document.getElementById("playBtn");
+      const vol = document.getElementById("volume");
+      if(a && playBtn && vol){ add("Audio: âœ… controls present"); } else { add("Audio: âŒ controls missing"); }
+    }catch(e){ add("Audio: âŒ error "+e.message); }
 
-  // 2. Social links valid
-  const soc = Array.from(document.querySelectorAll('footer a'));
-  const bad = soc.filter(a=>!a.getAttribute('href') || a.getAttribute('href')==='#');
-  bad.length? fail('Social links placeholder found') : pass('Social links ok');
+    // Nav + socials
+    try{
+      const need = ["linkHome","linkAbout","linkEvents","linkContact","linkShop"];
+      const ok = need.every(id=>document.getElementById(id));
+      add(ok? "Nav: âœ… all tabs present":"Nav: âŒ missing tabs");
+      const fb = document.getElementById("linkFB")?.href||"";
+      const ig = document.getElementById("linkIG")?.href||"";
+      add((fb.includes("http")&&ig.includes("http"))?"Socials: âœ… ok":"Socials: âŒ missing/placeholder");
+    }catch(e){ add("Nav: âŒ error "+e.message); }
 
-  // 3. Audio element wired
-  const audio = document.getElementById('bg-music');
-  if(!audio) fail('Audio element missing'); else pass('Audio element present');
+    // Search
+    try{
+      const s = document.getElementById("siteSearch");
+      add(s? "Search: âœ… present":"Search: âŒ not found");
+    }catch(e){ add("Search: âŒ error "+e.message); }
 
-  // 4. Search box present
-  const sb = document.getElementById('site-search');
-  sb ? pass('Search input present') : fail('Search input missing');
+    // Data files
+    try{
+      const ev = await fetch("data/events.json").then(r=>r.json()); add(`Events: âœ… loaded ${ev.length}`);
+    }catch(_){ add("Events: âŒ cannot load data/events.json"); }
+    try{
+      const pr = await fetch("data/products.json").then(r=>r.json()); add(`Shop: âœ… loaded ${pr.length} products`);
+    }catch(_){ add("Shop: âŒ cannot load data/products.json"); }
 
-  // 5. Data files exist
-  try{ await fetch('content/events/events.json').then(r=>r.json()); pass('Events data loaded'); }catch{ fail('Events data missing'); }
-  try{ await fetch('content/shop/products.json').then(r=>r.json()); pass('Shop data loaded'); }catch{ fail('Shop data missing'); }
+    // Images required
+    const images = ["images/logo.svg","images/bg-bronze-net.svg","images/welcome-bonsai.svg"];
+    for(const p of images){ add(await urlOk(p)? `Image: âœ… ${p}`:`Image: âŒ ${p} missing`); }
 
-  // 6. Email templates exist
-  const e1 = await fetch('emails/purchase.html'); e1.ok? pass('Purchase email present') : fail('Purchase email missing');
-  const e2 = await fetch('emails/donation.html'); e2.ok? pass('Donation email present') : fail('Donation email missing');
+    // Payments
+    try{
+      const stripe = document.getElementById("donateHeader")?.href||"";
+      const paypal = document.getElementById("donateFooter")?.href||"";
+      add((stripe && paypal)? "Donations: âœ… links set" : "Donations: âŒ links missing");
+    }catch(e){ add("Donations: âŒ error"); }
 
-  // 7. Quick search test after shop loads
-  await new Promise(r=>setTimeout(r, 300));
-  if(sb){
-    sb.value='mug'; sb.dispatchEvent(new Event('input'));
-    await new Promise(r=>setTimeout(r, 50));
-    const any = Array.from(document.querySelectorAll('.product')).some(x=>x.style.display!== 'none');
-    any? pass('Search filter shows results') : warn('Search showed no visible products (may be waiting for shop load)');
-    sb.value=''; sb.dispatchEvent(new Event('input'));
+    // Contact form presence
+    add(document.querySelector("form[name='contact']")? "Contact: âœ… form present":"Contact: âŒ form missing");
+
+    // Admin link check (file exists)
+    add(await urlOk("admin/index.html")? "CMS: âœ… admin placeholder reachable":"CMS: âŒ admin missing");
+
+    add("Site Check Complete");
+    render();
   }
-
-  log('Debug ready. Click Debug to hide/show.', 'warn');
+  window.DADDBG = {add,render,check};
+  window.addEventListener("load", ()=>{ setTimeout(()=>check(), 250); });
 })();

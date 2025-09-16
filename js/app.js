@@ -1,154 +1,133 @@
-// Helpers
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
-const dbgPanel = $('#debugPanel');
-const dbg = {
-  add(msg, isErr){ const p=document.createElement('div'); p.textContent=(isErr?'✖ ':'✓ ')+msg; p.className=isErr?'err':'ok'; dbgPanel.appendChild(p); dbgPanel.scrollTop=dbgPanel.scrollHeight; },
-  warn(msg){ const p=document.createElement('div'); p.textContent='! '+msg; p.className='warn'; dbgPanel.appendChild(p); dbgPanel.scrollTop=dbgPanel.scrollHeight; },
-  clear(){ dbgPanel.innerHTML=''; }
-};
+﻿(function(){
+  // Settings
+  let SETTINGS={theme:{},links:{},payments:{}};
+  fetch("data/settings.json").then(r=>r.json()).then(j=>SETTINGS=j);
 
-// Sections & simple router
-const sections = ['intro','home','about','events','contact','shop'];
-function show(id){
-  sections.forEach(s => $('#'+s).classList.remove('show'));
-  $('#'+id).classList.add('show');
-  $$('nav a').forEach(a=>a.classList.toggle('active', a.getAttribute('data-route')===id));
-  if(id!=='intro') window.location.hash = id;
-}
-
-function showRoute(id){
-  if(!sections.includes(id)){ dbg.add('Invalid route: '+id, true); return; }
-  show(id);
-  if(id==='home'){ ensureHome(); }
-  if(id==='about'){ ensureAbout(); }
-  if(id==='events'){ ensureEvents(); }
-  if(id==='shop'){ ensureShop(); }
-}
-
-// Welcome typing preserving spaces
-(function typing(){
-  const el = document.querySelector('.intro-message');
-  if(!el) return;
-  const text = el.textContent; el.textContent='';
-  let i=0;
-  (function step(){
-    if(i<text.length){
-      const ch=text[i++];
-      if(ch===' ') el.appendChild(document.createTextNode(' '));
-      else { const span=document.createElement('span'); span.textContent=ch; el.appendChild(span); }
-      setTimeout(step, 45); // elegant but quick
-    }else{
-      dbg.add('Welcome typing finished');
-      setTimeout(()=>showRoute('home'), 30000); // auto redirect 30s
+  // Welcome typing
+  window.addEventListener("DOMContentLoaded", ()=>{
+    const el = document.getElementById("welcomeText");
+    if(el){
+      const msg = "Step into a world where time slows, hearts connect, and every adventure lights the path toward a brighter future.";
+      fetch("data/settings.json").then(r=>r.json()).then(cfg=>{
+        const spd = cfg.theme.welcomeSpeedMs||28;
+        let i=0; (function type(){ if(i<msg.length){ el.textContent += msg[i++]; setTimeout(type, spd); } })();
+        const delay = (cfg.theme.welcomeDelayToHomeSec||30)*1000;
+        setTimeout(()=>{ window.location.href="home.html"; }, delay);
+      });
     }
-  })();
-})();
+  });
 
-// Audio controls
-const audio = $('#bg-music');
-const musicToggle = $('#musicToggle');
-const volume = $('#volume');
-let userInteracted=false;
+  // Music (element-based, mobile unlock)
+  window.addEventListener("DOMContentLoaded", ()=>{
+    const audio = document.getElementById("bgAudio");
+    const btn = document.getElementById("playBtn");
+    const vol = document.getElementById("volume");
+    if(!audio || !btn || !vol) return;
 
-function updateToggleLabel(){
-  musicToggle.textContent = audio.paused ? 'Play' : 'Pause';
-}
+    audio.loop = true;
+    audio.volume = 0.65;
+    function toggle(){
+      if(audio.paused){ audio.play().then(()=>{ btn.textContent="Pause"; }).catch(()=>{}); }
+      else { audio.pause(); btn.textContent="Play"; }
+    }
+    btn.addEventListener("click", toggle);
+    vol.addEventListener("input", ()=>{ audio.volume = +vol.value; });
+  });
 
-musicToggle.addEventListener('click', async ()=>{
-  userInteracted=true;
-  if(audio.paused){ try{ await audio.play(); }catch{} } else { audio.pause(); }
-  updateToggleLabel();
-});
-volume.addEventListener('input', ()=>{
-  // iOS restricts programmatic volume; this will work on most browsers
-  try{ audio.volume = Number(volume.value); }catch{}
-});
-// Attempt muted autoplay to "warm up" the audio
-document.addEventListener('DOMContentLoaded', async ()=>{
-  try{ audio.volume = 0; await audio.play(); dbg.add('Autoplay started (muted)'); }catch{ dbg.warn('Autoplay blocked'); }
-  volume.value = 0.6; try{ audio.volume = 0.6; }catch{}
-  updateToggleLabel();
-});
+  // Donate links
+  window.addEventListener("DOMContentLoaded", ()=>{
+    fetch("data/settings.json").then(r=>r.json()).then(c=>{
+      const h = document.getElementById("donateHeader"); if(h) h.href = c.payments.stripeTestLink||"#";
+      const f = document.getElementById("donateFooter"); if(f) f.href = c.payments.paypalSandboxLink||"#";
+      const fb = document.getElementById("linkFB"); if(fb) fb.href = c.links.facebook||"#";
+      const ig = document.getElementById("linkIG"); if(ig) ig.href = c.links.instagram||"#";
+    });
+  });
 
-// Nav bindings
-$$('[data-route]').forEach(el=>el.addEventListener('click', e=>{
-  e.preventDefault();
-  const t = e.currentTarget.getAttribute('data-route');
-  if(t) showRoute(t); else dbg.add('Broken nav item (no data-route)', true);
-}));
+  // Search (Home/About text + products)
+  function productCard(p){
+    return `<div class="card">
+      <img src="${p.img}" alt="${p.name}" style="width:100%;height:200px;object-fit:cover;border-radius:10px;border:1px solid rgba(240,208,128,0.2)"/>
+      <h3>${p.name}</h3><p>Â£${p.price}</p>
+      <a class="btn" href="${p.pay}" target="_blank" rel="noopener">Buy</a>
+    </div>`;
+  }
 
-// Debug toggle
-$('#debugToggle').addEventListener('click', ()=>{
-  $('#debugPanel').classList.toggle('show');
-});
+  async function runSearch(){
+    const box = document.getElementById("siteSearch");
+    const out = document.getElementById("homeResults");
+    if(!box || !out) return;
+    const q = box.value.trim().toLowerCase();
+    out.innerHTML = "";
+    if(!q) return;
 
-// Content loaders
-async function ensureHome(){
-  const container = $('#homeContent');
-  if(container.dataset.loaded) return;
-  const res = await fetch('content/home/home.md').then(r=>r.text()).catch(()=>'');
-  const card = document.createElement('div'); card.className='card'; card.innerHTML = '<p>'+res.replace(/\n/g,'<br>')+'</p>';
-  container.appendChild(card);
-  container.dataset.loaded='1';
-}
-async function ensureAbout(){
-  const el = $('#aboutContent');
-  if(el.dataset.loaded) return;
-  const res = await fetch('content/about/about.md').then(r=>r.text()).catch(()=>'');
-  el.innerHTML = '<div>'+res.replace(/\n/g,'<br>')+'</div>'; el.dataset.loaded='1';
-}
-async function ensureEvents(){
-  const list = $('#eventsList');
-  if(list.dataset.loaded) return;
-  const events = await fetch('content/events/events.json').then(r=>r.json());
-  events.forEach(ev=>{
-    const card=document.createElement('div'); card.className='card';
-    const date = new Date(ev.start);
+    const hits=[];
+    // Home text
+    const homeTxt = document.getElementById("homeText")?.textContent.toLowerCase()||"";
+    if(homeTxt.includes(q)) hits.push(`<div class="card"><h3>Home</h3><p>Text match found.</p></div>`);
+    // About text
+    try{
+      const t = await fetch("about.html").then(r=>r.text());
+      const m = t.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+      const a = (m?m[1]:t).replace(/<[^>]+>/g," ").toLowerCase();
+      if(a.includes(q)) hits.push(`<div class="card"><h3>About</h3><p>Text match found.</p><a class="btn" href="about.html">Open</a></div>`);
+    }catch(_){}
+    // Products
+    try{
+      const ps = await fetch("data/products.json").then(r=>r.json());
+      ps.filter(p=>p.name.toLowerCase().includes(q)).forEach(p=>hits.push(productCard(p)));
+    }catch(_){}
+    out.innerHTML = hits.length? hits.join("") : `<div class="card"><p>No results.</p></div>`;
+  }
+  window.addEventListener("DOMContentLoaded", ()=>{
+    const box = document.getElementById("siteSearch");
+    const btn = document.getElementById("searchBtn");
+    if(box && btn){ btn.addEventListener("click", runSearch); box.addEventListener("keydown", e=>{ if(e.key==="Enter") runSearch(); }); }
+  });
+
+  // Events page wire-up
+  window.addEventListener("DOMContentLoaded", ()=>{
+    const calEl = document.getElementById("calendar");
+    if(!calEl) return;
+    fetch("data/events.json").then(r=>r.json()).then(data=>{
+      const mapped = data.map(e=>({
+        title:e.title, start:e.start, end:e.end,
+        extendedProps:{location:e.location,map:e.map,route:e.route,image:e.image,description:e.description}
+      }));
+      const cal = new FullCalendar.Calendar(calEl, {
+        initialView:"dayGridMonth", height:"auto", events:mapped,
+        eventClick:(info)=>openEventModal(info.event)
+      });
+      cal.render();
+    });
+  });
+
+  window.openEventModal = function(ev){
+    const wrap = document.createElement("div");
+    wrap.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;z-index:9999";
+    const card = document.createElement("div");
+    card.className="card"; card.style.cssText="max-width:760px;width:92vw";
     card.innerHTML = `
-      <img src="${ev.image}" alt="Event image"/>
       <h3>${ev.title}</h3>
-      <p><b>${date.toDateString()}</b> — ${ev.location}</p>
-      <p>${ev.route}</p>
-      <p><a href="${ev.map}" target="_blank" rel="noopener">Open map</a></p>
-    `;
-    list.appendChild(card);
-  });
-  list.dataset.loaded='1';
-}
-async function ensureShop(){
-  const grid = $('#shopGrid');
-  if(grid.dataset.loaded) return;
-  const prods = await fetch('content/shop/products.json').then(r=>r.json());
-  prods.forEach(p=>{
-    const card=document.createElement('div'); card.className='card product';
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}"/>
-      <h3>${p.name}</h3>
-      <p>${p.price}</p>
-      <a class="btn" href="${p.link}">Buy</a>
-    `;
-    grid.appendChild(card);
-  });
-  grid.dataset.loaded='1';
-}
+      <p><span class="badge">When</span> ${new Date(ev.start).toLocaleString()} ${ev.end?(" - "+new Date(ev.end).toLocaleString()):""}</p>
+      <p><span class="badge">Where</span> ${ev.extendedProps.location} â€” <a class="btn" href="${ev.extendedProps.map}" target="_blank" rel="noopener">Open map</a></p>
+      <p><span class="badge">Route</span> ${ev.extendedProps.route||""}</p>
+      ${ev.extendedProps.image? `<img src="${ev.extendedProps.image}" style="width:100%;height:240px;object-fit:cover;border-radius:10px;border:1px solid rgba(240,208,128,0.2)"/>`:``}
+      <p>${ev.extendedProps.description||""}</p>
+      <div id="cd" class="badge" style="margin-top:8px">Loading countdown...</div>
+      <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" onclick="document.body.removeChild(document.getElementById('evModalWrap'))">Close</button>
+      </div>`;
+    const shell = document.createElement("div"); shell.id="evModalWrap"; shell.appendChild(card);
+    wrap.appendChild(shell); document.body.appendChild(wrap);
+    function tick(){
+      const out=document.getElementById("cd"); if(!out) return;
+      const diff = new Date(ev.start)-new Date();
+      if(diff<=0){ out.textContent="Event started"; return; }
+      const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+      out.textContent = `Starts in: ${d}d ${h}h ${m}m ${s}s`;
+      requestAnimationFrame(tick);
+    } tick();
+  };
 
-// Search (filters home/about text and products by name)
-$('#site-search').addEventListener('input', e=>{
-  const q=e.target.value.toLowerCase().trim();
-  // Filter products cards
-  $$('.product').forEach(card=>{
-    const txt = card.textContent.toLowerCase();
-    card.style.display = txt.includes(q)?'':'none';
-  });
-  // Simple highlight in home/about
-  ['homeContent','aboutContent'].forEach(id=>{
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.style.outline = q ? '1px dashed rgba(230,193,74,.45)' : 'none';
-  });
-  dbg.add("Search query '"+q+"'", false);
-});
-
-// Initial section
-if(location.hash && sections.includes(location.hash.slice(1))) showRoute(location.hash.slice(1));
+})();

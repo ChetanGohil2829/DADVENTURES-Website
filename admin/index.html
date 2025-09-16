@@ -1,0 +1,129 @@
+﻿<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DADVENTURES â€” Admin</title>
+<link rel="stylesheet" href="../css/style.css"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<main class="container">
+  <div class="card">
+    <h2>Admin Dashboard (Black + Gold)</h2>
+    <p class="badge">Demo</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <canvas id="visitors" height="160"></canvas>
+      <div class="card">
+        <h3>Totals</h3>
+        <div id="totals"></div>
+        <button class="btn" id="exportCSV">Export CSV</button>
+        <button class="btn" id="exportPNG">Export Graph PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Recent Activity</h3>
+    <input id="logSearch" class="card" placeholder="Search activity..."/>
+    <div style="display:flex;gap:8px;margin:8px 0">
+      <select id="logFilter" class="card">
+        <option value="">All</option>
+        <option>Page Edit</option><option>Event Added</option><option>Shop Update</option>
+        <option>Donation</option><option>Purchase</option><option>Rollback</option><option>Contact Form</option>
+      </select>
+      <button class="btn" id="exportLogCSV">Export Activity CSV</button>
+    </div>
+    <div id="logList" class="grid"></div>
+  </div>
+
+  <div class="card">
+    <h3>Demo Data Management</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="clearAll">Clear All Demo</button>
+      <button class="btn" id="seedAll">Re-seed All Demo</button>
+      <button class="btn" id="clearEvents">Clear Events</button>
+      <button class="btn" id="seedEvents">Re-seed Events</button>
+      <button class="btn" id="clearShop">Clear Shop</button>
+      <button class="btn" id="seedShop">Re-seed Shop</button>
+    </div>
+    <p class="badge">Actions are simulated for static environments (persist in localStorage).</p>
+  </div>
+</main>
+
+<script>
+const LS = {
+  get(k, fallback){ try{ const v=localStorage.getItem(k); return v? JSON.parse(v): fallback; }catch(_){ return fallback; } },
+  set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
+};
+
+async function loadJSON(p){ const r=await fetch(p); return r.json(); }
+
+function mkCSV(rows){
+  const esc = s => `"${String(s).replace(/"/g,'""')}"`;
+  return rows.map(r=>r.map(esc).join(",")).join("\n");
+}
+
+function download(name, dataUrl){
+  const a=document.createElement("a"); a.href=dataUrl; a.download=name; a.click();
+}
+
+async function init(){
+  const activity = LS.get("activity-log", await loadJSON("../data/activity-log.json"));
+  const prods = LS.get("products", await loadJSON("../data/products.json"));
+  const events = LS.get("events", await loadJSON("../data/events.json"));
+
+  // Visitors demo data (30 days)
+  const days=[...Array(30)].map((_,i)=>i+1);
+  const vals=[...Array(30)].map(()=> Math.floor(50+Math.random()*70));
+  const ctx=document.getElementById("visitors"); new Chart(ctx,{type:"line",data:{labels:days,datasets:[{label:"Visitors (Demo)",data:vals}]}});
+
+  // Totals (demo)
+  const donations = 520; const purchases = 240; const dcount=15; const pcount=8;
+  document.getElementById("totals").innerHTML = `
+    <p>Donations: <strong>Â£${donations}</strong> (${dcount}) [Demo]</p>
+    <p>Purchases: <strong>Â£${purchases}</strong> (${pcount}) [Demo]</p>
+    <p>Events loaded: <strong>${events.length}</strong></p>
+    <p>Products loaded: <strong>${prods.length}</strong></p>`;
+
+  // Activity list + filters + search
+  const list = document.getElementById("logList");
+  function renderLog(){
+    const q = document.getElementById("logSearch").value.trim().toLowerCase();
+    const f = document.getElementById("logFilter").value;
+    const rows = activity.filter(a=> (!f || a.action===f) && (!q || JSON.stringify(a).toLowerCase().includes(q)));
+    list.innerHTML = rows.map(a=>`<div class="card"><strong>${a.action}</strong><br><span class="badge">${new Date(a.ts).toLocaleString()}</span><p>${a.details}</p></div>`).join("");
+  }
+  document.getElementById("logSearch").addEventListener("input", renderLog);
+  document.getElementById("logFilter").addEventListener("change", renderLog);
+  renderLog();
+
+  // Exports
+  document.getElementById("exportCSV").addEventListener("click", ()=>{
+    const rows = [["Metric","Value"],["Donations","Â£"+donations],["Purchases","Â£"+purchases],["Events",events.length],["Products",prods.length]];
+    const csv = "data:text/csv;charset=utf-8,"+encodeURIComponent(mkCSV(rows));
+    download("stats.csv", csv);
+  });
+  document.getElementById("exportPNG").addEventListener("click", ()=>{
+    const url = document.getElementById("visitors").toDataURL("image/png");
+    download("visitors.png", url);
+  });
+  document.getElementById("exportLogCSV").addEventListener("click", ()=>{
+    const rows = [["Timestamp","User","Action","Details"]].concat(activity.map(a=>[a.ts,a.user,a.action,a.details]));
+    const csv = "data:text/csv;charset=utf-8,"+encodeURIComponent(mkCSV(rows));
+    download("activity-log.csv", csv);
+  });
+
+  // Demo data controls (simulate via localStorage)
+  document.getElementById("clearAll").onclick = ()=>{ LS.set("events", []); LS.set("products", []); LS.set("activity-log", []); alert("Demo data cleared (local)"); };
+  document.getElementById("seedAll").onclick = async ()=>{
+    LS.set("events", await loadJSON("../data/events.json"));
+    LS.set("products", await loadJSON("../data/products.json"));
+    LS.set("activity-log", await loadJSON("../data/activity-log.json"));
+    alert("Demo data re-seeded (local)");
+  };
+  document.getElementById("clearEvents").onclick = ()=>{ LS.set("events", []); alert("Events cleared (local)"); };
+  document.getElementById("seedEvents").onclick = async ()=>{ LS.set("events", await loadJSON("../data/events.json")); alert("Events re-seeded (local)"); };
+  document.getElementById("clearShop").onclick = ()=>{ LS.set("products", []); alert("Shop cleared (local)"); };
+  document.getElementById("seedShop").onclick = async ()=>{ LS.set("products", await loadJSON("../data/products.json")); alert("Shop re-seeded (local)"); };
+}
+init();
+</script>
+</body></html>

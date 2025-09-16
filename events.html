@@ -1,0 +1,31 @@
+﻿<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DADVENTURES â€” Events</title>
+<link rel="stylesheet" href="css/style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+<script defer src="js/app.js"></script>
+<script defer src="js/sitecheck.js"></script>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <div class="left">
+      <a id="linkHome" href="home.html"><img class="logo" src="images/logo.svg" alt="Dadventures"/></a>
+      <a id="linkAbout" href="about.html">About</a>
+      <a id="linkEvents" href="events.html">Events</a>
+      <a id="linkContact" href="contact.html">Contact</a>
+      <a id="linkShop" href="shop.html">Shop</a>
+    </div>
+    <div class="right"><a class="btn" id="donateHeader" href="#">Donate</a></div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="card"><h2>Events Calendar</h2><div id="calendar"></div></div>
+</main>
+
+<footer class="footer"><p>Â© 2025 DADVENTURES</p></footer>
+<div class="debug-toggle"><button class="btn" onclick="document.querySelector('.debug-panel').style.display='block'">Debug</button></div>
+<div class="debug-panel"><pre id="debugLog"></pre></div>
+</body></html>

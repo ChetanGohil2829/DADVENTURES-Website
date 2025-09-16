@@ -1,16 +1,12 @@
+﻿# Dadventures â€” GUIDE
 
-# Dadventures – Quick Guide
+- Welcome page types message (spacing preserved), 30s auto-redirect to Home.
+- Music: click Play to unlock on mobile; Volume slider adjusts.
+- Search (Home): above title, filters Home/About text + Shop products.
+- Events: FullCalendar loads 12 seeded events; click event for modal + countdown + map link.
+- Shop: 3 demo items with payment links (test).
+- Contact: Netlify-form ready.
+- Admin: dashboard with charts, activity log, exports, demo data controls (local).
+- Debug: toggle bottom-left; auto-runs silently; shows âœ…/âŒ.
 
-- Edit text in `content/home/home.md` and `content/about/about.md`
-- Events live in `content/events/events.json` (title, times, map link, route, image)
-- Products live in `content/shop/products.json`
-- Emails: see `emails/purchase.html` and `emails/donation.html`
-- Audio loop in `audio/ambient.wav` (currently a small silent loop for policy-safe autoplay)
-- Debug panel: click **Debug** bottom-left (only shows when toggled). It verifies data files, social links, routes and basic search.
-
-## Welcome Screen
-- Auto-redirects to Home after 30s.
-- Music: autoplay muted; first tap/click enables audible playback. Volume slider controls volume on most browsers (iOS restricts programmatic volume).
-
-## Deploy
-- Zip this folder and upload to Netlify or GitHub Pages.
+Edit in data/settings.json, data/events.json, data/products.json. Replace images in /images and audio in /audio.
