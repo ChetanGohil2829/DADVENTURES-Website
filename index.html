@@ -1,127 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>DADVENTURES</title>
-<link rel="stylesheet" href="css/styles.css" />
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Dadventures</title>
+<link rel="icon" href="images/logo.svg" type="image/svg+xml"/>
+<link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-<audio id="bg-music" autoplay loop muted>
-  <source src="audio/relaxing-piano-ambient.mp3" type="audio/mpeg" />
-</audio>
-
-<!-- Controls bar -->
-<div id="music-controls" class="ui-bar">
-  <button id="music-toggle" class="btn" aria-label="Play or Pause">Play</button>
-  <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.7" aria-label="Volume slider" />
-</div>
-
-<!-- Welcome intro -->
-<div id="intro" class="intro visible" role="dialog" aria-label="Welcome screen">
-  <div class="intro-inner">
-    <div id="intro-message" class="intro-message"></div>
-    <div class="intro-bonsai-wrap">
-      <img src="images/WELCOME_IMAGE.png" class="intro-bonsai" alt="Bonsai tree art" />
-      <div class="intro-blend"></div>
-    </div>
-    <div class="intro-actions">
-      <button id="enableSound" class="btn hidden" aria-label="Enable sound">Enable Sound</button>
+<header class="site">
+  <div class="wrap header-inner">
+    <a class="brand" href="#" data-route="home"><img src="images/logo.svg" alt="Dadventures logo"/></a>
+    <nav>
+      <a href="#" data-route="home">Home</a>
+      <a href="#" data-route="about">About</a>
+      <a href="#" data-route="events">Events</a>
+      <a href="#" data-route="contact">Contact</a>
+      <a href="#" data-route="shop">Shop</a>
+    </nav>
+    <div class="controls">
+      <button id="musicToggle" class="btn" aria-label="Play/Pause music">Play</button>
+      <input id="volume" class="range" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Music volume"/>
     </div>
   </div>
-</div>
-
-<!-- Header -->
-<header class="site-header">
-  <div class="left">
-    <img src="images/logo.png" class="site-logo clickable" data-route="home" alt="DADVENTURES logo" />
-  </div>
-  <nav class="nav">
-    <a data-route="home">Home</a>
-    <a data-route="about">About</a>
-    <a data-route="events">Events</a>
-    <a data-route="contact">Contact</a>
-    <a data-route="shop">Shop</a>
-  </nav>
 </header>
 
-<!-- Search -->
-<div class="search-wrap">
-  <input id="site-search" class="search-bar" type="search" placeholder="Search site..." aria-label="Search" />
-</div>
+<!-- Welcome / Intro -->
+<section id="intro" class="intro section show" role="region" aria-label="Welcome">
+  <div class="intro-message">✨ Welcome to DADVENTURES — Step into a world where time slows, hearts connect, and every adventure lights the path toward a brighter future.</div>
+  <div class="controls">
+    <button id="debugToggle" class="btn debug-toggle">Debug</button>
+    <div id="debugPanel" class="debug-panel"></div>
+  </div>
+</section>
 
-<!-- App routes -->
-<main id="app">
-  <section id="home" class="route visible">
+<!-- Home -->
+<section id="home" class="section" role="region" aria-label="Home">
+  <div class="wrap">
+    <div class="search-wrap">
+      <input id="site-search" class="search-bar" placeholder="Search events, pages, or products…"/>
+    </div>
     <h1>Home</h1>
-    <div class="card home-textbox">
-      <div id="home-hero"></div>
-    </div>
-    <div class="gallery-4">
-      <img src="images/gallery1.png" alt="Gallery item 1" />
-      <img src="images/gallery2.png" alt="Gallery item 2" />
-      <img src="images/gallery3.png" alt="Gallery item 3" />
-      <img src="images/gallery4.png" alt="Gallery item 4" />
-    </div>
-  </section>
+    <div id="homeContent" class="grid home-grid"></div>
+  </div>
+</section>
 
-  <section id="about" class="route hidden">
+<section id="about" class="section" aria-label="About">
+  <div class="wrap">
     <h1>About</h1>
-    <div class="card"><div id="about-content"></div></div>
-  </section>
+    <div id="aboutContent" class="card"></div>
+  </div>
+</section>
 
-  <section id="events" class="route hidden">
+<section id="events" class="section" aria-label="Events">
+  <div class="wrap">
     <h1>Events</h1>
-    <div id="calendar" class="card"></div>
-    <div id="event-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event details">
-      <div class="modal-content">
-        <span id="event-close" class="modal-close" aria-label="Close">×</span>
-        <div id="event-body"></div>
-      </div>
-    </div>
-  </section>
+    <div id="eventsList" class="grid home-grid"></div>
+  </div>
+</section>
 
-  <section id="contact" class="route hidden">
+<section id="contact" class="section" aria-label="Contact">
+  <div class="wrap">
     <h1>Contact</h1>
-    <form name="contact" method="POST" data-netlify="true" class="card form" id="contact-form">
-      <input type="hidden" name="form-name" value="contact" />
-      <label>Name <input type="text" name="name" required /></label>
-      <label>Email <input type="email" name="email" required /></label>
-      <label>Message <textarea name="message" rows="4"></textarea></label>
-      <button class="btn" type="submit">Send</button>
-    </form>
-  </section>
-
-  <section id="shop" class="route hidden">
-    <h1>Shop</h1>
-    <div id="shop-grid" class="card shop-grid"></div>
-  </section>
-</main>
-
-<footer class="site-footer fade-in">
-  <p>© <span id="y"></span> DADVENTURES</p>
-  <p class="social">Follow: <a href="#" target="_blank" rel="noopener">Facebook</a> • <a href="#" target="_blank" rel="noopener">Instagram</a></p>
-</footer>
-
-<!-- Debug -->
-<button id="debug-toggle" class="btn debug-toggle" aria-label="Open debug">Debug</button>
-<div id="debug-panel" class="debug-panel hidden" aria-live="polite">
-  <div class="debug-header">
-    <strong>Debug Panel</strong>
-    <div class="debug-actions">
-      <button id="debug-runcheck" class="btn-small">Run Site Check</button>
-      <button id="debug-clear" class="btn-small">Clear</button>
-      <button id="debug-download" class="btn-small">Download</button>
-      <button id="debug-close" class="btn-small">Close</button>
+    <div class="card">
+      <p>Use the contact form (demo). Your message will appear in the activity log.</p>
+      <form id="contactForm">
+        <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <input required name="name" placeholder="Your name" class="pill"/>
+          <input required name="email" type="email" placeholder="Email" class="pill"/>
+        </div>
+        <textarea required name="message" rows="4" placeholder="Message" class="pill" style="width:100%;margin-top:10px"></textarea>
+        <button class="btn" style="margin-top:10px">Send</button>
+      </form>
+      <div id="contactOk" style="display:none;margin-top:10px" class="pill">Thanks — message recorded (demo).</div>
     </div>
   </div>
-  <div id="debug-summary" class="debug-summary" style="padding:8px 10px"></div>
-  <div id="debug-log" class="debug-log"></div>
-</div>
+</section>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js" defer></script>
-<script src="js/app.js" defer></script>
-<script src="js/sitecheck.js" defer></script>
+<section id="shop" class="section" aria-label="Shop">
+  <div class="wrap">
+    <h1>Shop</h1>
+    <div id="shopGrid" class="grid home-grid"></div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="links">
+      <a href="https://facebook.com/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <span>© 2025 DADVENTURES</span>
+    </div>
+  </div>
+</footer>
+
+<audio id="bg-music" src="audio/ambient.wav" loop preload="auto"></audio>
+
+<script src="js/app.js"></script>
+<script src="js/sitecheck.js"></script>
 </body>
 </html>

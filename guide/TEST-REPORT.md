@@ -1,1 +1,0 @@
-Fixed7: Auto site check includes email templates existence.
