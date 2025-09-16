@@ -11,11 +11,13 @@ h1,h2{color:var(--gold);text-shadow:0 0 8px rgba(230,193,74,.55)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
 .activity{max-height:260px;overflow:auto}
 .small{opacity:.85}
+.badge{display:inline-block;border:1px solid var(--gold);padding:2px 6px;border-radius:6px;margin-left:6px;font-size:12px}
 </style>
 </head><body>
 <h1>📊 Dadventures — Stats Dashboard</h1>
 <div class="grid">
-  <div class="card"><h2>Visitors (30 days)</h2><canvas id="visitors" width="600" height="240"></canvas><br>
+  <div class="card"><h2>Visitors (30 days) <span class="badge">Demo</span></h2>
+    <canvas id="visitors" width="600" height="240"></canvas><br>
     <button class="btn" id="pngVisitors">Export Graph (PNG)</button>
   </div>
   <div class="card"><h2>Totals</h2>
@@ -26,19 +28,14 @@ h1,h2{color:var(--gold);text-shadow:0 0 8px rgba(230,193,74,.55)}
 <div class="card"><h2>Recent Activity</h2><div id="activity" class="activity small">Loading…</div></div>
 
 <script>
-// Seeded demo data (30 days visitors)
 const labels=[], data=[]; for(let i=29;i>=0;i--){const d=new Date(); d.setDate(d.getDate()-i); labels.push(d.toISOString().slice(0,10)); data.push(Math.floor(50+Math.random()*80)); }
-
-// Draw simple line chart
 const c = document.getElementById('visitors'); const ctx = c.getContext('2d');
 function drawChart(){
   ctx.clearRect(0,0,c.width,c.height);
-  ctx.strokeStyle = '#e6c14a'; ctx.lineWidth = 2;
-  // axes
-  ctx.strokeStyle = 'rgba(255,255,255,.2)'; ctx.beginPath(); ctx.moveTo(40,10); ctx.lineTo(40,220); ctx.lineTo(580,220); ctx.stroke();
-  // line
+  ctx.strokeStyle = 'rgba(255,255,255,.2)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(40,10); ctx.lineTo(40,220); ctx.lineTo(580,220); ctx.stroke();
   const max = Math.max(...data)+10, min = Math.min(...data)-10;
-  ctx.strokeStyle = '#e6c14a'; ctx.beginPath();
+  ctx.strokeStyle = '#e6c14a'; ctx.lineWidth = 2; ctx.beginPath();
   data.forEach((v,i)=>{
     const x = 40 + (540*(i/(data.length-1)));
     const y = 220 - ((v-min)/(max-min))*200;
@@ -47,31 +44,23 @@ function drawChart(){
   ctx.stroke();
 }
 drawChart();
+document.getElementById('pngVisitors').onclick=()=>{ const a = document.createElement('a'); a.href = c.toDataURL('image/png'); a.download = 'dadventures-visitors.png'; a.click(); };
 
-// PNG Export
-document.getElementById('pngVisitors').onclick=()=>{
-  const a = document.createElement('a');
-  a.href = c.toDataURL('image/png'); a.download = 'dadventures-visitors.png'; a.click();
-};
-
-// Load activity log (seeded)
 fetch('../../logs/activity.json').then(r=>r.json()).then(arr=>{
   const act = document.getElementById('activity');
   if(!Array.isArray(arr) || !arr.length){ act.textContent='No activity yet.'; return; }
-  act.innerHTML = arr.slice(0,40).map(e=>`<div>• [${e.time}] ${e.type.toUpperCase()} — ${e.note||e.name||e.who||''} ${e.amount?('£'+e.amount):''}</div>`).join('');
-  // totals
+  act.innerHTML = arr.slice(0,50).map(e=>`<div>• [${e.time}] ${e.type.toUpperCase()} — ${e.note||e.name||e.who||''} ${e.amount?('£'+e.amount):''} ${e.demo?' <span class="badge">Demo</span>':''}</div>`).join('');
   const totals = arr.reduce((acc,e)=>{ if(e.type==='donation') {acc.don+=e.amount||0; acc.dc++;} if(e.type==='purchase'){acc.pur+=e.amount||0; acc.pc++;} if(e.type==='contact'){acc.cc++;} if(e.type==='event'){acc.ec++;} return acc; }, {don:0,dc:0,pur:0,pc:0,cc:0,ec:0});
   document.getElementById('totals').innerHTML = `
     <div>Donations: £${totals.don.toFixed(2)} (${totals.dc})</div>
     <div>Purchases: £${totals.pur.toFixed(2)} (${totals.pc})</div>
     <div>Contact submissions: ${totals.cc}</div>
     <div>Event clicks: ${totals.ec}</div>`;
-}).catch(()=>{ document.getElementById('activity').textContent='No activity yet.'; });
+});
 
-// CSV export
 document.getElementById('csvExport').onclick = async () => {
   const res = await fetch('../../logs/activity.json'); const arr = await res.json();
-  const rows = [['time','type','name','who','amount','note']].concat(arr.map(e=>[e.time||'',e.type||'',e.name||'',e.who||'',e.amount||'',e.note||'']));
+  const rows = [['time','type','name','who','amount','note','demo']].concat(arr.map(e=>[e.time||'',e.type||'',e.name||'',e.who||'',e.amount||'',e.note||'',e.demo?'Demo':'']));
   const csv = rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');
   const blob = new Blob([csv],{type:'text/csv'}); const url = URL.createObjectURL(blob);
   const a = document.createElement('a'); a.href=url; a.download='dadventures-activity.csv'; a.click(); setTimeout(()=>URL.revokeObjectURL(url),0);

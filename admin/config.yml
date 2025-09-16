@@ -23,7 +23,7 @@ collections:
         label: "Events"
         name: "eventslist"
         fields:
-          - {label:"Events", name:"events", widget:"list", fields: [
+          - {label:"Events", name:"", widget:"list", fields: [
               {label:"Title", name:"title", widget:"string"},
               {label:"Start", name:"start", widget:"datetime"},
               {label:"End", name:"end", widget:"datetime", required:false},
@@ -40,11 +40,12 @@ collections:
         label: "Products"
         name: "products"
         fields:
-          - {label:"Products", name:"products", widget:"list", fields:[
+          - {label:"Products", name:"", widget:"list", fields:[
               {label:"Name", name:"name", widget:"string"},
               {label:"Price", name:"price", widget:"number"},
-              {label:"Link (Stripe/PayPal)", name:"link", widget:"string"},
-              {label:"Image", name:"image", widget:"image", required:false}
+              {label:"Link", name:"link", widget:"string"},
+              {label:"Image", name:"image", widget:"image", required:false},
+              {label:"Description", name:"description", widget:"text", required:false}
             ]}
   - name: "settings"
     label: "Settings"
@@ -56,4 +57,20 @@ collections:
           - {label:"Owner Notification Email (BCC)", name:"ownerEmail", widget:"string", required:false}
           - {label:"Donate with Stripe (URL)", name:"stripeUrl", widget:"string", required:false}
           - {label:"Donate with PayPal (URL)", name:"paypalUrl", widget:"string", required:false}
-          - {label:"Analytics ID (GA4)", name:"ga4", widget:"string", required:false}
+          - {label:"Analytics ID (GA4/Plausible)", name:"analyticsId", widget:"string", required:false}
+          - {label:"Theme Primary Colour", name:"primaryColor", widget:"string", required:false, default:"#e6c14a"}
+          - {label:"Glow Intensity (0-1)", name:"glow", widget:"number", required:false, default:0.3}
+      - file: "content/presets.json"
+        label: "Theme Presets"
+        name: "presets"
+        fields:
+          - {label:"Presets", name:"presets", widget:"list", fields:[
+              {label:"Name", name:"name", widget:"string"},
+              {label:"Settings JSON", name:"settings", widget:"text"}
+            ]}
+      - file: "content/maintenance.json"
+        label: "Maintenance"
+        name: "maintenance"
+        fields:
+          - {label:"Clear Demo Data (set to 'all' or section name to clear on publish)", name:"clearDemo", widget:"string", required:false}
+          - {label:"Reseed Demo Data (set to 'all' or section name to reseed on publish)", name:"reseedDemo", widget:"string", required:false}

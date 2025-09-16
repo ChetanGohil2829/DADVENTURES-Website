@@ -1,20 +1,23 @@
 [
   {
-    "name": "DADVENTURES T\u2011Shirt",
-    "price": 20,
+    "name": "Dadventures T\u2011Shirt [Demo]",
+    "price": 15,
     "link": "#",
-    "image": "images/shop/tee.jpg"
+    "image": "images/shop/tee.jpg",
+    "description": "Soft cotton tee for adventures."
   },
   {
-    "name": "Adventure Mug",
-    "price": 12,
+    "name": "Dadventures Mug [Demo]",
+    "price": 10,
     "link": "#",
-    "image": "images/shop/mug.jpg"
+    "image": "images/shop/mug.jpg",
+    "description": "Warm drinks for trail tales."
   },
   {
-    "name": "Explorer Hoodie",
-    "price": 35,
+    "name": "Dadventures Hoodie [Demo]",
+    "price": 25,
     "link": "#",
-    "image": "images/shop/hoodie.jpg"
+    "image": "images/shop/hoodie.jpg",
+    "description": "Cozy hoodie for cool evenings."
   }
 ]

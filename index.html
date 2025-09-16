@@ -11,22 +11,28 @@
 <audio id="bg-music" autoplay loop muted>
   <source src="audio/relaxing-piano-ambient.mp3" type="audio/mpeg" />
 </audio>
+
+<!-- Controls bar -->
 <div id="music-controls" class="ui-bar">
   <button id="music-toggle" class="btn" aria-label="Play or Pause">Play</button>
   <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.7" aria-label="Volume slider" />
 </div>
 
+<!-- Welcome intro -->
 <div id="intro" class="intro visible" role="dialog" aria-label="Welcome screen">
   <div class="intro-inner">
     <div id="intro-message" class="intro-message"></div>
-    <img src="images/WELCOME_IMAGE.png" class="intro-bonsai" alt="Bonsai tree art" />
+    <div class="intro-bonsai-wrap">
+      <img src="images/WELCOME_IMAGE.png" class="intro-bonsai" alt="Bonsai tree art" />
+      <div class="intro-blend"></div>
+    </div>
     <div class="intro-actions">
-      <button id="skipBtn" class="btn" aria-label="Skip to Home">Skip to Home</button>
       <button id="enableSound" class="btn hidden" aria-label="Enable sound">Enable Sound</button>
     </div>
   </div>
 </div>
 
+<!-- Header -->
 <header class="site-header">
   <div class="left">
     <img src="images/logo.png" class="site-logo clickable" data-route="home" alt="DADVENTURES logo" />
@@ -37,14 +43,15 @@
     <a data-route="events">Events</a>
     <a data-route="contact">Contact</a>
     <a data-route="shop">Shop</a>
-    <a class="btn donate" id="donateBtnHeader">Donate</a>
   </nav>
 </header>
 
+<!-- Search -->
 <div class="search-wrap">
   <input id="site-search" class="search-bar" type="search" placeholder="Search site..." aria-label="Search" />
 </div>
 
+<!-- App routes -->
 <main id="app">
   <section id="home" class="route visible">
     <h1>Home</h1>
@@ -89,30 +96,32 @@
   <section id="shop" class="route hidden">
     <h1>Shop</h1>
     <div id="shop-grid" class="card shop-grid"></div>
-    <div class="donate-wrap"><a class="btn donate" id="donateBtnShop">Donate</a></div>
   </section>
 </main>
 
 <footer class="site-footer fade-in">
   <p>© <span id="y"></span> DADVENTURES</p>
   <p class="social">Follow: <a href="#" target="_blank" rel="noopener">Facebook</a> • <a href="#" target="_blank" rel="noopener">Instagram</a></p>
-  <p><a class="btn donate" id="donateBtnFooter">Donate</a></p>
 </footer>
 
+<!-- Debug -->
 <button id="debug-toggle" class="btn debug-toggle" aria-label="Open debug">Debug</button>
 <div id="debug-panel" class="debug-panel hidden" aria-live="polite">
   <div class="debug-header">
     <strong>Debug Panel</strong>
     <div class="debug-actions">
+      <button id="debug-runcheck" class="btn-small">Run Site Check</button>
       <button id="debug-clear" class="btn-small">Clear</button>
       <button id="debug-download" class="btn-small">Download</button>
       <button id="debug-close" class="btn-small">Close</button>
     </div>
   </div>
+  <div id="debug-summary" class="debug-summary" style="padding:8px 10px"></div>
   <div id="debug-log" class="debug-log"></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js" defer></script>
 <script src="js/app.js" defer></script>
+<script src="js/sitecheck.js" defer></script>
 </body>
 </html>

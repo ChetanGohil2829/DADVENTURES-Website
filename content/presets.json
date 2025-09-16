@@ -1,0 +1,16 @@
+{
+  "presets": [
+    {
+      "name": "Elegant",
+      "settings": "{\"primaryColor\":\"#e6c14a\",\"glow\":0.3}"
+    },
+    {
+      "name": "Modern",
+      "settings": "{\"primaryColor\":\"#5cc8ff\",\"glow\":0.2}"
+    },
+    {
+      "name": "Bold",
+      "settings": "{\"primaryColor\":\"#ff5c5c\",\"glow\":0.5}"
+    }
+  ]
+}

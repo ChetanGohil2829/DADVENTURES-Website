@@ -1,67 +1,74 @@
 [
   {
-    "type": "purchase",
-    "time": "2025-09-06T18:57:57.385402Z",
-    "amount": 10,
+    "type": "Page",
+    "time": "2025-09-13T05:39:26.200702Z",
+    "note": "Updated Home Page welcome text",
+    "who": "Chetan",
+    "demo": true
+  },
+  {
+    "type": "Event",
+    "time": "2025-09-13T06:39:26.200702Z",
+    "note": "Added Event: Dadventures Autumn Hike (2025-10-05)",
     "who": "Emma",
-    "note": "Test purchase"
+    "demo": true
   },
   {
-    "type": "event",
-    "time": "2025-09-03T05:57:57.385402Z",
-    "note": "Viewed Autumn Hike",
-    "who": "Visitor"
+    "type": "Shop",
+    "time": "2025-09-13T07:39:26.200702Z",
+    "note": "Added Product: Dadventures T-Shirt (\u00a315)",
+    "who": "Chetan",
+    "demo": true
   },
   {
-    "type": "purchase",
-    "time": "2025-09-12T04:57:57.385402Z",
+    "type": "Donation",
+    "time": "2025-09-13T08:39:26.200702Z",
+    "note": "Sarah donated",
+    "who": "Sarah",
     "amount": 20,
-    "who": "Emma",
-    "note": "Test purchase"
+    "demo": true
   },
   {
-    "type": "purchase",
-    "time": "2025-08-29T11:57:57.385402Z",
+    "type": "Purchase",
+    "time": "2025-09-13T09:39:26.200702Z",
+    "note": "John purchased Dadventures Cap",
+    "who": "John",
     "amount": 12,
+    "demo": true
+  },
+  {
+    "type": "Rollback",
+    "time": "2025-09-13T11:39:26.200702Z",
+    "note": "Restored Events (backup)",
     "who": "Emma",
-    "note": "Test purchase"
+    "demo": true
   },
   {
-    "type": "contact",
-    "time": "2025-08-29T14:57:57.385402Z",
-    "name": "Amir",
-    "note": "Submitted contact form"
+    "type": "Theme",
+    "time": "2025-09-13T12:39:26.200702Z",
+    "note": "Glow reduced 0.8 \u2192 0.4",
+    "who": "Chetan",
+    "demo": true
   },
   {
-    "type": "contact",
-    "time": "2025-09-04T19:57:57.385402Z",
-    "name": "Amir",
-    "note": "Submitted contact form"
-  },
-  {
-    "type": "donation",
-    "time": "2025-09-03T05:57:57.385402Z",
-    "amount": 12,
-    "who": "James",
-    "note": "Test donation"
-  },
-  {
-    "type": "donation",
-    "time": "2025-09-10T19:57:57.385402Z",
-    "amount": 10,
+    "type": "Contact",
+    "time": "2025-09-13T13:39:26.200702Z",
+    "note": "Lucy submitted: \u201cJoin Dadventures\u201d",
     "who": "Lucy",
-    "note": "Test donation"
+    "demo": true
   },
   {
-    "type": "event",
-    "time": "2025-08-29T14:57:57.385402Z",
-    "note": "Viewed Camping Night",
-    "who": "Visitor"
+    "type": "Event",
+    "time": "2025-09-13T14:39:26.200702Z",
+    "note": "Mike viewed Dadventures Winter Camp",
+    "who": "Mike",
+    "demo": true
   },
   {
-    "type": "event",
-    "time": "2025-09-12T23:57:57.385402Z",
-    "note": "Viewed Camping Night",
-    "who": "Visitor"
+    "type": "Shop",
+    "time": "2025-09-13T15:39:26.200702Z",
+    "note": "Added Product: Dadventures Mug (\u00a310)",
+    "who": "Emma",
+    "demo": true
   }
 ]

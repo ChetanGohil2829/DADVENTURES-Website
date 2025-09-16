@@ -2,5 +2,7 @@
   "ownerEmail": "",
   "stripeUrl": "#",
   "paypalUrl": "#",
-  "ga4": ""
+  "analyticsId": "",
+  "primaryColor": "#e6c14a",
+  "glow": 0.3
 }
