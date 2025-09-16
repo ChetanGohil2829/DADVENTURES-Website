@@ -1,0 +1,59 @@
+backend:
+  name: github
+  branch: main
+  repo: your-github-username/your-repo-name
+media_folder: "images"
+public_folder: "/images"
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "content/home.md"
+        label: "Home"
+        name: "home"
+        fields: [{label: "Body", name: "body", widget: "markdown"}]
+      - file: "content/about.md"
+        label: "About"
+        name: "about"
+        fields: [{label: "Body", name: "body", widget: "markdown"}]
+  - name: "events"
+    label: "Events"
+    files:
+      - file: "content/events/events.json"
+        label: "Events"
+        name: "eventslist"
+        fields:
+          - {label:"Events", name:"events", widget:"list", fields: [
+              {label:"Title", name:"title", widget:"string"},
+              {label:"Start", name:"start", widget:"datetime"},
+              {label:"End", name:"end", widget:"datetime", required:false},
+              {label:"Location", name:"location", widget:"string"},
+              {label:"Google Maps Link", name:"map", widget:"string"},
+              {label:"Route", name:"route", widget:"string", required:false},
+              {label:"Details", name:"details", widget:"text", required:false},
+              {label:"Image", name:"image", widget:"image", required:false}
+            ]}
+  - name: "shop"
+    label: "Shop"
+    files:
+      - file: "content/shop/products.json"
+        label: "Products"
+        name: "products"
+        fields:
+          - {label:"Products", name:"products", widget:"list", fields:[
+              {label:"Name", name:"name", widget:"string"},
+              {label:"Price", name:"price", widget:"number"},
+              {label:"Link (Stripe/PayPal)", name:"link", widget:"string"},
+              {label:"Image", name:"image", widget:"image", required:false}
+            ]}
+  - name: "settings"
+    label: "Settings"
+    files:
+      - file: "content/settings.json"
+        label: "Site Settings"
+        name: "settings"
+        fields:
+          - {label:"Owner Notification Email (BCC)", name:"ownerEmail", widget:"string", required:false}
+          - {label:"Donate with Stripe (URL)", name:"stripeUrl", widget:"string", required:false}
+          - {label:"Donate with PayPal (URL)", name:"paypalUrl", widget:"string", required:false}
+          - {label:"Analytics ID (GA4)", name:"ga4", widget:"string", required:false}

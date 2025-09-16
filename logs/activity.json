@@ -1,0 +1,67 @@
+[
+  {
+    "type": "purchase",
+    "time": "2025-09-06T18:57:57.385402Z",
+    "amount": 10,
+    "who": "Emma",
+    "note": "Test purchase"
+  },
+  {
+    "type": "event",
+    "time": "2025-09-03T05:57:57.385402Z",
+    "note": "Viewed Autumn Hike",
+    "who": "Visitor"
+  },
+  {
+    "type": "purchase",
+    "time": "2025-09-12T04:57:57.385402Z",
+    "amount": 20,
+    "who": "Emma",
+    "note": "Test purchase"
+  },
+  {
+    "type": "purchase",
+    "time": "2025-08-29T11:57:57.385402Z",
+    "amount": 12,
+    "who": "Emma",
+    "note": "Test purchase"
+  },
+  {
+    "type": "contact",
+    "time": "2025-08-29T14:57:57.385402Z",
+    "name": "Amir",
+    "note": "Submitted contact form"
+  },
+  {
+    "type": "contact",
+    "time": "2025-09-04T19:57:57.385402Z",
+    "name": "Amir",
+    "note": "Submitted contact form"
+  },
+  {
+    "type": "donation",
+    "time": "2025-09-03T05:57:57.385402Z",
+    "amount": 12,
+    "who": "James",
+    "note": "Test donation"
+  },
+  {
+    "type": "donation",
+    "time": "2025-09-10T19:57:57.385402Z",
+    "amount": 10,
+    "who": "Lucy",
+    "note": "Test donation"
+  },
+  {
+    "type": "event",
+    "time": "2025-08-29T14:57:57.385402Z",
+    "note": "Viewed Camping Night",
+    "who": "Visitor"
+  },
+  {
+    "type": "event",
+    "time": "2025-09-12T23:57:57.385402Z",
+    "note": "Viewed Camping Night",
+    "who": "Visitor"
+  }
+]

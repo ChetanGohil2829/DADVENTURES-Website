@@ -2,16 +2,19 @@
   {
     "name": "DADVENTURES T\u2011Shirt",
     "price": 20,
-    "link": "#"
+    "link": "#",
+    "image": "images/shop/tee.jpg"
   },
   {
     "name": "Adventure Mug",
     "price": 12,
-    "link": "#"
+    "link": "#",
+    "image": "images/shop/mug.jpg"
   },
   {
     "name": "Explorer Hoodie",
     "price": 35,
-    "link": "#"
+    "link": "#",
+    "image": "images/shop/hoodie.jpg"
   }
 ]

@@ -15,6 +15,7 @@
   <button id="music-toggle" class="btn" aria-label="Play or Pause">Play</button>
   <input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.7" aria-label="Volume slider" />
 </div>
+
 <div id="intro" class="intro visible" role="dialog" aria-label="Welcome screen">
   <div class="intro-inner">
     <div id="intro-message" class="intro-message"></div>
@@ -25,6 +26,7 @@
     </div>
   </div>
 </div>
+
 <header class="site-header">
   <div class="left">
     <img src="images/logo.png" class="site-logo clickable" data-route="home" alt="DADVENTURES logo" />
@@ -35,11 +37,14 @@
     <a data-route="events">Events</a>
     <a data-route="contact">Contact</a>
     <a data-route="shop">Shop</a>
+    <a class="btn donate" id="donateBtnHeader">Donate</a>
   </nav>
 </header>
+
 <div class="search-wrap">
   <input id="site-search" class="search-bar" type="search" placeholder="Search site..." aria-label="Search" />
 </div>
+
 <main id="app">
   <section id="home" class="route visible">
     <h1>Home</h1>
@@ -53,14 +58,23 @@
       <img src="images/gallery4.png" alt="Gallery item 4" />
     </div>
   </section>
+
   <section id="about" class="route hidden">
     <h1>About</h1>
     <div class="card"><div id="about-content"></div></div>
   </section>
+
   <section id="events" class="route hidden">
     <h1>Events</h1>
     <div id="calendar" class="card"></div>
+    <div id="event-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Event details">
+      <div class="modal-content">
+        <span id="event-close" class="modal-close" aria-label="Close">×</span>
+        <div id="event-body"></div>
+      </div>
+    </div>
   </section>
+
   <section id="contact" class="route hidden">
     <h1>Contact</h1>
     <form name="contact" method="POST" data-netlify="true" class="card form" id="contact-form">
@@ -71,15 +85,20 @@
       <button class="btn" type="submit">Send</button>
     </form>
   </section>
+
   <section id="shop" class="route hidden">
     <h1>Shop</h1>
     <div id="shop-grid" class="card shop-grid"></div>
+    <div class="donate-wrap"><a class="btn donate" id="donateBtnShop">Donate</a></div>
   </section>
 </main>
+
 <footer class="site-footer fade-in">
   <p>© <span id="y"></span> DADVENTURES</p>
   <p class="social">Follow: <a href="#" target="_blank" rel="noopener">Facebook</a> • <a href="#" target="_blank" rel="noopener">Instagram</a></p>
+  <p><a class="btn donate" id="donateBtnFooter">Donate</a></p>
 </footer>
+
 <button id="debug-toggle" class="btn debug-toggle" aria-label="Open debug">Debug</button>
 <div id="debug-panel" class="debug-panel hidden" aria-live="polite">
   <div class="debug-header">
@@ -92,6 +111,7 @@
   </div>
   <div id="debug-log" class="debug-log"></div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js" defer></script>
 <script src="js/app.js" defer></script>
 </body>

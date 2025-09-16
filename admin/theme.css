@@ -1,0 +1,6 @@
+:root{ --gold:#e6c14a; --bg:#000; --paper:#f7f1d0; }
+body{ background:#000; color:var(--paper); }
+.nc-root, .nc-app{ background:#000 !important; color:var(--paper) !important; }
+a, button{ color:var(--gold) !important; }
+.nc-sidebar-header, .nc-toolbar{ background:#111 !important; border-bottom:1px solid rgba(230,193,74,.25) }
+input, textarea, select{ background:#000 !important; color:var(--paper) !important; border:1px solid var(--gold) !important; }
