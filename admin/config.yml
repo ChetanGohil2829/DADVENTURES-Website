@@ -1,49 +1,52 @@
-﻿backend:
+
+backend:
   name: git-gateway
   branch: main
-media_folder: "assets/images"
-public_folder: "/assets/images"
+media_folder: "images"
+public_folder: "/images"
 collections:
-  - name: "settings"
-    label: "Settings"
+  - name: "pages"
+    label: "Pages"
     files:
-      - file: "data/settings.json"
-        label: "Theme Settings"
-        name: "theme"
+      - file: "content/pages/about.md"
+        label: "About Page"
+        name: "about"
         fields:
-          - {label: "Primary Color", name: "primary", widget: "string", default: "#c08a3e"}
-          - {label: "Font", name: "font", widget: "string", default: "system-ui"}
-          - {label: "Welcome Speed", name: "welcomePace", widget: "number", default: 120}
+          - {label: Title, name: title, widget: string}
+          - {label: Body, name: body, widget: markdown}
+      - file: "content/pages/email-donation.html"
+        label: "Email Template - Donation"
+        name: "email_donation"
+        fields:
+          - {label: HTML, name: body, widget: text}
+      - file: "content/pages/email-purchase.html"
+        label: "Email Template - Purchase"
+        name: "email_purchase"
+        fields:
+          - {label: HTML, name: body, widget: text}
   - name: "events"
     label: "Events"
-    folder: "data/events"
+    folder: "content/events"
     create: true
-    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Time", name: "time", widget: "string"}
-      - {label: "Route", name: "route", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Map URL", name: "map", widget: "string"}
+      - {label: ID, name: id, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: DateTime ISO, name: datetime, widget: string}
+      - {label: Route, name: route, widget: string}
+      - {label: Description, name: description, widget: text}
+      - {label: Image, name: image, widget: image}
+      - {label: Map Link, name: map_link, widget: string}
   - name: "products"
     label: "Products"
-    folder: "data/products"
+    folder: "content/products"
     create: true
-    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
     fields:
-      - {label: "Name", name: "name", widget: "string"}
-      - {label: "Price", name: "price", widget: "number"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "URL", name: "url", widget: "string"}
-  - name: "emails"
-    label: "Email Templates"
-    files:
-      - file: "data/email-templates/purchase.html"
-        label: "Purchase Confirmation"
-        name: "purchase"
-        fields: [ {label: "HTML", name: "body", widget: "text"} ]
-      - file: "data/email-templates/donation.html"
-        label: "Donation Confirmation"
-        name: "donation"
-        fields: [ {label: "HTML", name: "body", widget: "text"} ]
+      - {label: ID, name: id, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: Price, name: price, widget: number}
+      - {label: Image, name: image, widget: image}
+      - {label: Link, name: link, widget: string}
