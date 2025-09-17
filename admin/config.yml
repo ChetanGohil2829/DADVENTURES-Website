@@ -1,0 +1,49 @@
+﻿backend:
+  name: git-gateway
+  branch: main
+media_folder: "assets/images"
+public_folder: "/assets/images"
+collections:
+  - name: "settings"
+    label: "Settings"
+    files:
+      - file: "data/settings.json"
+        label: "Theme Settings"
+        name: "theme"
+        fields:
+          - {label: "Primary Color", name: "primary", widget: "string", default: "#c08a3e"}
+          - {label: "Font", name: "font", widget: "string", default: "system-ui"}
+          - {label: "Welcome Speed", name: "welcomePace", widget: "number", default: 120}
+  - name: "events"
+    label: "Events"
+    folder: "data/events"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Time", name: "time", widget: "string"}
+      - {label: "Route", name: "route", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Map URL", name: "map", widget: "string"}
+  - name: "products"
+    label: "Products"
+    folder: "data/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Price", name: "price", widget: "number"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "URL", name: "url", widget: "string"}
+  - name: "emails"
+    label: "Email Templates"
+    files:
+      - file: "data/email-templates/purchase.html"
+        label: "Purchase Confirmation"
+        name: "purchase"
+        fields: [ {label: "HTML", name: "body", widget: "text"} ]
+      - file: "data/email-templates/donation.html"
+        label: "Donation Confirmation"
+        name: "donation"
+        fields: [ {label: "HTML", name: "body", widget: "text"} ]

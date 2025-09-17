@@ -1,11 +1,6 @@
-# Dadventures Test Report
-
-✅ Welcome screen with per-letter fade, slower speed
-✅ Music continuous, looped, volume + play/pause
-✅ Date + time in header
-✅ Donate link styled as nav item
-✅ Search bar aligned + working
-✅ Events calendar seeded with timeline
-✅ Timeline editable from CMS (timeline.json)
-✅ Contact form styled + functional
-✅ Debug panel toggle + logs with timestamps
+﻿# TEST-REPORT
+- Output: DadventuresBuild folder + DadventuresBuild.zip
+- Placeholders: welcome-bonsai.png, logo-top.png, background-bronze-net.png, relaxing-piano-ambient.mp3
+- CMS: /admin configured with Git Gateway
+- Email templates: purchase.html, donation.html
+- Events, Products, Settings seeded
