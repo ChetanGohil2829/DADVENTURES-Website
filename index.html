@@ -1,40 +1,58 @@
-﻿<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DADVENTURES â€” Welcome</title>
-<link rel="stylesheet" href="css/style.css"/>
-<script defer src="js/app.js"></script>
-<script defer src="js/sitecheck.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dadventures</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/app.js" defer></script>
+  <script src="js/debug.js" defer></script>
 </head>
 <body>
-<header>
-  <div class="nav">
-    <div class="left">
-      <a id="linkHome" href="home.html"><img class="logo" src="images/logo.svg" alt="Dadventures"/></a>
-      <a id="linkAbout" href="about.html">About</a>
-      <a id="linkEvents" href="events.html">Events</a>
-      <a id="linkContact" href="contact.html">Contact</a>
-      <a id="linkShop" href="shop.html">Shop</a>
+  <!-- Welcome Screen -->
+  <section id="welcome">
+    <img src="images/logo-mark.png" class="logo" alt="Dadventures Logo">
+    <div id="welcome-message"></div>
+    <img src="images/welcome-bonsai.png" class="bonsai" alt="Welcome Bonsai">
+    <button id="skip-intro">Skip</button>
+    <audio id="bg-music" src="audio/ambient.mp3" loop></audio>
+    <div id="controls">
+      <button id="playPause">Play</button>
+      <input type="range" id="volume" min="0" max="1" step="0.01">
     </div>
-    <div class="right">
-      <a class="btn" id="donateHeader" href="#">Donate</a>
-    </div>
-  </div>
-</header>
+  </section>
 
-<main class="hero">
-  <div class="container">
-    <h1 class="welcome-title">Welcome to DADVENTURES</h1>
-    <p id="welcomeText" class="welcome-msg"></p>
-    <img id="bonsai" src="images/welcome-bonsai.svg" alt="Dadventures Welcome"/>
-    <div class="controls">
-      <button class="btn" id="playBtn">Play</button>
-      <div class="volume"><span style="font-size:12px">Vol</span><input id="volume" type="range" min="0" max="1" step="0.05" value="0.65"/></div>
-    </div>
-  </div>
-</main>
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://stripe.com/test" target="_blank">Donate</a></li>
+        <li id="date-time"></li>
+      </ul>
+    </nav>
+  </header>
 
-<audio id="bgAudio" src="audio/relaxing-piano.mp3"></audio>
+  <!-- Sections -->
+  <main id="content">
+    <section id="home"><h1>Home</h1><input type="text" id="search" placeholder="Search"></section>
+    <section id="about"></section>
+    <section id="events"></section>
+    <section id="shop"></section>
+    <section id="contact"></section>
+  </main>
 
-<div class="debug-toggle"><button class="btn" onclick="document.querySelector('.debug-panel').style.display='block'">Debug</button></div>
-<div class="debug-panel"><pre id="debugLog"></pre><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('debugLog').textContent)">Copy Log</button></div>
-</body></html>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Dadventures</p>
+    <button id="debug-toggle">Debug</button>
+  </footer>
+
+  <!-- Debug Panel -->
+  <div id="debug-panel" style="display:none;"></div>
+</body>
+</html>
