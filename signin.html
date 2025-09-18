@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DADVENTURES — Sign In</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon-64.png">
+</head><body>
+<div class="container">
+  <header style="display:flex;align-items:center;gap:12px">
+    <img src="images/teepee-logo.svg" alt="Dadventures" width="48" height="48">
+    <h1>Admin Sign In</h1>
+  </header>
+  <div id="auth">
+    <button class="button" id="login">Sign In</button>
+    <button class="button" id="logout" style="display:none">Sign Out</button>
+  </div>
+  <div id="admin-panel" style="display:none">
+    <h2>Admin Tools</h2>
+    <ul>
+      <li><a href="admin/">Open CMS</a></li>
+      <li><a href="debug.html">Open Debug Panel</a></li>
+      <li><a href="control-panel.html">Open System Control Panel</a></li>
+    </ul>
+    <section>
+      <h3>Quick Checks</h3>
+      <div id="checks"></div>
+    </section>
+  </div>
+</div>
+
+<footer id="links-bar" class="links-bar">
+  <nav class="links-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="shop.html">Shop</a>
+    <a href="donations.html">Donations</a>
+    <a href="blog.html">Blog</a>
+    <a href="join.html">Join Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="signin.html">Sign In</a>
+  </nav>
+</footer>
+<script src="js/identity.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/editor.js"></script>
+
+<script src="js/identity.js"></script>
+<script>
+document.getElementById('login').onclick=function(){ netlifyIdentity.open(); }
+document.getElementById('logout').onclick=function(){ netlifyIdentity.logout(); }
+function render(){
+  const user = netlifyIdentity.currentUser();
+  document.getElementById('login').style.display = user? 'none':'inline-block';
+  document.getElementById('logout').style.display = user? 'inline-block':'none';
+  document.getElementById('admin-panel').style.display = user? 'block':'none';
+  if(user){ runChecks(); }
+}
+netlifyIdentity.on('init', render);
+netlifyIdentity.on('login', ()=>{ render(); netlifyIdentity.close(); });
+netlifyIdentity.on('logout', render);
+function runChecks(){
+  const tests = [
+    ['Audio file exists','audio/relaxing-piano-ambient.wav'],
+    ['Events data exists','content/events/events.json'],
+    ['Products data exists','content/products/products.json'],
+    ['CMS config exists','admin/config.yml']
+  ];
+  const el = document.getElementById('checks'); el.innerHTML = '';
+  tests.forEach(([name,url])=>{
+    fetch(url).then(r=>{ el.innerHTML += `<div>✅ ${name} — OK (${new Date().toLocaleString()})</div>`; })
+      .catch(_=>{ el.innerHTML += `<div>❌ ${name} — FAIL (${new Date().toLocaleString()})</div>`; });
+  });
+}
+</script>
+
+<footer class="site-footer">
+  <div class="social-links">
+    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
+</footer>
+</body></html>

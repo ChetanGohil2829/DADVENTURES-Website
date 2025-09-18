@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DADVENTURES — Blog</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon-64.png">
+</head><body>
+<div class="container">
+  <header style="display:flex;align-items:center;gap:12px">
+    <img src="images/teepee-logo.svg" alt="Dadventures" width="48" height="48">
+    <h1 data-editable id="blog_title">Dadventures Blog</h1>
+  </header>
+  <input id="q" placeholder="Search posts..." style="width:100%;padding:10px;margin:12px 0;border-radius:8px;border:1px solid #333;background:#0f0f12;color:#eee">
+  <div id="list" class="grid"></div>
+</div>
+
+<footer id="links-bar" class="links-bar">
+  <nav class="links-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="shop.html">Shop</a>
+    <a href="donations.html">Donations</a>
+    <a href="blog.html">Blog</a>
+    <a href="join.html">Join Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="signin.html">Sign In</a>
+  </nav>
+</footer>
+<script src="js/identity.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/editor.js"></script>
+
+<script>
+fetch('content/posts/posts.json').then(r=>r.json()).then(items=>{
+  const list=document.getElementById('list'); const q=document.getElementById('q');
+  function render(){
+    const term = (q.value||'').toLowerCase();
+    list.innerHTML = items.filter(p=>!term || p.title.toLowerCase().includes(term) || p.excerpt.toLowerCase().includes(term))
+      .map(p=>`
+        <article class="card">
+          <h2><a href="post.html?slug=${p.slug}">${p.title}</a></h2>
+          <small>${p.date}</small>
+          <p>${p.excerpt}</p>
+        </article>`).join('');
+  }
+  q.addEventListener('input', render); render();
+});
+</script>
+
+<footer class="site-footer">
+  <div class="social-links">
+    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
+</footer>
+</body></html>

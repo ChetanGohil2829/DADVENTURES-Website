@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DADVENTURES — Join Us</title>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="css/style.css"></head><body>
+<div class="container">
+  <header style="display:flex;align-items:center;gap:12px">
+    <img src="images/teepee-logo.svg" alt="Dadventures" width="48" height="48">
+    <h1 data-editable id="join_title">Join DADVENTURES</h1>
+  </header>
+  <p data-editable id="join_intro">Be first to hear about trails, camps, and community events. Sign up below.</p>
+  <form name="join-us" method="POST" data-netlify="true" class="grid" style="max-width:640px">
+    <input type="hidden" name="form-name" value="join-us">
+    <label>Full Name <input required name="name"></label>
+    <label>Email <input required type="email" name="email"></label>
+    <label>Phone <input name="phone"></label>
+    <label>Location <input name="location"></label>
+    <label>Interests <input name="interests" placeholder="Hiking, camping, ..."></label>
+    <label><input type="checkbox" name="whatsapp"> Join our WhatsApp community</label>
+    <button class="button" type="submit">Join</button>
+  </form>
+</div>
+
+<footer id="links-bar" class="links-bar">
+  <nav class="links-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="shop.html">Shop</a>
+    <a href="donations.html">Donations</a>
+    <a href="blog.html">Blog</a>
+    <a href="join.html">Join Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="signin.html">Sign In</a>
+  </nav>
+</footer>
+<script src="js/identity.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/editor.js"></script>
+
+
+<footer class="site-footer">
+  <div class="social-links">
+    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
+</footer>
+</body></html>

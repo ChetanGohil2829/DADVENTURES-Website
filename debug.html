@@ -1,13 +1,18 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Debug - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/></head>
+<title>Debug - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon-64.png">
+</head>
 <body>
   
 <header>
   <div class="inner">
     <div class="logo">
-      <a href="index.html"><img src="./images/logo-icon.svg" alt="Logo"/></a>
+      <a href="index.html"><img src="./images/teepee-logo.svg" alt="Logo"/></a>
       <strong>DADVENTURES</strong>
     </div>
     <nav>
@@ -63,4 +68,51 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 
   <script src="js/debug.js"></script>
   <script>document.querySelector('a[data-nav=Debug]').classList.add('active');</script>
+
+<footer class="site-footer">
+  <div class="social-links">
+    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
+</footer>
+<script src="js/identity.js"></script>
+<script>
+requireAdmin();
+const logEl = document.getElementById('log') || (function(){const d=document.createElement('div');d.id='log';document.body.appendChild(d);return d;})();
+const bar=document.createElement('div'); bar.className='grid'; bar.style.margin='16px 0';
+bar.innerHTML = `<div style="display:flex;gap:8px;flex-wrap:wrap">
+  <button class="btn" id="btn-open">Open</button>
+  <button class="btn" id="btn-close">Close</button>
+  <button class="btn" id="btn-clear">Clear Logs</button>
+  <button class="btn" id="btn-export">Export CSV</button>
+  <button class="btn" id="btn-reset">Reset Content</button></div>
+  <div id="debug-status" style="margin-top:8px"></div>`;
+document.body.insertBefore(bar, document.body.firstChild);
+const state = { open:true, logs:[] };
+function addLog(type,msg){
+  const t = new Date().toISOString();
+  state.logs.push([t,type,msg]);
+  const row = document.createElement('div'); row.textContent = `[${t}] ${type}: ${msg}`; logEl.appendChild(row);
+  document.getElementById('debug-status').textContent = 'Last event: '+t;
+}
+document.getElementById('btn-open').onclick=()=>{state.open=true; addLog('INFO','Panel opened');};
+document.getElementById('btn-close').onclick=()=>{state.open=false; addLog('INFO','Panel closed');};
+document.getElementById('btn-clear').onclick=()=>{state.logs=[]; logEl.innerHTML=''; addLog('ACTION','Logs cleared');};
+document.getElementById('btn-export').onclick=()=>{ let csv='timestamp,type,message\n'; state.logs.forEach(r=>{csv+=r.join(',')+'\n';});
+  const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='debug-logs.csv'; a.click(); };
+document.getElementById('btn-reset').onclick=()=>{ localStorage.clear(); addLog('ACTION','Local content/theme reset'); alert('Local content & theme reset. Reloading…'); location.reload(); };
+['audio/relaxing-piano-ambient.wav','content/events/events.json','content/products/products.json'].forEach(u=>{ fetch(u).then(_=> addLog('CHECK', u+' OK')).catch(_=> addLog('ERROR', u+' FAIL')); });
+</script>
+
+<footer id="links-bar" class="links-bar">
+  <nav class="links-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a>
+    <a href="shop.html">Shop</a><a href="donations.html">Donations</a><a href="blog.html">Blog</a>
+    <a href="join.html">Join Us</a><a href="contact.html">Contact</a><a href="signin.html">Sign In</a>
+  </nav>
+</footer>
+<script src="js/identity.js"></script><script src="js/audio.js"></script><script src="js/theme.js"></script><script src="js/editor.js"></script>
+
 </body></html>

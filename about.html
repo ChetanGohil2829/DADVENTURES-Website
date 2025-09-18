@@ -1,13 +1,18 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DADVENTURES - About</title><link rel="stylesheet" href="css/style.css"/></head>
+<title>DADVENTURES - About</title><link rel="stylesheet" href="css/style.css"/>
+<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="images/favicon-64.png" sizes="64x64" type="image/png">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="images/favicon-64.png">
+</head>
 <body>
   
 <header>
   <div class="inner">
     <div class="logo">
-      <a href="index.html"><img src="./images/logo-icon.svg" alt="Logo"/></a>
+      <a href="index.html"><img src="./images/teepee-logo.svg" alt="Logo"/></a>
       <strong>DADVENTURES</strong>
     </div>
     <nav>
@@ -41,7 +46,7 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
   <main class="container">
     
 <div class="searchbar">
-  <img src="images/logo-icon.svg" alt="search icon" style="height:20px"/>
+  <img src="images/teepee-logo.svg" alt="search icon" style="height:20px"/>
   <input id="search" type="search" placeholder="Search" aria-label="Search"/>
   <button id="searchBtn" class="btn" aria-label="Run search">Search</button>
 </div>
@@ -53,7 +58,7 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
         <textarea readonly style="min-height:120px">Write your mission statement here... (editable via CMS)</textarea>
       </div>
       <div style="text-align:center">
-        <img src="images/logo-icon.svg" alt="Founder" style="max-width:100%;height:auto"/>
+        <img src="images/teepee-logo.svg" alt="Founder" style="max-width:100%;height:auto"/>
         <small class="muted">Founder photo placeholder - replace with your image.</small>
       </div>
     </section>
@@ -79,4 +84,23 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 
   <script src="js/search.js"></script>
   <script>document.querySelector('a[data-nav=About]').classList.add('active');</script>
+
+<footer id="links-bar" class="links-bar">
+  <nav class="links-nav">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a>
+    <a href="shop.html">Shop</a><a href="donations.html">Donations</a><a href="blog.html">Blog</a>
+    <a href="join.html">Join Us</a><a href="contact.html">Contact</a><a href="signin.html">Sign In</a>
+  </nav>
+</footer>
+<script src="js/identity.js"></script><script src="js/audio.js"></script><script src="js/theme.js"></script><script src="js/editor.js"></script>
+
+
+<footer class="site-footer">
+  <div class="social-links">
+    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
+</footer>
 </body></html>
