@@ -1,3 +1,0 @@
-<!doctype html><html><head><meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>Blog — DADVENTURES</title><link rel='stylesheet' href='css/v101_patch.css'></head><body><h2 class='v101-center'>Blog</h2><div id='list' style='max-width:1000px;margin:0 auto'></div><script>
-(async function(){const r=await fetch('content/blog/posts.json'); const p=await r.json(); const el=document.getElementById('list'); el.innerHTML=p.map(x=>`<div class='v101-gap'><h3>${x.title}</h3><div>${x.date} · ${x.category}</div><p>${x.excerpt}</p><a href='post.html?slug=${x.slug}'>Read more</a></div>`).join('');})();
-</script></body></html>

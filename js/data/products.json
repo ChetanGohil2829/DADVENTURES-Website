@@ -1,0 +1,17 @@
+[
+  {
+    "id": "p1",
+    "name": "DADVENTURES Cap",
+    "price": 12.0
+  },
+  {
+    "id": "p2",
+    "name": "DADVENTURES T-Shirt",
+    "price": 18.5
+  },
+  {
+    "id": "p3",
+    "name": "DADVENTURES Mug",
+    "price": 8.0
+  }
+]

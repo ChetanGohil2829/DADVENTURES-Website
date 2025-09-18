@@ -1,56 +1,8 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Debug - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/><link rel="stylesheet" href="css/v101_patch.css">
-</head>
+<title>Debug - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/></head>
 <body>
-<section class="card v101-gap">
-  <h2>Site Audit Report</h2>
-  <p id="auditSummary">Running checks…</p>
-  <table style="width:100%;border-collapse:collapse">
-    <thead><tr><th align="left">Time</th><th align="left">Check</th><th align="left">Result</th><th align="left">Message</th><th align="left">Error Code</th></tr></thead>
-    <tbody id="auditRows"></tbody>
-  </table>
-  <div style="margin-top:12px;display:flex;gap:8px">
-    <button id="auditCsv" class="btn">Download CSV</button>
-    <button id="auditRerun" class="btn">Refresh Audit</button>
-  </div>
-</section>
-<script>
-(function(){
-  const checks = [
-    async ()=>({name:'Music Element', pass:!!document.getElementById('globalMusic')}),
-    async ()=>({name:'Play Button', pass:!!document.querySelector('[data-audio="play"]')}),
-    async ()=>({name:'Volume Slider', pass:!!document.querySelector('[data-audio="vol"]')}),
-    async ()=>{ try{const r=await fetch('content/events/events.json'); const j=await r.json(); return {name:'Events JSON', pass:Array.isArray(j)&&j.length>=12, msg:j.length+' events'};}catch(e){return {name:'Events JSON', pass:false, code:'ERR_EVENTS_404'};}},
-    async ()=>{ try{const r=await fetch('content/shop/products.json'); const j=await r.json(); return {name:'Shop Products', pass:Array.isArray(j)&&j.length>=3, msg:j.length+' products'};}catch(e){return {name:'Shop Products', pass:false, code:'ERR_SHOP_404'};}},
-  ];
-  async function run(){
-    const rows=document.getElementById('auditRows'); rows.innerHTML='';
-    let pass=0, fail=0; const ts=new Date().toISOString().replace('T',' ').split('.')[0];
-    for(const fn of checks){
-      const r=await fn(); if(r.pass) pass++; else fail++;
-      const tr=document.createElement('tr');
-      tr.innerHTML=`<td>${ts}</td><td>${r.name}</td><td>${r.pass?'✅ PASS':'❌ FAIL'}</td><td>${r.msg||''}</td><td>${r.code||''}</td>`;
-      rows.appendChild(tr);
-    }
-    document.getElementById('auditSummary').textContent=`Total Checks: ${checks.length} | ✅ Passed: ${pass} | ❌ Failed: ${fail}`;
-  }
-  function csv(){
-    let csv='Timestamp,Check,Result,Message,ErrorCode
-';
-    document.querySelectorAll('#auditRows tr').forEach(tr=>{
-      const tds=tr.querySelectorAll('td');
-      csv += Array.from(tds).map(td=>`"${td.textContent.replaceAll('"','""')}"`).join(',') + '
-';
-    });
-    const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='audit.csv'; a.click();
-  }
-  document.addEventListener('DOMContentLoaded', run);
-  document.addEventListener('click', e=>{ if(e.target.id==='auditCsv') csv(); if(e.target.id==='auditRerun') location.reload(); });
-})();
-</script>
-
   
 <header>
   <div class="inner">
@@ -104,44 +56,11 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
   
 <footer>
   <div class="inner">
-    <div>© 2025 DADVENTURE</div>
+    <div>Copyright 2025 DADVENTURE - Big & Little Adventures Together</div>
     <div><a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://instagram.com" target="_blank">Instagram</a></div>
   </div>
 </footer>
 
   <script src="js/debug.js"></script>
   <script>document.querySelector('a[data-nav=Debug]').classList.add('active');</script>
-
-<div class="fixed-music"><button class="btn" data-audio="play">Play</button> <input type="range" min="0" max="1" step="0.01" value="0.4" data-audio="vol" style="width:200px"></div>
-
-<script>
-(function(){
-  var audio = document.getElementById('globalMusic');
-  if(!audio) return;
-  var playBtns = document.querySelectorAll('[data-audio="play"]');
-  var volSliders = document.querySelectorAll('[data-audio="vol"]');
-  try {
-    var savedVol = localStorage.getItem('dadventures_vol');
-    if(savedVol!==null){ audio.volume = parseFloat(savedVol); volSliders.forEach(function(s){ s.value = audio.volume; }); }
-    var savedPlay = localStorage.getItem('dadventures_play')==='1';
-    if(savedPlay){ audio.muted=false; audio.play().catch(function(){}); setButtons('Pause'); }
-  }catch(e){}
-  playBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      if(audio.paused){ audio.muted=false; audio.play().catch(function(){}); setButtons('Pause'); savePlay(1); }
-      else { audio.pause(); setButtons('Play'); savePlay(0); }
-    });
-  });
-  volSliders.forEach(function(sl){
-    sl.addEventListener('input', function(){
-      audio.volume = sl.value;
-      document.querySelectorAll('[data-audio="vol"]').forEach(function(other){ if(other!==sl) other.value = sl.value; });
-      try{ localStorage.setItem('dadventures_vol', audio.volume); }catch(e){}
-    });
-  });
-  function setButtons(txt){ document.querySelectorAll('[data-audio="play"]').forEach(function(b){ b.textContent = txt; }); }
-  function savePlay(v){ try{ localStorage.setItem('dadventures_play', String(v)); }catch(e){} }
-})();
-</script>
-
 </body></html>
