@@ -1,7 +1,8 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Contact - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/></head>
+<title>Contact - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/><link rel="stylesheet" href="css/v101_patch.css">
+</head>
 <body>
   
 <header>
@@ -16,11 +17,8 @@
       <a href="events.html" class="navlink" data-nav="Events">Events</a>
       <a href="shop.html" class="navlink" data-nav="Shop">Shop</a>
       <a href="contact.html" class="navlink" data-nav="Contact">Contact</a>
-      <a href="join.html" class="navlink" data-nav="Join Us">Join Us</a>
       <a href="donations.html" class="navlink" data-nav="Donations">Donate</a>
-      <a href="blog.html" class="navlink" data-nav="Blog">Blog</a>
       <a href="debug.html" class="navlink" data-nav="Debug">Debug</a>
-          <a href="login.html" class="navlink" data-nav="Login">Login</a>
     </nav>
     <div style="display:flex;align-items:center;gap:12px">
       <div class="time-now" id="timeNow"></div>
@@ -52,7 +50,7 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
     <div class="card">
       <h2>Contact Us</h2>
       <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html" id="contactForm">
-        <p class="hidden"><label>Do not fill: <input name="bot-field"/></label></p>
+        <p class="hidden"><label>Do not fill: <input name="bot-field"/></label></div></p>
         <div class="form-row">
           <label>Name<input type="text" name="name" required/></label>
           <label>Email<input type="email" name="email" required/></label>
@@ -74,7 +72,7 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 <footer>
   <div class="inner">
     <div>© 2025 DADVENTURE</div>
-    <div><a href="community.html">Facebook</a> · <a href="community.html">Instagram</a> · <a href="community.html">TikTok</a></div>
+    <div><a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://instagram.com" target="_blank">Instagram</a></div>
   </div>
 </footer>
 
@@ -93,5 +91,37 @@ document.getElementById('contactForm').addEventListener('submit', function(e){
 });
   </script>
   <script>document.querySelector('a[data-nav=Contact]').classList.add('active');</script>
-  <script src="js/music.js"></script>
+
+<div class="fixed-music"><button class="btn" data-audio="play">Play</button> <input type="range" min="0" max="1" step="0.01" value="0.4" data-audio="vol" style="width:200px"></div>
+
+<script>
+(function(){
+  var audio = document.getElementById('globalMusic');
+  if(!audio) return;
+  var playBtns = document.querySelectorAll('[data-audio="play"]');
+  var volSliders = document.querySelectorAll('[data-audio="vol"]');
+  try {
+    var savedVol = localStorage.getItem('dadventures_vol');
+    if(savedVol!==null){ audio.volume = parseFloat(savedVol); volSliders.forEach(function(s){ s.value = audio.volume; }); }
+    var savedPlay = localStorage.getItem('dadventures_play')==='1';
+    if(savedPlay){ audio.muted=false; audio.play().catch(function(){}); setButtons('Pause'); }
+  }catch(e){}
+  playBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(audio.paused){ audio.muted=false; audio.play().catch(function(){}); setButtons('Pause'); savePlay(1); }
+      else { audio.pause(); setButtons('Play'); savePlay(0); }
+    });
+  });
+  volSliders.forEach(function(sl){
+    sl.addEventListener('input', function(){
+      audio.volume = sl.value;
+      document.querySelectorAll('[data-audio="vol"]').forEach(function(other){ if(other!==sl) other.value = sl.value; });
+      try{ localStorage.setItem('dadventures_vol', audio.volume); }catch(e){}
+    });
+  });
+  function setButtons(txt){ document.querySelectorAll('[data-audio="play"]').forEach(function(b){ b.textContent = txt; }); }
+  function savePlay(v){ try{ localStorage.setItem('dadventures_play', String(v)); }catch(e){} }
+})();
+</script>
+
 </body></html>

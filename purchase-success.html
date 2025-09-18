@@ -1,7 +1,8 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Purchase Success</title><link rel="stylesheet" href="css/style.css"/></head>
+<title>Purchase Success</title><link rel="stylesheet" href="css/style.css"/><link rel="stylesheet" href="css/v101_patch.css">
+</head>
 <body>
   <main class="container">
     <div class="card">
@@ -10,5 +11,39 @@
       <p><a class="btn" href="shop.html">Back to Shop</a></p>
     </div>
   </main>
-  <script src="js/music.js"></script>
+
+<audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
+
+<div class="fixed-music"><button class="btn" data-audio="play">Play</button> <input type="range" min="0" max="1" step="0.01" value="0.4" data-audio="vol" style="width:200px"></div>
+
+<script>
+(function(){
+  var audio = document.getElementById('globalMusic');
+  if(!audio) return;
+  var playBtns = document.querySelectorAll('[data-audio="play"]');
+  var volSliders = document.querySelectorAll('[data-audio="vol"]');
+  try {
+    var savedVol = localStorage.getItem('dadventures_vol');
+    if(savedVol!==null){ audio.volume = parseFloat(savedVol); volSliders.forEach(function(s){ s.value = audio.volume; }); }
+    var savedPlay = localStorage.getItem('dadventures_play')==='1';
+    if(savedPlay){ audio.muted=false; audio.play().catch(function(){}); setButtons('Pause'); }
+  }catch(e){}
+  playBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(audio.paused){ audio.muted=false; audio.play().catch(function(){}); setButtons('Pause'); savePlay(1); }
+      else { audio.pause(); setButtons('Play'); savePlay(0); }
+    });
+  });
+  volSliders.forEach(function(sl){
+    sl.addEventListener('input', function(){
+      audio.volume = sl.value;
+      document.querySelectorAll('[data-audio="vol"]').forEach(function(other){ if(other!==sl) other.value = sl.value; });
+      try{ localStorage.setItem('dadventures_vol', audio.volume); }catch(e){}
+    });
+  });
+  function setButtons(txt){ document.querySelectorAll('[data-audio="play"]').forEach(function(b){ b.textContent = txt; }); }
+  function savePlay(v){ try{ localStorage.setItem('dadventures_play', String(v)); }catch(e){} }
+})();
+</script>
+
 </body></html>
