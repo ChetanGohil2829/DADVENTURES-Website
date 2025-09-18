@@ -7,7 +7,7 @@
     <div class="box">
       <img src="images/logo-icon.svg" alt="logo" style="height:90px;margin-bottom:10px"/>
       <h1><span class="letters" id="letters"></span></h1>
-      <p class="muted">Big and Little Adventures Together</p>
+      <p class="muted">where big adventures meet little footsteps</p><div class="muted" style="margin:6px 0">👣 👣 👣</div>
       <div class="volume-controls"><button id="playPause" class="btn">Play</button>
         <label class="muted" style="display:inline-flex;gap:6px;align-items:center">Volume <input id="vol" type="range" min="0" max="1" step="0.01" value="0.4"/></label>
       </div>
@@ -27,4 +27,6 @@ vol.addEventListener('input',function(){ music.volume = +vol.value; });
 playPause.addEventListener('click', async function(){ if(music.paused){ try{ await music.play(); music.muted=false; }catch(e){} playPause.textContent="Pause"; } else { music.pause(); playPause.textContent="Play"; } });
 (async function(){ try{ await music.play(); }catch(e){} })();
 </script>
+  <script src="js/music.js"></script>
+<script>setTimeout(function(){ location.href="index.html"; }, 30000);</script>
 </body></html>

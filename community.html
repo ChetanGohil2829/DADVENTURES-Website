@@ -1,64 +1,41 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Community — DADVENTURE</title>
-<meta name="description" content="DADVENTURE community charity — dads and kids adventures."/>
-<link rel="stylesheet" href="css/main.css"/>
-</head><body>
-
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Community — DADVENTURES</title><link rel="stylesheet" href="css/style.css"/></head><body>
 <header>
-  <div class="container hstack">
+  <div class="inner">
     <div class="logo">
-      <img src="images/logo.svg" alt="DADVENTURE logo"/>
-      <strong>DADVENTURE</strong>
+      <a href="index.html"><img src="./images/logo-icon.svg" alt="Logo"/></a>
+      <strong>DADVENTURES</strong>
     </div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="events.html">Events</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-      <a href="join.html">Join Us</a>
-      <a href="donate.html">Donate</a>
-      <a href="blog.html">Blog</a>
-      <a href="debug.html">Debug</a>
-      <a href="login.html">Login</a>
+      <a href="index.html" class="navlink" data-nav="Home">Home</a>
+      <a href="about.html" class="navlink" data-nav="About">About</a>
+      <a href="events.html" class="navlink" data-nav="Events">Events</a>
+      <a href="shop.html" class="navlink" data-nav="Shop">Shop</a>
+      <a href="contact.html" class="navlink" data-nav="Contact">Contact</a>
+      <a href="join.html" class="navlink" data-nav="Join Us">Join Us</a>
+      <a href="donations.html" class="navlink" data-nav="Donations">Donate</a>
+      <a href="blog.html" class="navlink" data-nav="Blog">Blog</a>
+      <a href="debug.html" class="navlink" data-nav="Debug">Debug</a>
+          <a href="login.html" class="navlink" data-nav="Login">Login</a>
     </nav>
-    <div class="header-right">
-      <div class="searchbar">
-        <input class="input" id="globalSearch" placeholder="Search"/>
-        <button class="btn" id="doSearch">Search</button>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="time-now" id="timeNow"></div>
+      <div class="volume-controls">
+        <button id="globalPlayPause" class="btn" aria-label="Play or Pause music">Play</button>
+        <input id="globalVol" type="range" min="0" max="1" step="0.01" value="0.4" aria-label="Music volume"/>
       </div>
-      <div class="music-bar">
-        <button class="btn" data-audio="play">Play</button>
-        <input type="range" min="0" max="1" step="0.01" value="0.4" class="volume" data-audio="vol"/>
-      </div>
+      <audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
     </div>
   </div>
 </header>
-<audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
-
-<div class="container">
-<h2>Community</h2><p>Follow and connect with us on social platforms and WhatsApp.</p>
-</div>
-
+<main class="container"><div class="card"><h2>Community</h2><p>Connect with us on social platforms and our WhatsApp group (opt-in via Contact/Join Us).</p></div></main>
 <footer>
-  <div class="container center">
+  <div class="inner">
     <div>© 2025 DADVENTURE</div>
-    <div class="footer-social">
-      <a href="community.html">Facebook</a>
-      <span>·</span>
-      <a href="community.html">Instagram</a>
-      <span>·</span>
-      <a href="community.html">TikTok</a>
-    </div>
+    <div><a href="community.html">Facebook</a> · <a href="community.html">Instagram</a> · <a href="community.html">TikTok</a></div>
   </div>
-  <div class="fixed-bottom-bar">
-    <div class="music-bar">
-      <button class="btn" data-audio="play">Play</button>
-      <input type="range" min="0" max="1" step="0.01" value="0.4" class="volume" data-audio="vol"/>
-    </div>
-  </div>
-  <script src="js/main.js"></script>
 </footer>
 
+  <script src="js/search.js"></script>
+  <script>document.querySelector('a[data-nav=Home]').classList.add('active');</script>
+  <script src="js/music.js"></script>
 </body></html>

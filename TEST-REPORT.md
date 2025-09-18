@@ -1,17 +1,61 @@
-# TEST-REPORT (v1.0.1)
 
-## Summary
-All core templates load. Seeded data present. Debug auditor runs.
+# TEST-REPORT
 
-## Checks (sample)
-- Splash: PASS — shows message, skip works, auto-redirect in 30s
-- Music: PASS — header/footer controls, looped audio
-- Search (global): PASS — input present (demo wiring)
-- Events JSON: PASS — >= 12 entries
-- Event Modal: PASS — opens, countdown updates, maps link
-- Shop Products: PASS — 3 products rendered
-- Donate: PASS — buttons visible, success page exists
-- Contact: PASS — alignment fixed, opt-in validation enforced
-- Join Us: PASS — form + success page
-- Blog Board: PASS — filters + search
-- Debug: PASS — PASS/FAIL rows + CSV export
+Welcome:
+- Per-letter fade spacing: OK
+- Image scaling: OK
+- Autoplay muted -> fade on click: OK
+- Play/Pause + Volume desktop/mobile: OK
+- 30s auto-redirect + Skip: OK
+
+Navigation:
+- Logo -> Home: OK
+- Tabs aligned and clickable: OK
+- Social links present: OK
+- Donate styled as link: OK
+- Global music control on all pages: OK
+- Date/time in header: OK
+
+Search:
+- Above Home, styled: OK
+- Filters events, products, pages: OK
+- Button text "Search": OK
+- Icon displayed: OK
+
+Events:
+- 12 months seeded: OK
+- Modal countdown: OK
+- Map opens: OK
+- Upcoming filter + Today button: OK
+- Close button works: OK
+
+Shop:
+- 3 products seeded: OK
+- Sort + view: OK
+- Purchase test success page: OK
+
+Donations:
+- Page present, two test flows: OK
+- Success page present: OK
+
+Contact:
+- Fields aligned and readable: OK
+- Netlify test submit to /success.html: OK
+- WhatsApp opt-in with Town + Mobile validation: OK
+
+Debug:
+- Hidden by default unless opened: OK
+- Refresh, Download CSV, Clear, Close: OK
+- Logs for search, contact, shop open, product view, event open: OK
+
+Special characters:
+- Replaced decorative symbols with ASCII: OK
+
+Background:
+- All pages use images/bronze-net.png (placeholder). Replace with your background file using the same name.
+
+- Music: PASS — persists across pages via localStorage; bottom bar visible.
+- Debug Auditor: PASS — summary + CSV.
+- Join Us: PASS — validation + success redirect.
+- Blog: PASS — filter/search + post page.
+- Footer: PASS — © + Community links.

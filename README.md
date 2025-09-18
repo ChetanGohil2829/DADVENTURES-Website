@@ -1,27 +1,22 @@
-# DADVENTURES v1.0.1
 
-Single ZIP with full site, seeded data, and docs.
+# DADVENTURES - FullBuild-TestedFinal (Updated)
 
-## Setup
-1. Unzip `DADVENTURES-v1.0.1.zip`.
-2. Open `index.html` to see the Welcome screen (30s auto-redirect to Home).
-3. For Events/Shop/Blog JSON to load locally, serve via a local server (e.g. `npx serve .`).
+This package includes your requested fixes and seeded data. To replace the shared background, overwrite `images/bronze-net.png` with your provided background file (keep the same filename). The welcome page uses `images/welcome-bonsai.svg`. The top logo uses `images/logo-icon.svg` (transparent, no wordmark).
 
-## Pages
-- index.html (Welcome splash)
-- home.html, about.html, events.html, shop.html, donate.html, contact.html, join.html
-- blog.html, post.html
-- debug.html (audit)
-- login.html → `/admin`
+## Deploy (Netlify)
+1) Create new site from Git or drag-drop this folder.
+2) Ensure `netlify.toml` is present (redirects `/` -> `/splash.html`).
+3) Netlify Forms: submit contact once, then enable email notifications.
+4) Netlify CMS: Settings -> Identity ON -> Services -> Git Gateway ON. Visit `/admin`.
 
-## Music
-Global audio controls in header and fixed footer bar. Starts muted, loops when played.
+## Where Things Live
+- Welcome screen: `splash.html`
+- Global header/footer and music: across all pages
+- Events data: `content/events/events.json`
+- Shop data: `content/products/products.json`
+- Email templates: `content/pages/email-donation.html`, `content/pages/email-purchase.html`
+- Debug panel: `/debug.html` (CSV download, clear, close)
 
-## CMS
-Sample Netlify CMS config at `cms/config.yml`. Update backend to your repo/identity.
-
-## SEO
-`sitemap.xml`, `robots.txt`, meta tags.
-
-## Credits
-Auto-generated scaffolding when base zip contents were not fully available.
+## Notes
+- Donations and purchases are simulated with local success pages for testing.
+- Replace images as needed; keep filenames to avoid broken paths.

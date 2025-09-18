@@ -1,92 +1,97 @@
+
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Contact — DADVENTURE</title>
-<meta name="description" content="DADVENTURE community charity — dads and kids adventures."/>
-<link rel="stylesheet" href="css/main.css"/>
-</head><body>
-
+<title>Contact - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/></head>
+<body>
+  
 <header>
-  <div class="container hstack">
+  <div class="inner">
     <div class="logo">
-      <img src="images/logo.svg" alt="DADVENTURE logo"/>
-      <strong>DADVENTURE</strong>
+      <a href="index.html"><img src="./images/logo-icon.svg" alt="Logo"/></a>
+      <strong>DADVENTURES</strong>
     </div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="events.html">Events</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-      <a href="join.html">Join Us</a>
-      <a href="donate.html">Donate</a>
-      <a href="blog.html">Blog</a>
-      <a href="debug.html">Debug</a>
-      <a href="login.html">Login</a>
+      <a href="index.html" class="navlink" data-nav="Home">Home</a>
+      <a href="about.html" class="navlink" data-nav="About">About</a>
+      <a href="events.html" class="navlink" data-nav="Events">Events</a>
+      <a href="shop.html" class="navlink" data-nav="Shop">Shop</a>
+      <a href="contact.html" class="navlink" data-nav="Contact">Contact</a>
+      <a href="join.html" class="navlink" data-nav="Join Us">Join Us</a>
+      <a href="donations.html" class="navlink" data-nav="Donations">Donate</a>
+      <a href="blog.html" class="navlink" data-nav="Blog">Blog</a>
+      <a href="debug.html" class="navlink" data-nav="Debug">Debug</a>
+          <a href="login.html" class="navlink" data-nav="Login">Login</a>
     </nav>
-    <div class="header-right">
-      <div class="searchbar">
-        <input class="input" id="globalSearch" placeholder="Search"/>
-        <button class="btn" id="doSearch">Search</button>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="time-now" id="timeNow"></div>
+      <div class="volume-controls">
+        <button id="globalPlayPause" class="btn" aria-label="Play or Pause music">Play</button>
+        <input id="globalVol" type="range" min="0" max="1" step="0.01" value="0.4" aria-label="Music volume"/>
       </div>
-      <div class="music-bar">
-        <button class="btn" data-audio="play">Play</button>
-        <input type="range" min="0" max="1" step="0.01" value="0.4" class="volume" data-audio="vol"/>
-      </div>
+      <audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
     </div>
   </div>
 </header>
-<audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
-
-<div class="container">
-
-<h2 class="section-title">Contact Us</h2>
-<div class="card">
-  <form id="contactForm" class="vstack">
-    <div class="form-row"><label>Name</label><input class="input" required/></div>
-    <div class="form-row"><label>Email</label><input type="email" class="input" required/></div>
-    <div class="form-row"><label>Message</label><textarea class="input" rows="5" required></textarea></div>
-    <div class="wa-optin"><input type="checkbox" id="optin"/> <label for="optin">I would like to join the local DADVENTURE WhatsApp community</label></div>
-    <div id="waFields" style="display:none" class="grid grid-2">
-      <div class="form-row"><label>Town</label><input class="input" id="town"/></div>
-      <div class="form-row"><label>Mobile</label><input class="input" id="mobile"/></div>
-    </div>
-    <button class="btn btn-primary" type="submit">Send</button>
-  </form>
-</div>
 <script>
-const opt = document.getElementById('optin'); const wa = document.getElementById('waFields');
-opt.addEventListener('change', ()=>{ wa.style.display = opt.checked ? 'grid' : 'none'; });
-document.getElementById('contactForm').addEventListener('submit', (e)=>{
-  e.preventDefault();
-  if(opt.checked){
-    if(!document.getElementById('town').value || !document.getElementById('mobile').value){
-      alert('Please enter Town and Mobile to join WhatsApp group.'); return;
-    }
-  }
-  location.href='contact-success.html';
-});
+function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
 </script>
 
+  <main class="container">
+    
+<div class="searchbar">
+  <img src="images/logo-icon.svg" alt="search icon" style="height:20px"/>
+  <input id="search" type="search" placeholder="Search" aria-label="Search"/>
+  <button id="searchBtn" class="btn" aria-label="Run search">Search</button>
 </div>
 
+    <div class="card">
+      <h2>Contact Us</h2>
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html" id="contactForm">
+        <p class="hidden"><label>Do not fill: <input name="bot-field"/></label></p>
+        <div class="form-row">
+          <label>Name<input type="text" name="name" required/></label>
+          <label>Email<input type="email" name="email" required/></label>
+        </div>
+        <label>Message<textarea name="message" rows="5" required></textarea></label>
+        <label style="display:flex;gap:8px;align-items:center">
+          <input type="checkbox" id="waOpt" name="whatsapp_optin"/> I would like to join Local DADVENTURE WhatsApp community
+        </label>
+        <div id="waFields" class="hidden form-row">
+          <label>Town<input type="text" name="town" id="town"/></label>
+          <label>Mobile (WhatsApp)<input type="tel" name="mobile" id="mobile" pattern="\+?[0-9 ]{7,15}"/></label>
+        </div>
+        <button class="btn" type="submit">Send</button>
+      </form>
+    </div>
+    <section class="grid" id="searchResults" aria-live="polite"></section>
+  </main>
+  
 <footer>
-  <div class="container center">
+  <div class="inner">
     <div>© 2025 DADVENTURE</div>
-    <div class="footer-social">
-      <a href="community.html">Facebook</a>
-      <span>·</span>
-      <a href="community.html">Instagram</a>
-      <span>·</span>
-      <a href="community.html">TikTok</a>
-    </div>
+    <div><a href="community.html">Facebook</a> · <a href="community.html">Instagram</a> · <a href="community.html">TikTok</a></div>
   </div>
-  <div class="fixed-bottom-bar">
-    <div class="music-bar">
-      <button class="btn" data-audio="play">Play</button>
-      <input type="range" min="0" max="1" step="0.01" value="0.4" class="volume" data-audio="vol"/>
-    </div>
-  </div>
-  <script src="js/main.js"></script>
 </footer>
 
+  <script src="js/search.js"></script>
+  <script>
+var waOpt = document.getElementById('waOpt');
+var waFields = document.getElementById('waFields');
+waOpt.addEventListener('change',function(){ waFields.classList.toggle('hidden', !waOpt.checked); });
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  if(waOpt.checked){
+    var town = document.getElementById('town').value.trim();
+    var mobile = document.getElementById('mobile').value.trim();
+    if(!town || !mobile){ alert('Please enter town and a valid mobile number.'); e.preventDefault(); return; }
+  }
+  try{ var logs = JSON.parse(localStorage.getItem('dbg')||'[]'); logs.push({t:Date.now(), type:'contact_submit'}); localStorage.setItem('dbg', JSON.stringify(logs)); }catch(err){}
+});
+  </script>
+  <script>document.querySelector('a[data-nav=Contact]').classList.add('active');</script>
+  <script src="js/music.js"></script>
 </body></html>
