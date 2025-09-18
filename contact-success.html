@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Welcome — DADVENTURE</title>
+<title>Thank You — DADVENTURE</title>
 <meta name="description" content="DADVENTURE community charity — dads and kids adventures."/>
 <link rel="stylesheet" href="css/main.css"/>
 </head><body>
@@ -37,25 +37,9 @@
 </header>
 <audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
 
-<section class="hero"><div class="container">
-
-<div class="vstack center">
-  <h1>Welcome to DADVENTURES<br/><small class="small">where big adventures meet little footsteps</small></h1>
-  <div class="spacer"></div>
-  <img src="images/welcome-bonsai.svg" alt="Bonsai hand" style="height:140px;opacity:.9"/>
-  <div class="spacer"></div>
-  <div aria-label="baby-footprints" class="small">👣 👣 👣</div>
-  <div class="spacer"></div>
-  <button class="btn btn-primary" id="skip">Skip</button>
-  <div class="small" id="timer">Auto-redirect in 30s</div>
+<div class="container">
+<h2>Thank you, your message has been sent.</h2><p>We’ll get back to you soon.</p>
 </div>
-<script>
-let seconds=30; const timerEl=document.getElementById('timer');
-const t=setInterval(()=>{ seconds--; timerEl.textContent = "Auto-redirect in "+seconds+"s"; if(seconds<=0){ clearInterval(t); location.href="home.html";}},1000);
-document.getElementById('skip').addEventListener('click', ()=>{ clearInterval(t); location.href="home.html"; });
-</script>
-
-</div></section>
 
 <footer>
   <div class="container center">

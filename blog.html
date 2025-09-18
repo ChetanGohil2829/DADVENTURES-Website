@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Welcome — DADVENTURE</title>
+<title>Blog — DADVENTURE</title>
 <meta name="description" content="DADVENTURE community charity — dads and kids adventures."/>
 <link rel="stylesheet" href="css/main.css"/>
 </head><body>
@@ -37,25 +37,54 @@
 </header>
 <audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
 
-<section class="hero"><div class="container">
+<div class="container">
 
-<div class="vstack center">
-  <h1>Welcome to DADVENTURES<br/><small class="small">where big adventures meet little footsteps</small></h1>
-  <div class="spacer"></div>
-  <img src="images/welcome-bonsai.svg" alt="Bonsai hand" style="height:140px;opacity:.9"/>
-  <div class="spacer"></div>
-  <div aria-label="baby-footprints" class="small">👣 👣 👣</div>
-  <div class="spacer"></div>
-  <button class="btn btn-primary" id="skip">Skip</button>
-  <div class="small" id="timer">Auto-redirect in 30s</div>
+<h2 class="section-title">Blog</h2>
+<div class="hstack" style="justify-content:space-between;">
+  <div class="hstack">
+    <button class="btn" data-filter="All">All</button>
+    <button class="btn" data-filter="Parenting">Parenting</button>
+    <button class="btn" data-filter="Events">Events</button>
+    <button class="btn" data-filter="Community">Community</button>
+  </div>
+  <div class="searchbar">
+    <input class="input" id="blogSearch" placeholder="Search articles"/>
+    <button class="btn" id="blogGo">Search</button>
+  </div>
 </div>
+<div class="spacer"></div>
+<div id="timeline" class="vstack"></div>
 <script>
-let seconds=30; const timerEl=document.getElementById('timer');
-const t=setInterval(()=>{ seconds--; timerEl.textContent = "Auto-redirect in "+seconds+"s"; if(seconds<=0){ clearInterval(t); location.href="home.html";}},1000);
-document.getElementById('skip').addEventListener('click', ()=>{ clearInterval(t); location.href="home.html"; });
+let posts = [];
+function render(list){
+  const t = document.getElementById('timeline');
+  t.innerHTML='';
+  list.sort((a,b)=> new Date(b.date)-new Date(a.date));
+  list.forEach(p=>{
+    const row = document.createElement('div'); row.className='timeline-item';
+    row.innerHTML = `<span class='dot'></span>
+      <div class='card vstack'><img src='${p.image}' alt='${p.title}' style='width:100%;border-radius:12px'/></div>
+      <div class='card vstack'><strong>${p.title}</strong><span class='small'>${p.date} · ${p.category}</span><p>${p.excerpt}</p>
+      <a class='btn' href='post.html?slug=${p.slug}'>Read More</a></div>`;
+    t.appendChild(row);
+  });
+}
+async function init(){
+  const res = await fetch('content/blog/posts.json'); posts = await res.json();
+  render(posts);
+  document.querySelectorAll('[data-filter]').forEach(b=> b.onclick = ()=>{
+    const f = b.getAttribute('data-filter');
+    render(f==='All'?posts:posts.filter(p=>p.category===f));
+  });
+  document.getElementById('blogGo').onclick = ()=>{
+    const q = document.getElementById('blogSearch').value.toLowerCase();
+    render(posts.filter(p=> (p.title+p.excerpt).toLowerCase().includes(q)));
+  };
+}
+init();
 </script>
 
-</div></section>
+</div>
 
 <footer>
   <div class="container center">

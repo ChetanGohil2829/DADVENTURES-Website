@@ -1,3 +1,3 @@
 # About DADVENTURES
 
-Edit this content in Netlify CMS.
+Editable via CMS.

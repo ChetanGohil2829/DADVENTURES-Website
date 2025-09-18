@@ -1,0 +1,26 @@
+[
+  {
+    "id": "p1",
+    "name": "DADVENTURES Cap",
+    "price": "\u00a315",
+    "image": "images/prod-cap.svg",
+    "desc": "Comfortable cap for sunny trails.",
+    "link": "purchase-success.html"
+  },
+  {
+    "id": "p2",
+    "name": "DADVENTURES T-shirt",
+    "price": "\u00a320",
+    "image": "images/prod-tee.svg",
+    "desc": "Soft tee for every adventure.",
+    "link": "purchase-success.html"
+  },
+  {
+    "id": "p3",
+    "name": "DADVENTURES Mug",
+    "price": "\u00a38",
+    "image": "images/prod-mug.svg",
+    "desc": "Warm drink, warm memories.",
+    "link": "purchase-success.html"
+  }
+]

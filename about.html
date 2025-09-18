@@ -1,82 +1,96 @@
-
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DADVENTURES - About</title><link rel="stylesheet" href="css/style.css"/></head>
-<body>
-  
+<title>About — DADVENTURE</title>
+<meta name="description" content="DADVENTURE community charity — dads and kids adventures."/>
+<link rel="stylesheet" href="css/main.css"/>
+</head><body>
+
 <header>
-  <div class="inner">
+  <div class="container hstack">
     <div class="logo">
-      <a href="index.html"><img src="./images/logo-icon.svg" alt="Logo"/></a>
-      <strong>DADVENTURES</strong>
+      <img src="images/logo.svg" alt="DADVENTURE logo"/>
+      <strong>DADVENTURE</strong>
     </div>
     <nav>
-      <a href="index.html" class="navlink" data-nav="Home">Home</a>
-      <a href="about.html" class="navlink" data-nav="About">About</a>
-      <a href="events.html" class="navlink" data-nav="Events">Events</a>
-      <a href="shop.html" class="navlink" data-nav="Shop">Shop</a>
-      <a href="contact.html" class="navlink" data-nav="Contact">Contact</a>
-      <a href="donations.html" class="navlink" data-nav="Donations">Donate</a>
-      <a href="debug.html" class="navlink" data-nav="Debug">Debug</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="events.html">Events</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+      <a href="join.html">Join Us</a>
+      <a href="donate.html">Donate</a>
+      <a href="blog.html">Blog</a>
+      <a href="debug.html">Debug</a>
+      <a href="login.html">Login</a>
     </nav>
-    <div style="display:flex;align-items:center;gap:12px">
-      <div class="time-now" id="timeNow"></div>
-      <div class="volume-controls">
-        <button id="globalPlayPause" class="btn" aria-label="Play or Pause music">Play</button>
-        <input id="globalVol" type="range" min="0" max="1" step="0.01" value="0.4" aria-label="Music volume"/>
+    <div class="header-right">
+      <div class="searchbar">
+        <input class="input" id="globalSearch" placeholder="Search"/>
+        <button class="btn" id="doSearch">Search</button>
       </div>
-      <audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
+      <div class="music-bar">
+        <button class="btn" data-audio="play">Play</button>
+        <input type="range" min="0" max="1" step="0.01" value="0.4" class="volume" data-audio="vol"/>
+      </div>
     </div>
   </div>
 </header>
-<script>
-function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
-setInterval(updClock,1000); updClock();
-var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
-gv.addEventListener('input', function(){ gm.volume = +gv.value; });
-gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
-(async function(){ try{ await gm.play(); }catch(e){} })();
-</script>
+<audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
 
-  <main class="container">
-    
-<div class="searchbar">
-  <img src="images/logo-icon.svg" alt="search icon" style="height:20px"/>
-  <input id="search" type="search" placeholder="Search" aria-label="Search"/>
-  <button id="searchBtn" class="btn" aria-label="Run search">Search</button>
+<div class="container">
+
+<h2 class="section-title">About DADVENTURES</h2>
+<div class="grid grid-2">
+  <div class="card vstack">
+    <strong>Our Mission</strong>
+    <p>DADVENTURES is a community charity founded in 2025. Our mission is to support dads and children by creating opportunities to spend meaningful time together.</p>
+  </div>
+  <div class="card vstack">
+    <strong>Why Father–Child Bonding Matters</strong>
+    <p>In the UK, around 1 in 5 dependent children grow up without a father figure at home. Studies show that when fathers are actively involved in childcare and play, children develop stronger social skills, emotional resilience, and perform better academically. Fathers benefit too — with better mental health and stronger family connections.</p>
+    <p><em>At DADVENTURES, we aim to change this.</em></p>
+    <ul>
+      <li>Organise outdoor adventures and community events.</li>
+      <li>Provide a network of support for dads.</li>
+      <li>Invest back into the communities we live in.</li>
+    </ul>
+  </div>
+</div>
+<div class="spacer"></div>
+<h3 class="section-title">Our Journey</h3>
+<div class="timeline">
+  <div class="timeline-item">
+    <span class="dot"></span>
+    <div class="card"><strong>2009</strong><p>First community hikes begin.</p></div>
+    <div class="card"><strong>2010</strong><p>Launched first father–child campout.</p></div>
+  </div>
+  <div class="timeline-item">
+    <span class="dot"></span>
+    <div class="card"><strong>2011</strong><p>Added mentoring and skills workshops.</p></div>
+    <div class="card"><strong>2025</strong><p>DADVENTURES charity founded.</p></div>
+  </div>
 </div>
 
-    <section class="card" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
-      <div>
-        <h2>Our Mission</h2>
-        <p class="muted">To build stronger bonds between dads and their children through simple, memorable adventures.</p>
-        <textarea readonly style="min-height:120px">Write your mission statement here... (editable via CMS)</textarea>
-      </div>
-      <div style="text-align:center">
-        <img src="images/logo-icon.svg" alt="Founder" style="max-width:100%;height:auto"/>
-        <small class="muted">Founder photo placeholder - replace with your image.</small>
-      </div>
-    </section>
-    <section class="card">
-      <h2>Timeline</h2>
-      <div style="overflow-x:auto">
-        <div style="display:flex;gap:24px;align-items:stretch;min-width:720px">
-          <div class="card" style="min-width:220px"><strong>2009</strong><br/><em>Name (CAO)</em><br/>BECAME COMPANY OWNER</div>
-          <div class="card" style="min-width:220px"><strong>2010</strong><br/>Technology launched - Product X<br/><span class="muted">Short description</span></div>
-          <div class="card" style="min-width:220px"><strong>2011</strong><br/>Moved premises</div>
-        </div>
-      </div>
-    </section>
-    <section class="grid" id="searchResults" aria-live="polite"></section>
-  </main>
-  
+</div>
+
 <footer>
-  <div class="inner">
-    <div>Copyright 2025 DADVENTURE - Big & Little Adventures Together</div>
-    <div><a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://instagram.com" target="_blank">Instagram</a></div>
+  <div class="container center">
+    <div>© 2025 DADVENTURE</div>
+    <div class="footer-social">
+      <a href="community.html">Facebook</a>
+      <span>·</span>
+      <a href="community.html">Instagram</a>
+      <span>·</span>
+      <a href="community.html">TikTok</a>
+    </div>
   </div>
+  <div class="fixed-bottom-bar">
+    <div class="music-bar">
+      <button class="btn" data-audio="play">Play</button>
+      <input type="range" min="0" max="1" step="0.01" value="0.4" class="volume" data-audio="vol"/>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
 </footer>
 
-  <script src="js/search.js"></script>
-  <script>document.querySelector('a[data-nav=About]').classList.add('active');</script>
 </body></html>
