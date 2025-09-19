@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="dadventures-logo" class="mode-gradient" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="teepeeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1fb6ff"/>
+      <stop offset="50%" stop-color="#ff3ea5"/>
+      <stop offset="100%" stop-color="#9B5DE5"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style><![CDATA[
+      svg.mode-solid .shape { stroke: currentColor; filter: none; }
+      svg.mode-gradient .shape { stroke: url(#teepeeGradient); filter: url(#glow); }
+    ]]></style>
+  </defs>
+  <g class="shape" stroke-width="6">
+    <path d="M20 80 L50 18 L80 80 Z"/>
+    <line x1="42" y1="36" x2="58" y2="14"/>
+    <line x1="58" y1="36" x2="42" y2="14"/>
+  </g>
+</svg>
