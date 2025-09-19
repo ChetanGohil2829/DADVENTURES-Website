@@ -56,3 +56,16 @@ footer .inner{ display:flex; flex-direction:column; align-items:center; gap:.4re
 
 /* teepee logo subtle glow */
 header .logo img{ height:28px; filter: drop-shadow(0 0 6px rgba(40,192,255,.35)); }
+
+/* v3.3.9 nav sizing + glow + footer */
+header nav a{
+  font-size: 0.98rem;
+  padding: 8px 14px;
+  border-radius: 18px;
+}
+@media (max-width: 900px){
+  header nav a{ font-size: 0.95rem; padding: 7px 12px; }
+}
+header .logo img{ height: 28px; filter: drop-shadow(0 0 8px rgba(64,170,255,.45)); }
+footer .footer-copy{ font-size: .8rem; opacity:.8; margin-top:6px; }
+.searchbar.with-icon input{ background-image:url('../images/teepee.svg'); background-repeat:no-repeat; background-size:16px 16px; background-position:12px center; padding-left:36px; }

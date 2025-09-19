@@ -59,3 +59,33 @@
   const ro=new ResizeObserver(pad); 
   window.addEventListener('load',()=>{ const ac=document.getElementById('audioControls'); if(ac){ ro.observe(ac); pad(); } });
 })();
+
+// v3.3.9 favicon swap by theme
+(function(){
+  function hrefFor(theme){
+    switch((theme||'').toLowerCase()){
+      case 'gold': case 'bronze': return 'images/favicon-goldbronze.svg';
+      case 'green': case 'orange': return 'images/favicon-greenorange.svg';
+      default: return 'images/favicon-bluepink.svg';
+    }
+  }
+  function applyFav(theme){
+    var link=document.querySelector('link#favicon');
+    if(!link){
+      link=document.createElement('link');
+      link.id='favicon'; link.rel='icon'; link.type='image/svg+xml';
+      document.head.appendChild(link);
+    }
+    link.href=hrefFor(theme);
+  }
+  // apply on load and when theme changes (if admin stores it)
+  window.addEventListener('DOMContentLoaded', function(){
+    var theme = localStorage.getItem('theme');
+    applyFav(theme);
+    window.addEventListener('storage', function(e){
+      if(e.key==='theme'){ applyFav(e.newValue); }
+    });
+  });
+  // expose setter
+  window._setThemeFavicon = applyFav;
+})();
