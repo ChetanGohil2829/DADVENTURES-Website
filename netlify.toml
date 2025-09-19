@@ -1,0 +1,7 @@
+
+[build]
+  publish = "."
+[[redirects]]
+  from = "/"
+  to = "/splash.html"
+  status = 302

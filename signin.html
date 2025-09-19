@@ -1,10 +1,37 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dadventures</title>
-<link rel="stylesheet" href="css/site.css"><link rel="icon" type="image/png" href="images/favicon-green.png">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script></head>
-<body><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<header><div class="header-inner"><div class="logo"><img src="images/logo-teepee.png" alt="logo"><div class="site-title">DADVENTURES</div></div><nav><a href="index.html" class="">Home</a><a href="about.html" class="">About</a><a href="events.html" class="">Events</a><a href="shop.html" class="">Shop</a><a href="blog.html" class="">Blog</a><a href="timeline.html" class="">Timeline</a><a href="join.html" class="">Join Us</a><a href="contact.html" class="">Contact</a><a href="signin.html" class="active">Sign In</a><a href="admin.html" class="">Control Panel</a></nav></div></header><div class="container"><div class="card"><h3>Sign In</h3><form id="loginForm"><div><label>Password<input class="input" type="password" placeholder="Enter admin password"></label></div><div style="margin-top:12px"><button class="button" type="submit">Sign In</button></div><div id="loginNote" style="margin-top:8px;color:#ff8c8c"></div></form>
-<div class="badge" style="margin-top:8px">Admin-only debug panel is accessible after sign-in.</div></div></div><footer><div class="footer-inner"><div>© Dadventures</div><div class="volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01">
-<a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
-<a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-<a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
-</div></div></footer></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign In — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-green.png">
+<link rel="stylesheet" href="css/patch-v32.css">
+<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script><script src="js/forms.js" defer></script>
+
+<link rel="icon" type="image/png" href="images/favicon-green.png">
+<link rel="stylesheet" href="css/patch-v32.css">
+<script src="js/theme.js" defer></script>
+<script src="js/audio.js" defer></script>
+<script src="js/admin.js" defer></script>
+<script src="js/debug.js" defer></script>
+<script src="js/forms.js" defer></script>
+</head><body>
+<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
+<div class="container">
+<h2>Sign In</h2>
+<form id="loginForm" style="display:grid;gap:12px;max-width:420px">
+  <label>Username<input class="input" name="username" required></label>
+  <label>Password<input class="input" type="password" required></label>
+  <div><a id="forgot" href="#" class="muted">Forgot password?</a></div>
+  <button class="button" type="submit">Sign In</button>
+  <div id="loginNote" style="color:#ff8c8c"></div>
+</form>
+<hr>
+<div id="adminDebug" style="display:none">
+  <h3>Admin Debug</h3>
+  <button class="button" id="runDebug">Run Checks</button>
+  <pre id="debugLog" style="min-height:120px"></pre>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{
+    if(window.DadventuresAdmin && DadventuresAdmin.isAdmin()){ document.getElementById('adminDebug').style.display='block'; }
+  });
+</script>
+</div>
+<footer><div class="footer-inner"><div>© DADVENTURES</div><div class="footer-volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01"></div><a class="badge" href="https://www.tiktok.com" target="_blank">TikTok</a></div></footer>
+</body></html>

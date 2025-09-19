@@ -1,10 +1,86 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dadventures</title>
-<link rel="stylesheet" href="css/site.css"><link rel="icon" type="image/png" href="images/favicon-green.png">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script></head>
-<body><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<header><div class="header-inner"><div class="logo"><img src="images/logo-teepee.png" alt="logo"><div class="site-title">DADVENTURES</div></div><nav><a href="index.html" class="">Home</a><a href="about.html" class="">About</a><a href="events.html" class="active">Events</a><a href="shop.html" class="">Shop</a><a href="blog.html" class="">Blog</a><a href="timeline.html" class="">Timeline</a><a href="join.html" class="">Join Us</a><a href="contact.html" class="">Contact</a><a href="signin.html" class="">Sign In</a><a href="admin.html" class="">Control Panel</a></nav></div></header><div class="container"><div class="card"><h3>Events</h3><div id="events" class="grid grid-2"></div>
-<script>fetch('content/events.json').then(r=>r.json()).then(d=>{document.getElementById('events').innerHTML=d.map(e=>`<div class='card'><div class='badge'>${e.date} ${e.time}</div><img class='responsive-img' src='${e.image}'><h4>${e.title}</h4><p>${e.description}</p><a class='button' href='${e.map_link}' target='_blank'>Open Map</a></div>`).join('');});</script></div></div><footer><div class="footer-inner"><div>© Dadventures</div><div class="volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01">
-<a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
-<a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-<a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
-</div></div></footer></body></html>
+
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DADVENTURES - Events</title><link rel="stylesheet" href="css/style.css"/>
+<link rel="icon" type="image/png" href="images/favicon-green.png">
+<link rel="stylesheet" href="css/patch-v32.css">
+<script src="js/theme.js" defer></script>
+<script src="js/audio.js" defer></script>
+<script src="js/admin.js" defer></script>
+<script src="js/debug.js" defer></script>
+<script src="js/forms.js" defer></script>
+</head>
+<body>
+<audio id=\"globalAudio\" src=\"audio/ambient_loop.wav\" autoplay></audio>
+  
+<header>
+  <div class="inner">
+    <div class="logo">
+      <a href="index.html"><img src="./images/logo-icon.svg" alt="Logo"/></a>
+      <strong>DADVENTURES</strong>
+    </div>
+    <nav>
+      <a href="index.html" class="navlink" data-nav="Home">Home</a>
+      <a href="about.html" class="navlink" data-nav="About">About</a>
+      <a href="events.html" class="navlink" data-nav="Events">Events</a>
+      <a href="shop.html" class="navlink" data-nav="Shop">Shop</a>
+      <a href="contact.html" class="navlink" data-nav="Contact">Contact</a>
+      <a href="donations.html" class="navlink" data-nav="Donations">Donate</a>
+      <a href="debug.html" class="navlink" data-nav="Debug">Debug</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div class="time-now" id="timeNow"></div>
+      <div class="volume-controls">
+        <button id="globalPlayPause" class="btn" aria-label="Play or Pause music">Play</button>
+        <input id="globalVol" type="range" min="0" max="1" step="0.01" value="0.4" aria-label="Music volume"/>
+      </div>
+      <audio id="globalMusic" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
+    </div>
+  </div>
+</header>
+<script>
+function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
+</script>
+
+  <main class="container">
+    
+<div class="searchbar">
+  <img src="images/logo-icon.svg" alt="search icon" style="height:20px"/>
+  <input id="search" type="search" placeholder="Search" aria-label="Search"/>
+  <button id="searchBtn" class="btn" aria-label="Run search">Search</button>
+</div>
+
+    <div class="card" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+      <button id="todayBtn" class="btn">Today</button>
+      <select id="filter"><option value="all">All</option><option value="upcoming">Upcoming only</option></select>
+    </div>
+    <div class="grid" id="eventsGrid"></div>
+  </main>
+  <div class="modal" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="panel">
+      <h3 id="mTitle"></h3>
+      <img id="mImg" alt="" style="width:100%;border-radius:12px;display:block;margin-bottom:10px"/>
+      <p id="mDesc" class="muted"></p>
+      <p><strong>Route:</strong> <span id="mRoute"></span></p>
+      <p><a id="mMap" href="#" target="_blank" rel="noopener">Open in Google Maps</a></p>
+      <div class="countdown" id="mCountdown"></div>
+      <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end"><button class="btn" id="mClose">Close</button></div>
+    </div>
+  </div>
+  
+<footer>
+  <div class="inner">
+    <div>Copyright 2025 DADVENTURE - Big & Little Adventures Together</div>
+    <div><a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://instagram.com" target="_blank">Instagram</a></div>
+  </div>
+</footer>
+
+  <script src="js/search.js"></script>
+  <script src="js/events.js"></script>
+  <script>document.querySelector('a[data-nav=Events]').classList.add('active');</script>
+</body></html>

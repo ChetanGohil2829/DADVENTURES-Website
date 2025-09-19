@@ -1,0 +1,17 @@
+
+:root{ --spacing:14px; --radius:16px; --font-size:16px; --accent:#00c896; }
+*{ box-sizing:border-box } img{ max-width:100%; height:auto }
+#play, #playBtn, .play, button[aria-label="Play"]{ display:none !important; }
+footer .footer-inner{ display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; text-align:center }
+.footer-volume{ display:flex; align-items:center; gap:8px }
+.footer-volume input[type=range]{ accent-color: var(--accent) }
+#audioControls{ position:fixed; left:12px; right:12px; bottom:12px; z-index:40; display:flex; gap:10px; align-items:center; justify-content:center;
+  background: rgba(0,0,0,.35); backdrop-filter: blur(6px); border:1px solid rgba(255,255,255,.12); padding:8px 12px; border-radius:14px }
+#audioControls button{ padding:6px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.04); color:inherit }
+#audioControls input[type=range]{ width:220px; accent-color: var(--accent) }
+@media (max-width:560px){ #audioControls input[type=range]{ width:140px } }
+.timeline{ position:relative; display:flex; gap:16px; overflow:auto; scroll-snap-type:x mandatory; padding-bottom:8px }
+.timeline .item{ min-width:260px; scroll-snap-align:start; border-left:4px solid var(--accent); border-radius:12px; padding:12px; background:rgba(255,255,255,.03) }
+@media (min-width:701px){ .timeline::before{ content:''; position:absolute; left:0; right:0; top:22px; height:4px; background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.18),rgba(255,255,255,.08)); border-radius:4px } .timeline .item{ border-left:none; border-top:4px solid var(--accent) } }
+@media (max-width:700px){ .timeline::before{ content:''; position:absolute; top:0; bottom:0; left:10px; width:4px; background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.18),rgba(255,255,255,.08)); border-radius:4px } .timeline .item{ min-width:auto; margin-left:24px } }
+.theme-green{--accent:#00c896}.theme-orange{--accent:#ff8c00}.theme-pink{--accent:#ff50a0}.theme-purple{--accent:#785aff}.theme-gold{--accent:#ffc850}.theme-bronze{--accent:#cd7f32}

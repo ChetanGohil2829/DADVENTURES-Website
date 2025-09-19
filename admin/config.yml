@@ -1,0 +1,52 @@
+
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "images"
+public_folder: "/images"
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "content/pages/about.md"
+        label: "About Page"
+        name: "about"
+        fields:
+          - {label: Title, name: title, widget: string}
+          - {label: Body, name: body, widget: markdown}
+      - file: "content/pages/email-donation.html"
+        label: "Email Template - Donation"
+        name: "email_donation"
+        fields:
+          - {label: HTML, name: body, widget: text}
+      - file: "content/pages/email-purchase.html"
+        label: "Email Template - Purchase"
+        name: "email_purchase"
+        fields:
+          - {label: HTML, name: body, widget: text}
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: ID, name: id, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: DateTime ISO, name: datetime, widget: string}
+      - {label: Route, name: route, widget: string}
+      - {label: Description, name: description, widget: text}
+      - {label: Image, name: image, widget: image}
+      - {label: Map Link, name: map_link, widget: string}
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: ID, name: id, widget: string}
+      - {label: Title, name: title, widget: string}
+      - {label: Price, name: price, widget: number}
+      - {label: Image, name: image, widget: image}
+      - {label: Link, name: link, widget: string}

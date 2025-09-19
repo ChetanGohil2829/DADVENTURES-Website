@@ -1,12 +1,6 @@
-VALIDATION REPORT — DADVENTURES v3.1
-Timestamp: 2025-09-19T11:53:55.937710Z
-PASS: All critical files present
-PASS: Favicon variant present: green
-PASS: Favicon variant present: orange
-PASS: Favicon variant present: pink
-PASS: Favicon variant present: purple
-PASS: Favicon variant present: gold
-PASS: Favicon variant present: bronze
-PASS: Events seeded count=12
-PASS: Blog posts count=3
-PASS: Shop items count=3
+VALIDATION REPORT — DADVENTURES v3.2 BASEPATCH
+Timestamp: 2025-09-19T13:12:41.078372Z
+PASS: Teepee favicons generated
+PASS: Audio loop asset present
+PASS: Seeds present (events/blog/shop/timeline)
+PASS: Join/SignIn/Admin pages added
