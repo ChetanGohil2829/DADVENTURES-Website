@@ -2,12 +2,13 @@
 (function(){
   function q(s){return document.querySelector(s);}
 
-  // Toggle drawers
+  // Toggle nav drawer
   const navBtn=q('#nav-btn'); const nav=q('#nav-drawer');
-  if(navBtn && nav){ navBtn.addEventListener('click',()=>{nav.classList.toggle('open');}); }
+  if(navBtn && nav){ navBtn.addEventListener('click',()=>{ nav.classList.toggle('open'); }); }
 
+  // Toggle music drawer
   const musicBtn=q('#music-btn'); const musicDrawer=q('#music-drawer');
-  if(musicBtn && musicDrawer){ musicBtn.addEventListener('click',()=>{musicDrawer.classList.toggle('open');}); }
+  if(musicBtn && musicDrawer){ musicBtn.addEventListener('click',()=>{ musicDrawer.classList.toggle('open'); }); }
 
   // Music controls
   const audio=q('#bg-music'); const playBtn=q('#music-play'); const vol=q('#music-vol');
@@ -17,7 +18,9 @@
       else { audio.pause(); playBtn.textContent='Play'; }
     });
   }
-  if(audio && vol){
-    vol.addEventListener('input',()=>{ audio.volume=vol.value; });
-  }
+  if(audio && vol){ vol.addEventListener('input',()=>{ audio.volume=vol.value; }); }
+
+  // Clock (static once loaded)
+  const clock=q('#clock');
+  if(clock){ const now=new Date(); clock.textContent = now.toLocaleString(); }
 })();
