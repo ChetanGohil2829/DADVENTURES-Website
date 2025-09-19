@@ -90,114 +90,76 @@
   window._setThemeFavicon = applyFav;
 })();
 
+// v3.4.2 header & audio enhancements
 (function(){
-  const THEMES=[
-    ['bluepinkpurple','#34b4ff'],
-    ['goldbronze','#caa74b'],
-    ['greenorange','#31d27f'],
-    ['yellowblue','#f4d13f'],
-    ['navyorange','#ff7a1a'],
-    ['maroonpeach','#ffbd9b'],
-    ['navyteal','#16c2b4'],
-    ['blackorange','#ff7a1a']
-  ];
-  function setFavicon(key){
-    let link=document.getElementById('favicon');
-    if(!link){ link=document.createElement('link'); link.id='favicon'; link.rel='icon'; link.type='image/svg+xml'; document.head.appendChild(link); }
-    link.href='images/favicon-'+key+'.svg';
-  }
-  function setTheme(key, accent){
-    localStorage.setItem('theme.key', key);
-    localStorage.setItem('theme.accent', accent);
-    document.documentElement.style.setProperty('--accent', accent);
-    setFavicon(key);
-    const img=document.querySelector('header .logo img');
-    if(img){ img.style.filter='drop-shadow(0 0 8px '+accent+'66)'; }
-  }
-  function cycleTheme(){
-    const cur=localStorage.getItem('theme.key')||THEMES[0][0];
-    const idx=Math.max(0, THEMES.findIndex(t=>t[0]===cur));
-    const next=THEMES[(idx+1)%THEMES.length];
-    setTheme(next[0], next[1]);
-  }
-  function applyStored(){
-    const k=localStorage.getItem('theme.key')||THEMES[0][0];
-    const a=localStorage.getItem('theme.accent')||THEMES[0][1];
-    setTheme(k,a);
-  }
-  function setHeaderPos(pos){ document.documentElement.setAttribute('data-header-pos', pos); localStorage.setItem('header.pos',pos); }
-  function toggleHeaderPos(){ setHeaderPos((localStorage.getItem('header.pos')||'top')==='top'?'bottom':'top'); }
-  function install(){
-    const wrap=document.querySelector('header .header-right'); if(!wrap) return;
-    const pos=document.createElement('button'); pos.className='header-btn'; pos.title='Move header top/bottom'; pos.textContent='↕'; pos.addEventListener('click', toggleHeaderPos);
-    const pal=document.createElement('button'); pal.className='header-btn'; pal.title='Change theme'; pal.textContent='🎨'; pal.addEventListener('click', cycleTheme);
-    wrap.prepend(pal); wrap.prepend(pos);
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    applyStored();
-    setHeaderPos(localStorage.getItem('header.pos')||'top');
-    install();
-  });
-})();
-// v3.4.1 persistent audio + movable player
-(function(){
-  const SKEY='music.state';    // {volume, playing, time, ts, src}
-  const POS='audio.pos';       // 'top' | 'bottom'
-  function get(k){ try{return JSON.parse(localStorage.getItem(k)||'{}')}catch(e){return{}} }
-  function set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-  function getPos(){ return localStorage.getItem(POS)||'bottom'; }
-  function applyPos(){ document.documentElement.setAttribute('data-audio-pos', getPos()); }
-  function togglePos(){ const next=getPos()==='bottom'?'top':'bottom'; localStorage.setItem(POS,next); applyPos(); padForBar(); }
+  const HPOS='header.pos'; const APOS='audio.pos'; const SKEY='music.state';
+  function applyHeaderPos(){ document.documentElement.setAttribute('data-header-pos', localStorage.getItem(HPOS)||'top'); }
+  function toggleHeaderPos(){ localStorage.setItem(HPOS, (localStorage.getItem(HPOS)||'top')==='top'?'bottom':'top'); applyHeaderPos(); }
+  function applyAudioPos(){ document.documentElement.setAttribute('data-audio-pos', localStorage.getItem(APOS)||'bottom'); }
+  function toggleAudioPos(){ localStorage.setItem(APOS, (localStorage.getItem(APOS)||'bottom')==='bottom'?'top':'bottom'); applyAudioPos(); padForBar(); }
   function padForBar(){
     const ac=document.getElementById('audioControls'); if(!ac) return;
-    const h=ac.getBoundingClientRect().height||60, pos=getPos();
-    document.body.style.paddingBottom = pos==='bottom'? (h+16)+'px' : '';
-    document.body.style.paddingTop    = pos==='top'   ? (h+16)+'px' : '';
+    const h=ac.getBoundingClientRect().height||60, pos=(localStorage.getItem(APOS)||'bottom');
+    document.body.style.paddingBottom = pos==='bottom' ? (h+16)+'px' : '';
+    document.body.style.paddingTop    = pos==='top'    ? (h+16)+'px' : '';
   }
-  function ensureControls(){
-    if(document.getElementById('audioControls')) return;
-    const bar=document.createElement('div'); bar.id='audioControls';
-    bar.innerHTML='<button id="acToggle">Pause</button><input id="acVol" type="range" min="0" max="1" step="0.01" value="0.4"><button id="acPos" title="Move player top/bottom">↕</button>';
-    document.body.appendChild(bar);
-  }
-  function init(){
-    applyPos();
-    ensureControls();
-    let a=document.getElementById('siteAudio');
-    if(!a){
-      a=document.createElement('audio'); a.id='siteAudio'; a.loop=true; a.preload='auto';
-      a.src='audio/ambient_loop.wav';
-      a.addEventListener('error',()=>{ if(a.src.indexOf('relaxing')<0) a.src='audio/relaxing-piano-ambient.wav'; else a.src='audio_loop.wav'; a.load(); });
-      document.body.appendChild(a);
+  function ensureHeaderButtons(){
+    const right=document.querySelector('header .header-right'); if(!right) return;
+    if(!right.querySelector('#hdrPos')){
+      const btn=document.createElement('button'); btn.id='hdrPos'; btn.textContent='↕'; btn.title='Move header top/bottom';
+      btn.style.cssText='padding:.35rem .6rem;border-radius:.6rem;border:1px solid rgba(255,255,255,.12);background:#0f2230;color:#d8f2ff;cursor:pointer';
+      btn.addEventListener('click', toggleHeaderPos);
+      right.prepend(btn);
     }
-    const state=get(SKEY);
+  }
+  function ensureAudio(){
+    if(!document.getElementById('audioControls')){
+      const bar=document.createElement('div');
+      bar.id='audioControls';
+      bar.innerHTML='<button id="acToggle">Pause</button><input id="acVol" type="range" min="0" max="1" step="0.01" value="0.4"><button id="acPos" title="Move player top/bottom">↕</button>';
+      document.body.appendChild(bar);
+    }
+    let a=document.getElementById('siteAudio');
+    if(!a){ a=document.createElement('audio'); a.id='siteAudio'; a.loop=true; a.preload='auto'; a.src='audio/relaxing-piano-ambient.wav'; document.body.appendChild(a); }
+    const state=JSON.parse(localStorage.getItem(SKEY)||'{}');
     if(typeof state.volume==='number') a.volume=state.volume;
-    const wantPlay = state.playing!==false; // default true
+    const wantPlay = state.playing!==false;
     const savedWhen = state.ts||0;
     const savedTime = state.time||0;
     function resumeAtMetadata(){
       let target = savedTime||0;
-      if(wantPlay && savedWhen){
-        const delta=(Date.now()-savedWhen)/1000;
-        target = (savedTime + delta) % (a.duration||3600);
-      }
-      try{ a.currentTime = target; }catch(e){}
+      if(wantPlay && savedWhen){ const delta=(Date.now()-savedWhen)/1000; target=(savedTime+delta) % (a.duration||3600); }
+      try{ a.currentTime=target; }catch(e){}
     }
     a.addEventListener('loadedmetadata', resumeAtMetadata, {once:true});
-    // Autoplay policy: unmute & play on first user interaction
-    function firstInteract(){ a.muted=false; if(wantPlay) a.play().catch(()=>{}); document.removeEventListener('click', firstInteract); }
-    document.addEventListener('click', firstInteract, {once:true});
-    if(wantPlay){ a.play().catch(()=>{}); } else { a.pause(); }
-    // Wire controls
+    // nav click intent for autoplay
+    document.querySelectorAll('a[href$=".html"]').forEach(x=>x.addEventListener('click',()=>{ try{ localStorage.setItem('music.intent','1') }catch(e){} },{capture:true}));
+    function first(){ a.muted=false; if(wantPlay){ a.play().catch(()=>{}) } document.removeEventListener('click', first) }
+    document.addEventListener('click', first, {once:true});
+    if(wantPlay) a.play().catch(()=>{});
     const btn=document.getElementById('acToggle'); const vol=document.getElementById('acVol'); const pos=document.getElementById('acPos');
-    if(btn){ btn.textContent=a.paused?'Play':'Pause'; btn.addEventListener('click',()=>{ if(a.paused){ a.play(); btn.textContent='Pause'; } else { a.pause(); btn.textContent='Play'; } save(); }); }
-    if(vol){ vol.value = (typeof state.volume==='number')? state.volume : a.volume; vol.addEventListener('input',()=>{ a.volume=+vol.value; save(); }); }
-    if(pos){ pos.addEventListener('click', togglePos); }
-    // Save periodically and on unload
-    function save(){ set(SKEY,{ volume:a.volume, playing:!a.paused, time:a.currentTime||0, ts:Date.now(), src:a.currentSrc||a.src }); }
-    setInterval(save, 1500); window.addEventListener('beforeunload', save);
-    // Maintain padding around the bar
-    padForBar(); new ResizeObserver(padForBar).observe(document.getElementById('audioControls'));
+    if(btn){ btn.textContent=a.paused?'Play':'Pause'; btn.addEventListener('click',()=>{ if(a.paused){ a.play(); btn.textContent='Pause' } else { a.pause(); btn.textContent='Play' } save(); }); }
+    if(vol){ vol.value=(typeof state.volume==='number')? state.volume : a.volume; vol.addEventListener('input',()=>{ a.volume=+vol.value; save(); }); }
+    if(pos){ pos.addEventListener('click', toggleAudioPos); }
+    function save(){ try{ localStorage.setItem(SKEY, JSON.stringify({volume:a.volume, playing:!a.paused, time:a.currentTime||0, ts:Date.now()})) }catch(e){} }
+    setInterval(save, 1200); window.addEventListener('beforeunload', save);
+    applyAudioPos(); padForBar();
   }
-  document.addEventListener('DOMContentLoaded', init);
+  function boot(){
+    applyHeaderPos();
+    ensureHeaderButtons();
+    ensureAudio();
+  }
+  document.addEventListener('DOMContentLoaded', boot);
+})();
+// v3.4.2 autoplay on next page if user clicked nav
+(function(){
+  document.addEventListener('DOMContentLoaded',()=>{
+    try{
+      if(localStorage.getItem('music.intent')==='1'){
+        const a=document.getElementById('siteAudio'); if(a){ a.muted=false; a.play().catch(()=>{}) }
+      }
+      localStorage.removeItem('music.intent');
+    }catch(e){}
+  });
 })();
