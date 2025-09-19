@@ -1,15 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="gradBluePink" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00afff"/>
-      <stop offset="100%" stop-color="#ff46c8"/>
-    </linearGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <g stroke="url(#gradBluePink)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
-    <path d="M15 80 L50 20 L85 80 Z"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path class="teepee-glow" d="M15 80 L50 20 L85 80 Z" stroke="var(--color-accent-2)" stroke-width="7" filter="url(#glow)"/>
+    <path class="teepee-stroke" d="M15 80 L50 20 L85 80 Z" stroke="var(--color-accent)" stroke-width="6"/>
   </g>
 </svg>

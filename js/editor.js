@@ -37,3 +37,37 @@
     document.querySelectorAll('[data-editable]').forEach((el,i)=>{ const key = el.id || `editable_${i}`; const val = localStorage.getItem('content:'+key); if(val) el.innerHTML = val; });
   }
 })();
+
+
+// Drag & Drop block layout (admin only). Mark sections with data-block and data-block-group.
+(function(){
+  function adminOnly(){ try{ return window.isAdmin && window.isAdmin(); }catch(e){ return false; } }
+  if(!adminOnly()) return;
+  const groups = new Set();
+  document.querySelectorAll('[data-block-group]').forEach(g=>groups.add(g.getAttribute('data-block-group')));
+  groups.forEach(group=>{
+    const container = document.querySelector(`[data-block-group="${group}"]`);
+    if(!container) return;
+    container.querySelectorAll('[data-block]').forEach(el=>{
+      el.draggable = true;
+      el.addEventListener('dragstart', e=>{ e.dataTransfer.setData('text/plain', el.getAttribute('data-block')); e.dataTransfer.effectAllowed='move'; el.style.opacity=.4; });
+      el.addEventListener('dragend', ()=>{ el.style.opacity=1; saveOrder(); });
+      el.addEventListener('dragover', e=>{ e.preventDefault(); });
+      el.addEventListener('drop', e=>{
+        e.preventDefault();
+        const id = e.dataTransfer.getData('text/plain');
+        const dragged = container.querySelector(`[data-block="${id}"]`);
+        if(dragged && dragged!==el){ container.insertBefore(dragged, el); }
+      });
+    });
+    function saveOrder(){
+      const order = Array.from(container.querySelectorAll('[data-block]')).map(x=>x.getAttribute('data-block'));
+      localStorage.setItem('layout:'+group, JSON.stringify(order));
+    }
+    // apply saved order
+    try{
+      const saved = JSON.parse(localStorage.getItem('layout:'+group)||'[]');
+      saved.forEach(id=>{ const n = container.querySelector(`[data-block="${id}"]`); if(n) container.appendChild(n); });
+    }catch(_){}
+  });
+})();

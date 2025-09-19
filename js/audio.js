@@ -6,16 +6,18 @@
     audio = document.createElement('audio');
     audio.id = 'global-audio';
     audio.src = AUDIO_SRC; audio.loop = true; audio.preload = 'auto';
-    audio.volume = parseFloat(localStorage.getItem('audioVolume')||'0.3');
+    audio.volume = parseFloat(localStorage.getItem('audioVolume')||'0.35');
     audio.muted = localStorage.getItem('audioMuted')==='true';
     document.body.appendChild(audio);
   }
+  // Start on first interaction (browser policy)
   const firstTouch = () => { audio.play().catch(()=>{});
     document.removeEventListener('click', firstTouch);
     document.removeEventListener('touchstart', firstTouch);
   };
   document.addEventListener('click', firstTouch);
   document.addEventListener('touchstart', firstTouch);
+  // Floating widget (bottom-right)
   if(!document.getElementById('audio-widget')){
     const wrap = document.createElement('div');
     wrap.id='audio-widget';

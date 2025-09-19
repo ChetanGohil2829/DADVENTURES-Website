@@ -46,25 +46,27 @@ body.splash-body{background:#000 url('../images/welcome-bonsai.svg') center/cove
 table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;padding:8px;text-align:left} th{background:#0f1322}
 
 
-/* === v4 Additions === */
+/* === Fresh v4 Additions === */
 :root{
   --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
-  --radius-2:12px; --color-bg:#0b0b0d; --color-fg:#f3f3f3; --color-accent:#b87333;
+  --radius-2:12px; --color-bg:#0b0b0d; --color-fg:#f3f3f3; --color-accent:#b87333; --font-family: Inter, system-ui, sans-serif;
 }
 *{box-sizing:border-box}
+html,body{background:#0b0b0d;color:var(--color-fg);font-family:var(--font-family)}
 img{max-width:100%;height:auto}
 .container{max-width:1100px;margin:0 auto;padding:var(--space-5)}
 .grid{display:grid;gap:var(--space-4)}
-/* Links bar */
+.card{background:#101013;border:1px solid #262626;border-radius:var(--radius-2);padding:var(--space-4)}
+/* Navigation / Links bar */
 .links-bar{margin-top:var(--space-6);padding:var(--space-4) 0;border-top:1px solid #222;text-align:center}
-.links-bar .links-nav a{margin:0 var(--space-2);text-decoration:none;color:var(--color-fg);opacity:.8}
+.links-bar .links-nav a{margin:0 var(--space-2);text-decoration:none;color:var(--color-fg);opacity:.85}
 .links-bar .links-nav a:hover{opacity:1}
 /* Footer */
 .site-footer{margin-top:40px;padding:16px 0;border-top:1px solid #222;text-align:center}
 .site-footer .social-links{display:flex;gap:12px;justify-content:center;margin-bottom:8px;flex-wrap:wrap}
 .site-footer .social-links a{color:var(--color-fg);opacity:.85;text-decoration:none;border:1px solid #333;padding:6px 10px;border-radius:999px}
 .site-footer .social-links a:hover{opacity:1;border-color:var(--color-accent)}
-.site-footer .copyright{margin:0;color:#aaa}
+.site-footer .copyright{margin:0;color:#aaa;text-align:center}
 /* Mobile scaling */
 @media (max-width:768px){
   .container{padding:var(--space-3)}
@@ -81,11 +83,14 @@ img{max-width:100%;height:auto}
   .timeline::before{display:none}
   .timeline.horizontal{display:grid;grid-template-columns:repeat( auto-fit, minmax(240px,1fr) );gap:var(--space-5)}
 }
-/* Theme palettes */
-:root[data-theme="gold"]{--color-accent:#b87333}
-:root[data-theme="green"]{--color-accent:#28a745}
-:root[data-theme="pink"]{--color-accent:#d63384}
+/* Theme palettes (affect accents; logo SVG uses CSS vars too) */
+:root[data-theme="gold"]{--color-accent:#b87333; --color-accent-2:#ffd479;}
+:root[data-theme="green"]{--color-accent:#28a745; --color-accent-2:#ff8c2b;}
+:root[data-theme="pink"]{--color-accent:#d63384; --color-accent-2:#56ccff;}
 .button, button, .btn{padding:10px 16px;border-radius:10px;border:1px solid var(--color-accent);background:transparent;color:var(--color-fg);cursor:pointer}
 .button:hover{background:var(--color-accent);color:#111}
-/* Hide legacy header play button if present */
-#playButton, .play-button, .header-audio-play{display:none !important}
+/* Hide any legacy header audio controls */
+#playButton, .play-button, .header-audio-play, .legacy-audio {display:none !important}
+/* Teepee logo stroke color can be tinted via CSS var */
+.teepee-stroke{stroke: var(--color-accent);}
+.teepee-glow{stroke: var(--color-accent-2); opacity:.7;}
