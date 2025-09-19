@@ -4,6 +4,8 @@
 <title>Debug - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/>  <link rel="stylesheet" href="css/v3.3.4.css"/>
   <script src="js/v3.3.4.js" defer></script>
 <link id="favicon" rel="icon" type="image/svg+xml" href="images/favicon-bluepink.svg"/>
+<link rel="stylesheet" href="/css/phase1.6-sidebar.css">
+<script src="/js/phase1.6-sidebar.js" defer></script>
 </head>
 <body>
 <header>
@@ -76,45 +78,4 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 
   <script src="js/debug.js"></script>
   <script>document.querySelector('a[data-nav=Debug]').classList.add('active');</script>
-
-<link rel="stylesheet" href="/css/phase1.5-fullfix.css">
-<script src="/js/phase1.5-fullfix.js" defer></script>
-
-<div id="dad-header">
-  <div class="logo"><img src="/assets/images/logo.svg" alt="DADVENTURES"></div>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about.html">About</a>
-    <a href="/events.html">Events</a>
-    <a href="/calendar.html">Calendar</a>
-    <a href="/blogs.html">Blogs</a>
-    <a href="/shop.html">Shop</a>
-    <a href="/donate.html">Donate</a>
-    <a href="/contact.html">Contact Us</a>
-    <a href="/signin.html">Sign In</a>
-  </nav>
-  <div class="icons">
-    <button id="nav-btn" class="icon-btn">☰</button>
-    <button id="music-btn" class="icon-btn">🎵</button>
-    <span id="clock"></span>
-  </div>
-</div>
-
-<div id="nav-drawer">
-  <a href="/">Home</a>
-  <a href="/about.html">About</a>
-  <a href="/events.html">Events</a>
-  <a href="/calendar.html">Calendar</a>
-  <a href="/blogs.html">Blogs</a>
-  <a href="/shop.html">Shop</a>
-  <a href="/donate.html">Donate</a>
-  <a href="/contact.html">Contact Us</a>
-  <a href="/signin.html">Sign In</a>
-</div>
-
-<div id="music-drawer">
-  <audio id="bg-music" src="/assets/audio/relaxing-piano.mp3" preload="auto" loop></audio>
-  <button id="music-play">Play</button>
-  <input id="music-vol" type="range" min="0" max="1" step="0.01" value="0.7">
-</div>
 </body></html>

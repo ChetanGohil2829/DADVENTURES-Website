@@ -1,0 +1,38 @@
+
+:root{ --theme-glow:#1fb6ff; }
+
+/* Hamburger + music icons (theme-aware) */
+.dad-icon { color: var(--theme-glow); background:none; border:none; cursor:pointer; font: inherit; line-height:1; }
+.dad-icon:hover { filter: drop-shadow(0 0 6px var(--theme-glow)); }
+
+/* Vertical nav container (we move the real nav into here on open) */
+#dad-aside-nav {
+  position: fixed; top: 60px; left: 0; bottom: 0; width: 220px;
+  padding: 16px 12px; background: rgba(0,0,0,0.82);
+  display: none; flex-direction: column; gap: 10px; z-index: 9998;
+}
+#dad-aside-nav.open { display: flex; }
+#dad-aside-nav a { color: var(--theme-glow); text-decoration: none; padding: 8px 4px; font-size: 16px; }
+#dad-aside-nav a:hover { filter: drop-shadow(0 0 6px var(--theme-glow)); }
+
+/* When aside nav is open, push content a bit so it doesn't sit under it */
+body.dad-aside-open main, body.dad-aside-open #content, body.dad-aside-open .page {
+  margin-left: 220px;
+}
+
+/* Music icon inside existing trailer bar */
+#dad-music-icon { margin-left: 10px; display:inline-flex; align-items:center; }
+
+/* Slide-in music panel from left (single-file controls) */
+#dad-music-panel {
+  position: fixed; left: -220px; bottom: 70px; width: 220px;
+  background: rgba(0,0,0,0.82); padding: 12px; border-radius: 8px;
+  display: flex; flex-direction: column; gap: 10px; z-index: 9998;
+  transition: left .25s ease;
+}
+#dad-music-panel.open { left: 10px; }
+#dad-music-panel button, #dad-music-panel input[type=range] {
+  color: var(--theme-glow); border: 1px solid var(--theme-glow);
+  background: none; border-radius: 6px; padding: 6px 10px;
+}
+#dad-music-panel input[type=range]{ width: 100%; }
