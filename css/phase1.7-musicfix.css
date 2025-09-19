@@ -1,0 +1,26 @@
+
+:root{ --theme-glow:#1fb6ff; }
+
+/* Header adjustments */
+header nav a { padding:4px 6px; font-size:14px; }
+@media(max-width:768px){
+  header nav a { padding:2px 4px; font-size:12px; }
+}
+
+/* Trailer music icon */
+#dad-music-icon { background:none; border:none; cursor:pointer; color:var(--theme-glow); font-size:20px; }
+#dad-music-icon:hover { filter:drop-shadow(0 0 6px var(--theme-glow)); }
+
+/* Music drop-down panel */
+#dad-music-panel {
+  position:absolute; bottom:50px; right:10px; width:200px;
+  background:rgba(0,0,0,0.7); border-radius:8px; padding:10px;
+  display:none; flex-direction:column; gap:10px; z-index:9999;
+  transform:translateY(-10px); opacity:0; transition:all .3s ease;
+}
+#dad-music-panel.open { display:flex; transform:translateY(0); opacity:1; }
+#dad-music-panel button, #dad-music-panel input[type=range] {
+  color:var(--theme-glow); border:1px solid var(--theme-glow);
+  background:none; border-radius:6px; padding:6px 8px; cursor:pointer;
+}
+#dad-music-panel input[type=range]{ width:100%; }
