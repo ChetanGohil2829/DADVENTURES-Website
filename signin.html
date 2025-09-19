@@ -1,17 +1,31 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sign In — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-blue.png"><link rel="stylesheet" href="css/patch-v33.css"><link rel="stylesheet" href="css/blog.css">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script><script src="js/forms.js" defer></script>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign In — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-blue.png">
+<link rel="stylesheet" href="css/patch-v33.css">
+<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script>
+<script src="js/admin.js" defer></script><script src="js/debug.js" defer></script><script src="js/forms.js" defer></script>
+
 <link rel="icon" type="image/png" href="images/favicon-blue.png">
 <link rel="stylesheet" href="css/patch-v33.css">
-<link rel="stylesheet" href="css/blog.css">
 <script src="js/theme.js" defer></script>
 <script src="js/audio.js" defer></script>
 <script src="js/admin.js" defer></script>
 <script src="js/debug.js" defer></script>
 <script src="js/forms.js" defer></script>
 <script src="js/calendar.js" defer></script>
-</head>
-<body ><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio><div class="container" style="max-width:1100px;margin:0 auto;padding:16px">
+</head>\1
+<audio id=\"globalAudio\" src=\"audio/ambient_loop.wav\" autoplay></audio>
+<header class="mini-header">
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="images/logo-teepee.png" alt="Dadventures logo"></a>
+    <nav>
+      <a href="index.html">Home</a><a href="about">About</a><a href="events">Events</a>
+      <a href="shop">Shop</a><a href="contact">Contact</a><a href="join.html">Join Us</a>
+      <a href="blog.html">Blog</a><a href="signin.html">Sign In</a><a href="admin.html">Control Panel</a>
+    </nav>
+  </div>
+</header>
+<main class="container" style="max-width:1100px;margin:0 auto;padding:16px">
 <h2>Sign In</h2>
 <form id="loginForm" style="display:grid;gap:12px;max-width:420px">
   <label>Username<input class="input" name="username" required></label>
@@ -27,5 +41,7 @@
   <button class="button" id="exportDebug">Export</button>
   <pre id="debugLog" style="min-height:120px"></pre>
 </div>
-<script>document.addEventListener('DOMContentLoaded',()=>{ if(window.DadventuresAdmin && DadventuresAdmin.isAdmin()){ document.getElementById('adminDebug').style.display='block'; } });</script>
-</div><footer><div class="footer-inner">Copyright 2025 DADVENTURE · <a class="badge" href="https://www.tiktok.com" target="_blank">TikTok</a> · <a class="badge" href="https://www.instagram.com" target="_blank">Instagram</a> · <a class="badge" href="https://www.facebook.com" target="_blank">Facebook</a></div></footer></body></html>
+<script>document.addEventListener('DOMContentLoaded',()=>{{ if(window.DadventuresAdmin && DadventuresAdmin.isAdmin()){{ document.getElementById('adminDebug').style.display='block'; }} }});</script>
+</main>
+<footer><div class="footer-inner">Copyright 2025 DADVENTURESS · <a href="https://www.tiktok.com" target="_blank">TikTok</a> · <a href="https://www.instagram.com" target="_blank">Instagram</a> · <a href="https://www.facebook.com" target="_blank">Facebook</a></div></footer>
+</body></html>

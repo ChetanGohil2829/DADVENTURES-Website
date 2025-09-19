@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dadventures — Blog</title>
+<title>Dadventures — Blog Post</title>
 <link rel="icon" type="image/png" href="images/favicon-blue.png"><link rel="stylesheet" href="css/patch-v33.css">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/blog.js" defer></script>
+<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script>
 
 <link rel="icon" type="image/png" href="images/favicon-blue.png">
 <link rel="stylesheet" href="css/patch-v33.css">
@@ -26,10 +26,16 @@
   </div>
 </header>
 
-<div class="blog-wrap">
-  <div class="blog-top"><div class="blog-title">Latest from the Blog</div><div class="blog-filters"></div></div>
-  <div class="blog-grid"></div>
-</div>
-<div class="blog-join-rail"><a href="join.html">JOIN THE TALK</a></div>
+<main class="blog-wrap"><article id="post"></article></main>
 <footer><div class="footer-inner">Copyright 2025 DADVENTURESS · <a href="https://www.tiktok.com" target="_blank">TikTok</a> · <a href="https://www.instagram.com" target="_blank">Instagram</a> · <a href="https://www.facebook.com" target="_blank">Facebook</a></div></footer>
+<script>
+fetch('content/blog.json').then(r=>r.json()).then(list=>{
+  const slug=new URLSearchParams(location.search).get('p');
+  const p=list.find(x=>(x.slug||x.title.toLowerCase().replace(/\s+/g,'-'))===slug);
+  const el=document.getElementById('post'); if(!p){ el.textContent='Post not found.'; return; }
+  el.innerHTML=`<h1>${p.title}</h1><div class="blog-meta"><span>${p.author||'Dadventures'}</span><span class='blog-dot'></span><span>${p.date}</span></div>
+  <img src="${p.image||'images/logo-teepee.png'}" alt="${p.title}" style="border-radius:12px;margin-bottom:12px">
+  <p style="font-size:1.05rem;line-height:1.7">${p.body||p.excerpt||''}</p>`;
+});
+</script>
 </body></html>

@@ -1,7 +1,0 @@
-VALIDATION REPORT — DADVENTURES v3.3 FULLSITE
-Timestamp: 2025-09-19T14:29:59.073596Z
-PASS: Teepee logo + themed favicons present
-PASS: Bottom audio player present
-PASS: Timeline axis css present
-PASS: Events calendar enhancement enabled
-PASS: Blog / Join / Signin / Admin pages present

@@ -8,7 +8,8 @@
     "author": "Dadventures",
     "views": 5,
     "likes": 0,
-    "slug": "close-your-computer"
+    "slug": "close-your-computer",
+    "body": "Practical steps to unplug with your kid, sample itinerary, and reflection prompts."
   },
   {
     "title": "Let\u2019s Talk 50 Shades of Grey",
@@ -19,7 +20,8 @@
     "author": "Dadventures",
     "views": 12,
     "likes": 2,
-    "slug": "grey-skies"
+    "slug": "grey-skies",
+    "body": "Layering basics for drizzle days, what to pack, and quick warm-up games."
   },
   {
     "title": "The Secret to Gooey Cookies",
@@ -30,7 +32,8 @@
     "author": "Dadventures",
     "views": 10,
     "likes": 2,
-    "slug": "cookies"
+    "slug": "cookies",
+    "body": "Our favorite chewy recipe plus camp-friendly hacks."
   },
   {
     "title": "Beginner\u2019s Kit: 8 Items",
@@ -41,7 +44,8 @@
     "author": "Dadventures",
     "views": 7,
     "likes": 1,
-    "slug": "kit"
+    "slug": "kit",
+    "body": "Eight tiny items that rescue most outings, with budget picks."
   },
   {
     "title": "3 Easy Woodland Loops",
@@ -52,7 +56,8 @@
     "author": "Dadventures",
     "views": 9,
     "likes": 1,
-    "slug": "loops"
+    "slug": "loops",
+    "body": "Three loops tested with kids, parking tips, and snack stops."
   },
   {
     "title": "Microadventures After School",
@@ -63,6 +68,7 @@
     "author": "Dadventures",
     "views": 6,
     "likes": 0,
-    "slug": "microadventures"
+    "slug": "microadventures",
+    "body": "After-school templates that work in under an hour."
   }
 ]
