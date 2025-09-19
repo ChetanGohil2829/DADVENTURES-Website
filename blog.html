@@ -1,33 +1,37 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blog — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-green.png">
-<link rel="stylesheet" href="css/patch-v32.css">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script><script src="js/forms.js" defer></script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dadventures — Blog</title>
+  <link rel="icon" type="image/png" href="images/favicon-blue.png">
+  <link rel="stylesheet" href="css/patch-v33.css">
+  <link rel="stylesheet" href="css/blog.css">
+  <script src="js/theme.js" defer></script>
+  <script src="js/audio.js" defer></script>
+  <script src="js/admin.js" defer></script>
+  <script src="js/debug.js" defer></script>
+  <script src="js/blog.js" defer></script>
 
-<link rel="icon" type="image/png" href="images/favicon-green.png">
-<link rel="stylesheet" href="css/patch-v32.css">
+<link rel="icon" type="image/png" href="images/favicon-blue.png">
+<link rel="stylesheet" href="css/patch-v33.css">
+<link rel="stylesheet" href="css/blog.css">
 <script src="js/theme.js" defer></script>
 <script src="js/audio.js" defer></script>
 <script src="js/admin.js" defer></script>
 <script src="js/debug.js" defer></script>
 <script src="js/forms.js" defer></script>
-</head><body>
-<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<div class="container">
-<h2>Blog</h2>
-<div id="posts" class="grid grid-3"></div>
-<script>
-fetch('content/blog.json').then(r=>r.json()).then(d=>{
-  const root=document.getElementById('posts');
-  root.innerHTML = d.map(p=>`
-    <div class="card">
-      <img class="responsive-img" src="${p.image}" alt="${p.title}">
-      <h4>${p.title}</h4>
-      <div class="badge">${p.date}</div>
-      <p>${p.excerpt}</p>
+<script src="js/calendar.js" defer></script>
+</head>
+<body>
+  <audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
+  <div class="blog-wrap">
+    <div class="blog-top">
+      <div class="blog-title">Latest from the Blog</div>
+      <div class="blog-filters"></div>
     </div>
-  `).join('');
-});
-</script>
-</div>
-<footer><div class="footer-inner"><div>© DADVENTURES</div><div class="footer-volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01"></div><a class="badge" href="https://www.tiktok.com" target="_blank">TikTok</a></div></footer>
-</body></html>
+    <div class="blog-grid"></div>
+  </div>
+  <div class="blog-join-rail"><a href="join.html">JOIN THE TALK</a></div>
+  <footer><div class="footer-inner">Copyright 2025 DADVENTURE · <a class="badge" href="https://www.tiktok.com" target="_blank">TikTok</a> · <a class="badge" href="https://www.instagram.com" target="_blank">Instagram</a> · <a class="badge" href="https://www.facebook.com" target="_blank">Facebook</a></div></footer>
+</body>
+</html>

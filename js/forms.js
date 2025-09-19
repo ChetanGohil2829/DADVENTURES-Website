@@ -5,8 +5,8 @@
     form.addEventListener('submit', function(e){
       if(isNetlify()) return;
       e.preventDefault();
-      const note = document.getElementById('formSuccess');
-      if(note){ note.style.display='block'; note.textContent='Thank you — DADVENTURES will respond within 48 hours.'; }
+      const ok=document.getElementById('formSuccess');
+      if(ok){ ok.style.display='block'; ok.textContent='Thank you — DADVENTURES will respond within 48 hours.'; }
       form.reset();
     });
   }

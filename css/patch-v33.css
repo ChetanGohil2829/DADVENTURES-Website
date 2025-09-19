@@ -1,0 +1,33 @@
+
+/* v3.3 FULLSITE: global fixes */
+:root{ --accent:#00a0ff; --header-h:72px; --safe-bottom:64px; }
+html{ scroll-padding-top: var(--header-h); }
+body{ padding-bottom: var(--safe-bottom); }
+img{ max-width:100%; height:auto; }
+footer{ text-align:center; }
+label>input[type="checkbox"]{ transform: translateY(2px); margin-right:8px; }
+.form-row, .checkbox-row{ display:flex; align-items:flex-start; gap:8px; }
+
+/* Timeline axis & orientation */
+.timeline{ position:relative; display:flex; gap:16px; overflow:auto; scroll-snap-type:x mandatory; padding:8px 0 16px; }
+.timeline .item{ min-width:260px; scroll-snap-align:start; background:rgba(255,255,255,.03); border-radius:12px; padding:12px; border-left:4px solid var(--accent); }
+@media (min-width:701px){
+  .timeline::before{ content:''; position:absolute; left:0; right:0; top:22px; height:4px; background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.18),rgba(255,255,255,.08)); border-radius:4px; }
+  .timeline .item{ border-left:none; border-top:4px solid var(--accent); }
+}
+@media (max-width:700px){
+  .timeline::before{ content:''; position:absolute; top:0; bottom:0; left:10px; width:4px; background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.18),rgba(255,255,255,.08)); border-radius:4px; }
+  .timeline .item{ min-width:auto; margin-left:24px; }
+}
+
+/* Events calendar */
+#eventsCalendar{ margin:16px auto; max-width:1100px; }
+.cal-head{ display:flex; gap:8px; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.cal-filters{ display:flex; gap:8px; flex-wrap:wrap; }
+.cal-chip{ padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03); }
+.cal-grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+@media (max-width:1024px){ .cal-grid{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:640px){ .cal-grid{ grid-template-columns:repeat(2,1fr); } }
+.cal-card{ background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:10px; }
+.cal-card h4{ margin:0 0 6px; font-size:16px; }
+.cal-card .badge{ display:inline-block; margin-right:6px; }

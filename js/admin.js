@@ -4,9 +4,9 @@
   function isAdmin(){ return localStorage.getItem(KEY)==='1'; }
   function login(u,p){ const ok=(u||'').trim().length>0 && (p||'').trim()==='Dadventures!2025'; if(ok) localStorage.setItem(KEY,'1'); return ok; }
   function logout(){ localStorage.removeItem(KEY); location.href='index.html'; }
-  function applyControls(){
+  function bindControls(){
     const fs=document.getElementById('fontSize'); if(fs){ fs.addEventListener('input',()=>{ document.documentElement.style.setProperty('--font-size', fs.value+'px'); }); }
-    const preview=document.getElementById('previewTheme'); if(preview){ preview.querySelectorAll('[data-theme]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); window.DadventuresTheme&&DadventuresTheme.setTheme(b.getAttribute('data-theme')); })); }
+    document.querySelectorAll('[data-theme]').forEach(b=> b.addEventListener('click',e=>{ e.preventDefault(); window.DadventuresTheme&&DadventuresTheme.setTheme(b.getAttribute('data-theme')); }));
     const reset=document.getElementById('resetAll'); if(reset){ reset.addEventListener('click',()=>{ localStorage.clear(); location.reload(); }); }
   }
   function init(){
@@ -23,7 +23,7 @@
     }
     if(document.body.classList.contains('admin-page')){
       if(!isAdmin()){ location.href='signin.html'; return; }
-      applyControls();
+      bindControls();
     }
   }
   window.DadventuresAdmin={isAdmin,logout};

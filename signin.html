@@ -1,18 +1,17 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sign In — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-green.png">
-<link rel="stylesheet" href="css/patch-v32.css">
+<title>Sign In — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-blue.png"><link rel="stylesheet" href="css/patch-v33.css"><link rel="stylesheet" href="css/blog.css">
 <script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script><script src="js/forms.js" defer></script>
-
-<link rel="icon" type="image/png" href="images/favicon-green.png">
-<link rel="stylesheet" href="css/patch-v32.css">
+<link rel="icon" type="image/png" href="images/favicon-blue.png">
+<link rel="stylesheet" href="css/patch-v33.css">
+<link rel="stylesheet" href="css/blog.css">
 <script src="js/theme.js" defer></script>
 <script src="js/audio.js" defer></script>
 <script src="js/admin.js" defer></script>
 <script src="js/debug.js" defer></script>
 <script src="js/forms.js" defer></script>
-</head><body>
-<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<div class="container">
+<script src="js/calendar.js" defer></script>
+</head>
+<body ><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio><div class="container" style="max-width:1100px;margin:0 auto;padding:16px">
 <h2>Sign In</h2>
 <form id="loginForm" style="display:grid;gap:12px;max-width:420px">
   <label>Username<input class="input" name="username" required></label>
@@ -25,13 +24,8 @@
 <div id="adminDebug" style="display:none">
   <h3>Admin Debug</h3>
   <button class="button" id="runDebug">Run Checks</button>
+  <button class="button" id="exportDebug">Export</button>
   <pre id="debugLog" style="min-height:120px"></pre>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded',()=>{
-    if(window.DadventuresAdmin && DadventuresAdmin.isAdmin()){ document.getElementById('adminDebug').style.display='block'; }
-  });
-</script>
-</div>
-<footer><div class="footer-inner"><div>© DADVENTURES</div><div class="footer-volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01"></div><a class="badge" href="https://www.tiktok.com" target="_blank">TikTok</a></div></footer>
-</body></html>
+<script>document.addEventListener('DOMContentLoaded',()=>{ if(window.DadventuresAdmin && DadventuresAdmin.isAdmin()){ document.getElementById('adminDebug').style.display='block'; } });</script>
+</div><footer><div class="footer-inner">Copyright 2025 DADVENTURE · <a class="badge" href="https://www.tiktok.com" target="_blank">TikTok</a> · <a class="badge" href="https://www.instagram.com" target="_blank">Instagram</a> · <a class="badge" href="https://www.facebook.com" target="_blank">Facebook</a></div></footer></body></html>
