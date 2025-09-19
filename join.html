@@ -1,66 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dadventures</title>
-<link rel="stylesheet" href="css/site.css">
-<link rel="icon" type="image/png" href="images/favicon-green.png">
-<script src="js/theme.js" defer></script>
-<script src="js/audio.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/debug.js" defer></script>
-</head>
-<body>
-<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <img src="images/logo-teepee.png" alt="Dadventures logo">
-      <div class="site-title">DADVENTURES</div>
-    </div>
-    <nav>
-      <a href="index.html" class="">Home</a>
-<a href="about.html" class="">About</a>
-<a href="events.html" class="">Events</a>
-<a href="shop.html" class="">Shop</a>
-<a href="blog.html" class="">Blog</a>
-<a href="timeline.html" class="">Timeline</a>
-<a href="join.html" class="active">Join Us</a>
-<a href="contact.html" class="">Contact</a>
-<a href="signin.html" class="">Sign In</a>
-<a href="admin.html" class="">Control Panel</a>
-    </nav>
-  </div>
-</header>
-<div class="container">
-
-  <div class="card">
-    <h3>Join Us</h3>
-    <form name="join" method="post" data-netlify="true">
-      <input type="hidden" name="form-name" value="join">
-      <div style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
-        <div><label>Name<input class="input" name="name" required></label></div>
-        <div><label>Email<input class="input" type="email" name="email" required></label></div>
-      </div>
-      <div style="margin-top:12px"><label>Why join?<textarea class="input" name="reason" rows="4"></textarea></label></div>
-      <div style="margin-top:12px"><button class="button" type="submit">Submit</button></div>
-    </form>
-    <div class="badge" style="margin-top:8px">Mock submissions enabled</div>
-  </div>
-
-</div>
-<footer>
-  <div class="footer-inner">
-    <div>© Dadventures • Big and little adventures together</div>
-    <div class="volume">
-      <span class="badge">Volume</span>
-      <input type="range" data-volume min="0" max="1" step="0.01">
-      <a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
-      <a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-      <a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dadventures</title>
+<link rel="stylesheet" href="css/site.css"><link rel="icon" type="image/png" href="images/favicon-green.png">
+<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script></head>
+<body><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
+<header><div class="header-inner"><div class="logo"><img src="images/logo-teepee.png" alt="logo"><div class="site-title">DADVENTURES</div></div><nav><a href="index.html" class="">Home</a><a href="about.html" class="">About</a><a href="events.html" class="">Events</a><a href="shop.html" class="">Shop</a><a href="blog.html" class="">Blog</a><a href="timeline.html" class="">Timeline</a><a href="join.html" class="active">Join Us</a><a href="contact.html" class="">Contact</a><a href="signin.html" class="">Sign In</a><a href="admin.html" class="">Control Panel</a></nav></div></header><div class="container"><div class="card"><h3>Join Us</h3><form name="join" method="post" data-netlify="true"><input type="hidden" name="form-name" value="join">
+<div style="display:grid;gap:12px;grid-template-columns:1fr 1fr"><div><label>Name<input class="input" name="name" required></label></div><div><label>Email<input class="input" type="email" name="email" required></label></div></div>
+<div style="margin-top:12px"><label>Why join?<textarea class="input" name="reason" rows="4"></textarea></label></div><div style="margin-top:12px"><button class="button" type="submit">Submit</button></div></form></div></div><footer><div class="footer-inner"><div>© Dadventures</div><div class="volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01">
+<a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+<a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+<a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+</div></div></footer></body></html>

@@ -1,96 +1,27 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dadventures</title>
-<link rel="stylesheet" href="css/site.css">
-<link rel="icon" type="image/png" href="images/favicon-green.png">
-<script src="js/theme.js" defer></script>
-<script src="js/audio.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/debug.js" defer></script>
-</head>
-<body>
-<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <img src="images/logo-teepee.png" alt="Dadventures logo">
-      <div class="site-title">DADVENTURES</div>
-    </div>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-<a href="about.html" class="">About</a>
-<a href="events.html" class="">Events</a>
-<a href="shop.html" class="">Shop</a>
-<a href="blog.html" class="">Blog</a>
-<a href="timeline.html" class="">Timeline</a>
-<a href="join.html" class="">Join Us</a>
-<a href="contact.html" class="">Contact</a>
-<a href="signin.html" class="">Sign In</a>
-<a href="admin.html" class="">Control Panel</a>
-    </nav>
-  </div>
-</header>
-<div class="container">
-
-  <div class="grid grid-3">
-    <div class="card">
-      <h3>Welcome to Dadventures</h3>
-      <p>Bonding through nature — hikes, camping, and shared exploration.</p>
-      <div class="badge">Theme</div>
-      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-        <a href="#" class="button" data-theme="green">Green</a>
-        <a href="#" class="button" data-theme="orange">Orange</a>
-        <a href="#" class="button" data-theme="pink">Pink</a>
-        <a href="#" class="button" data-theme="purple">Purple</a>
-        <a href="#" class="button" data-theme="gold">Gold</a>
-        <a href="#" class="button" data-theme="bronze">Bronze</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Upcoming Events</h3>
-      <div id="upcoming"></div>
-      <script>
-        fetch('content/events.json').then(r=>r.json()).then(data=>{
-          const root = document.getElementById('upcoming');
-          root.innerHTML = data.slice(0,4).map(e=>`
-            <div class="badge">${e.date} • ${e.time}</div>
-            <div><strong>${e.title}</strong> — ${e.route}</div>
-          `).join('');
-        });
-      </script>
-    </div>
-    <div class="card">
-      <h3>Admin Debug</h3>
-      <button class="button" id="runDebug">Run checks</button>
-      <div class="debug" id="debugPanel">
-        <pre id="debugLog"></pre>
-      </div>
-      <script>
-        // Reveal debug only if admin
-        document.addEventListener('DOMContentLoaded', ()=>{
-          if(window.DadventuresAdmin && window.DadventuresAdmin.isAdmin()){
-            document.getElementById('debugPanel').classList.add('visible');
-          }
-        });
-      </script>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dadventures</title>
+<link rel="stylesheet" href="css/site.css"><link rel="icon" type="image/png" href="images/favicon-green.png">
+<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script></head>
+<body><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
+<header><div class="header-inner"><div class="logo"><img src="images/logo-teepee.png" alt="logo"><div class="site-title">DADVENTURES</div></div><nav><a href="index.html" class="active">Home</a><a href="about.html" class="">About</a><a href="events.html" class="">Events</a><a href="shop.html" class="">Shop</a><a href="blog.html" class="">Blog</a><a href="timeline.html" class="">Timeline</a><a href="join.html" class="">Join Us</a><a href="contact.html" class="">Contact</a><a href="signin.html" class="">Sign In</a><a href="admin.html" class="">Control Panel</a></nav></div></header><div class="container">
+<div class="grid grid-3">
+  <div class="card"><h3>Welcome to Dadventures</h3><p>Bonding through nature — hikes, camping, and shared exploration.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a href="#" class="button" data-theme="green">Green</a>
+      <a href="#" class="button" data-theme="orange">Orange</a>
+      <a href="#" class="button" data-theme="pink">Pink</a>
+      <a href="#" class="button" data-theme="purple">Purple</a>
+      <a href="#" class="button" data-theme="gold">Gold</a>
+      <a href="#" class="button" data-theme="bronze">Bronze</a>
     </div>
   </div>
-
-</div>
-<footer>
-  <div class="footer-inner">
-    <div>© Dadventures • Big and little adventures together</div>
-    <div class="volume">
-      <span class="badge">Volume</span>
-      <input type="range" data-volume min="0" max="1" step="0.01">
-      <a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
-      <a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-      <a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
-    </div>
+  <div class="card"><h3>Upcoming Events</h3><div id="upcoming"></div>
+    <script>fetch('content/events.json').then(r=>r.json()).then(d=>{document.getElementById('upcoming').innerHTML=d.slice(0,4).map(e=>`<div class='badge'>${e.date} • ${e.time}</div><div><strong>${e.title}</strong> — ${e.route}</div>`).join('');});</script>
   </div>
-</footer>
-</body>
-</html>
+  <div class="card"><h3>Admin Debug</h3><button class="button" id="runDebug">Run checks</button><div class="debug" id="debugPanel"><pre id="debugLog"></pre></div>
+    <script>document.addEventListener('DOMContentLoaded',()=>{if(window.DadventuresAdmin&&window.DadventuresAdmin.isAdmin()){document.getElementById('debugPanel').classList.add('visible');}});</script>
+  </div>
+</div></div><footer><div class="footer-inner"><div>© Dadventures</div><div class="volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01">
+<a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+<a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+<a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+</div></div></footer></body></html>

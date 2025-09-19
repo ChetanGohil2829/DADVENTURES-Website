@@ -1,70 +1,10 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dadventures</title>
-<link rel="stylesheet" href="css/site.css">
-<link rel="icon" type="image/png" href="images/favicon-green.png">
-<script src="js/theme.js" defer></script>
-<script src="js/audio.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/debug.js" defer></script>
-</head>
-<body>
-<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <img src="images/logo-teepee.png" alt="Dadventures logo">
-      <div class="site-title">DADVENTURES</div>
-    </div>
-    <nav>
-      <a href="index.html" class="">Home</a>
-<a href="about.html" class="">About</a>
-<a href="events.html" class="">Events</a>
-<a href="shop.html" class="active">Shop</a>
-<a href="blog.html" class="">Blog</a>
-<a href="timeline.html" class="">Timeline</a>
-<a href="join.html" class="">Join Us</a>
-<a href="contact.html" class="">Contact</a>
-<a href="signin.html" class="">Sign In</a>
-<a href="admin.html" class="">Control Panel</a>
-    </nav>
-  </div>
-</header>
-<div class="container">
-
-  <div class="card">
-    <h3>Shop (seeded)</h3>
-    <div id="shop" class="grid grid-3"></div>
-    <script>
-      fetch('content/shop.json').then(r=>r.json()).then(data=>{
-        const root = document.getElementById('shop');
-        root.innerHTML = data.map(p=>`
-          <div class="card">
-            <img class="responsive-img" src="${p.image}" alt="${p.name}">
-            <h4>${p.name}</h4>
-            <div class="badge">${p.price}</div>
-            <a class="button" href="${p.link}">Buy</a>
-          </div>
-        `).join('');
-      });
-    </script>
-  </div>
-
-</div>
-<footer>
-  <div class="footer-inner">
-    <div>© Dadventures • Big and little adventures together</div>
-    <div class="volume">
-      <span class="badge">Volume</span>
-      <input type="range" data-volume min="0" max="1" step="0.01">
-      <a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
-      <a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
-      <a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dadventures</title>
+<link rel="stylesheet" href="css/site.css"><link rel="icon" type="image/png" href="images/favicon-green.png">
+<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script><script src="js/admin.js" defer></script><script src="js/debug.js" defer></script></head>
+<body><audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
+<header><div class="header-inner"><div class="logo"><img src="images/logo-teepee.png" alt="logo"><div class="site-title">DADVENTURES</div></div><nav><a href="index.html" class="">Home</a><a href="about.html" class="">About</a><a href="events.html" class="">Events</a><a href="shop.html" class="active">Shop</a><a href="blog.html" class="">Blog</a><a href="timeline.html" class="">Timeline</a><a href="join.html" class="">Join Us</a><a href="contact.html" class="">Contact</a><a href="signin.html" class="">Sign In</a><a href="admin.html" class="">Control Panel</a></nav></div></header><div class="container"><div class="card"><h3>Shop</h3><div id="shop" class="grid grid-3"></div>
+<script>fetch('content/shop.json').then(r=>r.json()).then(d=>{document.getElementById('shop').innerHTML=d.map(p=>`<div class='card'><img class='responsive-img' src='${p.image}'><h4>${p.name}</h4><div class='badge'>${p.price}</div><a class='button' href='${p.link}'>Buy</a></div>`).join('');});</script></div></div><footer><div class="footer-inner"><div>© Dadventures</div><div class="volume"><span>Volume</span><input type="range" data-volume min="0" max="1" step="0.01">
+<a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+<a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+<a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+</div></div></footer></body></html>
