@@ -1,40 +1,50 @@
 
 (function(){
-  const savedTheme = localStorage.getItem('theme') || 'gold';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  const savedFont = localStorage.getItem('fontFamily') || 'Inter, system-ui, sans-serif';
-  document.documentElement.style.setProperty('--font-family', savedFont);
-  document.body.style.fontFamily = 'var(--font-family)';
-  window.Theme = {
-    setTheme(t){ document.documentElement.setAttribute('data-theme', t); localStorage.setItem('theme', t); },
-    setFont(f){
-      const link = document.getElementById('google-font') || (function(){ const l=document.createElement('link');l.id='google-font';l.rel='stylesheet';document.head.appendChild(l);return l;})();
-      link.href = 'https://fonts.googleapis.com/css2?family='+encodeURIComponent(f)+':wght@300;400;600;800&display=swap';
-      document.documentElement.style.setProperty('--font-family', `'${f}', system-ui, sans-serif`);
-      localStorage.setItem('fontFamily', f);
-    },
-    reset(){ localStorage.removeItem('theme'); localStorage.removeItem('fontFamily'); location.reload(); }
+  const THEME_KEY = 'dadventures.theme';
+  const themes = ['green','orange','pink','purple','gold','bronze'];
+  const favicons = {
+    green: 'images/favicon-green.png',
+    orange:'images/favicon-orange.png',
+    pink:  'images/favicon-pink.png',
+    purple:'images/favicon-purple.png',
+    gold:  'images/favicon-gold.png',
+    bronze:'images/favicon-bronze.png',
+    default:'images/favicon-default.png'
   };
-})();
 
-
-// Update homepage title and hero tint by theme
-(function(){
-  function applyThemeUI(){
-    const t = document.documentElement.getAttribute('data-theme') || 'gold';
-    const nameMap = {gold:'Dadventures • Gold', green:'Dadventures • Green', pink:'Dadventures • Pink'};
-    const h = document.getElementById('home_title') || document.getElementById('site-name');
-    if(h){ h.textContent = nameMap[t] || 'Dadventures'; }
-    const hero = document.getElementById('hero');
-    if(hero){
-      if(t==='gold') hero.style.background = 'linear-gradient(135deg, rgba(184,115,51,.25), rgba(255,212,121,.15))';
-      if(t==='green') hero.style.background = 'linear-gradient(135deg, rgba(40,167,69,.25), rgba(255,140,43,.15))';
-      if(t==='pink') hero.style.background = 'linear-gradient(135deg, rgba(214,51,132,.25), rgba(86,204,255,.15))';
+  function ensureFaviconLink(){
+    let link = document.querySelector('link[rel~="icon"]');
+    if(!link){
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
     }
+    return link;
   }
-  window.Theme.applyThemeUI = applyThemeUI;
-  // Patch into existing setter
-  const _setTheme = window.Theme.setTheme;
-  window.Theme.setTheme = function(t){ _setTheme(t); setTimeout(applyThemeUI, 0); };
-  document.addEventListener('DOMContentLoaded', applyThemeUI);
+
+  function setTheme(theme){
+    if(!themes.includes(theme)) theme = 'green';
+    localStorage.setItem(THEME_KEY, theme);
+    document.documentElement.classList.remove(...themes.map(t => 'theme-'+t));
+    document.documentElement.classList.add('theme-'+theme);
+    // swap favicon
+    const link = ensureFaviconLink();
+    link.href = favicons[theme] || favicons.default;
+    // highlight active nav (optional) - skipped to avoid extra logic
+  }
+
+  function initTheme(){
+    const saved = localStorage.getItem(THEME_KEY) || 'green';
+    setTheme(saved);
+    // Hook theme switchers if present
+    document.querySelectorAll('[data-theme]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        setTheme(btn.getAttribute('data-theme'));
+      });
+    });
+  }
+
+  window.DadventuresTheme = { setTheme, initTheme };
+  document.addEventListener('DOMContentLoaded', initTheme);
 })();

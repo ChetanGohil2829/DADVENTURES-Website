@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Dadventures Hike Sep 2025",
+    "date": "2025-09-19",
+    "time": "10:00",
+    "route": "Trail Loop 1",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Oct 2025",
+    "date": "2025-10-19",
+    "time": "10:00",
+    "route": "Trail Loop 2",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Nov 2025",
+    "date": "2025-11-18",
+    "time": "10:00",
+    "route": "Trail Loop 3",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Dec 2025",
+    "date": "2025-12-18",
+    "time": "10:00",
+    "route": "Trail Loop 4",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Jan 2026",
+    "date": "2026-01-17",
+    "time": "10:00",
+    "route": "Trail Loop 5",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Feb 2026",
+    "date": "2026-02-16",
+    "time": "10:00",
+    "route": "Trail Loop 6",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Mar 2026",
+    "date": "2026-03-18",
+    "time": "10:00",
+    "route": "Trail Loop 7",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Apr 2026",
+    "date": "2026-04-17",
+    "time": "10:00",
+    "route": "Trail Loop 8",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike May 2026",
+    "date": "2026-05-17",
+    "time": "10:00",
+    "route": "Trail Loop 9",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Jun 2026",
+    "date": "2026-06-16",
+    "time": "10:00",
+    "route": "Trail Loop 10",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Jul 2026",
+    "date": "2026-07-16",
+    "time": "10:00",
+    "route": "Trail Loop 11",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  },
+  {
+    "title": "Dadventures Hike Aug 2026",
+    "date": "2026-08-15",
+    "time": "10:00",
+    "route": "Trail Loop 12",
+    "description": "Guided nature trail focused on bonding and exploration.",
+    "image": "images/logo-teepee.png",
+    "map_link": "https://maps.google.com/?q=51.3773,-0.1406"
+  }
+]

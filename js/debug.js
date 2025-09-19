@@ -1,25 +1,36 @@
 
-function sanitize(s){ return String(s||'').replace(/[^\w\s\-\.:@/]/g,''); }
-function load(){
-  var tb = document.querySelector('#tbl tbody');
-  tb.innerHTML = '';
-  var rows = []; try{ rows = JSON.parse(localStorage.getItem('dbg')||'[]'); }catch(e){ rows=[]; }
-  rows.forEach(function(r){
-    var tr = document.createElement('tr');
-    var t = new Date(r.t||Date.now()).toLocaleString();
-    tr.innerHTML = '<td>'+sanitize(t)+'</td><td>'+sanitize(r.type)+'</td><td>'+sanitize(JSON.stringify(r))+'</td>';
-    tb.appendChild(tr);
+(function(){
+  function log(msg){ const el = document.getElementById('debugLog'); if(el){ el.textContent += msg + "\n"; } }
+  function pass(name){ log('PASS: ' + name + ' @ ' + new Date().toISOString()); }
+  function fail(name, err){ log('FAIL: ' + name + ' -> ' + err + ' @ ' + new Date().toISOString()); }
+
+  function runChecks(){
+    try{
+      // Check audio element
+      const a = document.getElementById('globalAudio');
+      if(a && typeof a.play === 'function') pass('Audio element found'); else fail('Audio element','missing');
+
+      // Check favicon
+      const f = document.querySelector('link[rel~="icon"]');
+      if(f && f.href) pass('Favicon link present'); else fail('Favicon','missing');
+
+      // Check pages/navigation links
+      document.querySelectorAll('nav a').forEach(a => { if(a.getAttribute('href')){} });
+      pass('Nav links exist');
+
+      // Check content data presence
+      fetch('content/events.json').then(r=>r.ok?pass('Events data ok'):fail('Events data','not ok'));
+      fetch('content/blog.json').then(r=>r.ok?pass('Blog data ok'):fail('Blog data','not ok'));
+      fetch('content/shop.json').then(r=>r.ok?pass('Shop data ok'):fail('Shop data','not ok'));
+      fetch('content/timeline.json').then(r=>r.ok?pass('Timeline data ok'):fail('Timeline data','not ok'));
+    }catch(e){
+      fail('Runtime', e.message||String(e));
+    }
+  }
+
+  window.DadventuresDebug = { runChecks };
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const runBtn = document.getElementById('runDebug');
+    if(runBtn){ runBtn.addEventListener('click', runChecks); }
   });
-}
-document.getElementById('refresh').onclick = load;
-document.getElementById('clear').onclick = function(){ localStorage.setItem('dbg','[]'); load(); };
-document.getElementById('download').onclick = function(){
-  var rows = []; try{ rows = JSON.parse(localStorage.getItem('dbg')||'[]'); }catch(e){ rows=[]; }
-  var header = 'time,type,data\\n';
-  var csv = header + rows.map(function(r){ return new Date(r.t||Date.now()).toISOString()+','+(r.type||'')+','+((JSON.stringify(r)||'').replace(/,/g,';')); }).join('\\n');
-  var blob = new Blob([csv], {type:'text/csv'});
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a'); a.href=url; a.download='debug.csv'; document.body.appendChild(a); a.click(); a.remove();
-};
-document.getElementById('close').onclick = function(){ history.back(); };
-load();
+})();

@@ -1,0 +1,12 @@
+VALIDATION REPORT — DADVENTURES v3.1
+Timestamp: 2025-09-19T11:16:27.384862Z
+PASS: All critical files present
+PASS: Favicon variant present: green
+PASS: Favicon variant present: orange
+PASS: Favicon variant present: pink
+PASS: Favicon variant present: purple
+PASS: Favicon variant present: gold
+PASS: Favicon variant present: bronze
+PASS: Events seeded count=12
+PASS: Blog posts count=3
+PASS: Shop items count=3

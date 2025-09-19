@@ -1,41 +1,36 @@
 
 (function(){
-  const AUDIO_SRC = 'audio/relaxing-piano-ambient.wav';
-  let audio = document.getElementById('global-audio');
-  if(!audio){
-    audio = document.createElement('audio');
-    audio.id = 'global-audio';
-    audio.src = AUDIO_SRC; audio.loop = true; audio.preload = 'auto';
-    audio.volume = parseFloat(localStorage.getItem('audioVolume')||'0.35');
-    audio.muted = localStorage.getItem('audioMuted')==='true';
-    document.body.appendChild(audio);
-  }
-  // Start on first interaction (browser policy)
-  const firstTouch = () => { audio.play().catch(()=>{});
-    document.removeEventListener('click', firstTouch);
-    document.removeEventListener('touchstart', firstTouch);
-  };
-  document.addEventListener('click', firstTouch);
-  document.addEventListener('touchstart', firstTouch);
-  // Floating widget (bottom-right)
-  if(!document.getElementById('audio-widget')){
-    const wrap = document.createElement('div');
-    wrap.id='audio-widget';
-    wrap.style.cssText='position:fixed;right:12px;bottom:12px;background:#111a;border:1px solid #333;padding:10px;border-radius:12px;backdrop-filter:blur(6px);z-index:9999;';
-    wrap.innerHTML = `<div style="font-size:12px;margin-bottom:6px">Music</div>
-      <input id="vol" type="range" min="0" max="1" step="0.01" value="${audio.volume}" style="width:140px">
-      <button id="mute" class="btn" style="margin-left:8px">${audio.muted?'Unmute':'Mute'}</button>`;
-    document.body.appendChild(wrap);
-    wrap.querySelector('#vol').addEventListener('input', (e)=>{
-      audio.volume = parseFloat(e.target.value);
-      localStorage.setItem('audioVolume', String(audio.volume));
-      audio.muted = false; localStorage.setItem('audioMuted', 'false');
-      audio.play().catch(()=>{});
-    });
-    wrap.querySelector('#mute').addEventListener('click', (e)=>{
-      audio.muted = !audio.muted; e.target.textContent = audio.muted?'Unmute':'Mute';
-      localStorage.setItem('audioMuted', audio.muted?'true':'false');
-      audio.play().catch(()=>{});
+  const VKEY = 'dadventures.volume';
+  const TKEY = 'dadventures.audio.time';
+  const AID = 'globalAudio';
+
+  function initAudio(){
+    const audio = document.getElementById(AID);
+    if(!audio) return;
+
+    audio.loop = true;
+    audio.muted = true; // autoplay policy
+    audio.volume = parseFloat(localStorage.getItem(VKEY) || '0.35');
+    const last = parseFloat(localStorage.getItem(TKEY) || '0');
+    if(!isNaN(last)) { try { audio.currentTime = last % Math.max(1,audio.duration||60); } catch(e){} }
+
+    const tryPlay = () => audio.play().catch(()=>{});
+    tryPlay();
+    document.addEventListener('click', ()=>{ audio.muted = false; tryPlay(); }, { once:true });
+
+    // Persist last position every 2s
+    setInterval(()=>{ try { localStorage.setItem(TKEY, String(audio.currentTime||0)); } catch(e){} }, 2000);
+
+    // Volume control hookup
+    document.querySelectorAll('input[type="range"][data-volume]').forEach(r => {
+      r.value = String(audio.volume);
+      r.addEventListener('input', () => {
+        const v = Math.max(0, Math.min(1, parseFloat(r.value)));
+        audio.volume = v;
+        localStorage.setItem(VKEY, String(v));
+      });
     });
   }
+
+  document.addEventListener('DOMContentLoaded', initAudio);
 })();

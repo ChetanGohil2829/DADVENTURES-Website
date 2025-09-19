@@ -20,7 +20,7 @@
       <div class="site-title">DADVENTURES</div>
     </div>
     <nav>
-      <a href="index.html" class="active">Home</a>
+      <a href="index.html" class="">Home</a>
 <a href="about.html" class="">About</a>
 <a href="events.html" class="">Events</a>
 <a href="shop.html" class="">Shop</a>
@@ -35,48 +35,10 @@
 </header>
 <div class="container">
 
-  <div class="grid grid-3">
-    <div class="card">
-      <h3>Welcome to Dadventures</h3>
-      <p>Bonding through nature — hikes, camping, and shared exploration.</p>
-      <div class="badge">Theme</div>
-      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-        <a href="#" class="button" data-theme="green">Green</a>
-        <a href="#" class="button" data-theme="orange">Orange</a>
-        <a href="#" class="button" data-theme="pink">Pink</a>
-        <a href="#" class="button" data-theme="purple">Purple</a>
-        <a href="#" class="button" data-theme="gold">Gold</a>
-        <a href="#" class="button" data-theme="bronze">Bronze</a>
-      </div>
-    </div>
-    <div class="card">
-      <h3>Upcoming Events</h3>
-      <div id="upcoming"></div>
-      <script>
-        fetch('content/events.json').then(r=>r.json()).then(data=>{
-          const root = document.getElementById('upcoming');
-          root.innerHTML = data.slice(0,4).map(e=>`
-            <div class="badge">${e.date} • ${e.time}</div>
-            <div><strong>${e.title}</strong> — ${e.route}</div>
-          `).join('');
-        });
-      </script>
-    </div>
-    <div class="card">
-      <h3>Admin Debug</h3>
-      <button class="button" id="runDebug">Run checks</button>
-      <div class="debug" id="debugPanel">
-        <pre id="debugLog"></pre>
-      </div>
-      <script>
-        // Reveal debug only if admin
-        document.addEventListener('DOMContentLoaded', ()=>{
-          if(window.DadventuresAdmin && window.DadventuresAdmin.isAdmin()){
-            document.getElementById('debugPanel').classList.add('visible');
-          }
-        });
-      </script>
-    </div>
+  <div class="card" style="text-align:center">
+    <h3>Logo Icon</h3>
+    <img src="images/logo-teepee.png" alt="New Teepee Logo" style="max-width:300px">
+    <p class="muted">This page reflects the updated teepee logo. Favicon and header logo sync to theme.</p>
   </div>
 
 </div>

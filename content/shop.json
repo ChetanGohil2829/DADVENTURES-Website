@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Dadventures Cap",
+    "price": "\u00a315.00",
+    "image": "images/logo-teepee.png",
+    "link": "#"
+  },
+  {
+    "name": "Dadventures T\u2011Shirt",
+    "price": "\u00a320.00",
+    "image": "images/logo-teepee.png",
+    "link": "#"
+  },
+  {
+    "name": "Dadventures Mug",
+    "price": "\u00a38.00",
+    "image": "images/logo-teepee.png",
+    "link": "#"
+  }
+]

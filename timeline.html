@@ -23,9 +23,9 @@
       <a href="index.html" class="">Home</a>
 <a href="about.html" class="">About</a>
 <a href="events.html" class="">Events</a>
-<a href="shop.html" class="active">Shop</a>
+<a href="shop.html" class="">Shop</a>
 <a href="blog.html" class="">Blog</a>
-<a href="timeline.html" class="">Timeline</a>
+<a href="timeline.html" class="active">Timeline</a>
 <a href="join.html" class="">Join Us</a>
 <a href="contact.html" class="">Contact</a>
 <a href="signin.html" class="">Sign In</a>
@@ -36,17 +36,15 @@
 <div class="container">
 
   <div class="card">
-    <h3>Shop (seeded)</h3>
-    <div id="shop" class="grid grid-3"></div>
+    <h3>Timeline</h3>
+    <div class="timeline" id="timeline"></div>
     <script>
-      fetch('content/shop.json').then(r=>r.json()).then(data=>{
-        const root = document.getElementById('shop');
-        root.innerHTML = data.map(p=>`
-          <div class="card">
-            <img class="responsive-img" src="${p.image}" alt="${p.name}">
-            <h4>${p.name}</h4>
-            <div class="badge">${p.price}</div>
-            <a class="button" href="${p.link}">Buy</a>
+      fetch('content/timeline.json').then(r=>r.json()).then(data=>{
+        const root = document.getElementById('timeline');
+        root.innerHTML = data.map(t=>`
+          <div class="item">
+            <div class="badge">${t.year}</div>
+            <p>${t.text}</p>
           </div>
         `).join('');
       });

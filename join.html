@@ -1,75 +1,66 @@
-<!doctype html><html lang="en"><head>
-
-<meta name="description" content="Dadventures — hikes, camps, trails and community adventures for families.">
-<meta property="og:site_name" content="Dadventures">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dadventures">
-<meta property="og:description" content="Hikes, camps, trails and community adventures for families.">
-<meta property="og:image" content="images/favicon-64.png">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Dadventures",
-  "url": "https://example.com",
-  "logo": "https://example.com/images/favicon-64.png",
-  "sameAs": [
-    "https://facebook.com/dadventures",
-    "https://instagram.com/dadventures",
-    "https://tiktok.com/@dadventures"
-  ]
-}
-</script>
-
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DADVENTURES — Join Us</title>
-<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="stylesheet" href="css/style.css"></head><body>
-<div class="container">
-  <header style="display:flex;align-items:center;gap:12px">
-    <img src="images/teepee-logo.svg" alt="Dadventures" width="48" height="48">
-    <h1 data-editable id="join_title">Join DADVENTURES</h1>
-  </header>
-  <p data-editable id="join_intro">Be first to hear about trails, camps, and community events. Sign up below.</p>
-  <form name="join-us" method="POST" data-netlify="true" class="grid" style="max-width:640px">
-    <input type="hidden" name="form-name" value="join-us">
-    <label>Full Name <input required name="name"></label>
-    <label>Email <input required type="email" name="email"></label>
-    <label>Phone <input name="phone"></label>
-    <label>Location <input name="location"></label>
-    <label>Interests <input name="interests" placeholder="Hiking, camping, ..."></label>
-    <label><input type="checkbox" name="whatsapp"> Join our WhatsApp community</label>
-    <button class="button" type="submit">Join</button>
-  </form>
-</div>
-
-<footer id="links-bar" class="links-bar">
-  <nav class="links-nav">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="events.html">Events</a>
-    <a href="shop.html">Shop</a>
-    <a href="donations.html">Donations</a>
-    <a href="blog.html">Blog</a>
-    <a href="join.html">Join Us</a>
-    <a href="contact.html">Contact</a>
-    <a href="signin.html">Sign In</a>
-  </nav>
-</footer>
-<script src="js/identity.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/editor.js"></script>
-
-
-<footer class="site-footer">
-  <div class="social-links">
-    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
-    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dadventures</title>
+<link rel="stylesheet" href="css/site.css">
+<link rel="icon" type="image/png" href="images/favicon-green.png">
+<script src="js/theme.js" defer></script>
+<script src="js/audio.js" defer></script>
+<script src="js/admin.js" defer></script>
+<script src="js/debug.js" defer></script>
+</head>
+<body>
+<audio id="globalAudio" src="audio/ambient_loop.wav" autoplay></audio>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <img src="images/logo-teepee.png" alt="Dadventures logo">
+      <div class="site-title">DADVENTURES</div>
+    </div>
+    <nav>
+      <a href="index.html" class="">Home</a>
+<a href="about.html" class="">About</a>
+<a href="events.html" class="">Events</a>
+<a href="shop.html" class="">Shop</a>
+<a href="blog.html" class="">Blog</a>
+<a href="timeline.html" class="">Timeline</a>
+<a href="join.html" class="active">Join Us</a>
+<a href="contact.html" class="">Contact</a>
+<a href="signin.html" class="">Sign In</a>
+<a href="admin.html" class="">Control Panel</a>
+    </nav>
   </div>
-  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
-</footer>
+</header>
+<div class="container">
 
-</body></html>
+  <div class="card">
+    <h3>Join Us</h3>
+    <form name="join" method="post" data-netlify="true">
+      <input type="hidden" name="form-name" value="join">
+      <div style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
+        <div><label>Name<input class="input" name="name" required></label></div>
+        <div><label>Email<input class="input" type="email" name="email" required></label></div>
+      </div>
+      <div style="margin-top:12px"><label>Why join?<textarea class="input" name="reason" rows="4"></textarea></label></div>
+      <div style="margin-top:12px"><button class="button" type="submit">Submit</button></div>
+    </form>
+    <div class="badge" style="margin-top:8px">Mock submissions enabled</div>
+  </div>
+
+</div>
+<footer>
+  <div class="footer-inner">
+    <div>© Dadventures • Big and little adventures together</div>
+    <div class="volume">
+      <span class="badge">Volume</span>
+      <input type="range" data-volume min="0" max="1" step="0.01">
+      <a class="badge" href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+      <a class="badge" href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+      <a class="badge" href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

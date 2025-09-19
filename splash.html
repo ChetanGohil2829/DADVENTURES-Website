@@ -1,39 +1,11 @@
 
 <!doctype html><html lang="en"><head>
-
-<meta name="description" content="Dadventures — hikes, camps, trails and community adventures for families.">
-<meta property="og:site_name" content="Dadventures">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dadventures">
-<meta property="og:description" content="Hikes, camps, trails and community adventures for families.">
-<meta property="og:image" content="images/favicon-64.png">
-<meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Dadventures",
-  "url": "https://example.com",
-  "logo": "https://example.com/images/favicon-64.png",
-  "sameAs": [
-    "https://facebook.com/dadventures",
-    "https://instagram.com/dadventures",
-    "https://tiktok.com/@dadventures"
-  ]
-}
-</script>
-
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Welcome - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/>
-<link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="images/favicon-64.png" sizes="64x64" type="image/png">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="images/favicon-64.png">
-</head>
+<title>Welcome - DADVENTURES</title><link rel="stylesheet" href="css/style.css"/></head>
 <body class="splash-body">
   <div class="splash">
     <div class="box">
-      <img src="images/teepee-logo.svg" alt="logo" style="height:90px;margin-bottom:10px"/>
+      <img src="images/logo-icon.svg" alt="logo" style="height:90px;margin-bottom:10px"/>
       <h1><span class="letters" id="letters"></span></h1>
       <p class="muted">Big and Little Adventures Together</p>
       <div class="volume-controls"><button id="playPause" class="btn">Play</button>
@@ -55,24 +27,4 @@ vol.addEventListener('input',function(){ music.volume = +vol.value; });
 playPause.addEventListener('click', async function(){ if(music.paused){ try{ await music.play(); music.muted=false; }catch(e){} playPause.textContent="Pause"; } else { music.pause(); playPause.textContent="Play"; } });
 (async function(){ try{ await music.play(); }catch(e){} })();
 </script>
-
-<footer id="links-bar" class="links-bar">
-  <nav class="links-nav">
-    <a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a>
-    <a href="shop.html">Shop</a><a href="donations.html">Donations</a><a href="blog.html">Blog</a>
-    <a href="join.html">Join Us</a><a href="contact.html">Contact</a><a href="signin.html">Sign In</a>
-  </nav>
-</footer>
-<script src="js/identity.js"></script><script src="js/audio.js"></script><script src="js/theme.js"></script><script src="js/editor.js"></script>
-
-
-<footer class="site-footer">
-  <div class="social-links">
-    <a href="https://facebook.com/dadventures" target="_blank" rel="noopener">Facebook</a>
-    <a href="https://instagram.com/dadventures" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://tiktok.com/@dadventures" target="_blank" rel="noopener">TikTok</a>
-  </div>
-  <p class="copyright">© Dadventures 2025 — All Rights Reserved</p>
-</footer>
-
 </body></html>

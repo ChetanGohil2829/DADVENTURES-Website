@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Why Dadventures?",
+    "date": "2025-09-19",
+    "image": "images/logo-teepee.png",
+    "excerpt": "Big and little adventures together \u2014 our mission and story.",
+    "slug": "why-dadventures",
+    "content": "We believe in shared experiences outdoors that build lifelong memories."
+  },
+  {
+    "title": "Top 5 Kid\u2011Friendly Trails",
+    "date": "2025-09-26",
+    "image": "images/logo-teepee.png",
+    "excerpt": "Easy routes perfect for first adventures.",
+    "slug": "kid-friendly-trails",
+    "content": "A curated list of gentle trails suited for young explorers."
+  },
+  {
+    "title": "What to Pack",
+    "date": "2025-10-03",
+    "image": "images/logo-teepee.png",
+    "excerpt": "A simple checklist for safe and fun trips.",
+    "slug": "what-to-pack",
+    "content": "From water and snacks to first-aid \u2014 here\u2019s your packing list."
+  }
+]
