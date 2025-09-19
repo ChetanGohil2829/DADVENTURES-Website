@@ -47,3 +47,15 @@
   }
   document.addEventListener('DOMContentLoaded', ensureAudio);
 })();
+
+// Reserve space for audio bar so it doesn't cover footer
+(function(){
+  function pad(){
+    const ac=document.getElementById('audioControls');
+    if(!ac) return;
+    const h=ac.getBoundingClientRect().height||60;
+    document.body.style.paddingBottom = (h+24)+'px';
+  }
+  const ro=new ResizeObserver(pad); 
+  window.addEventListener('load',()=>{ const ac=document.getElementById('audioControls'); if(ac){ ro.observe(ac); pad(); } });
+})();
