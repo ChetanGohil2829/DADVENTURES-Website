@@ -1,47 +1,26 @@
 <!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sign In — Dadventures</title><link rel="icon" type="image/png" href="images/favicon-blue.png">
-<link rel="stylesheet" href="css/patch-v33.css">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script>
-<script src="js/admin.js" defer></script><script src="js/debug.js" defer></script><script src="js/forms.js" defer></script>
-
-<link rel="icon" type="image/png" href="images/favicon-blue.png">
-<link rel="stylesheet" href="css/patch-v33.css">
-<script src="js/theme.js" defer></script>
-<script src="js/audio.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/debug.js" defer></script>
-<script src="js/forms.js" defer></script>
-<script src="js/calendar.js" defer></script>
-</head>\1
-<audio id=\"globalAudio\" src=\"audio/ambient_loop.wav\" autoplay></audio>
-<header class="mini-header">
-  <div class="wrap">
-    <a class="logo" href="index.html"><img src="images/logo-teepee.png" alt="Dadventures logo"></a>
-    <nav>
-      <a href="index.html">Home</a><a href="about">About</a><a href="events">Events</a>
-      <a href="shop">Shop</a><a href="contact">Contact</a><a href="join.html">Join Us</a>
-      <a href="blog.html">Blog</a><a href="signin.html">Sign In</a><a href="admin.html">Control Panel</a>
-    </nav>
-  </div>
-</header>
-<main class="container" style="max-width:1100px;margin:0 auto;padding:16px">
-<h2>Sign In</h2>
-<form id="loginForm" style="display:grid;gap:12px;max-width:420px">
-  <label>Username<input class="input" name="username" required></label>
-  <label>Password<input class="input" type="password" required></label>
-  <div><a id="forgot" href="#" class="muted">Forgot password?</a></div>
-  <button class="button" type="submit">Sign In</button>
-  <div id="loginNote" style="color:#ff8c8c"></div>
-</form>
-<hr>
-<div id="adminDebug" style="display:none">
-  <h3>Admin Debug</h3>
-  <button class="button" id="runDebug">Run Checks</button>
-  <button class="button" id="exportDebug">Export</button>
-  <pre id="debugLog" style="min-height:120px"></pre>
-</div>
-<script>document.addEventListener('DOMContentLoaded',()=>{{ if(window.DadventuresAdmin && DadventuresAdmin.isAdmin()){{ document.getElementById('adminDebug').style.display='block'; }} }});</script>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sign In — Dadventures</title><link rel="stylesheet" href="css/style.css"/><link rel="stylesheet" href="css/v3.3.4.css"/>
+<script src="js/v3.3.4.js" defer></script></head><body>
+<header><div class="inner">
+  <div class="logo"><a href="index.html"><img src="images/logo-icon.svg" alt="Logo"/></a><strong>DADVENTURES</strong></div>
+  <nav>
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a><a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a><a href="donations.html">Donate</a><a href="join.html">Join Us</a>
+    <a href="blog.html">Blog</a><a aria-current="page" href="signin.html">Sign In</a><a href="admin.html">Control Panel</a>
+  </nav><div class="header-right"><span class="clock"></span></div></div></header>
+<main class="container">
+  <section class="card" style="max-width:600px;margin:1rem auto">
+    <h2>Sign In</h2>
+    <form onsubmit="event.preventDefault(); alert('Demo login only.');">
+      <label>Username<br><input type="text" required></label><br><br>
+      <label>Password<br><input type="password" required></label><br><br>
+      <a href="#" class="muted">Forgot password?</a><br><br>
+      <button class="btn" type="submit">Sign In</button>
+    </form>
+  </section>
 </main>
-<footer><div class="footer-inner">Copyright 2025 DADVENTURESS · <a href="https://www.tiktok.com" target="_blank">TikTok</a> · <a href="https://www.instagram.com" target="_blank">Instagram</a> · <a href="https://www.facebook.com" target="_blank">Facebook</a></div></footer>
-</body></html>
+<footer><div class="inner">
+  <div class="footer-links"><a href="https://www.tiktok.com/">TikTok</a> · <a href="https://www.instagram.com/">Instagram</a> · <a href="https://www.facebook.com/">Facebook</a></div>
+  <div class="footer-copy">Copyright 2025 DADVENTURES</div>
+</div></footer></body></html>

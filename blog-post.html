@@ -1,41 +1,23 @@
 <!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dadventures — Blog Post</title>
-<link rel="icon" type="image/png" href="images/favicon-blue.png"><link rel="stylesheet" href="css/patch-v33.css">
-<script src="js/theme.js" defer></script><script src="js/audio.js" defer></script>
-
-<link rel="icon" type="image/png" href="images/favicon-blue.png">
-<link rel="stylesheet" href="css/patch-v33.css">
-<script src="js/theme.js" defer></script>
-<script src="js/audio.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/debug.js" defer></script>
-<script src="js/forms.js" defer></script>
-<script src="js/calendar.js" defer></script>
-</head>\1
-<audio id=\"globalAudio\" src=\"audio/ambient_loop.wav\" autoplay></audio>
-
-<header class="mini-header">
-  <div class="wrap">
-    <a class="logo" href="index.html"><img src="images/logo-teepee.png" alt="Dadventures logo"></a>
-    <nav>
-      <a href="index.html">Home</a><a href="about">About</a><a href="events">Events</a>
-      <a href="shop">Shop</a><a href="contact">Contact</a><a href="join.html">Join Us</a>
-      <a href="blog.html">Blog</a><a href="signin.html">Sign In</a><a href="admin.html">Control Panel</a>
-    </nav>
-  </div>
-</header>
-
-<main class="blog-wrap"><article id="post"></article></main>
-<footer><div class="footer-inner">Copyright 2025 DADVENTURESS · <a href="https://www.tiktok.com" target="_blank">TikTok</a> · <a href="https://www.instagram.com" target="_blank">Instagram</a> · <a href="https://www.facebook.com" target="_blank">Facebook</a></div></footer>
-<script>
-fetch('content/blog.json').then(r=>r.json()).then(list=>{
-  const slug=new URLSearchParams(location.search).get('p');
-  const p=list.find(x=>(x.slug||x.title.toLowerCase().replace(/\s+/g,'-'))===slug);
-  const el=document.getElementById('post'); if(!p){ el.textContent='Post not found.'; return; }
-  el.innerHTML=`<h1>${p.title}</h1><div class="blog-meta"><span>${p.author||'Dadventures'}</span><span class='blog-dot'></span><span>${p.date}</span></div>
-  <img src="${p.image||'images/logo-teepee.png'}" alt="${p.title}" style="border-radius:12px;margin-bottom:12px">
-  <p style="font-size:1.05rem;line-height:1.7">${p.body||p.excerpt||''}</p>`;
-});
-</script>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blog Post — Dadventures</title>
+<link rel="stylesheet" href="css/style.css"/><link rel="stylesheet" href="css/v3.3.4.css"/>
+<script src="js/v3.3.4.js" defer></script>
+</head><body>
+<header><div class="inner">
+  <div class="logo"><a href="index.html"><img src="images/logo-icon.svg" alt="Logo"/></a><strong>DADVENTURES</strong></div>
+  <nav><a href="index.html">Home</a><a href="blog.html" aria-current="page">Blog</a></nav>
+  <div class="header-right"><span class="clock"></span></div>
+</div></header>
+<main class="container">
+  <article class="card">
+    <h1>Sample Blog Article</h1>
+    <p class="muted">Dadventures · 2025-09-19</p>
+    <p>Welcome to the new Dadventures blog! This is mock text so you can verify the style and layout quickly.</p>
+  </article>
+</main>
+<footer><div class="inner">
+  <div class="footer-links"><a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></div>
+  <div class="footer-copy">Copyright 2025 DADVENTURES</div>
+</div></footer>
 </body></html>

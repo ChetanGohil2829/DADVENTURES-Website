@@ -1,8 +1,8 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DADVENTURES - Shop</title><link rel="stylesheet" href="css/style.css"/>
-<link rel="stylesheet" href="css/revert-events-shop.css">
+<title>DADVENTURES - Shop</title><link rel="stylesheet" href="css/style.css"/>  <link rel="stylesheet" href="css/v3.3.4.css"/>
+  <script src="js/v3.3.4.js" defer></script>
 </head>
 <body>
   
@@ -42,7 +42,7 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 
   <main class="container">
     
-<div class="searchbar">
+<div class="searchbar with-icon">
   <img src="images/logo-icon.svg" alt="search icon" style="height:20px"/>
   <input id="search" type="search" placeholder="Search" aria-label="Search"/>
   <button id="searchBtn" class="btn" aria-label="Run search">Search</button>
@@ -56,8 +56,12 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
   
 <footer>
   <div class="inner">
-    <div>Copyright 2025 DADVENTURE - Big & Little Adventures Together</div>
-    <div><a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://instagram.com" target="_blank">Instagram</a></div>
+    <div class="footer-links">
+      <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a> ·
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> ·
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+    <div class="footer-copy">Copyright 2025 DADVENTURES</div>
   </div>
 </footer>
 
