@@ -1,8 +1,0 @@
-
-header.site-header { position: fixed; top: 0; left: 0; right: 0; height: 56px; z-index: 9999; display:flex; align-items:center; background: rgba(0,0,0,0.4); padding: 0 12px; }
-header.site-header .nav { display:flex; gap:18px; margin-left:20px; font-size:14px; }
-header.site-header .logo img { height:44px; }
-.clock-top-right { margin-left:auto; margin-right:10px; font-size:13px; color:var(--clock-color,#eaf6ff); }
-#music-bar { position: fixed; right: 16px; bottom: 16px; background: rgba(0,0,0,0.6); padding:8px; border-radius:10px; cursor: grab; z-index:9998; }
-#admin-debug { display:none; position:fixed; bottom:0; left:0; right:0; max-height:200px; overflow:auto; background:#111; color:#0f0; font-family:monospace; font-size:12px; padding:8px; }
-body.admin #admin-debug { display:block; }
