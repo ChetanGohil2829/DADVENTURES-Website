@@ -69,3 +69,30 @@ header nav a{
 header .logo img{ height: 28px; filter: drop-shadow(0 0 8px rgba(64,170,255,.45)); }
 footer .footer-copy{ font-size: .8rem; opacity:.8; margin-top:6px; }
 .searchbar.with-icon input{ background-image:url('../images/teepee.svg'); background-repeat:no-repeat; background-size:16px 16px; background-position:12px center; padding-left:36px; }
+
+:root{ --nav-font-size: 10pt; --nav-pad-y: 6px; --nav-pad-x: 12px; --header-pos: top; --accent:#34b4ff; }
+header{ position:sticky; top:0; z-index:40 }
+html[data-header-pos="bottom"] header{ top:auto; bottom:0 }
+header .inner{ display:flex; align-items:center; gap:16px; padding:8px 16px; background:rgba(0,0,0,.35); backdrop-filter: blur(6px); border-bottom:1px solid rgba(255,255,255,.08) }
+header .logo img{ height:28px; filter: drop-shadow(0 0 8px rgba(64,170,255,.4)); }
+header nav{ display:grid; grid-auto-flow: column; grid-auto-columns:1fr; gap:.65rem; align-items:center; flex:1 }
+header nav a{ display:inline-flex; align-items:center; justify-content:center; font-size:var(--nav-font-size); padding:var(--nav-pad-y) var(--nav-pad-x); border-radius:18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); color:#cfe8ff; text-decoration:none; white-space:nowrap; transition: box-shadow .15s ease, transform .06s ease, background .15s }
+header nav a:hover{ transform:translateY(-1px); box-shadow:0 0 12px rgba(52,180,255,.35), 0 0 16px rgba(194,92,255,.25); background:rgba(255,255,255,.10) }
+.header-right{ display:flex; align-items:center; gap:10px; margin-left:12px }
+.clock{ color:#9ab6c9; font:500 .9rem/1.2 ui-sans-serif, system-ui }
+.header-btn{ background:none; border:1px solid rgba(255,255,255,.15); border-radius:10px; padding:6px 8px; color:#bfe7ff; cursor:pointer }
+.header-btn:hover{ background:rgba(255,255,255,.08) }
+footer .footer-copy{ font-size:9pt; opacity:.85; margin-top:4px }
+input[type="search"].with-icon, .searchbar.with-icon input[type="search"]{ background-image:url('../images/teepee.svg'); background-repeat:no-repeat; background-position:12px center; background-size:16px 16px; padding-left:34px }
+
+/* v3.4.1 audio bar positionable */
+#audioControls{
+  position:fixed; left:12px; right:12px; bottom:12px; z-index:60;
+  display:flex; align-items:center; gap:.75rem; justify-content:center;
+  padding:.6rem .9rem; border-radius:14px;
+  background:rgba(0,0,0,.55); backdrop-filter: blur(6px); color:#e6f6ff;
+  border:1px solid rgba(255,255,255,.12);
+}
+html[data-audio-pos="top"] #audioControls{ top:12px; bottom:auto }
+#audioControls button{ padding:.45rem .9rem; border-radius:.7rem; border:1px solid rgba(255,255,255,.12); background:#0f2230; color:#d8f2ff; cursor:pointer }
+#audioControls input[type=range]{ width:260px }
