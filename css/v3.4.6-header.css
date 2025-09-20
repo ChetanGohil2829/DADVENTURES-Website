@@ -1,0 +1,60 @@
+
+:root{ --theme-glow:#1fb6ff; }
+
+/* Header look */
+header{
+  background:rgba(0,0,0,.85);
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  z-index:50;
+}
+header .logo img, header .logo svg{ filter:drop-shadow(0 0 8px var(--theme-glow)); }
+
+/* Desktop nav */
+header nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  margin:0 auto;
+}
+header nav a{
+  color:#e7f2ff;
+  text-decoration:none;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:.95rem;
+}
+header nav a:hover{ filter:drop-shadow(0 0 8px var(--theme-glow)); }
+
+/* Remove the left-side icon near clock */
+header .left-icon, .adjust-icon{ display:none !important; }
+
+/* Right drawer icon stays (no styles changed) */
+
+/* Mobile */
+#nav-toggle{ display:none; }
+@media(max-width:768px){
+  header{ min-height:60px; }
+  /* show burger */
+  #nav-toggle{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:34px; height:34px; margin-left:10px;
+    font-size:22px; color:#e7f2ff; background:transparent; border:0; cursor:pointer;
+  }
+  /* hide inline nav by default */
+  header nav{ display:none; }
+  /* drop-down panel when open */
+  header.nav-open nav{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    position:absolute;
+    top:100%; left:0; right:0;
+    padding:10px 14px;
+    background:rgba(0,0,0,.95);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+}
