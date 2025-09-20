@@ -1,0 +1,25 @@
+
+/* Header fixed top */
+header.site-header { position: fixed; top: 0; left: 0; right: 0; height: 60px; z-index: 9999;
+  display:flex; align-items:center; justify-content:space-between;
+  background: rgba(0,0,0,0.7); padding: 6px 16px; transition: all 0.3s ease; }
+header.site-header.reduced { height: 36px; overflow:hidden; }
+header.site-header .nav { display:flex; gap:18px; font-size:14px; margin-top:6px; }
+header.site-header .toggle-btn { background:none; border:none; cursor:pointer; color:#ccc; font-size:18px; }
+header.site-header .toggle-btn:hover { color: var(--theme-glow,#1fb6ff); }
+
+/* Music bar */
+#music-bar { position: fixed; right: 16px; bottom: 16px;
+  background: rgba(0,0,0,0.6); padding:8px 40px 8px 8px;
+  border-radius:10px; transition: all 0.3s ease; z-index:9998; }
+#music-bar.reduced { width:140px; height:36px; overflow:hidden; }
+#music-bar .toggle-btn { position:absolute; top:4px; right:6px;
+  background:none; border:none; color:#ccc; font-size:16px; cursor:pointer; }
+#music-bar .toggle-btn:hover { color: var(--theme-glow,#1fb6ff); }
+#music-vol { width:80px; }
+
+/* Debugger */
+#admin-debug { display:none; position:fixed; bottom:0; left:0; right:0;
+  max-height:200px; overflow:auto; background:#111; color:#0f0;
+  font-family:monospace; font-size:12px; padding:8px; }
+body.admin #admin-debug { display:block; }
