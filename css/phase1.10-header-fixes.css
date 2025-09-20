@@ -1,0 +1,50 @@
+
+:root { --theme-glow: #1fb6ff; }
+
+/* Header adjustments */
+header {
+  background: rgba(0,0,0,0.85);
+  min-height: 72px; /* slightly taller */
+  display: flex;
+  align-items: center;
+}
+header .logo img, header .logo svg {
+  filter: drop-shadow(0 0 8px var(--theme-glow));
+}
+
+/* Tabs */
+header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin: 0 auto;
+}
+header nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+header nav a:hover {
+  filter: drop-shadow(0 0 6px var(--theme-glow));
+}
+
+/* Remove unwanted icons */
+header .screen-adjust, header .resize-icon { display: none !important; }
+
+/* Mobile adjustments */
+@media(max-width: 768px) {
+  body { margin-top: 0 !important; }
+  header { padding-top: 0 !important; }
+  header nav { display: none; flex-direction: column; gap: 14px; padding: 12px; }
+  header.nav-open nav { display: flex; background: rgba(0,0,0,0.95); }
+  #dad-hamburger {
+    display: block;
+    position: absolute;
+    left: 14px; top: 18px;
+    font-size: 24px;
+    background: none; border: none; color: white;
+  }
+  #dad-clock { position: absolute; right: 14px; top: 18px; }
+}

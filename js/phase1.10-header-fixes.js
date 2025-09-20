@@ -54,4 +54,18 @@
       }catch(e){}
     },2000);
   }catch(e){ console.warn('music init failed',e); }
+
+  // THEME-aware logo glow
+  function applyThemeGlow(){
+    var theme = localStorage.getItem('dad_theme') || 'default';
+    var glow = '#1fb6ff';
+    if(theme==='gold-bronze') glow='#d4af37';
+    if(theme==='green-orange') glow='#00ff7f';
+    if(theme==='navy-teal') glow='#00ced1';
+    if(theme==='maroon-peach') glow='#ff6f61';
+    if(theme==='black-orange') glow='#ff6600';
+    document.documentElement.style.setProperty('--theme-glow', glow);
+  }
+  applyThemeGlow();
+  window.addEventListener('storage', applyThemeGlow);
 })();
