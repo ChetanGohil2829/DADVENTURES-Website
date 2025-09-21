@@ -1,48 +1,41 @@
 
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>DADVENTURES - Events</title><link rel="stylesheet" href="css/style.css"/>  <link rel="stylesheet" href="css/v3.3.4.css"/>
-  <script src="js/v3.3.4.js" defer></script>
-<link id="favicon" rel="icon" type="image/svg+xml" href="images/favicon-bluepink.svg"/><link rel="stylesheet" href="css/v3.4.10-strict.css">
-  <link rel="stylesheet" href="css/v3.4.11-strict.css">
-  <link rel="stylesheet" href="css/v3.4.12-strict.css">
-  <link rel="stylesheet" href="css/v3.4.13-strict.css">
-  <link rel="stylesheet" href="css/v3.4.14-strict.css">
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>DADVENTURES - Events</title><link href="css/style.css" rel="stylesheet"/> <link href="css/v3.3.4.css" rel="stylesheet"/>
+<script defer="" src="js/v3.3.4.js"></script>
+<link href="images/favicon-bluepink.svg" id="favicon" rel="icon" type="image/svg+xml"/><link href="css/v3.4.10-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.11-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.12-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.13-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.14-strict.css" rel="stylesheet"/>
 </head>
 <body>
 <header>
-  <div class="inner">
-    
-    <div class="logo">
-      <a href="index.html"><img src="images/logo-icon.svg" alt="Dadventures logo"/></a>
-      <strong>DADVENTURES</strong>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="events.html">Events</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
-      <a href="donations.html">Donate</a>
-      <a href="join.html">Join Us</a>
-      <a href="blog.html">Blog</a>
-      <a href="signin.html">Sign In</a>
-      <a href="admin.html">Control Panel</a>
-    </nav>
-    <div class="header-right"><span class="clock"></span><button class="menu-toggle" aria-label="Menu">☰</button></div>
-    
-  </div>
+<div class="inner">
+<div class="logo">
+<a href="index.html"><img alt="Dadventures logo" src="images/logo-icon.svg"/></a>
+<strong>DADVENTURES</strong>
+</div>
+<nav>
 
 
-    <div style="display:flex;align-items:center;gap:12px">
-      
-      
-      
-    </div>
-  </div>
+
+
+<a href="contact.html">Contact</a>
+
+
+
+
+
+<a href="index.html">Home</a><a href="about.html">About</a><a href="events.html">Events</a><a href="blog.html">Blog</a><a href="shop.html">Shop</a><a href="donations.html">Donate</a><a href="signin.html">Sign In</a></nav>
+<div class="header-right"><span class="clock"></span><button aria-label="Menu" class="menu-toggle">☰</button></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+</div>
+
 </header>
 <div class="mobile-nav"><div class="mobile-links"></div></div>
-</div>
 
 <script>
 function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
@@ -52,50 +45,45 @@ gv.addEventListener('input', function(){ gm.volume = +gv.value; });
 gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
 (async function(){ try{ await gm.play(); }catch(e){} })();
 </script>
-
-  <main class="container">
-    
+<main class="container">
 <div class="searchbar with-icon">
-  <img src="images/logo-icon.svg" alt="search icon" style="height:20px"/>
-  <input id="search" type="search" placeholder="Search" aria-label="Search"/>
-  <button id="searchBtn" class="btn" aria-label="Run search">Search</button>
+<img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
+<input aria-label="Search" id="search" placeholder="Search" type="search"/>
+<button aria-label="Run search" class="btn" id="searchBtn">Search</button>
 </div>
-
-    <div class="card" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
-      <button id="todayBtn" class="btn">Today</button>
-      <select id="filter"><option value="all">All</option><option value="upcoming">Upcoming only</option></select>
-    </div>
-    <div class="grid" id="eventsGrid"></div>
-  </main>
-  <div class="modal" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <div class="panel">
-      <h3 id="mTitle"></h3>
-      <img id="mImg" alt="" style="width:100%;border-radius:12px;display:block;margin-bottom:10px"/>
-      <p id="mDesc" class="muted"></p>
-      <p><strong>Route:</strong> <span id="mRoute"></span></p>
-      <p><a id="mMap" href="#" target="_blank" rel="noopener">Open in Google Maps</a></p>
-      <div class="countdown" id="mCountdown"></div>
-      <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end"><button class="btn" id="mClose">Close</button></div>
-    </div>
-  </div>
-  
+<div class="card" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+<button class="btn" id="todayBtn">Today</button>
+<select id="filter"><option value="all">All</option><option value="upcoming">Upcoming only</option></select>
+</div>
+<div class="grid" id="eventsGrid"></div>
+</main>
+<div aria-labelledby="mTitle" aria-modal="true" class="modal" id="eventModal" role="dialog">
+<div class="panel">
+<h3 id="mTitle"></h3>
+<img alt="" id="mImg" style="width:100%;border-radius:12px;display:block;margin-bottom:10px"/>
+<p class="muted" id="mDesc"></p>
+<p><strong>Route:</strong> <span id="mRoute"></span></p>
+<p><a href="#" id="mMap" rel="noopener" target="_blank">Open in Google Maps</a></p>
+<div class="countdown" id="mCountdown"></div>
+<div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end"><button class="btn" id="mClose">Close</button></div>
+</div>
+</div>
 <footer>
-  <div class="inner">
-    <button class="menu-toggle" aria-label="Menu">☰</button>
-    <div class="footer-links">
-      <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a> ·
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a> ·
-      <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
-    </div>
-    <div class="footer-copy">Copyright 2025 DADVENTURES</div>
-  </div>
+<div class="inner">
+<button aria-label="Menu" class="menu-toggle">☰</button>
+<div class="footer-links">
+<a href="https://www.tiktok.com/" rel="noopener" target="_blank">TikTok</a> ·
+      <a href="https://www.instagram.com/" rel="noopener" target="_blank">Instagram</a> ·
+      <a href="https://www.facebook.com/" rel="noopener" target="_blank">Facebook</a>
+</div>
+<div class="footer-copy">Copyright 2025 DADVENTURES</div>
+</div>
 </footer>
-
-  <script src="js/search.js"></script>
-  <script src="js/events.js"></script>
-  <script>document.querySelector('a[data-nav=Events]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
-  <script src="js/v3.4.11-strict.js"></script>
-  <script src="js/v3.4.12-strict.js"></script>
-  <script src="js/v3.4.13-strict.js"></script>
-  <script src="js/v3.4.14-strict.js"></script>
+<script src="js/search.js"></script>
+<script src="js/events.js"></script>
+<script>document.querySelector('a[data-nav=Events]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
+<script src="js/v3.4.11-strict.js"></script>
+<script src="js/v3.4.12-strict.js"></script>
+<script src="js/v3.4.13-strict.js"></script>
+<script src="js/v3.4.14-strict.js"></script>
 </body></html>
