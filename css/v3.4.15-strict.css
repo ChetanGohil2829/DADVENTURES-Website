@@ -1,8 +1,0 @@
-
-/* Fix for mobile music visibility */
-@media (max-width:768px) {
-  .menu-toggle { display:block; }
-  .header-right .clock { display:block; }
-  /* Ensure mobile music is properly styled for visibility and function */
-  audio { display:block; width:100%; }
-}
