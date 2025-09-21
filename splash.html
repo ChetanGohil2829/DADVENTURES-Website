@@ -8,6 +8,7 @@
 <script src="/js/v3.4.4-header-drawer-music.js" defer></script>
 <link rel="stylesheet" href="/css/v3.4.7-header.css">
 <script src="/js/v3.4.7-header-music.js" defer></script>
+  <link rel="stylesheet" href="css/v3.4.8-header-fixes.css">
 </head>
 <body class="splash-body">
   <div class="splash">
@@ -34,6 +35,7 @@ vol.addEventListener('input',function(){ music.volume = +vol.value; });
 playPause.addEventListener('click', async function(){ if(music.paused){ try{ await music.play(); music.muted=false; }catch(e){} playPause.textContent="Pause"; } else { music.pause(); playPause.textContent="Play"; } });
 (async function(){ try{ await music.play(); }catch(e){} })();
 </script>
+  <script src="js/v3.4.8-header-fixes.js"></script>
 </body></html>
 
 <footer>
