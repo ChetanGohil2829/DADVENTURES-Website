@@ -1,0 +1,58 @@
+
+/* v3.4.13 STRICT — address menu placement, duplicate links, glow, soundbar */
+
+/* 1) Logo glow (stronger specificity) */
+:root { --theme-glow:#1fb6ff; }
+header .logo a img, header .logo img, header .logo svg {
+  filter: drop-shadow(0 0 8px var(--theme-glow)) !important;
+  transition: filter .2s ease;
+}
+
+/* 2) Right-side cluster (clock + hamburger) */
+.header-right{ display:flex; align-items:center; gap:10px; }
+.header-right .clock{ color:#fff; font-size:.95rem; }
+
+/* 3) Hamburger visible only on mobile, beside clock, pulsing */
+.menu-toggle{
+  display:none;
+  font-size:1.6rem;
+  background:none; border:0;
+  color:var(--theme-glow);
+  text-shadow:0 0 6px var(--theme-glow);
+  cursor:pointer;
+  animation:pulseGlow 2s infinite;
+}
+@keyframes pulseGlow{
+  0%{ text-shadow:0 0 4px var(--theme-glow); }
+  50%{ text-shadow:0 0 12px var(--theme-glow); }
+  100%{ text-shadow:0 0 4px var(--theme-glow); }
+}
+@media(max-width:768px){
+  .menu-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+  header nav{ display:none !important; }
+  .mobile-nav{ display:none; }
+  .mobile-nav.active{
+    display:block;
+    position:fixed; left:0; right:0; top:58px;
+    background:rgba(0,0,0,.96);
+    padding:16px 20px; z-index:999;
+    animation:slideDown .25s ease;
+  }
+  .mobile-nav .mobile-links a{
+    display:block; text-align:left;
+    padding:10px 0; color:#fff; text-decoration:none;
+  }
+  .mobile-nav .mobile-links a:hover{
+    color:var(--theme-glow);
+    filter: drop-shadow(0 0 6px var(--theme-glow));
+  }
+}
+@keyframes slideDown{ from{ transform:translateY(-100%); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+
+/* 4) Safety — ensure mobile nav hidden on desktop (prevents duplicate links row) */
+@media(min-width:769px){
+  .mobile-nav{ display:none !important; }
+}
+
+/* 5) Safety — remove header soundbars */
+header audio, header .volume-controls{ display:none !important; }
