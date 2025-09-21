@@ -1,0 +1,67 @@
+
+/* v3.4.11 STRICT — implements 4 requested changes */
+
+/* 1) Logo glow (theme + admin override) */
+:root { --theme-glow: #1fb6ff; }
+header .logo img, header .logo svg {
+  filter: drop-shadow(0 0 8px var(--theme-glow));
+  transition: filter .2s ease;
+}
+body[data-glow-override] .logo img,
+body[data-glow-override] .logo svg {
+  filter: drop-shadow(0 0 8px var(--theme-glow));
+}
+
+/* 2) Date/time right aligned (desktop) */
+.header-right {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.header-right .clock {
+  color:#fff;
+  font-size:.95rem;
+}
+@media (max-width:768px) {
+  .header-right .clock { display:none; }
+}
+
+/* 3) Hamburger menu */
+.menu-toggle {
+  display:none;
+  font-size:1.6rem;
+  background:none;
+  border:0;
+  color: var(--theme-glow);
+  filter: drop-shadow(0 0 6px var(--theme-glow));
+  cursor:pointer;
+}
+@media (max-width:768px) {
+  .menu-toggle { display:block; }
+  header nav { display:none; }
+  .mobile-nav { display:none; }
+  .mobile-nav.active {
+    display:block;
+    position:fixed;
+    left:0; right:0;
+    top:58px;
+    background: rgba(0,0,0,0.96);
+    padding:16px 20px;
+    z-index: 999;
+    animation: slideDown .25s ease;
+  }
+  .mobile-nav .mobile-links a {
+    display:block;
+    padding:10px 0;
+    color:#fff;
+    text-decoration:none;
+  }
+  .mobile-nav .mobile-links a:hover {
+    color: var(--theme-glow);
+    filter: drop-shadow(0 0 6px var(--theme-glow));
+  }
+}
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity:0; }
+  to { transform: translateY(0); opacity:1; }
+}
