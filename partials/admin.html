@@ -1,4 +1,3 @@
-</div>
 <main class="container">
 <section class="card">
 <h2>Control Panel</h2>
@@ -14,6 +13,13 @@
 </div>
 <br/>
 <label>Base font size <input max="20" min="14" oninput="document.documentElement.style.fontSize=this.value+'px'" type="range" value="16"/></label>
-
+<script>
+      document.querySelectorAll('.cp-theme .pill').forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          document.querySelectorAll('.cp-theme .pill').forEach(b=>b.dataset.active="false");
+          btn.dataset.active="true";
+        });
+      });
+    </script>
 </section>
 </main>

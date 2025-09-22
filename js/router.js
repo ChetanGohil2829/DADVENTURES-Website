@@ -1,29 +1,49 @@
-// SPA Router v3.5.4
+// SPA Router v3.5.5
 (function(){
   function sanitize(html){
-    // remove any mobile-nav remnants or duplicate trailers that snuck into partials
-    return html.replace(/<div[^>]+class=["']mobile-nav["'][\\s\\S]*?<\\/div>/ig,'')
-               .replace(/<footer[\\s\\S]*?<\\/footer>/ig,'');
+    // Drop any duplicate footer blocks that may exist in some partials
+    return html.replace(/<footer[\s\S]*?<\/footer>/ig,'')
+               .replace(/<div[^>]+class=["']footer-links["'][\s\S]*?<\/div>/ig,'')
+               .replace(/<div[^>]+class=["']footer-copy["'][\s\S]*?<\/div>/ig,'')
+               .replace(/<div[^>]+class=["']mobile-nav["'][\s\S]*?<\/div>/ig,'');
   }
   function loadPage(path, push){
-    const app=document.getElementById('app'); if(!app) return;
-    fetch('partials/'+path+'.html').then(r=> r.ok ? r.text() : "").then(html=>{
-      app.innerHTML = sanitize(html||"");
-      document.querySelectorAll('header nav a').forEach(a=>{
+    var app=document.getElementById('app');
+    if(!app) return;
+    var file = (path==='index' || path==='') ? 'home' : path;
+    fetch('partials/'+file+'.html').then(function(r){ return r.ok ? r.text() : ''; }).then(function(html){
+      app.innerHTML = sanitize(html||'');
+      // active nav highlighting
+      document.querySelectorAll('header nav a').forEach(function(a){
         a.classList.remove('active');
-        if(a.getAttribute('href').includes(path)) a.classList.add('active');
+        if((path==='index' && a.getAttribute('href').includes('index.html')) ||
+           a.getAttribute('href').includes(file+'.html')){
+          a.classList.add('active');
+        }
       });
-      if(push) history.pushState({path},'',path+'.html');
-    }).catch(()=>{});
+      if(push){ history.pushState({path:file}, '', (file==='home'?'index':file)+'.html'); }
+    }).catch(function(){});
   }
-  document.addEventListener('click', e=>{
-    const a=e.target.closest('a');
-    if(a && a.getAttribute('href') && !a.getAttribute('href').startsWith('http')){
-      const href=a.getAttribute('href'); const page=href.replace('.html','').replace('/','');
-      if(page){ e.preventDefault(); loadPage(page,true); }
+  // Intercept nav clicks (header + mobile nav)
+  document.addEventListener('click', function(e){
+    var a=e.target.closest('a');
+    if(!a) return;
+    var href=a.getAttribute('href')||'';
+    if(a.target==='_blank') return;
+    if(/^https?:/i.test(href) || href.startsWith('#')) return;
+    // Only intercept site page links that end with .html
+    if(/\.html$/i.test(href)){
+      e.preventDefault();
+      var page=href.replace(/^\//,'').replace(/\.html$/i,'');
+      loadPage(page,true);
     }
   });
-  window.addEventListener('popstate', e=>{ const st=e.state; if(st&&st.path){ loadPage(st.path,false);} });
-  const path=(location.pathname.split('/').pop().replace('.html',''))||'home';
-  loadPage(path,false);
+  // Back/forward
+  window.addEventListener('popstate', function(e){
+    var st=e.state; if(st && st.path){ loadPage(st.path,false); }
+  });
+  // Default initial load: map index->home
+  var initial=(location.pathname.split('/').pop().replace(/\.html$/i,''))||'home';
+  if(initial==='index') initial='home';
+  loadPage(initial,false);
 })();
