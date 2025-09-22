@@ -38,7 +38,24 @@
     });
   }
 
+  
   // Drawer toggle near clock
+  const btn = document.querySelector('#header-drawer-toggle');
+  if (btn) {
+      const drawer = document.querySelector('#header-drawer');
+      btn.addEventListener('click', () => {
+          drawer.classList.toggle('open');
+      });
+  }
+  // Ensure mobile menu works properly, include touch event listeners
+  const mobileNav = document.querySelector('#header-drawer');
+  const navLinks = document.querySelectorAll('header nav a');
+  navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+          mobileNav.classList.remove('open');  // Close the menu after a link is clicked
+      });
+  });
+
   const clock = q('#dad-clock, .clock, .header-clock, header time') || q('header');
   if(clock && !q('#header-drawer-toggle')){
     const btn = document.createElement('button');
