@@ -55,5 +55,5 @@ header .logo a img, header .logo img, header .logo svg{
 /* Safety: remove any header audio UIs if they exist */
 header audio, header .volume-controls{ display:none !important; }
 
-/* v3.4.16: hide stray header toggle next to time + any drawer toggle */
+/* v3.4.17 ensure no stray header toggle */
 #hdrPos, #header-drawer-toggle{ display:none !important; }

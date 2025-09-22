@@ -39,14 +39,13 @@
     wrap.id='audioControls'; wrap.innerHTML='<button id="acToggle">Pause</button><div class="spacer"></div><input id="acVol" type="range" min="0" max="1" step="0.01" value="0.4">';
     document.body.appendChild(wrap);
     const a=document.getElementById('siteAudio') || (function(){const el=document.createElement('audio'); el.id='siteAudio'; el.loop=true; el.preload="auto"; document.body.appendChild(el); return el;})();
-    /* v3.4.16 prefer mp3 with fallback to wav */
+    /* v3.4.17 MP3+WAV support */ 
     (function(){
       try{ a.setAttribute('playsinline',''); }catch(e){}
       const mp3='audio/relaxing-piano-ambient.mp3';
       const wav='audio/relaxing-piano-ambient.wav';
       const pick = (a.canPlayType && a.canPlayType('audio/mpeg')) ? mp3 : wav;
-      a.src = pick;
-      // If MP3 was chosen but missing, fall back to WAV on error
+      a.src=pick;
       a.addEventListener('error', function _fb(){
         if(a.src && a.src.indexOf('.mp3')!==-1){ a.src=wav; a.load(); a.play().catch(()=>{}); }
         a.removeEventListener('error', _fb);
@@ -115,7 +114,10 @@
     document.body.style.paddingBottom = pos==='bottom' ? (h+16)+'px' : '';
     document.body.style.paddingTop    = pos==='top'    ? (h+16)+'px' : '';
   }
-  function ensureHeaderButtons(){ /* removed per v3.4.16: no header toggle near clock */ }
+  function ensureHeaderButtons(){
+    const right=document.querySelector('header .header-right'); if(!right) return;
+    // v3.4.17: removed extra toggle button near clock, keep clock intact
+}
   }
   function ensureAudio(){
     if(!document.getElementById('audioControls')){
@@ -125,14 +127,13 @@
       document.body.appendChild(bar);
     }
     let a=document.getElementById('siteAudio');
-    if(!a){ a=document.createElement('audio'); a.id='siteAudio'; a.loop=true; a.preload='auto'; /* v3.4.16 prefer mp3 with fallback to wav */
+    if(!a){ a=document.createElement('audio'); a.id='siteAudio'; a.loop=true; a.preload='auto'; /* v3.4.17 MP3+WAV support */ 
     (function(){
       try{ a.setAttribute('playsinline',''); }catch(e){}
       const mp3='audio/relaxing-piano-ambient.mp3';
       const wav='audio/relaxing-piano-ambient.wav';
       const pick = (a.canPlayType && a.canPlayType('audio/mpeg')) ? mp3 : wav;
-      a.src = pick;
-      // If MP3 was chosen but missing, fall back to WAV on error
+      a.src=pick;
       a.addEventListener('error', function _fb(){
         if(a.src && a.src.indexOf('.mp3')!==-1){ a.src=wav; a.load(); a.play().catch(()=>{}); }
         a.removeEventListener('error', _fb);
