@@ -39,7 +39,19 @@
     wrap.id='audioControls'; wrap.innerHTML='<button id="acToggle">Pause</button><div class="spacer"></div><input id="acVol" type="range" min="0" max="1" step="0.01" value="0.4">';
     document.body.appendChild(wrap);
     const a=document.getElementById('siteAudio') || (function(){const el=document.createElement('audio'); el.id='siteAudio'; el.loop=true; el.preload="auto"; document.body.appendChild(el); return el;})();
-    a.src = 'audio/relaxing-piano-ambient.wav';
+    /* v3.4.16 prefer mp3 with fallback to wav */
+    (function(){
+      try{ a.setAttribute('playsinline',''); }catch(e){}
+      const mp3='audio/relaxing-piano-ambient.mp3';
+      const wav='audio/relaxing-piano-ambient.wav';
+      const pick = (a.canPlayType && a.canPlayType('audio/mpeg')) ? mp3 : wav;
+      a.src = pick;
+      // If MP3 was chosen but missing, fall back to WAV on error
+      a.addEventListener('error', function _fb(){
+        if(a.src && a.src.indexOf('.mp3')!==-1){ a.src=wav; a.load(); a.play().catch(()=>{}); }
+        a.removeEventListener('error', _fb);
+      });
+    })();
     a.volume=.4; a.muted=false; a.play().catch(()=>{});
     const btn=document.getElementById('acToggle'), vol=document.getElementById('acVol');
     btn.addEventListener('click',()=>{ if(a.paused){ a.play(); btn.textContent='Pause'; } else { a.pause(); btn.textContent='Play'; } });
@@ -103,14 +115,7 @@
     document.body.style.paddingBottom = pos==='bottom' ? (h+16)+'px' : '';
     document.body.style.paddingTop    = pos==='top'    ? (h+16)+'px' : '';
   }
-  function ensureHeaderButtons(){
-    const right=document.querySelector('header .header-right'); if(!right) return;
-    if(!right.querySelector('#hdrPos')){
-      const btn=document.createElement('button'); btn.id='hdrPos'; btn.textContent='↕'; btn.title='Move header top/bottom';
-      btn.style.cssText='padding:.35rem .6rem;border-radius:.6rem;border:1px solid rgba(255,255,255,.12);background:#0f2230;color:#d8f2ff;cursor:pointer';
-      btn.addEventListener('click', toggleHeaderPos);
-      right.prepend(btn);
-    }
+  function ensureHeaderButtons(){ /* removed per v3.4.16: no header toggle near clock */ }
   }
   function ensureAudio(){
     if(!document.getElementById('audioControls')){
@@ -120,7 +125,19 @@
       document.body.appendChild(bar);
     }
     let a=document.getElementById('siteAudio');
-    if(!a){ a=document.createElement('audio'); a.id='siteAudio'; a.loop=true; a.preload='auto'; a.src='audio/relaxing-piano-ambient.wav'; document.body.appendChild(a); }
+    if(!a){ a=document.createElement('audio'); a.id='siteAudio'; a.loop=true; a.preload='auto'; /* v3.4.16 prefer mp3 with fallback to wav */
+    (function(){
+      try{ a.setAttribute('playsinline',''); }catch(e){}
+      const mp3='audio/relaxing-piano-ambient.mp3';
+      const wav='audio/relaxing-piano-ambient.wav';
+      const pick = (a.canPlayType && a.canPlayType('audio/mpeg')) ? mp3 : wav;
+      a.src = pick;
+      // If MP3 was chosen but missing, fall back to WAV on error
+      a.addEventListener('error', function _fb(){
+        if(a.src && a.src.indexOf('.mp3')!==-1){ a.src=wav; a.load(); a.play().catch(()=>{}); }
+        a.removeEventListener('error', _fb);
+      });
+    })(); document.body.appendChild(a); }
     const state=JSON.parse(localStorage.getItem(SKEY)||'{}');
     if(typeof state.volume==='number') a.volume=state.volume;
     const wantPlay = state.playing!==false;
@@ -136,6 +153,8 @@
     document.querySelectorAll('a[href$=".html"]').forEach(x=>x.addEventListener('click',()=>{ try{ localStorage.setItem('music.intent','1') }catch(e){} },{capture:true}));
     function first(){ a.muted=false; if(wantPlay){ a.play().catch(()=>{}) } document.removeEventListener('click', first) }
     document.addEventListener('click', first, {once:true});
+    document.addEventListener('pointerdown', first, {once:true});
+    document.addEventListener('touchstart', first, {once:true});
     if(wantPlay) a.play().catch(()=>{});
     const btn=document.getElementById('acToggle'); const vol=document.getElementById('acVol'); const pos=document.getElementById('acPos');
     if(btn){ btn.textContent=a.paused?'Play':'Pause'; btn.addEventListener('click',()=>{ if(a.paused){ a.play(); btn.textContent='Pause' } else { a.pause(); btn.textContent='Play' } save(); }); }

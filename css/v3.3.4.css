@@ -102,3 +102,7 @@ footer .footer-copy{ font-size:9pt }
   :root{ --nav-font-size: 9pt }
   header .inner{ padding:8px 10px }
 }
+
+/* v3.4.16 player tap targets */
+#audioControls button, #audioControls input[type=range]{ touch-action: manipulation; }
+#audioControls{ z-index: 9999; }
