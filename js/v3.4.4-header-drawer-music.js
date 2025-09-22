@@ -3,20 +3,10 @@
   // Hamburger Button functionality for mobile navigation
   const btn = document.querySelector('#header-drawer-toggle');
   const mobileNav = document.querySelector('#header-drawer');
-  const btn = document.querySelector('#header-drawer-toggle');
-  const mobileNav = document.querySelector('#header-drawer');
   if (btn && mobileNav) {
       btn.addEventListener('click', () => {
           mobileNav.classList.toggle('open');
           document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
-      });
-  }
-  // Close the mobile navigation when any link is clicked
-  const navLinks = document.querySelectorAll('header nav a');
-  navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-          mobileNav.classList.remove('open');
-          document.body.style.overflow = '';  // Re-enable body scrolling when menu is closed
       });
   }
   // Close the mobile navigation when any link is clicked

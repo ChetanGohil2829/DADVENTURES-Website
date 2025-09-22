@@ -3,12 +3,12 @@
   header time {
     visibility: visible !important;
     font-size: 1.2rem;
-    color: #fff;  /* Make the date/time text stand out on mobile */
+    color: #fff;  /* Ensure the date/time text stands out on mobile */
   }
   #header-drawer-toggle {
     display: block !important;  /* Ensure hamburger button is visible on mobile */
   }
   #header-drawer.open {
-    display: block !important;  /* Make sure the drawer is visible when open */
+    display: block !important;  /* Ensure the drawer is visible when opened */
   }
 }
