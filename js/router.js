@@ -1,4 +1,4 @@
-// SPA Router v3.5.9 (embedded templates)
+// SPA Router v3.5.10 (embedded templates)
 const PAGES = {
   'home': `
 </div>
