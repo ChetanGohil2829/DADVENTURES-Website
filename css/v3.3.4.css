@@ -102,3 +102,6 @@ footer .footer-copy{ font-size:9pt }
   :root{ --nav-font-size: 9pt }
   header .inner{ padding:8px 10px }
 }
+
+/* v3.4.18 ensure audio bar visible */
+#audioControls{ display:flex !important; }
