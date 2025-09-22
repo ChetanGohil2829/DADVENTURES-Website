@@ -1,4 +1,5 @@
-const PAGES={
+// SPA Router v3.5.8 (embedded templates)
+const PAGES = {
   'home': `
 </div>
 <script>
@@ -571,33 +572,52 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
     return html.replace(/<footer[\s\S]*?<\/footer>/ig,'')
                .replace(/<div[^>]+class=["']mobile-nav["'][\s\S]*?<\/div>/ig,'');
   }
-  function render(path,push){
-    var app=document.getElementById('app'); if(!app) return;
-    var file=(path==='index'||!path)?'home':path;
-    var tpl=PAGES[file]||'';
-    app.innerHTML=sanitize(tpl);
+
+  function render(path, push){
+    const app=document.getElementById('app'); if(!app) return;
+    const file=(path==='index'||!path)?'home':path;
+    const tpl = PAGES[file] || '';
+    app.innerHTML = sanitize(tpl);
+
+    // Activate nav links
     document.querySelectorAll('header nav a').forEach(function(a){
       a.classList.remove('active');
       if(a.getAttribute('href') && a.getAttribute('href').indexOf(file+'.html')>-1) a.classList.add('active');
       if(file==='home' && a.getAttribute('href').includes('index.html')) a.classList.add('active');
     });
-    // execute inline scripts
+
+    // Execute inline scripts in the injected HTML
     app.querySelectorAll('script').forEach(function(s){
-      var n=document.createElement('script');
-      if(s.src) n.src=s.src; else n.textContent=s.textContent;
-      document.body.appendChild(n); setTimeout(function(){n.remove();},0);
+      const n=document.createElement('script');
+      if(s.src){ n.src=s.src; } else { n.textContent=s.textContent; }
+      document.body.appendChild(n);
+      setTimeout(function(){n.remove();},0);
     });
-    if(push) history.pushState({path:file},'',(file==='home'?'index':file)+'.html');
-    var mn=document.querySelector('.mobile-nav'); if(mn) mn.classList.remove('active');
+
+    if(push) history.pushState({path:file}, '', (file==='home'?'index':file)+'.html');
+
+    // Auto-close mobile nav after navigation
+    const mn=document.querySelector('.mobile-nav'); if(mn) mn.classList.remove('active');
   }
-  document.addEventListener('click',function(e){
-    var a=e.target.closest('a'); if(!a) return;
-    var href=a.getAttribute('href')||'';
-    if(a.target==='_blank'||/^https?:/i.test(href)||href.startsWith('#')) return;
-    if(/\.html$/i.test(href)){ e.preventDefault(); var page=href.replace(/^\//,'').replace(/\.html$/i,''); render(page,true); }
+
+  // Intercept navigation links
+  document.addEventListener('click', function(e){
+    const a=e.target.closest('a'); if(!a) return;
+    let href=a.getAttribute('href')||'';
+    if(a.target==='_blank' || /^https?:/i.test(href) || href.startsWith('#')) return;
+    if(/\.html$/i.test(href)){
+      e.preventDefault();
+      let page=href.replace(/^\//,'').replace(/\.html$/i,'');
+      render(page,true);
+    }
   });
-  window.addEventListener('popstate',function(e){ var st=e.state; render(st&&st.path?st.path:'home',false); });
-  var initial=(location.pathname.split('/').pop().replace(/\.html$/i,''))||'home';
+
+  // Back/forward handling
+  window.addEventListener('popstate', function(e){ const st=e.state; render(st&&st.path?st.path:'home',false); });
+
+  // Initial page load (Home by default)
+  let initial=(location.pathname.split('/').pop().replace(/\.html$/i,''))||'home';
   if(initial==='index') initial='home';
   render(initial,false);
+
 })();
