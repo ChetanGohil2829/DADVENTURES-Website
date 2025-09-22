@@ -1,0 +1,12 @@
+<main class="container">
+<div class="searchbar with-icon">
+<img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
+<input aria-label="Search" id="search" placeholder="Search" type="search"/>
+<button aria-label="Run search" class="btn" id="searchBtn">Search</button>
+</div>
+<div class="card" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+<button class="btn" id="todayBtn">Today</button>
+<select id="filter"><option value="all">All</option><option value="upcoming">Upcoming only</option></select>
+</div>
+<div class="grid" id="eventsGrid"></div>
+</main>

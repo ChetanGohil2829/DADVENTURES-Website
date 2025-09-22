@@ -1,0 +1,27 @@
+<main class="container">
+<div class="searchbar with-icon">
+<img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
+<input aria-label="Search" id="search" placeholder="Search" type="search"/>
+<button aria-label="Run search" class="btn" id="searchBtn">Search</button>
+</div>
+<div class="card">
+<h2>Contact Us</h2>
+<form action="/success.html" data-netlify="true" id="contactForm" method="POST" name="contact" netlify-honeypot="bot-field">
+<p class="hidden"><label>Do not fill: <input name="bot-field"/></label></p>
+<div class="form-row">
+<label>Name<input name="name" required="" type="text"/></label>
+<label>Email<input name="email" required="" type="email"/></label>
+</div>
+<label>Message<textarea name="message" required="" rows="5"></textarea></label>
+<label style="display:flex;gap:8px;align-items:center">
+<input id="waOpt" name="whatsapp_optin" type="checkbox"/> I would like to join Local DADVENTURE WhatsApp community
+        </label>
+<div class="hidden form-row" id="waFields">
+<label>Town<input id="town" name="town" type="text"/></label>
+<label>Mobile (WhatsApp)<input id="mobile" name="mobile" pattern="\+?[0-9 ]{7,15}" type="tel"/></label>
+</div>
+<button class="btn" type="submit">Send</button>
+</form>
+</div>
+<section aria-live="polite" class="grid" id="searchResults"></section>
+</main>

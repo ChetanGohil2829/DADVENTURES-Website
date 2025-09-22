@@ -105,3 +105,6 @@ footer .footer-copy{ font-size:9pt }
 
 /* v3.4.18 ensure audio bar visible */
 #audioControls{ display:flex !important; }
+
+/* v3.5.0 clock fixes */
+.clock{ font-weight:400 !important; white-space:nowrap; flex-shrink:0; }
