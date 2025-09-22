@@ -1,4 +1,4 @@
-// SPA Router v3.5.0
+// SPA Router v3.5.1
 (function(){
   function loadPage(path, push){
     const app=document.getElementById('app');
