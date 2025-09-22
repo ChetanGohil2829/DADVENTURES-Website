@@ -10,17 +10,3 @@
       <audio id="music" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
     </div>
   </div>
-<script>
-var nameText = "Welcome to DADVENTURES";
-var lettersEl = document.getElementById('letters');
-nameText.split('').forEach(function(ch,i){ var s=document.createElement('span'); s.style.setProperty('--i',i); s.textContent=(ch===' ')? '\u00A0' : ch; lettersEl.appendChild(s); });
-var music = document.getElementById('music'), playPause = document.getElementById('playPause'), vol = document.getElementById('vol');
-var timerEl = document.getElementById('timer'), skip = document.getElementById('skip');
-var seconds = 30; var t = setInterval(function(){ seconds--; timerEl.textContent = "Auto-redirect in " + seconds + "s"; if(seconds<=0){ clearInterval(t); location.href="index.html";}},1000);
-skip.addEventListener('click',function(){ location.href="index.html"; });
-vol.addEventListener('input',function(){ music.volume = +vol.value; });
-playPause.addEventListener('click', async function(){ if(music.paused){ try{ await music.play(); music.muted=false; }catch(e){} playPause.textContent="Pause"; } else { music.pause(); playPause.textContent="Play"; } });
-(async function(){ try{ await music.play(); }catch(e){} })();
-</script>
-  <script src="js/v3.4.8-header-fixes.js"></script>
-<script defer src="js/v3.4.17-fallback.js"></script>

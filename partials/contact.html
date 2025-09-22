@@ -1,12 +1,5 @@
-<div class="mobile-nav"><div class="mobile-links"></div></div>
-<script>
-function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
-setInterval(updClock,1000); updClock();
-var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
-gv.addEventListener('input', function(){ gm.volume = +gv.value; });
-gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
-(async function(){ try{ await gm.play(); }catch(e){} })();
-</script>
+</div>
+
 <main class="container">
 <div class="searchbar with-icon">
 <img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
@@ -34,24 +27,3 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 </div>
 <section aria-live="polite" class="grid" id="searchResults"></section>
 </main>
-
-<script src="js/search.js"></script>
-<script>
-var waOpt = document.getElementById('waOpt');
-var waFields = document.getElementById('waFields');
-waOpt.addEventListener('change',function(){ waFields.classList.toggle('hidden', !waOpt.checked); });
-document.getElementById('contactForm').addEventListener('submit', function(e){
-  if(waOpt.checked){
-    var town = document.getElementById('town').value.trim();
-    var mobile = document.getElementById('mobile').value.trim();
-    if(!town || !mobile){ alert('Please enter town and a valid mobile number.'); e.preventDefault(); return; }
-  }
-  try{ var logs = JSON.parse(localStorage.getItem('dbg')||'[]'); logs.push({t:Date.now(), type:'contact_submit'}); localStorage.setItem('dbg', JSON.stringify(logs)); }catch(err){}
-});
-  </script>
-<script>document.querySelector('a[data-nav=Contact]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
-<script src="js/v3.4.11-strict.js"></script>
-<script src="js/v3.4.12-strict.js"></script>
-<script src="js/v3.4.13-strict.js"></script>
-<script src="js/v3.4.14-strict.js"></script>
-<script defer src="js/v3.4.17-fallback.js"></script>

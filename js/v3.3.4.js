@@ -159,7 +159,7 @@
     if(wantPlay) a.play().catch(()=>{});
     const btn=document.getElementById('acToggle'); const vol=document.getElementById('acVol'); const pos=document.getElementById('acPos');
     if(btn){ btn.textContent=a.paused?'Play':'Pause'; btn.addEventListener('click',()=>{ if(a.paused){ a.play(); btn.textContent='Pause' } else { a.pause(); btn.textContent='Play' } save(); }); }
-    if(vol){ vol.value=(typeof state.volume==='number')? state.volume : a.volume; vol.addEventListener('input',()=>{ a.volume=+vol.value; save(); }); }
+    if(vol){ vol.value=(typeof state.volume==='number')? state.volume : a.volume; vol.addEventListener('input',()=>{ a.volume=+vol.value; save(); vol.addEventListener('change',()=>{ a.volume=+vol.value; save(); }); vol.addEventListener('touchstart',()=>{ a.muted=false; }); vol.addEventListener('pointerdown',()=>{ a.muted=false; }); }); }
     if(pos){ pos.addEventListener('click', toggleAudioPos); }
     function save(){ try{ localStorage.setItem(SKEY, JSON.stringify({volume:a.volume, playing:!a.paused, time:a.currentTime||0, ts:Date.now()})) }catch(e){} }
     setInterval(save, 1200); window.addEventListener('beforeunload', save);
