@@ -6,9 +6,9 @@
     color: #fff;  /* Ensure the date/time text stands out on mobile */
   }
   #header-drawer-toggle {
-    display: block !important;  /* Ensure hamburger button is visible on mobile */
+    display: none !important;  /* Hide hamburger button on mobile */
   }
   #header-drawer.open {
-    display: block !important;  /* Ensure the drawer is visible when opened */
+    display: none !important;  /* Ensure the drawer is hidden */
   }
 }
