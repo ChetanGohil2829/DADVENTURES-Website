@@ -1,3 +1,12 @@
+<div class="mobile-nav"><div class="mobile-links"></div></div>
+<script>
+function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
+</script>
 <main class="container">
 <div class="searchbar with-icon">
 <img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
@@ -10,3 +19,23 @@
 </div>
 <div class="grid" id="eventsGrid"></div>
 </main>
+<div aria-labelledby="mTitle" aria-modal="true" class="modal" id="eventModal" role="dialog">
+<div class="panel">
+<h3 id="mTitle"></h3>
+<img alt="" id="mImg" style="width:100%;border-radius:12px;display:block;margin-bottom:10px"/>
+<p class="muted" id="mDesc"></p>
+<p><strong>Route:</strong> <span id="mRoute"></span></p>
+<p><a href="#" id="mMap" rel="noopener" target="_blank">Open in Google Maps</a></p>
+<div class="countdown" id="mCountdown"></div>
+<div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end"><button class="btn" id="mClose">Close</button></div>
+</div>
+</div>
+
+<script src="js/search.js"></script>
+<script src="js/events.js"></script>
+<script>document.querySelector('a[data-nav=Events]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
+<script src="js/v3.4.11-strict.js"></script>
+<script src="js/v3.4.12-strict.js"></script>
+<script src="js/v3.4.13-strict.js"></script>
+<script src="js/v3.4.14-strict.js"></script>
+<script defer src="js/v3.4.17-fallback.js"></script>

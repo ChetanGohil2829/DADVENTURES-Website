@@ -1,3 +1,12 @@
+<div class="mobile-nav"><div class="mobile-links"></div></div>
+<script>
+function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
+</script>
 <main class="container">
 <div class="searchbar with-icon">
 <img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
@@ -9,3 +18,12 @@
 </div>
 <div class="grid" id="shopGrid"></div>
 </main>
+
+<script src="js/search.js"></script>
+<script src="js/shop.js"></script>
+<script>document.querySelector('a[data-nav=Shop]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
+<script src="js/v3.4.11-strict.js"></script>
+<script src="js/v3.4.12-strict.js"></script>
+<script src="js/v3.4.13-strict.js"></script>
+<script src="js/v3.4.14-strict.js"></script>
+<script defer src="js/v3.4.17-fallback.js"></script>

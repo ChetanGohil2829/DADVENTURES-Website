@@ -1,4 +1,4 @@
-// SPA Router v3.5.2
+// SPA Router v3.5.3
 (function(){
   function loadPage(path, push){
     const app=document.getElementById('app');
@@ -29,7 +29,7 @@
   window.addEventListener('popstate',e=>{
     const st=e.state; if(st&&st.path){ loadPage(st.path,false); }
   });
-  // Default load home
+  // Default to home
   const path=location.pathname.split('/').pop().replace('.html','')||'home';
   loadPage(path||'home',false);
 })();
