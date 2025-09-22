@@ -54,7 +54,7 @@
     a.volume=.4; a.muted=false; a.play().catch(()=>{});
     $1if(vol){
       ['input','change','touchstart','touchmove','pointerdown','pointermove'].forEach(function(ev){
-        vol.addEventListener(ev, function(){ try{ a.muted=false; a.volume=+vol.value; save(); }catch(e){} });
+        vol.addEventListener(ev, function(){ try{ a.muted=false; a.volume=+vol.value; }catch(e){} });
       });
     }); }
     if(pos){ pos.addEventListener('click', toggleAudioPos); }

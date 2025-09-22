@@ -1,4 +1,4 @@
-// SPA Router v3.5.8 (embedded templates)
+// SPA Router v3.5.9 (embedded templates)
 const PAGES = {
   'home': `
 </div>
@@ -574,9 +574,9 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
   }
 
   function render(path, push){
-    const app=document.getElementById('app'); if(!app) return;
-    const file=(path==='index'||!path)?'home':path;
-    const tpl = PAGES[file] || '';
+    var app=document.getElementById('app'); if(!app) return;
+    var file=(path==='index'||!path)?'home':path;
+    var tpl = PAGES[file] || '';
     app.innerHTML = sanitize(tpl);
 
     // Activate nav links
@@ -588,7 +588,7 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 
     // Execute inline scripts in the injected HTML
     app.querySelectorAll('script').forEach(function(s){
-      const n=document.createElement('script');
+      var n=document.createElement('script');
       if(s.src){ n.src=s.src; } else { n.textContent=s.textContent; }
       document.body.appendChild(n);
       setTimeout(function(){n.remove();},0);
@@ -597,26 +597,26 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
     if(push) history.pushState({path:file}, '', (file==='home'?'index':file)+'.html');
 
     // Auto-close mobile nav after navigation
-    const mn=document.querySelector('.mobile-nav'); if(mn) mn.classList.remove('active');
+    var mn=document.querySelector('.mobile-nav'); if(mn) mn.classList.remove('active');
   }
 
   // Intercept navigation links
-  document.addEventListener('click', function(e){
-    const a=e.target.closest('a'); if(!a) return;
-    let href=a.getAttribute('href')||'';
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a'); if(!a) return;
+    var href=a.getAttribute('href')||'';
     if(a.target==='_blank' || /^https?:/i.test(href) || href.startsWith('#')) return;
     if(/\.html$/i.test(href)){
       e.preventDefault();
-      let page=href.replace(/^\//,'').replace(/\.html$/i,'');
+      var page=href.replace(/^\//,'').replace(/\.html$/i,'');
       render(page,true);
     }
   });
 
   // Back/forward handling
-  window.addEventListener('popstate', function(e){ const st=e.state; render(st&&st.path?st.path:'home',false); });
+  window.addEventListener('popstate',function(e){ var st=e.state; render(st&&st.path?st.path:'home',false); });
 
   // Initial page load (Home by default)
-  let initial=(location.pathname.split('/').pop().replace(/\.html$/i,''))||'home';
+  var initial=(location.pathname.split('/').pop().replace(/\.html$/i,''))||'home';
   if(initial==='index') initial='home';
   render(initial,false);
 
