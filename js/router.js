@@ -1,41 +1,85 @@
 // SPA Router v3.5.11 (embedded templates)
 const PAGES = {
-  'home': `
-</div>
-<script>
-function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
-setInterval(updClock,1000); updClock();
-var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
-gv.addEventListener('input', function(){ gm.volume = +gv.value; });
-gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
-(async function(){ try{ await gm.play(); }catch(e){} })();
-</script>
-<main class="container">
-<div class="searchbar with-icon">
-<img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
-<input aria-label="Search" id="search" placeholder="Search" type="search"/>
-<button aria-label="Run search" class="btn" id="searchBtn">Search</button>
-</div>
-<section class="hero card">
-<h1>Adventures that bring us closer</h1>
-<p>From nature trails to camping trips and weekend explorations - we create wholesome memories for dads and kids.</p>
-<div class="grid">
-<div class="card"><strong>Upcoming:</strong><p class="muted">See the <a href="events.html">Events</a> - filter for upcoming only.</p></div>
-<div class="card"><strong>Shop:</strong><p class="muted">Caps, tees, mugs - check the <a href="shop.html">Shop</a>.</p></div>
-<div class="card"><strong>Get Involved:</strong><p class="muted">Questions or ideas? <a href="contact.html">Contact us</a>.</p></div>
-</div>
+  
+'home': `
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="images/logo-icon.svg" alt="Dadventures Logo" class="hero-logo"/>
+    <h1 class="hero-title">Explore. Bond. Adventure.</h1>
+    <p class="hero-tagline">Where fathers and children create unforgettable memories.</p>
+    <a href="#quick-actions" class="hero-btn">Get Started ↓</a>
+  </div>
 </section>
-<section aria-live="polite" class="grid" id="searchResults"></section>
-</main>
 
-<script src="js/search.js"></script>
-<script>document.querySelector('a[data-nav=Home]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
-<script src="js/v3.4.11-strict.js"></script>
-<script src="js/v3.4.12-strict.js"></script>
-<script src="js/v3.4.13-strict.js"></script>
-<script src="js/v3.4.14-strict.js"></script>
-<script defer src="js/v3.4.17-fallback.js"></script>
+<section id="quick-actions" class="tiles">
+  <div class="tile events">
+    <h2>Next Adventure</h2>
+    <p class="countdown" id="countdown1">Loading…</p>
+    <a href="events.html" class="tile-btn">View Events</a>
+  </div>
+  <div class="tile shop">
+    <h2>Shop</h2>
+    <img src="images/shop-cap.png" alt="Dadventures Cap"/>
+    <a href="shop.html" class="tile-btn">Go to Shop</a>
+  </div>
+  <div class="tile donate">
+    <h2>Support Us</h2>
+    <a href="donations.html" class="tile-btn glow">Donate Now</a>
+  </div>
+  <div class="tile join">
+    <h2>Join Us</h2>
+    <a href="https://chat.whatsapp.com/demo" target="_blank" class="tile-btn">Community</a>
+  </div>
+</section>
+
+<section class="events-preview">
+  <h2>Upcoming Events</h2>
+  <div class="event-cards">
+    <div class="event-card">
+      <img src="images/events/campfire.jpg" alt="Event"/>
+      <div class="event-info">
+        <h3>Campfire Night</h3>
+        <p>25/09/2025 · Lakeview</p>
+        <p class="countdown">Countdown: 2 days</p>
+      </div>
+    </div>
+    <div class="event-card">
+      <img src="images/events/hike.jpg" alt="Event"/>
+      <div class="event-info">
+        <h3>Mountain Hike</h3>
+        <p>05/10/2025 · Ridge Trail</p>
+        <p class="countdown">Countdown: 12 days</p>
+      </div>
+    </div>
+    <div class="event-card">
+      <img src="images/events/stargazing.jpg" alt="Event"/>
+      <div class="event-info">
+        <h3>Stargazing</h3>
+        <p>20/10/2025 · Open Fields</p>
+        <p class="countdown">Countdown: 27 days</p>
+      </div>
+    </div>
+  </div>
+  <a href="events.html" class="see-all">See All Events →</a>
+</section>
+
+<section class="shop-highlight">
+  <h2>Shop Highlight</h2>
+  <div class="products">
+    <div class="product">
+      <img src="images/shop-cap.png" alt="Cap"/>
+      <p>Dadventures Cap – £15</p>
+    </div>
+    <div class="product">
+      <img src="images/shop-shirt.png" alt="T-shirt"/>
+      <p>Adventure T-shirt – £20</p>
+    </div>
+  </div>
+  <a href="shop.html" class="see-all">Explore Shop →</a>
+</section>
 `,
+
   'splash': `
 <div class="splash">
     <div class="box">
