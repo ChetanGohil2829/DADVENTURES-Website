@@ -67,12 +67,30 @@
   });
 })();
 
-// v3.5.17 ensure clock visible on mobile
-(function(){
-  var s=document.getElementById('clock-visible');
-  if(!s){
-    s=document.createElement('style'); s.id='clock-visible';
-    s.textContent='@media(max-width:768px){ .header-right .clock{ display:inline-flex !important; } }';
-    document.head.appendChild(s);
-  }
+// v3.5.18 ensure mobile menu works
+(function ensureMobileMenuFixed3518(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var mobile=document.querySelector('.mobile-nav');
+    if(!mobile){
+      mobile=document.createElement('div'); mobile.className='mobile-nav';
+      var links=document.createElement('div'); links.className='mobile-links';
+      mobile.appendChild(links); document.body.appendChild(mobile);
+    }
+    var links=mobile.querySelector('.mobile-links');
+    var headerNav=document.querySelector('header nav');
+    if(links && headerNav && links.children.length===0){
+      links.innerHTML=headerNav.innerHTML;
+    }
+    var toggles=document.querySelectorAll('header .menu-toggle');
+    toggles.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        mobile.classList.toggle('active');
+      }, {passive:true});
+    });
+    if(links){
+      links.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ mobile.classList.remove('active'); }, {passive:true});
+      });
+    }
+  });
 })();

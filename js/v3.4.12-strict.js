@@ -20,33 +20,28 @@
 })();
 
 // 3) Hamburger mobile menu toggle
-
+(function(){
+  var toggle = document.querySelectorAll('.menu-toggle').forEach(function(toggle){
+    toggle;
+  var mobileNav = document.querySelector('.mobile-nav');
+  var sourceNav = document.querySelector('header nav');
+  if (!toggle || !mobileNav || !sourceNav) return;
+  var links = mobileNav.querySelector('.mobile-links');
+  if (!links) {
+    links = document.createElement('div');
+    links.className = 'mobile-links';
+    mobileNav.appendChild(links);
+  }
+  if (links.children.length === 0) {
+    links.innerHTML = sourceNav.innerHTML; // copy existing nav links
+  }
+  toggle.addEventListener('click', function(){
+    mobileNav.classList.toggle('active');
+  });
+})();
 
 // 4) Console check for soundbar
 (function(){
   var globalBars = document.querySelectorAll('#globalMusic, #globalSoundbar');
   console.log("Soundbars detected:", globalBars.length);
-})();
-
-
-// v3.5.17 menu fix
-(function(){
-  var toggleBtns=document.querySelectorAll('header .menu-toggle');
-  var mobile=document.querySelector('.mobile-nav');
-  var headerNav=document.querySelector('header nav');
-  if(!mobile || !headerNav) return;
-  var links=mobile.querySelector('.mobile-links');
-  if(links && links.children.length===0){
-    links.innerHTML=headerNav.innerHTML;
-  }
-  toggleBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      mobile.classList.toggle('active');
-    }, {passive:true});
-  });
-  if(links){
-    links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ mobile.classList.remove('active'); }, {passive:true});
-    });
-  }
 })();

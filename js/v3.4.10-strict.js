@@ -21,7 +21,20 @@
 })();
 
 // 3) Mobile wardrobe menu (toggle existing nav links into mobile panel)
-
+(function(){
+  var toggle = document.querySelectorAll('.menu-toggle').forEach(function(toggle){
+    toggle;
+  var mobileNav = document.querySelector('.mobile-nav');
+  var sourceNav = document.querySelector('header nav');
+  if (!toggle || !mobileNav || !sourceNav) return;
+  var links = mobileNav.querySelector('.mobile-links');
+  if (links && links.children.length === 0) {
+    links.innerHTML = sourceNav.innerHTML; // copy existing nav
+  }
+  toggle.addEventListener('click', function(){
+    mobileNav.classList.toggle('active');
+  });
+})();
 
 // 4) Remove additional soundbar if it exists inside header only
 (function(){
@@ -29,27 +42,4 @@
   if (!header) return;
   header.querySelectorAll('audio, .volume-controls, .floating-player, .music-overlay, .audio-floating, .player-overlay')
     .forEach(function(el){ el.remove(); });
-})();
-
-
-// v3.5.17 menu fix
-(function(){
-  var toggleBtns=document.querySelectorAll('header .menu-toggle');
-  var mobile=document.querySelector('.mobile-nav');
-  var headerNav=document.querySelector('header nav');
-  if(!mobile || !headerNav) return;
-  var links=mobile.querySelector('.mobile-links');
-  if(links && links.children.length===0){
-    links.innerHTML=headerNav.innerHTML;
-  }
-  toggleBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      mobile.classList.toggle('active');
-    }, {passive:true});
-  });
-  if(links){
-    links.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ mobile.classList.remove('active'); }, {passive:true});
-    });
-  }
 })();
