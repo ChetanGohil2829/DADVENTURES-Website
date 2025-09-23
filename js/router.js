@@ -1,35 +1,34 @@
 // SPA Router v3.5.11 (embedded templates)
 const PAGES = {
   
+
 'home': `
 <section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <img src="images/logo-icon.svg" alt="Dadventures Logo" class="hero-logo"/>
     <h1 class="hero-title">Explore. Bond. Adventure.</h1>
-    <p class="hero-tagline">Where fathers and children create unforgettable memories.</p>
-    <a href="#quick-actions" class="hero-btn">Get Started ↓</a>
+    <p class="hero-tagline">DadVentures — Where every trail is a memory.</p>
+    <a href="#quick-cards" class="btn-primary">Start Your Next Adventure</a>
   </div>
 </section>
 
-<section id="quick-actions" class="tiles">
-  <div class="tile events">
+<section id="quick-cards" class="cards">
+  <div class="card card-event">
     <h2>Next Adventure</h2>
-    <p class="countdown" id="countdown1">Loading…</p>
-    <a href="events.html" class="tile-btn">View Events</a>
+    <p>Forest Hike · 12 Oct 2025</p>
+    <p class="countdown" id="nextCountdown">Loading…</p>
   </div>
-  <div class="tile shop">
-    <h2>Shop</h2>
-    <img src="images/shop-cap.png" alt="Dadventures Cap"/>
-    <a href="shop.html" class="tile-btn">Go to Shop</a>
+  <div class="card card-shop">
+    <img src="images/shop/cap.png" alt="DadVentures Cap"/>
+    <p>DadVentures Cap – £15</p>
   </div>
-  <div class="tile donate">
-    <h2>Support Us</h2>
-    <a href="donations.html" class="tile-btn glow">Donate Now</a>
+  <div class="card card-donate">
+    <p>Help us bring more adventures</p>
+    <a href="donations.html" class="btn-accent">Donate</a>
   </div>
-  <div class="tile join">
-    <h2>Join Us</h2>
-    <a href="https://chat.whatsapp.com/demo" target="_blank" class="tile-btn">Community</a>
+  <div class="card card-join">
+    <p>Become part of our community</p>
+    <a href="https://chat.whatsapp.com/demo" target="_blank" class="btn-link">Join Us</a>
   </div>
 </section>
 
@@ -37,48 +36,49 @@ const PAGES = {
   <h2>Upcoming Events</h2>
   <div class="event-cards">
     <div class="event-card">
-      <img src="images/events/campfire.jpg" alt="Event"/>
+      <img src="images/events/campfire.jpg" alt="Campfire Night"/>
       <div class="event-info">
         <h3>Campfire Night</h3>
-        <p>25/09/2025 · Lakeview</p>
-        <p class="countdown">Countdown: 2 days</p>
+        <p>30/09/2025 · Lakeview</p>
+        <p class="countdown">Countdown: 6 days</p>
       </div>
     </div>
     <div class="event-card">
-      <img src="images/events/hike.jpg" alt="Event"/>
+      <img src="images/events/trail.jpg" alt="Trail Cleanup"/>
       <div class="event-info">
-        <h3>Mountain Hike</h3>
-        <p>05/10/2025 · Ridge Trail</p>
-        <p class="countdown">Countdown: 12 days</p>
+        <h3>Trail Cleanup</h3>
+        <p>12/10/2025 · Hillside Park</p>
+        <p class="countdown">Countdown: 18 days</p>
       </div>
     </div>
     <div class="event-card">
-      <img src="images/events/stargazing.jpg" alt="Event"/>
+      <img src="images/events/stargazing.jpg" alt="Stargazing"/>
       <div class="event-info">
-        <h3>Stargazing</h3>
-        <p>20/10/2025 · Open Fields</p>
-        <p class="countdown">Countdown: 27 days</p>
+        <h3>Full Moon Stargazing</h3>
+        <p>25/10/2025 · Riverside Meadow</p>
+        <p class="countdown">Countdown: 31 days</p>
       </div>
     </div>
   </div>
-  <a href="events.html" class="see-all">See All Events →</a>
+  <a href="events.html" class="btn-secondary">See All Events →</a>
 </section>
 
 <section class="shop-highlight">
   <h2>Shop Highlight</h2>
   <div class="products">
     <div class="product">
-      <img src="images/shop-cap.png" alt="Cap"/>
-      <p>Dadventures Cap – £15</p>
+      <img src="images/shop/cap.png" alt="Cap"/>
+      <p>DadVentures Cap – £15</p>
     </div>
     <div class="product">
-      <img src="images/shop-shirt.png" alt="T-shirt"/>
+      <img src="images/shop/tshirt.png" alt="T-shirt"/>
       <p>Adventure T-shirt – £20</p>
     </div>
   </div>
-  <a href="shop.html" class="see-all">Explore Shop →</a>
+  <a href="shop.html" class="btn-secondary">Explore Shop →</a>
 </section>
 `,
+
 
   'splash': `
 <div class="splash">
