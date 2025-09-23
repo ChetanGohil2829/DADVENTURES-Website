@@ -4,11 +4,48 @@
 <html lang="en"><head>
 <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>DADVENTURES - Home</title><link href="css/style.css" rel="stylesheet"/> <link href="css/v3.3.4.css" rel="stylesheet"/>
-
+<script defer="" src="js/v3.3.4.js"></script>
+<link href="images/favicon-bluepink.svg" id="favicon" rel="icon" type="image/svg+xml"/><link href="css/v3.4.10-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.11-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.12-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.13-strict.css" rel="stylesheet"/>
+<link href="css/v3.4.14-strict.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+<div class="inner">
+<div class="logo">
+<a href="index.html"><img alt="Dadventures logo" src="images/logo-icon.svg"/></a>
+<strong>DADVENTURES</strong>
+</div>
+<nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="events.html">Event</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="blog.html">Blog</a>
+      <a href="shop.html">Shop</a>
+      <a href="donations.html">Donate</a>
+      <a href="signin.html">Sign In</a>
+    </nav>
+<div class="header-right"><span class="clock"></span></div>
+</div>
+<div style="display:flex;align-items:center;gap:12px">
+</div>
+</header>
+<div class="mobile-nav"><div class="mobile-links"></div></div>
+<script>
+function updClock(){ var z=new Date(); document.querySelector('.clock').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
+</script>
 <main id="app"></main>
 <footer>
 <div class="inner">
-<button aria-label="Menu" class="menu-toggle">☰</button>
+
 <div class="footer-links">
 <a href="https://www.tiktok.com/" rel="noopener" target="_blank">TikTok</a> ·
       <a href="https://www.instagram.com/" rel="noopener" target="_blank">Instagram</a> ·
@@ -25,18 +62,4 @@
 <script src="js/v3.4.14-strict.js"></script>
 <script defer src="js/v3.4.17-fallback.js"></script>
 <script src="js/router.js"></script>
-
-<script>
-(function(){
-  function tick(){
-    var el = document.querySelector('.clock');
-    if(!el) return;
-    var d = new Date();
-    function p(n){return String(n).padStart(2,'0');}
-    el.textContent = d.toLocaleDateString() + ' ' + p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());
-  }
-  setInterval(tick,1000); tick();
-})();
-</script>
-
 </body></html>

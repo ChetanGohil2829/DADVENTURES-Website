@@ -2,7 +2,14 @@
 const PAGES = {
   'home': `
 </div>
-
+<script>
+function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
+</script>
 <main class="container">
 <div class="searchbar with-icon">
 <img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
@@ -39,19 +46,20 @@ const PAGES = {
         <label class="muted" style="display:inline-flex;gap:6px;align-items:center">Volume <input id="vol" type="range" min="0" max="1" step="0.01" value="0.4"/></label>
       </div>
       <div class="skip" style="margin-top:16px"><button id="skip" class="btn">Enter Site</button> <small class="muted" id="timer">Auto-redirect in 30s</small></div>
-      
+      <audio id="music" src="audio/relaxing-piano-ambient.wav" preload="auto" muted loop></audio>
     </div>
   </div>
 <script>
 var nameText = "Welcome to DADVENTURES";
 var lettersEl = document.getElementById('letters');
 nameText.split('').forEach(function(ch,i){ var s=document.createElement('span'); s.style.setProperty('--i',i); s.textContent=(ch===' ')? '\u00A0' : ch; lettersEl.appendChild(s); });
-var music = document.getElementById('siteAudio') || document.getElementById('music'), playPause = document.getElementById('playPause'), vol = document.getElementById('vol');
+var music = document.getElementById('music'), playPause = document.getElementById('playPause'), vol = document.getElementById('vol');
 var timerEl = document.getElementById('timer'), skip = document.getElementById('skip');
 var seconds = 30; var t = setInterval(function(){ seconds--; timerEl.textContent = "Auto-redirect in " + seconds + "s"; if(seconds<=0){ clearInterval(t); location.href="index.html";}},1000);
 skip.addEventListener('click',function(){ location.href="index.html"; });
 vol.addEventListener('input',function(){ music.volume = +vol.value; });
 playPause.addEventListener('click', async function(){ if(music.paused){ try{ await music.play(); music.muted=false; }catch(e){} playPause.textContent="Pause"; } else { music.pause(); playPause.textContent="Play"; } });
+(async function(){ try{ await music.play(); }catch(e){} })();
 </script>
   <script src="js/v3.4.8-header-fixes.js"></script>
 <script defer src="js/v3.4.17-fallback.js"></script>
