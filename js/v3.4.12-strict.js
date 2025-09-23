@@ -45,3 +45,17 @@
   var globalBars = document.querySelectorAll('#globalMusic, #globalSoundbar');
   console.log("Soundbars detected:", globalBars.length);
 })();
+
+
+// v3.5.14-menu-patch — force menu toggles to work across duplicates
+(function(){
+  var mobile = document.querySelector('.mobile-nav');
+  var toggles = document.querySelectorAll('.menu-toggle');
+  if(!mobile || toggles.length===0) return;
+  toggles.forEach(function(t){
+    if(!t.__menuBound3514){
+      t.addEventListener('click', function(){ mobile.classList.toggle('active'); }, {passive:true});
+      t.__menuBound3514 = true;
+    }
+  });
+})();

@@ -66,3 +66,55 @@
     try{ ensureAudioBar(); }catch(e){}
   });
 })();
+
+// v3.5.14 additions — robust mobile menu + ensure single audio player + clock visibility
+(function(){
+  function ensureMobileMenu(){
+    var toggles = Array.from(document.querySelectorAll('.menu-toggle'));
+    var mobile = document.querySelector('.mobile-nav');
+    var headerNav = document.querySelector('header nav');
+    if(!mobile){
+      // create if missing
+      mobile = document.createElement('div'); mobile.className = 'mobile-nav';
+      var links = document.createElement('div'); links.className='mobile-links';
+      mobile.appendChild(links);
+      document.body.appendChild(mobile);
+    }
+    var linksWrap = mobile.querySelector('.mobile-links');
+    if(linksWrap && headerNav && linksWrap.childElementCount===0){
+      linksWrap.innerHTML = headerNav.innerHTML;
+    }
+    toggles.forEach(function(t){
+      t.addEventListener('click', function(){
+        mobile.classList.toggle('active');
+      }, {passive:true});
+    });
+    if(linksWrap){
+      linksWrap.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ mobile.classList.remove('active'); }, {passive:true});
+      });
+    }
+  }
+
+  function ensureAudioConsistency(){
+    var a = document.getElementById('siteAudio');
+    if(!a) return;
+    // Remove duplicate header audio controls or stray players
+    document.querySelectorAll('header audio, header .volume-controls, .floating-player, .music-overlay, .audio-floating, .player-overlay')
+      .forEach(function(el){ el.remove(); });
+  }
+
+  function injectClockCSS(){
+    var id = 'clock-visible-css';
+    if(document.getElementById(id)) return;
+    var s = document.createElement('style'); s.id=id;
+    s.textContent = '@media(max-width:768px){ .header-right .clock{ display:inline-flex !important; } }';
+    document.head.appendChild(s);
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    try{ ensureMobileMenu(); }catch(e){}
+    try{ ensureAudioConsistency(); }catch(e){}
+    try{ injectClockCSS(); }catch(e){}
+  });
+})();
