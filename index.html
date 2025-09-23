@@ -35,7 +35,7 @@
 </header>
 <div class="mobile-nav"><div class="mobile-links"></div></div>
 <script>
-function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+function updClock(){ var z=new Date(); document.querySelector('.clock').textContent=z.toLocaleString(); }
 setInterval(updClock,1000); updClock();
 var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
 gv.addEventListener('input', function(){ gm.volume = +gv.value; });

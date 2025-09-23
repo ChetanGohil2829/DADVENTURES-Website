@@ -43,7 +43,7 @@ header .logo a img, header .logo img, header .logo svg{
   }
   .mobile-nav .mobile-links a{ display:block; text-align:left; padding:10px 0; color:#fff; text-decoration:none; }
   .mobile-nav .mobile-links a:hover{ color:var(--theme-glow); filter: drop-shadow(0 0 6px var(--theme-glow)); }
-  .header-right .clock{ display:none; }
+  
 }
 @keyframes slideDown{ from{ transform:translateY(-100%); opacity:0; } to{ transform:translateY(0); opacity:1; } }
 

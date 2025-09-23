@@ -21,7 +21,8 @@
 
 // 3) Mobile wardrobe menu toggle
 (function(){
-  var toggle = document.querySelector('.menu-toggle');
+  var toggle = document.querySelectorAll('.menu-toggle').forEach(function(toggle){
+    toggle;
   var mobileNav = document.querySelector('.mobile-nav');
   var sourceNav = document.querySelector('header nav');
   if (!toggle || !mobileNav || !sourceNav) return;
