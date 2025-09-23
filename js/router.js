@@ -1,85 +1,41 @@
 // SPA Router v3.5.11 (embedded templates)
 const PAGES = {
-  
-
-'home': `
-<section class="hero">
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <h1 class="hero-title">Explore. Bond. Adventure.</h1>
-    <p class="hero-tagline">DadVentures — Where every trail is a memory.</p>
-    <a href="#quick-cards" class="btn-primary">Start Your Next Adventure</a>
-  </div>
+  'home': `
+</div>
+<script>
+function updClock(){ var z=new Date(); document.getElementById('timeNow').textContent=z.toLocaleString(); }
+setInterval(updClock,1000); updClock();
+var gm=document.getElementById('globalMusic'), gp=document.getElementById('globalPlayPause'), gv=document.getElementById('globalVol');
+gv.addEventListener('input', function(){ gm.volume = +gv.value; });
+gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play(); gm.muted=false; }catch(e){} gp.textContent='Pause'; } else { gm.pause(); gp.textContent='Play'; } });
+(async function(){ try{ await gm.play(); }catch(e){} })();
+</script>
+<main class="container">
+<div class="searchbar with-icon">
+<img alt="search icon" src="images/logo-icon.svg" style="height:20px"/>
+<input aria-label="Search" id="search" placeholder="Search" type="search"/>
+<button aria-label="Run search" class="btn" id="searchBtn">Search</button>
+</div>
+<section class="hero card">
+<h1>Adventures that bring us closer</h1>
+<p>From nature trails to camping trips and weekend explorations - we create wholesome memories for dads and kids.</p>
+<div class="grid">
+<div class="card"><strong>Upcoming:</strong><p class="muted">See the <a href="events.html">Events</a> - filter for upcoming only.</p></div>
+<div class="card"><strong>Shop:</strong><p class="muted">Caps, tees, mugs - check the <a href="shop.html">Shop</a>.</p></div>
+<div class="card"><strong>Get Involved:</strong><p class="muted">Questions or ideas? <a href="contact.html">Contact us</a>.</p></div>
+</div>
 </section>
+<section aria-live="polite" class="grid" id="searchResults"></section>
+</main>
 
-<section id="quick-cards" class="cards">
-  <div class="card card-event">
-    <h2>Next Adventure</h2>
-    <p>Forest Hike · 12 Oct 2025</p>
-    <p class="countdown" id="nextCountdown">Loading…</p>
-  </div>
-  <div class="card card-shop">
-    <img src="images/shop/cap.png" alt="DadVentures Cap"/>
-    <p>DadVentures Cap – £15</p>
-  </div>
-  <div class="card card-donate">
-    <p>Help us bring more adventures</p>
-    <a href="donations.html" class="btn-accent">Donate</a>
-  </div>
-  <div class="card card-join">
-    <p>Become part of our community</p>
-    <a href="https://chat.whatsapp.com/demo" target="_blank" class="btn-link">Join Us</a>
-  </div>
-</section>
-
-<section class="events-preview">
-  <h2>Upcoming Events</h2>
-  <div class="event-cards">
-    <div class="event-card">
-      <img src="images/events/campfire.jpg" alt="Campfire Night"/>
-      <div class="event-info">
-        <h3>Campfire Night</h3>
-        <p>30/09/2025 · Lakeview</p>
-        <p class="countdown">Countdown: 6 days</p>
-      </div>
-    </div>
-    <div class="event-card">
-      <img src="images/events/trail.jpg" alt="Trail Cleanup"/>
-      <div class="event-info">
-        <h3>Trail Cleanup</h3>
-        <p>12/10/2025 · Hillside Park</p>
-        <p class="countdown">Countdown: 18 days</p>
-      </div>
-    </div>
-    <div class="event-card">
-      <img src="images/events/stargazing.jpg" alt="Stargazing"/>
-      <div class="event-info">
-        <h3>Full Moon Stargazing</h3>
-        <p>25/10/2025 · Riverside Meadow</p>
-        <p class="countdown">Countdown: 31 days</p>
-      </div>
-    </div>
-  </div>
-  <a href="events.html" class="btn-secondary">See All Events →</a>
-</section>
-
-<section class="shop-highlight">
-  <h2>Shop Highlight</h2>
-  <div class="products">
-    <div class="product">
-      <img src="images/shop/cap.png" alt="Cap"/>
-      <p>DadVentures Cap – £15</p>
-    </div>
-    <div class="product">
-      <img src="images/shop/tshirt.png" alt="T-shirt"/>
-      <p>Adventure T-shirt – £20</p>
-    </div>
-  </div>
-  <a href="shop.html" class="btn-secondary">Explore Shop →</a>
-</section>
+<script src="js/search.js"></script>
+<script>document.querySelector('a[data-nav=Home]').classList.add('active');</script><script src="js/v3.4.10-strict.js"></script>
+<script src="js/v3.4.11-strict.js"></script>
+<script src="js/v3.4.12-strict.js"></script>
+<script src="js/v3.4.13-strict.js"></script>
+<script src="js/v3.4.14-strict.js"></script>
+<script defer src="js/v3.4.17-fallback.js"></script>
 `,
-
-
   'splash': `
 <div class="splash">
     <div class="box">
