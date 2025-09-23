@@ -66,3 +66,13 @@
     try{ ensureAudioBar(); }catch(e){}
   });
 })();
+
+// v3.5.17 ensure clock visible on mobile
+(function(){
+  var s=document.getElementById('clock-visible');
+  if(!s){
+    s=document.createElement('style'); s.id='clock-visible';
+    s.textContent='@media(max-width:768px){ .header-right .clock{ display:inline-flex !important; } }';
+    document.head.appendChild(s);
+  }
+})();

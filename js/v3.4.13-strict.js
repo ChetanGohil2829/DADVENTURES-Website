@@ -20,19 +20,7 @@
 })();
 
 // Prepare mobile menu
-(function(){
-  var toggle = document.querySelector('header .menu-toggle');
-  var mobile = document.querySelector('.mobile-nav');
-  var headerNav = document.querySelector('header nav');
-  if(!toggle || !mobile || !headerNav) return;
-  var links = mobile.querySelector('.mobile-links');
-  if (links && links.children.length === 0){
-    links.innerHTML = headerNav.innerHTML;
-  }
-  toggle.addEventListener('click', function(){
-    mobile.classList.toggle('active');
-  });
-})();
+
 
 // Soundbar check
 (function(){
@@ -42,4 +30,27 @@
   }
   var globals = document.querySelectorAll('#globalMusic, #globalSoundbar, .global-soundbar');
   console.log('Global soundbars found =', globals.length);
+})();
+
+
+// v3.5.17 menu fix
+(function(){
+  var toggleBtns=document.querySelectorAll('header .menu-toggle');
+  var mobile=document.querySelector('.mobile-nav');
+  var headerNav=document.querySelector('header nav');
+  if(!mobile || !headerNav) return;
+  var links=mobile.querySelector('.mobile-links');
+  if(links && links.children.length===0){
+    links.innerHTML=headerNav.innerHTML;
+  }
+  toggleBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      mobile.classList.toggle('active');
+    }, {passive:true});
+  });
+  if(links){
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ mobile.classList.remove('active'); }, {passive:true});
+    });
+  }
 })();
