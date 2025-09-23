@@ -11,9 +11,23 @@
 <link href="css/v3.4.13-strict.css" rel="stylesheet"/>
 <link href="css/v3.4.14-strict.css" rel="stylesheet"/>
 
-<style id="header-zfix">
-header{position:relative; z-index:10000;}
-.mobile-nav.active{z-index:9999;} /* stays below header */
+<style id="hamburger-debug">
+.mobile-nav{display:none;}
+.mobile-nav.active{display:block !important; background:rgba(0,0,0,0.95); padding:20px; position:fixed; top:60px; left:0; right:0; z-index:9999;}
+.mobile-nav .mobile-links a{display:block; padding:10px 0; color:#fff; text-decoration:none;}
+.mobile-nav .mobile-links a:hover{color:var(--theme-glow);}
+</style>
+
+
+<style id="clock-hotfix">
+@media(max-width:768px){
+  header .clock{
+    position:relative;
+    z-index:10001;
+    display:inline-flex !important;
+    color:#fff;
+  }
+}
 </style>
 
 </head>

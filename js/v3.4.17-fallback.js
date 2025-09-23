@@ -67,13 +67,30 @@
   });
 })();
 
-// v3.5.19 ensure header stays above mobile nav
-(function(){
+// v3.5.18 ensure mobile menu works
+(function ensureMobileMenuFixed3518(){
   document.addEventListener('DOMContentLoaded', function(){
-    if(!document.getElementById('header-zfix')){
-      var s=document.createElement('style'); s.id='header-zfix';
-      s.textContent='header{position:relative; z-index:10000;} .mobile-nav.active{z-index:9999;}';
-      document.head.appendChild(s);
+    var mobile=document.querySelector('.mobile-nav');
+    if(!mobile){
+      mobile=document.createElement('div'); mobile.className='mobile-nav';
+      var links=document.createElement('div'); links.className='mobile-links';
+      mobile.appendChild(links); document.body.appendChild(mobile);
+    }
+    var links=mobile.querySelector('.mobile-links');
+    var headerNav=document.querySelector('header nav');
+    if(links && headerNav && links.children.length===0){
+      links.innerHTML=headerNav.innerHTML;
+    }
+    var toggles=document.querySelectorAll('header .menu-toggle');
+    toggles.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        mobile.classList.toggle('active');
+      }, {passive:true});
+    });
+    if(links){
+      links.querySelectorAll('a').forEach(function(a){
+        a.addEventListener('click', function(){ mobile.classList.remove('active'); }, {passive:true});
+      });
     }
   });
 })();
