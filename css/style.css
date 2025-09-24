@@ -126,7 +126,3 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
   margin-bottom:10px;
   display:block;
 }
-
-/* Lightbox base (container styles set inline) */
-#lightbox{animation:fadeIn .16s ease-in}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}

@@ -54,12 +54,21 @@
   async function loadHomeBoxes(){
     try{
       var res = await fetch('/content/pages/home.json', {cache:'no-store'});
-      if(!res.ok) return;
+      if(!res.ok) { console.warn("⚠️ CMS home.json failed to load, using static fallback"); return; }
       var data = await res.json();
       renderBoxes(data);
-    }catch(e){ /* ignore */ }
+      // hide static fallback cards
+      document.querySelectorAll('.card').forEach(function(el){
+        if(el.textContent.includes('Upcoming') || el.textContent.includes('Shop') || el.textContent.includes('Get Involved')){
+          el.style.display = 'none';
+        }
+      });
+      console.log("✅ Home boxes loaded from CMS");
+    }catch(e){
+      console.warn("⚠️ CMS home.json error, using static fallback", e);
+    }
   }
 
-  // Expose globally so router template can call it after render
   window.renderHomeBoxes = loadHomeBoxes;
+  document.addEventListener('DOMContentLoaded', loadHomeBoxes);
 })();
