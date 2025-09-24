@@ -107,6 +107,15 @@
       if(!el.closest(".home-cards-grid")) el.remove();
     });
 
+    
+    // Final cleanup: remove any leftover boxes that aren't in our grid
+    var patterns = /(Upcoming:|Latest Blog:|Shop:|Get Involved:)/i;
+    Array.from(root.querySelectorAll('.content-box')).forEach(function(el){
+      if(!el.closest('.home-cards-grid') && patterns.test((el.textContent||''))){
+        el.remove();
+      }
+    });
+
     console.log("✅ Home rebuilt v3.5.40 — spacing set; duplicates removed; order enforced");
   }
   fetch("content/pages/home.json", {cache:"no-store"})
