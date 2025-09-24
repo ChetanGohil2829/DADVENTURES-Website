@@ -147,3 +147,5 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 
 /* Make all cards equal height look nicer */
 .home-cards-grid .card{ height: 100%; }
+
+.home-cards-grid .card{ text-align:left; }

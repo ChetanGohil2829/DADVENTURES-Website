@@ -111,6 +111,16 @@
                            (d.boxes || []).find(b => b.id === "involved" || b.id === "getinvolved"),
              "involved", lb);
 
+    // Match blog card style to Shop card for consistent color/spacing
+    if(blogCard && shopCard){
+      blogCard.className = shopCard.className;
+      blogCard.style.textAlign = 'left';
+    }
+    if(upcomingCard){ upcomingCard.style.textAlign = 'left'; }
+    if(shopCard){ shopCard.style.textAlign = 'left'; }
+    if(involvedCard){ involvedCard.style.textAlign = 'left'; }
+
+
     // Add community link only inside Get Involved (if not present)
     const involvedBox = byId["involved"] || byId["getinvolved"] ||
                         (d.boxes || []).find(b => b.id === "involved" || b.id === "getinvolved");
