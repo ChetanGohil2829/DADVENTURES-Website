@@ -3,25 +3,25 @@
     {
       "id": "upcoming",
       "title": "Upcoming",
-      "html": "See the <a href=\"/events\">Events</a> - filter for upcoming.",
+      "html": "Filter for upcoming <a href=\"/events\">Events</a>.",
       "image": "images/home/upcoming.jpg"
     },
     {
       "id": "blog",
       "title": "Latest Blog",
-      "html": "Catch up on our latest <a href=\"/blog\">stories</a>.",
+      "html": "Catch up on our latest <a href=\"/blog\">Stories</a>.",
       "image": "images/home/blog.jpg"
     },
     {
       "id": "shop",
       "title": "Shop",
-      "html": "Support DADVENTURES, <a href=\"/shop\">Shop</a> open.",
+      "html": "Support DADVENTURES, <a href=\"/shop\">Shop</a> now open.",
       "image": "images/home/shop.jpg"
     },
     {
       "id": "involved",
       "title": "Get Involved",
-      "html": "Questions or ideas? <a href=\"/contact\">Contact us</a>.&nbsp; Join our <a href=\"https://chat.whatsapp.com/your-community-link\" target=\"_blank\" rel=\"noopener\">Community</a>.",
+      "html": "Questions or ideas? <a href=\"/contact\">Contact us</a>.<br/>Join our <a href=\"https://chat.whatsapp.com/your-community-link\" target=\"_blank\" rel=\"noopener\">Community</a>.",
       "image": "images/home/community.jpg"
     }
   ]
