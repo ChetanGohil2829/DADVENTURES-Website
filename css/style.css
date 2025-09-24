@@ -65,3 +65,13 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
   transform: scale(1.02);
   box-shadow: var(--box-glow-hover);
 }
+
+
+/* === Override default .card shadow to use CMS-controlled white glow === */
+.card{
+  box-shadow: var(--box-glow) !important;
+  border-radius: 14px !important;
+}
+.card:hover{
+  box-shadow: var(--box-glow-hover) !important;
+}
