@@ -3,34 +3,26 @@
     {
       "id": "upcoming",
       "title": "Upcoming",
-      "text": "See the Events \u2013 filter for upcoming only.",
-      "image": "/images/home/upcoming-placeholder.jpg",
-      "link": "/events"
-    },
-    {
-      "id": "shop",
-      "title": "Shop",
-      "text": "Caps, tees, mugs \u2013 check the Shop.",
-      "image": "/images/home/shop-placeholder.jpg",
-      "link": "/shop"
+      "html": "See the <a href=\"/events\">Events</a> - filter for upcoming.",
+      "image": "images/home/upcoming.jpg"
     },
     {
       "id": "blog",
       "title": "Latest Blog",
-      "text": "Catch up on our newest stories.",
-      "image": "images/home/blog.jpg",
-      "link": "/blog"
+      "html": "Catch up on our latest <a href=\"/blog\">stories</a>.",
+      "image": "images/home/blog.jpg"
+    },
+    {
+      "id": "shop",
+      "title": "Shop",
+      "html": "Support DADVENTURES, <a href=\"/shop\">Shop</a> open.",
+      "image": "images/home/shop.jpg"
     },
     {
       "id": "involved",
       "title": "Get Involved",
-      "text": "Questions or ideas? Contact us.",
-      "image": "/images/home/involved-placeholder.jpg",
-      "link": "/contact",
-      "community": {
-        "label": "Join our Community",
-        "url": "https://chat.whatsapp.com/your-community-link"
-      }
+      "html": "Questions or ideas? <a href=\"/contact\">Contact us</a>.&nbsp; Join our <a href=\"https://chat.whatsapp.com/your-community-link\" target=\"_blank\" rel=\"noopener\">Community</a>.",
+      "image": "images/home/community.jpg"
     }
   ]
 }

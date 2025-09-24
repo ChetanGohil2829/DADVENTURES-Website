@@ -149,3 +149,8 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 .home-cards-grid .card{ height: 100%; }
 
 .home-cards-grid .card{ text-align:left; }
+
+
+/* styled links inside home card copy */
+.home-card .box-text a{ color: var(--link, #2ec7ff); text-decoration: none; font-weight: 600; }
+.home-card .box-text a:hover{ text-decoration: underline; }
