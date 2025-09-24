@@ -105,3 +105,13 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 .search:hover, .search-container:hover, .search-panel:hover {
   box-shadow: var(--box-glow-hover) !important;
 }
+
+
+/* === HOTFIX: Apply glow to actual search bar classes === */
+.searchbar, .searchbar.with-icon {
+  box-shadow: var(--box-glow) !important;
+  border-radius: 14px !important;
+}
+.searchbar:hover, .searchbar.with-icon:hover {
+  box-shadow: var(--box-glow-hover) !important;
+}
