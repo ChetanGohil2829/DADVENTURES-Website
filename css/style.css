@@ -46,31 +46,10 @@ body.splash-body{background:#000 url('../images/welcome-bonsai.svg') center/cove
 table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;padding:8px;text-align:left} th{background:#0f1322}
 
 
-/* Elegant Home Boxes */
+/* Design Settings (CMS controlled) */
 :root {
-  --box-glow: 0 0 10px rgba(255, 255, 255, 0.15);
-  --box-glow-hover: 0 0 18px rgba(255, 255, 255, 0.35);
-}
-
-.home-box {
-  background: #111;
-  border-radius: 14px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: var(--box-glow);
-  transition: all 0.3s ease-in-out;
-}
-
-.home-box:hover {
-  transform: scale(1.03);
-  box-shadow: var(--box-glow-hover);
-}
-
-
-/* Global Elegant Content Boxes */
-:root {
-  --box-glow: 0 0 10px rgba(255, 255, 255, 0.15);
-  --box-glow-hover: 0 0 18px rgba(255, 255, 255, 0.35);
+  --box-glow: 0 0 6px rgba(255, 255, 255, 0.12);
+  --box-glow-hover: 0 0 12px rgba(255, 255, 255, 0.25);
 }
 
 .content-box {
@@ -83,6 +62,6 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 }
 
 .content-box:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   box-shadow: var(--box-glow-hover);
 }
