@@ -18,7 +18,21 @@
     const img = document.getElementById("lightbox-image");
     const lb  = document.getElementById("lightbox");
     if(img && lb){ img.src = src; lb.style.display = "flex"; }
+  
+
+  function cleanupDuplicates(scope){
+    try{
+      var doc = scope || document;
+      var patterns = /(Upcoming:|Latest Blog:|Shop:|Get Involved:)/i;
+      Array.from(doc.querySelectorAll('.content-box')).forEach(function(el){
+        if(!el.closest('.home-cards-grid') && patterns.test((el.textContent||''))){
+          el.remove();
+        }
+      });
+    }catch(e){ console.warn('cleanupDuplicates failed', e); }
   }
+
+}
   function buildCard(box, id){
     const el = document.createElement("div");
     el.className = "card content-box home-card";
@@ -70,7 +84,10 @@
     const root = getHomeRoot();
     if(!root) return;
 
-    // Tagline directly under heading with extra spacing
+    
+    // global cleanup pass before building
+    cleanupDuplicates(document);
+// Tagline directly under heading with extra spacing
     const heading = root.querySelector("h1,h2,strong");
     const tagline = Array.from(root.querySelectorAll("p,div"))
       .find(el => /From nature trails to camping trips and weekend explorations/i.test((el.textContent||"")));
@@ -116,6 +133,8 @@
       }
     });
 
+    cleanupDuplicates(document);
+    setTimeout(function(){ cleanupDuplicates(document); }, 300);
     console.log("✅ Home rebuilt v3.5.40 — spacing set; duplicates removed; order enforced");
   }
   fetch("content/pages/home.json", {cache:"no-store"})
