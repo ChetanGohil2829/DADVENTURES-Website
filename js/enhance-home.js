@@ -40,7 +40,7 @@
   function addImage(card, box, key, lb) {
     if (!card || !box || !box.image || card.querySelector(".home-box-img")) return;
     const img = document.createElement("img");
-    img.src = box.image;
+    img.src = box.image + (box.image.indexOf('?')===-1 ? ('?v='+Date.now()) : '');
     img.alt = box.title || key;
     img.className = "home-box-img";
     img.loading = "lazy";
