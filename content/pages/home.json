@@ -1,21 +1,21 @@
 {
   "upcoming": {
     "title": "Upcoming",
-    "text": "See our latest adventures.",
-    "image": "images/placeholders/upcoming.jpg",
-    "link": "/events.html"
+    "text": "See the latest adventures.",
+    "link": "/events.html",
+    "image": "images/placeholders/upcoming.jpg"
   },
   "shop": {
     "title": "Shop",
     "text": "Caps, tees, mugs \u2013 check our store.",
-    "image": "images/placeholders/shop.jpg",
-    "link": "/shop.html"
+    "link": "/shop.html",
+    "image": "images/placeholders/shop.jpg"
   },
   "getinvolved": {
     "title": "Get Involved",
     "text": "Questions or ideas? Contact us.",
-    "image": "images/placeholders/getinvolved.jpg",
-    "contact_link": "/contact.html",
-    "whatsapp_link": "https://chat.whatsapp.com/YOUR_INVITE_LINK"
+    "link": "/contact.html",
+    "whatsapp": "https://chat.whatsapp.com/YOUR_INVITE_LINK",
+    "image": "images/placeholders/getinvolved.jpg"
   }
 }

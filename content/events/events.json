@@ -1,98 +1,110 @@
 [
   {
-    "title": "Dadventures Event 1",
-    "date": "2025-09-24",
-    "location": "Location 1 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event1.jpg",
-    "description": "Sample description for event 1."
+    "id": "ev01",
+    "title": "Nature Trail #1",
+    "datetime": "2025-09-15T10:00:00",
+    "route": "Trailhead 1 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+1"
   },
   {
-    "title": "Dadventures Event 2",
-    "date": "2025-10-24",
-    "location": "Location 2 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event2.jpg",
-    "description": "Sample description for event 2."
+    "id": "ev02",
+    "title": "Nature Trail #2",
+    "datetime": "2025-10-15T10:00:00",
+    "route": "Trailhead 2 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+2"
   },
   {
-    "title": "Dadventures Event 3",
-    "date": "2025-11-23",
-    "location": "Location 3 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event3.jpg",
-    "description": "Sample description for event 3."
+    "id": "ev03",
+    "title": "Nature Trail #3",
+    "datetime": "2025-11-15T10:00:00",
+    "route": "Trailhead 3 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+3"
   },
   {
-    "title": "Dadventures Event 4",
-    "date": "2025-12-23",
-    "location": "Location 4 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event4.jpg",
-    "description": "Sample description for event 4."
+    "id": "ev04",
+    "title": "Nature Trail #4",
+    "datetime": "2025-12-15T10:00:00",
+    "route": "Trailhead 4 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+4"
   },
   {
-    "title": "Dadventures Event 5",
-    "date": "2026-01-22",
-    "location": "Location 5 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event1.jpg",
-    "description": "Sample description for event 5."
+    "id": "ev05",
+    "title": "Nature Trail #5",
+    "datetime": "2026-01-15T10:00:00",
+    "route": "Trailhead 5 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+5"
   },
   {
-    "title": "Dadventures Event 6",
-    "date": "2026-02-21",
-    "location": "Location 6 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event2.jpg",
-    "description": "Sample description for event 6."
+    "id": "ev06",
+    "title": "Nature Trail #6",
+    "datetime": "2026-02-15T10:00:00",
+    "route": "Trailhead 6 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+6"
   },
   {
-    "title": "Dadventures Event 7",
-    "date": "2026-03-23",
-    "location": "Location 7 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event3.jpg",
-    "description": "Sample description for event 7."
+    "id": "ev07",
+    "title": "Nature Trail #7",
+    "datetime": "2026-03-15T10:00:00",
+    "route": "Trailhead 7 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+7"
   },
   {
-    "title": "Dadventures Event 8",
-    "date": "2026-04-22",
-    "location": "Location 8 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event4.jpg",
-    "description": "Sample description for event 8."
+    "id": "ev08",
+    "title": "Nature Trail #8",
+    "datetime": "2026-04-15T10:00:00",
+    "route": "Trailhead 8 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+8"
   },
   {
-    "title": "Dadventures Event 9",
-    "date": "2026-05-22",
-    "location": "Location 9 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event1.jpg",
-    "description": "Sample description for event 9."
+    "id": "ev09",
+    "title": "Nature Trail #9",
+    "datetime": "2026-05-15T10:00:00",
+    "route": "Trailhead 9 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+9"
   },
   {
-    "title": "Dadventures Event 10",
-    "date": "2026-06-21",
-    "location": "Location 10 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event2.jpg",
-    "description": "Sample description for event 10."
+    "id": "ev10",
+    "title": "Nature Trail #10",
+    "datetime": "2026-06-15T10:00:00",
+    "route": "Trailhead 10 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+10"
   },
   {
-    "title": "Dadventures Event 11",
-    "date": "2026-07-21",
-    "location": "Location 11 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event3.jpg",
-    "description": "Sample description for event 11."
+    "id": "ev11",
+    "title": "Nature Trail #11",
+    "datetime": "2026-07-15T10:00:00",
+    "route": "Trailhead 11 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+11"
   },
   {
-    "title": "Dadventures Event 12",
-    "date": "2026-08-20",
-    "location": "Location 12 Park",
-    "map": "https://maps.google.com",
-    "image": "images/placeholders/event4.jpg",
-    "description": "Sample description for event 12."
+    "id": "ev12",
+    "title": "Nature Trail #12",
+    "datetime": "2026-08-15T10:00:00",
+    "route": "Trailhead 12 -> Scenic Point -> Picnic Spot",
+    "description": "Family friendly trail with rest stops and photo ops.",
+    "image": "images/welcome-bonsai.svg",
+    "map_link": "https://www.google.com/maps?q=Trailhead+12"
   }
 ]

@@ -50,3 +50,22 @@ collections:
       - {label: Price, name: price, widget: number}
       - {label: Image, name: image, widget: image}
       - {label: Link, name: link, widget: string}
+
+
+  - name: "home"
+    label: "Home Page"
+    file: "content/pages/home.json"
+    fields:
+      - { label: "Upcoming Title", name: "upcoming.title", widget: "string" }
+      - { label: "Upcoming Text", name: "upcoming.text", widget: "text" }
+      - { label: "Upcoming Link", name: "upcoming.link", widget: "string" }
+      - { label: "Upcoming Image", name: "upcoming.image", widget: "image" }
+      - { label: "Shop Title", name: "shop.title", widget: "string" }
+      - { label: "Shop Text", name: "shop.text", widget: "text" }
+      - { label: "Shop Link", name: "shop.link", widget: "string" }
+      - { label: "Shop Image", name: "shop.image", widget: "image" }
+      - { label: "Get Involved Title", name: "getinvolved.title", widget: "string" }
+      - { label: "Get Involved Text", name: "getinvolved.text", widget: "text" }
+      - { label: "Get Involved Link", name: "getinvolved.link", widget: "string" }
+      - { label: "WhatsApp Link", name: "getinvolved.whatsapp", widget: "string" }
+      - { label: "Get Involved Image", name: "getinvolved.image", widget: "image" }

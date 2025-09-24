@@ -44,3 +44,45 @@ body.splash-body{background:#000 url('../images/welcome-bonsai.svg') center/cove
 .modal .panel{background:#0f1220;border:1px solid #2a324d;border-radius:20px;padding:24px;max-width:560px;width:100%}
 .countdown{font-variant-numeric:tabular-nums;font-size:20px;margin-top:8px}
 table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;padding:8px;text-align:left} th{background:#0f1322}
+
+
+/* Elegant Home Boxes */
+:root {
+  --box-glow: 0 0 10px rgba(255, 255, 255, 0.15);
+  --box-glow-hover: 0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+.home-box {
+  background: #111;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--box-glow);
+  transition: all 0.3s ease-in-out;
+}
+
+.home-box:hover {
+  transform: scale(1.03);
+  box-shadow: var(--box-glow-hover);
+}
+
+
+/* Global Elegant Content Boxes */
+:root {
+  --box-glow: 0 0 10px rgba(255, 255, 255, 0.15);
+  --box-glow-hover: 0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+.content-box {
+  background: #111;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--box-glow);
+  transition: all 0.3s ease-in-out;
+}
+
+.content-box:hover {
+  transform: scale(1.03);
+  box-shadow: var(--box-glow-hover);
+}
