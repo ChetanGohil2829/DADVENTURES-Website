@@ -75,3 +75,17 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 .card:hover{
   box-shadow: var(--box-glow-hover) !important;
 }
+
+
+/* === Consistent Glow Across All Boxes (v3.5.21) === */
+.card, .content-box, .event-card, .product-card, .blog-post,
+.contact-section, .donate-section, .about-section,
+.box, .panel, .tile {
+  box-shadow: var(--box-glow) !important;
+  border-radius: 14px !important;
+}
+.card:hover, .content-box:hover, .event-card:hover, .product-card:hover, .blog-post:hover,
+.contact-section:hover, .donate-section:hover, .about-section:hover,
+.box:hover, .panel:hover, .tile:hover {
+  box-shadow: var(--box-glow-hover) !important;
+}
