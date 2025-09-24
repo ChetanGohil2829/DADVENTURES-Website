@@ -53,11 +53,11 @@
 
   async function loadHomeBoxes(){
     try{
-      var res = await fetch('/content/pages/home.json', {cache:'no-store'});
+      var res = await fetch('content/pages/home.json', {cache:'no-store'}); // relative path
       if(!res.ok) { console.warn("⚠️ CMS home.json failed to load, using static fallback"); return; }
       var data = await res.json();
       renderBoxes(data);
-      // hide static fallback cards
+      // hide static fallback cards after success
       document.querySelectorAll('.card').forEach(function(el){
         if(el.textContent.includes('Upcoming') || el.textContent.includes('Shop') || el.textContent.includes('Get Involved')){
           el.style.display = 'none';
