@@ -20,6 +20,8 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
 <h1>Adventures that bring us closer</h1>
 <p>From nature trails to camping trips and weekend explorations - we create wholesome memories for dads and kids.</p>
 <div class="grid">
+<div class="home-boxes grid"></div>
+<script>window.renderHomeBoxes && window.renderHomeBoxes();</script>
 <div class="card"><strong>Upcoming:</strong><p class="muted">See the <a href="events.html">Events</a> - filter for upcoming only.</p></div>
 <div class="card"><strong>Shop:</strong><p class="muted">Caps, tees, mugs - check the <a href="shop.html">Shop</a>.</p></div>
 <div class="card"><strong>Get Involved:</strong><p class="muted">Questions or ideas? <a href="contact.html">Contact us</a>.</p></div>
