@@ -1,0 +1,29 @@
+{
+  "boxes": [
+    {
+      "id": "upcoming",
+      "title": "Upcoming",
+      "text": "See the Events \u2013 filter for upcoming only.",
+      "image": "/images/home/upcoming-placeholder.jpg",
+      "link": "/events"
+    },
+    {
+      "id": "shop",
+      "title": "Shop",
+      "text": "Caps, tees, mugs \u2013 check the Shop.",
+      "image": "/images/home/shop-placeholder.jpg",
+      "link": "/shop"
+    },
+    {
+      "id": "involved",
+      "title": "Get Involved",
+      "text": "Questions or ideas? Contact us.",
+      "image": "/images/home/involved-placeholder.jpg",
+      "link": "/contact",
+      "community": {
+        "label": "Join our Community",
+        "url": "https://chat.whatsapp.com/your-community-link"
+      }
+    }
+  ]
+}

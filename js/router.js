@@ -621,3 +621,29 @@ gp.addEventListener('click', async function(){ if(gm.paused){ try{ await gm.play
   render(initial,false);
 
 })();
+
+
+// Load home boxes from JSON
+async function loadHomeBoxes(){
+  try {
+    const res = await fetch('/content/pages/home.json', {cache:'no-store'});
+    if(!res.ok) return;
+    const data = await res.json();
+    const container = document.querySelector('.home-boxes');
+    if(container){
+      container.innerHTML = '';
+      data.boxes.forEach(box => {
+        const div = document.createElement('div');
+        div.className = 'card home-box';
+        div.innerHTML = `
+          <img src="${box.image}" alt="${box.title}" class="home-box-img" style="max-width:100%;border-radius:10px;margin-bottom:10px;">
+          <h3>${box.title}</h3>
+          <p>${box.text}</p>
+          ${box.community ? `<a href="${box.community.url}" target="_blank">${box.community.label}</a>` : `<a href="${box.link}">Learn more</a>`}
+        `;
+        container.appendChild(div);
+      });
+    }
+  } catch(e){ console.error(e); }
+}
+document.addEventListener('DOMContentLoaded', loadHomeBoxes);
