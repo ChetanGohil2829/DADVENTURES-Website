@@ -1,176 +1,128 @@
-
-(function () {
-  function getHomeContainer() {
-    const h = Array.from(document.querySelectorAll("h1,h2,strong"))
-      .find(el => /adventures.*bring.*closer/i.test((el.textContent || "").trim()));
-    return h ? (h.closest("section,article,main,div") || h.parentElement) : document;
+(function(){
+  function homeContainer(){
+    const h = Array.from(document.querySelectorAll('h1,h2,strong'))
+      .find(el => /adventures.*bring.*closer/i.test((el.textContent||'').trim()));
+    return h ? (h.closest('section,article,main,div') || h.parentElement) : document;
   }
 
-  function lightbox() {
-    if (document.getElementById("lightbox")) return;
-    const lb = document.createElement("div");
-    lb.id = "lightbox";
-    lb.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:99999";
-    lb.innerHTML =
-      '<img id="lightbox-image" alt="" style="max-width:90vw;max-height:90vh;border-radius:16px;box-shadow:0 0 24px rgba(0,0,0,.6)"/>';
+  function ensureLightbox(){
+    if(document.getElementById('lightbox')) return;
+    const lb = document.createElement('div');
+    lb.id = 'lightbox';
+    lb.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:99999';
+    lb.innerHTML = '<img id="lightbox-image" alt="" style="max-width:90vw;max-height:90vh;border-radius:16px;box-shadow:0 0 24px rgba(0,0,0,.6)"/>';
     document.body.appendChild(lb);
-    function close() { lb.style.display = "none"; }
-    lb.addEventListener("click", e => { if (e.target === lb) close(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
-    return lb;
+    lb.addEventListener('click', e => { if(e.target===lb) lb.style.display='none'; });
+    document.addEventListener('keydown', e => { if(e.key==='Escape') lb.style.display='none'; });
+  }
+  function openLightbox(src){
+    const img = document.getElementById('lightbox-image');
+    const lb  = document.getElementById('lightbox');
+    if(img && lb){ img.src = src; lb.style.display = 'flex'; }
   }
 
-  function findCardByTitle(container, prefix) {
-    const cards = Array.from(container.querySelectorAll(".card"));
-    for (const card of cards) {
-      const h = card.querySelector("strong,h3");
-      if (!h) continue;
-      const t = (h.textContent || "").trim();
-      if (t.toLowerCase().startsWith(prefix.toLowerCase())) return card;
-    }
-    return null;
-  }
+  function card(box, key){
+    const el = document.createElement('div');
+    el.className = 'card content-box home-card';
+    el.dataset.id = key;
+    el.style.textAlign = 'left';
 
-  function insertAfter(node, newNode) {
-    if (!node || !node.parentNode) return;
-    if (node.nextSibling) node.parentNode.insertBefore(newNode, node.nextSibling);
-    else node.parentNode.appendChild(newNode);
-  }
-
-  function setOrCreateImage(card, box, key, lb){
-    if(!card || !box || !box.image) return;
-    var img = card.querySelector('.home-box-img');
-    var src = box.image + (box.image.indexOf('?')===-1 ? ('?v='+Date.now()) : '');
-    if(img){
-      img.src = src;
-      img.alt = box.title || key;
-    }else{
-      img = document.createElement('img');
+    if(box.image){
+      const img = document.createElement('img');
       img.className = 'home-box-img';
       img.loading = 'lazy';
-      img.src = src;
       img.alt = box.title || key;
-      card.insertBefore(img, card.firstChild);
-      if (lb) {
-        img.addEventListener("click", () => {
-          document.getElementById("lightbox-image").src = img.src;
-          lb.style.display = "flex";
-        });
-      }
+      img.src = box.image + (box.image.indexOf('?')===-1 ? ('?v='+Date.now()) : '');
+      img.addEventListener('click', ()=>openLightbox(img.src));
+      el.appendChild(img);
     }
+
+    if(box.title){
+      const h = document.createElement('strong');
+      h.textContent = /:$/.test(box.title) ? box.title : (box.title + ':');
+      el.appendChild(h);
+    }
+
+    if(box.text){
+      const p = document.createElement('p');
+      p.className = 'box-text';
+      p.textContent = box.text;
+      el.appendChild(p);
+    }
+
+    if(box.link){
+      const p = document.createElement('p');
+      const a = document.createElement('a');
+      a.className = 'primary-link';
+      a.href = box.link;
+      a.textContent = 'Learn more';
+      p.appendChild(a);
+      el.appendChild(p);
+    }
+
+    if(key==='involved' && box.community && box.community.url){
+      const p = document.createElement('p');
+      const a = document.createElement('a');
+      a.className = 'community-link';
+      a.href = box.community.url;
+      a.target = '_blank'; a.rel='noopener';
+      a.textContent = box.community.label || 'Join our Community';
+      p.appendChild(a);
+      el.appendChild(p);
+    }
+
+    return el;
   }
 
-  function commonAncestor(nodes){
-    nodes = nodes.filter(Boolean);
-    if(nodes.length===0) return null;
-    function pathToRoot(n){
-      var p=[]; while(n){ p.push(n); n=n.parentElement; } return p;
+  function rebuild(d){
+    ensureLightbox();
+    const root = homeContainer();
+    if(!root) return;
+
+    // remove legacy/injected boxes and wrappers in HOME only
+    root.querySelectorAll('.home-cards-grid, .content-box.card').forEach(el => el.remove());
+
+    // wrapper
+    const grid = document.createElement('div');
+    grid.className = 'home-cards-grid';
+    const heading = root.querySelector('h1,h2,strong');
+    if(heading && heading.parentElement===root && heading.nextSibling){
+      root.insertBefore(grid, heading.nextSibling);
+    }else{
+      root.appendChild(grid);
     }
-    var p0 = pathToRoot(nodes[0]);
-    for(var i=1;i<nodes.length;i++){
-      var p = pathToRoot(nodes[i]);
-      var found = null;
-      for(var a of p0){
-        if(p.includes(a)){ found = a; break; }
-      }
-      if(found){ p0 = pathToRoot(found); }
-    }
-    return p0[0] || null;
-  }
 
-  function enhance(data) {
-    const container = getHomeContainer();
-
-    // Remove previously injected extras (keep originals intact)
-    container.querySelectorAll(".box-desc, .primary-link").forEach(el => el.remove());
-
-    const d = data.boxes ? data : {
+    // normalize data
+    const data = d && d.boxes ? d : {
       boxes: [
-        data.upcoming || {},
-        data.shop || {},
-        data.blog || {},
-        data.involved || data.getinvolved || {}
+        d.upcoming || {},
+        d.shop || {},
+        d.blog || {},
+        d.involved || d.getinvolved || {}
       ]
     };
-    const byId = {};
-    (d.boxes || []).forEach(b => { if (b && b.id) byId[b.id] = b; });
+    const byId = {}; (data.boxes||[]).forEach(b=>{ if(b && b.id) byId[b.id] = b; });
 
-    const lb = lightbox();
+    // order requested: Upcoming, Shop, Latest Blog, Get Involved
+    const list = [
+      byId['upcoming'] || (data.boxes||[]).find(b=>b.id==='upcoming') || {id:'upcoming', title:'Upcoming', link:'/events'},
+      byId['shop']     || (data.boxes||[]).find(b=>b.id==='shop')     || {id:'shop', title:'Shop', link:'/shop'},
+      byId['blog']     || (data.boxes||[]).find(b=>b.id==='blog')     || {id:'blog', title:'Latest Blog', link:'/blog'},
+      byId['involved'] || byId['getinvolved'] ||
+        (data.boxes||[]).find(b=>b.id==='involved'||b.id==='getinvolved') ||
+        {id:'involved', title:'Get Involved', link:'/contact', community:{url:'https://chat.whatsapp.com/your-community-link'}}
+    ];
 
-    // Find/ensure cards
-    const upcomingCard = findCardByTitle(container, "Upcoming");
-    const shopCard     = findCardByTitle(container, "Shop");
-    let   blogCard     = findCardByTitle(container, "Latest Blog");
-    const involvedCard = findCardByTitle(container, "Get Involved");
-
-    // If Blog missing, create after Shop with its own text/link
-    const blogBox = byId["blog"] || (d.boxes || []).find(b => b.id === "blog");
-    if (!blogCard && shopCard && blogBox) {
-      blogCard = document.createElement("div");
-      blogCard.className = shopCard.className; // match style
-      blogCard.innerHTML = "<strong>Latest Blog:</strong>";
-      if (blogBox.text) {
-        const p = document.createElement("p");
-        p.className = "box-desc";
-        p.textContent = blogBox.text;
-        blogCard.appendChild(p);
-      }
-      if (blogBox.link) {
-        const p = document.createElement("p");
-        const a = document.createElement("a");
-        a.href = blogBox.link;
-        a.textContent = "Learn more";
-        a.className = "primary-link";
-        p.appendChild(a);
-        blogCard.appendChild(p);
-      }
-      insertAfter(shopCard, blogCard);
-    }
-
-    // Always (re)set images for existing cards (prevents stale/broken src)
-    setOrCreateImage(upcomingCard, byId["upcoming"] || (d.boxes || []).find(b => b.id === "upcoming"), "upcoming", lb);
-    setOrCreateImage(shopCard,     byId["shop"]     || (d.boxes || []).find(b => b.id === "shop"),     "shop", lb);
-    setOrCreateImage(blogCard,     blogBox, "blog", lb);
-    setOrCreateImage(involvedCard, byId["involved"] || byId["getinvolved"] ||
-                                  (d.boxes || []).find(b => b.id === "involved" || b.id === "getinvolved"),
-                      "involved", lb);
-
-    // Community link only in involved
-    const involvedBox = byId["involved"] || byId["getinvolved"] ||
-                        (d.boxes || []).find(b => b.id === "involved" || b.id === "getinvolved");
-    if (involvedCard && involvedBox && involvedBox.community && involvedBox.community.url) {
-      if (!involvedCard.querySelector(".community-link")) {
-        const p = document.createElement("p");
-        const a = document.createElement("a");
-        a.href = involvedBox.community.url;
-        a.textContent = involvedBox.community.label || "Join our Community";
-        a.target = "_blank";
-        a.rel = "noopener";
-        a.className = "community-link";
-        p.appendChild(a);
-        involvedCard.appendChild(p);
-      }
-    }
-
-    // Layout/order: use nearest common ancestor so all 4 share one parent
-    var parent = commonAncestor([upcomingCard, blogCard, shopCard, involvedCard]) || container;
-    if (parent){
-      parent.classList.add('home-cards-grid');
-      [upcomingCard, blogCard, shopCard, involvedCard].forEach(function(n){
-        if(n && n.parentElement !== parent){ parent.appendChild(n); }
-      });
-    }
-
-    // Left align safeguard
-    [upcomingCard, blogCard, shopCard, involvedCard].forEach(function(n){
-      if(n){ n.style.textAlign = 'left'; }
+    list.forEach(b=>{
+      const key = (b.id==='getinvolved') ? 'involved' : b.id;
+      grid.appendChild(card(b, key));
     });
 
-    console.log("✅ Home enhanced (images & grid; common parent & cache-busted)");
+    console.log('✅ Rebuilt Home cards (v3.5.35, order: Upcoming, Shop, Blog, Involved)');
   }
 
-  fetch("content/pages/home.json", { cache: "no-store" })
-    .then(r => r.ok ? r.json() : null)
-    .then(d => { if (d) enhance(d); else console.warn("⚠️ home.json missing"); })
-    .catch(e => console.warn("⚠️ home.json error", e));
+  fetch('content/pages/home.json', {cache:'no-store'})
+    .then(r=>r.ok?r.json():null)
+    .then(rebuild)
+    .catch(console.warn);
 })();

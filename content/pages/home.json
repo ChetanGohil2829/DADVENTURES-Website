@@ -8,18 +8,18 @@
       "link": "/events"
     },
     {
-      "id": "blog",
-      "title": "Latest Blog",
-      "text": "Catch up on our newest stories.",
-      "image": "images/home/blog.jpg",
-      "link": "/blog"
-    },
-    {
       "id": "shop",
       "title": "Shop",
       "text": "Caps, tees, mugs \u2013 check the Shop.",
       "image": "/images/home/shop-placeholder.jpg",
       "link": "/shop"
+    },
+    {
+      "id": "blog",
+      "title": "Latest Blog",
+      "text": "Catch up on our newest stories.",
+      "image": "images/home/blog.jpg",
+      "link": "/blog"
     },
     {
       "id": "involved",
