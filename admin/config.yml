@@ -75,3 +75,17 @@ collections:
           - { label: "Link", name: "link", widget: "string" }
           - { label: "Community Label", name: "community.label", widget: "string", required: false }
           - { label: "Community URL", name: "community.url", widget: "string", required: false }
+
+
+  - name: "navigation"
+    label: "Navigation"
+    file: "content/pages/navigation.json"
+    fields:
+      - label: "Items"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Link", name: "href", widget: "string" }
+          - { label: "Visible", name: "visible", widget: "boolean", default: true }
+

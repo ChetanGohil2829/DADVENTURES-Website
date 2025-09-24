@@ -130,3 +130,10 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 /* Lightbox base (container styles set inline) */
 #lightbox{animation:fadeIn .16s ease-in}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+
+/* Home box image hover zoom (CMS-controlled) */
+:root{ --home-img-scale: 1.08; }
+.home-box-img{ transition: transform .25s ease; will-change: transform; }
+.home-box-img:hover{ transform: scale(var(--home-img-scale)); }
+
