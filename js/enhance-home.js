@@ -128,7 +128,25 @@
       }
     }
 
-    console.log("✅ Home enhanced (images only; no duplicate text)");
+    
+    // ---- Order and layout ----
+    // Parent that holds the cards
+    var cardsParent = null;
+    [upcomingCard, blogCard, shopCard, involvedCard].some(function(n){
+      if(n && n.parentElement){ cardsParent = n.parentElement; return true; }
+      return false;
+    });
+    if(cardsParent){
+      // apply responsive grid for clean alignment
+      cardsParent.classList.add('home-cards-grid');
+
+      // desired sequence: Upcoming, Blog, Shop, Get Involved
+      [upcomingCard, blogCard, shopCard, involvedCard].forEach(function(n){
+        if(n){ cardsParent.appendChild(n); }
+      });
+    }
+
+    console.log("✅ Home enhanced (images only; no duplicate text; ordered & grid)");
   }
 
   fetch("content/pages/home.json", { cache: "no-store" })

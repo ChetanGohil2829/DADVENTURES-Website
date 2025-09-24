@@ -137,3 +137,13 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 .home-box-img{ transition: transform .25s ease; will-change: transform; }
 .home-box-img:hover{ transform: scale(var(--home-img-scale)); }
 
+
+
+/* Home cards responsive grid */
+.home-cards-grid{ display:grid; grid-template-columns: repeat(4, minmax(240px,1fr)); gap: 20px; align-items: start; }
+@media (max-width: 1280px){ .home-cards-grid{ grid-template-columns: repeat(3, minmax(240px,1fr)); } }
+@media (max-width: 980px){ .home-cards-grid{ grid-template-columns: repeat(2, minmax(240px,1fr)); } }
+@media (max-width: 640px){ .home-cards-grid{ grid-template-columns: 1fr; } }
+
+/* Make all cards equal height look nicer */
+.home-cards-grid .card{ height: 100%; }
