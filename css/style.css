@@ -91,15 +91,17 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 }
 
 
-/* === Consistent Glow Including Search Box (v3.5.22) === */
+/* === Consistent Glow Including Search Bar (v3.5.22b) === */
 .card, .content-box, .event-card, .product-card, .blog-post,
 .contact-section, .donate-section, .about-section,
-.box, .panel, .tile, .search-box {
+.box, .panel, .tile,
+.search, .search-container, .search-panel {
   box-shadow: var(--box-glow) !important;
   border-radius: 14px !important;
 }
 .card:hover, .content-box:hover, .event-card:hover, .product-card:hover, .blog-post:hover,
 .contact-section:hover, .donate-section:hover, .about-section:hover,
-.box:hover, .panel:hover, .tile:hover, .search-box:hover {
+.box:hover, .panel:hover, .tile:hover,
+.search:hover, .search-container:hover, .search-panel:hover {
   box-shadow: var(--box-glow-hover) !important;
 }
