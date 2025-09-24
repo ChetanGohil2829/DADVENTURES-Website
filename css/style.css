@@ -115,3 +115,18 @@ table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;paddin
 .searchbar:hover, .searchbar.with-icon:hover {
   box-shadow: var(--box-glow-hover) !important;
 }
+
+
+/* Home box images */
+.home-box-img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:10px;
+  display:block;
+}
+
+/* Lightbox base (container styles set inline) */
+#lightbox{animation:fadeIn .16s ease-in}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
