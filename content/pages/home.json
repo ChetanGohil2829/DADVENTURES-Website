@@ -15,6 +15,13 @@
       "link": "/shop"
     },
     {
+      "id": "blog",
+      "title": "Latest Blog",
+      "text": "Catch up on our newest stories.",
+      "image": "images/home/blog.jpg",
+      "link": "/blog"
+    },
+    {
       "id": "involved",
       "title": "Get Involved",
       "text": "Questions or ideas? Contact us.",
