@@ -1,0 +1,21 @@
+{
+  "upcoming": {
+    "title": "Upcoming",
+    "text": "See our latest adventures.",
+    "image": "images/placeholders/upcoming.jpg",
+    "link": "/events.html"
+  },
+  "shop": {
+    "title": "Shop",
+    "text": "Caps, tees, mugs \u2013 check our store.",
+    "image": "images/placeholders/shop.jpg",
+    "link": "/shop.html"
+  },
+  "getinvolved": {
+    "title": "Get Involved",
+    "text": "Questions or ideas? Contact us.",
+    "image": "images/placeholders/getinvolved.jpg",
+    "contact_link": "/contact.html",
+    "whatsapp_link": "https://chat.whatsapp.com/YOUR_INVITE_LINK"
+  }
+}

@@ -44,37 +44,3 @@ body.splash-body{background:#000 url('../images/welcome-bonsai.svg') center/cove
 .modal .panel{background:#0f1220;border:1px solid #2a324d;border-radius:20px;padding:24px;max-width:560px;width:100%}
 .countdown{font-variant-numeric:tabular-nums;font-size:20px;margin-top:8px}
 table{width:100%;border-collapse:collapse} th,td{border:1px solid #2a3146;padding:8px;text-align:left} th{background:#0f1322}
-
-
-/* Home Box Styling Enhancements */
-:root {
-  --box-glow: 0 0 12px rgba(255,255,255,0.25);
-}
-.home-box {
-  background:#111;
-  border-radius:16px;
-  padding:20px;
-  text-align:center;
-  box-shadow: var(--box-glow);
-  transition:all 0.3s ease-in-out;
-}
-.home-box:hover {
-  transform:scale(1.03);
-  box-shadow:0 0 20px rgba(255,255,255,0.6);
-}
-.box-image {
-  width:100%;
-  max-height:180px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-bottom:12px;
-}
-.community-link {
-  font-weight:bold;
-  color:#25d366;
-  text-decoration:none;
-}
-.community-link:hover {
-  text-decoration:underline;
-  color:#1ebe5d;
-}

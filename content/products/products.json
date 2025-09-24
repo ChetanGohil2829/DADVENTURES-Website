@@ -1,23 +1,20 @@
 [
   {
-    "id": "cap",
-    "title": "Dadventures Cap",
-    "price": 12.0,
-    "image": "images/logo-icon.svg",
-    "link": "product.html?id=cap"
+    "name": "Dadventures Cap",
+    "price": "15.00",
+    "image": "images/placeholders/product1.jpg",
+    "link": "#"
   },
   {
-    "id": "tee",
-    "title": "Dadventures T-shirt",
-    "price": 18.0,
-    "image": "images/logo-icon.svg",
-    "link": "product.html?id=tee"
+    "name": "Dadventures T-Shirt",
+    "price": "20.00",
+    "image": "images/placeholders/product2.jpg",
+    "link": "#"
   },
   {
-    "id": "mug",
-    "title": "Dadventures Mug",
-    "price": 8.5,
-    "image": "images/logo-icon.svg",
-    "link": "product.html?id=mug"
+    "name": "Dadventures Mug",
+    "price": "10.00",
+    "image": "images/placeholders/product3.jpg",
+    "link": "#"
   }
 ]
