@@ -2,7 +2,7 @@
 async function loadEvents(){
   const items = await fetch('content/events/events.json').then(r=>r.json());
   const grid = document.getElementById('eventsGrid');
-  // function render(list){ // Disabled to prevent event boxes rendering
+  function render(list){
     grid.innerHTML = list.map(function(ev){
       return '<article class="card" data-title="'+(ev.title.toLowerCase()+' '+ev.description.toLowerCase())+'">'
         + '<img src="'+ev.image+'" alt="" style="width:100%;border-radius:12px;margin-bottom:10px"/>'
