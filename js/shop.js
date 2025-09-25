@@ -4,7 +4,7 @@ async function loadShop(){
   let items = await res.json();
   const grid = document.getElementById('shopGrid');
   function render(list){
-    grid.innerHTML = ''; list.map(function(p){
+    grid.innerHTML = list.map(function(p){
       return '<article class="card" data-title="'+p.title.toLowerCase()+'">'
         + '<img src="'+p.image+'" alt="" style="width:100%;border-radius:12px;margin-bottom:10px;aspect-ratio:16/9;object-fit:contain;background:#0b0b0e"/>'
         + '<h3>'+p.title+'</h3>'

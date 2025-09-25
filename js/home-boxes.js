@@ -20,7 +20,7 @@
     return lb;
   }
 
-  // function renderBoxes(data){ // Disabled to prevent bottom boxes rendering
+  // // function renderBoxes(data){ // Disabled to prevent bottom boxes rendering
     var container = document.querySelector('.home-boxes');
     if(!container || !data || !Array.isArray(data.boxes)) return;
     container.innerHTML = '';

@@ -19,7 +19,7 @@
     const lb  = document.getElementById("lightbox");
     if(img && lb){ img.src = src; lb.style.display = "flex"; }
   }
-  function buildCard(box, id){
+  // function buildCard(box, id){
     const el = document.createElement("div");
     el.className = "card content-box home-card";
     el.dataset.id = id;
