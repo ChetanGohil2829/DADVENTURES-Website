@@ -43,25 +43,25 @@ function updateFooterTime(){ const ft=$('#foot-time'); if(ft) ft.textContent=new
 function showMaintenance(on){ const m=$('#maint'); if(on){ m.classList.add('show'); } else { m.classList.remove('show'); } }
 window.addEventListener('hashchange', render); window.addEventListener('load', loadAll);
 
-/* v4.2.2 progressive enhancements */
+/* v4.2.2 enhancements */
 (function(){
   const btn = document.getElementById('menuToggle');
   let panel = document.getElementById('mobilePanel');
-  if (btn){
-    if (!panel){
-      panel = document.createElement('nav'); panel.id='mobilePanel';
-      const main = document.querySelector('.nav, .tabs, .menu');
-      if (main){ main.querySelectorAll('a').forEach(a=>{ const link=a.cloneNode(true); link.removeAttribute('class'); panel.appendChild(link); }); }
+  if(btn){
+    if(!panel){
+      panel=document.createElement('nav'); panel.id='mobilePanel';
+      const main=document.querySelector('.nav,.tabs,.menu');
+      if(main){ main.querySelectorAll('a').forEach(a=>{ const l=a.cloneNode(true); l.removeAttribute('class'); panel.appendChild(l); }); }
       document.body.appendChild(panel);
     }
     btn.addEventListener('click',()=>panel.classList.toggle('open'));
     panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>panel.classList.remove('open')));
   }
-  const headerSocials = document.querySelector('.header .socials, .topbar .socials');
-  const footer = document.querySelector('.footer, .trailer');
-  if (headerSocials && footer && !footer.querySelector('.socials')){ const clone=headerSocials.cloneNode(true); clone.style.marginLeft='auto'; footer.appendChild(clone); headerSocials.style.display='none'; }
-  function ensureModal(){ let back=document.querySelector('.dv-modal-backdrop'); if(back) return back; back=document.createElement('div'); back.className='dv-modal-backdrop'; back.innerHTML='<div class="dv-modal"><h3 id="dvTitle">Event</h3><p id="dvDate" style="color:#9aa3c7"></p><textarea id="dvNote" class="dv-input" rows="6" placeholder="Add your note (saved locally)"></textarea><div class="dv-actions"><button id="dvDel" class="button">Delete</button><button id="dvSave" class="button primary">Save</button><button id="dvClose" class="button">Close</button></div></div>'; document.body.appendChild(back); back.addEventListener('click',e=>{ if(e.target===back) back.style.display='none'; }); back.querySelector('#dvClose').onclick=()=> back.style.display='none'; back.querySelector('#dvSave').onclick=()=>{ const d=back.querySelector('#dvDate').dataset.date; localStorage.setItem('note_'+d, back.querySelector('#dvNote').value); alert('Saved'); back.style.display='none';}; back.querySelector('#dvDel').onclick=()=>{ const d=back.querySelector('#dvDate').dataset.date; localStorage.removeItem('note_'+d); back.querySelector('#dvNote').value=''; alert('Deleted'); back.style.display='none';}; return back; }
-  function wireCalendar(){ const cells=Array.from(document.querySelectorAll('.calendar .day, .cal .day, .calendar-day, .calendar .cell')); if(!cells.length) return; const back=ensureModal(); cells.forEach(cell=>{ if(cell.__wired) return; cell.__wired=true; cell.style.cursor='pointer'; cell.addEventListener('click',()=>{ const label=cell.getAttribute('data-title') || (cell.querySelector('.title')&&cell.querySelector('.title').textContent) || 'Event/Note'; const dateStr=cell.getAttribute('data-date') || cell.dataset.date || cell.textContent.trim(); back.querySelector('#dvTitle').textContent=label; back.querySelector('#dvDate').textContent=dateStr; back.querySelector('#dvDate').dataset.date=dateStr; back.querySelector('#dvNote').value=localStorage.getItem('note_'+dateStr)||''; back.style.display='flex'; }); }); }
-  wireCalendar(); setTimeout(wireCalendar, 1000);
-  if (localStorage.getItem('dadventures_maintenance')==='1'){ const bar=document.createElement('div'); bar.textContent='Site under maintenance'; bar.style.cssText='position:sticky;top:0;background:#ff4d6d;color:#fff;text-align:center;padding:6px;z-index:1000'; document.body.prepend(bar); }
+  const footer=document.querySelector('footer,.footer,.trailer');
+  if(footer){ const headerLinks=document.querySelectorAll('header a, .header a, .topbar a'); headerLinks.forEach(a=>{
+    const txt=(a.textContent||'').toLowerCase(); if(/ig|fb|tt|instagram|facebook|tiktok/.test(txt)){ const clone=a.cloneNode(true); footer.appendChild(clone); a.style.display='none'; }
+  });}
+  function ensureModal(){let b=document.querySelector('.dv-modal-backdrop');if(b) return b;b=document.createElement('div');b.className='dv-modal-backdrop';b.innerHTML='<div class="dv-modal"><h3 id="dvTitle">Event</h3><p id="dvDate" style="color:#9aa3c7"></p><textarea id="dvNote" class="dv-input" rows="6"></textarea><div class="dv-actions"><button id="dvDel">Delete</button><button id="dvSave">Save</button><button id="dvClose">Close</button></div></div>';document.body.appendChild(b);b.querySelector('#dvClose').onc...
+  function bindCalendar(){const cells=document.querySelectorAll('.calendar .day,.calendar-day,[role="gridcell"],.calendar .cell');if(!cells.length) return;const back=ensureModal();cells.forEach(c=>{if(c.__wired)return;c.__wired=true;c.style.cursor='pointer';c.addEventListener('click',()=>{const d=c.getAttribute('data-date')||c.dataset.date||(c.textContent||'').trim();back.querySelector('#dvTitle').textContent='Event';back.querySelector('#dvDate').textContent=d;back.querySelector('#dvDate').dataset.da...
+  bindCalendar(); setTimeout(bindCalendar,1000);
 })();

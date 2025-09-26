@@ -81,7 +81,7 @@ h3{font-size:clamp(18px, 3vw, 22px); margin:.2em 0 .4em}
 #maint{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.85); z-index:9999; color:#fff}
 #maint.show{display:grid}
 
-/* v4.2.2 enhancements — additive only */
+/* v4.2.2 enhancements */
 :root{--soft-glow:0 0 12px rgba(122,168,255,.25),0 0 22px rgba(255,102,204,.12);--line:rgba(122,168,255,.15)}
 .card,.panel,.tile,.box{box-shadow:var(--soft-glow)!important;border-color:var(--line)!important}
 .nav,.tabs,.menu{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
@@ -93,9 +93,11 @@ h3{font-size:clamp(18px, 3vw, 22px); margin:.2em 0 .4em}
 #mobilePanel a{display:block;margin:.4rem 0;padding:.6rem;border:1px solid var(--line);border-radius:10px}
 @media(max-width:900px){.nav,.tabs,.menu{display:none}#menuToggle{display:inline-flex;flex-direction:column;gap:4px}}
 .footer,.trailer{padding:.6rem 1rem!important}
-.footer .socials a,.trailer .socials a{border:1px solid var(--line);border-radius:10px;padding:.3rem .5rem;margin-left:.4rem}
+.footer a,.trailer a{border:1px solid var(--line);border-radius:10px;padding:.3rem .5rem;margin-left:.4rem}
 .contact-form form,form.contact,#contactForm{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;align-items:center}
 .contact-form form textarea,form.contact textarea,#contactForm textarea{grid-column:span 2}
+.timeline .item,.tl-card{border:1px solid var(--line);border-radius:16px;padding:1rem;background:rgba(12,14,28,.85);transition:box-shadow .2s ease}
+.timeline .item:hover,.tl-card:hover{box-shadow:var(--soft-glow)}
 .dv-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:1000}
 .dv-modal{background:rgba(12,14,28,.98);border:1px solid var(--line);border-radius:16px;padding:1rem;max-width:520px;width:92%}
 .dv-actions{display:flex;gap:.6rem;justify-content:flex-end;margin-top:.6rem}
