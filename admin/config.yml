@@ -2,90 +2,25 @@
 backend:
   name: git-gateway
   branch: main
-media_folder: "images"
-public_folder: "/images"
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 collections:
-  - name: "pages"
-    label: "Pages"
-    files:
-      - file: "content/pages/about.md"
-        label: "About Page"
-        name: "about"
-        fields:
-          - {label: Title, name: title, widget: string}
-          - {label: Body, name: body, widget: markdown}
-      - file: "content/pages/email-donation.html"
-        label: "Email Template - Donation"
-        name: "email_donation"
-        fields:
-          - {label: HTML, name: body, widget: text}
-      - file: "content/pages/email-purchase.html"
-        label: "Email Template - Purchase"
-        name: "email_purchase"
-        fields:
-          - {label: HTML, name: body, widget: text}
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
   - name: "events"
     label: "Events"
     folder: "content/events"
     create: true
-    extension: "json"
-    format: "json"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: ID, name: id, widget: string}
-      - {label: Title, name: title, widget: string}
-      - {label: DateTime ISO, name: datetime, widget: string}
-      - {label: Route, name: route, widget: string}
-      - {label: Description, name: description, widget: text}
-      - {label: Image, name: image, widget: image}
-      - {label: Map Link, name: map_link, widget: string}
-  - name: "products"
-    label: "Products"
-    folder: "content/products"
-    create: true
-    extension: "json"
-    format: "json"
-    fields:
-      - {label: ID, name: id, widget: string}
-      - {label: Title, name: title, widget: string}
-      - {label: Price, name: price, widget: number}
-      - {label: Image, name: image, widget: image}
-      - {label: Link, name: link, widget: string}
-
-
-  - name: "design"
-    label: "Design Settings"
-    file: "content/pages/design.json"
-    fields:
-      - { label: "Box Glow (default)", name: "box_glow", widget: "string" }
-      - { label: "Box Glow (hover)", name: "box_glow_hover", widget: "string" }
-
-
-  - name: "home"
-    label: "Home Page"
-    file: "content/pages/home.json"
-    fields:
-      - label: "Boxes"
-        name: "boxes"
-        widget: "list"
-        fields:
-          - { label: "ID", name: "id", widget: "string" }
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Text", name: "text", widget: "text" }
-          - { label: "Image", name: "image", widget: "image" }
-          - { label: "Link", name: "link", widget: "string" }
-          - { label: "Community Label", name: "community.label", widget: "string", required: false }
-          - { label: "Community URL", name: "community.url", widget: "string", required: false }
-
-
-  - name: "navigation"
-    label: "Navigation"
-    file: "content/pages/navigation.json"
-    fields:
-      - label: "Items"
-        name: "items"
-        widget: "list"
-        fields:
-          - { label: "Label", name: "label", widget: "string" }
-          - { label: "Link", name: "href", widget: "string" }
-          - { label: "Visible", name: "visible", widget: "boolean", default: true }
-
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Description", name: "body", widget: "markdown" }

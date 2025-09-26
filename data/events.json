@@ -1,0 +1,170 @@
+[
+  {
+    "id": "evt-001",
+    "title": "Dadventure #1: Nature Trail & Campfire",
+    "date": "2025-09-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-002",
+    "title": "Dadventure #2: Nature Trail & Campfire",
+    "date": "2025-10-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-003",
+    "title": "Dadventure #3: Nature Trail & Campfire",
+    "date": "2025-10-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-004",
+    "title": "Dadventure #4: Nature Trail & Campfire",
+    "date": "2025-11-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-005",
+    "title": "Dadventure #5: Nature Trail & Campfire",
+    "date": "2025-12-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-006",
+    "title": "Dadventure #6: Nature Trail & Campfire",
+    "date": "2026-01-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-007",
+    "title": "Dadventure #7: Nature Trail & Campfire",
+    "date": "2026-02-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-008",
+    "title": "Dadventure #8: Nature Trail & Campfire",
+    "date": "2026-03-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-009",
+    "title": "Dadventure #9: Nature Trail & Campfire",
+    "date": "2026-04-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-010",
+    "title": "Dadventure #10: Nature Trail & Campfire",
+    "date": "2026-05-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-011",
+    "title": "Dadventure #11: Nature Trail & Campfire",
+    "date": "2026-06-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  },
+  {
+    "id": "evt-012",
+    "title": "Dadventure #12: Nature Trail & Campfire",
+    "date": "2026-07-15",
+    "time": "10:00",
+    "location": "Richmond Park, London",
+    "coords": {
+      "lat": 51.442,
+      "lng": -0.274
+    },
+    "image": "assets/images/events.jpg",
+    "description": "A father\u2013child nature trail with a safe, supervised campfire. Bring comfy shoes and water.",
+    "mapLink": "https://maps.google.com/?q=Richmond+Park+London"
+  }
+]

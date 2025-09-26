@@ -1,0 +1,25 @@
+{
+  "siteName": "DADVENTURES",
+  "tagline": "Explore \u2022 Bond \u2022 Grow",
+  "primaryTheme": "glow-blue-pink",
+  "themes": [
+    {
+      "id": "glow-blue-pink",
+      "label": "Blue/Pink Glow"
+    },
+    {
+      "id": "gold-bronze",
+      "label": "Gold/Bronze"
+    },
+    {
+      "id": "green-orange",
+      "label": "Green/Orange"
+    },
+    {
+      "id": "navy-orange",
+      "label": "Navy/Orange"
+    }
+  ],
+  "font": "'Inter', system-ui, -apple-system, Segoe UI, Roboto",
+  "accentScale": 1.0
+}

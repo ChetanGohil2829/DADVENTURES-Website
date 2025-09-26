@@ -1,0 +1,26 @@
+[
+  {
+    "id": "sku-cap",
+    "name": "DADVENTURES Cap",
+    "price": 14.99,
+    "image": "assets/images/shop.jpg",
+    "url": "#",
+    "description": "Adjustable cotton cap with embroidered logo."
+  },
+  {
+    "id": "sku-tee",
+    "name": "DADVENTURES T-Shirt",
+    "price": 19.99,
+    "image": "assets/images/shop.jpg",
+    "url": "#",
+    "description": "Soft tee with glowing teepee logo."
+  },
+  {
+    "id": "sku-mug",
+    "name": "DADVENTURES Mug",
+    "price": 9.99,
+    "image": "assets/images/shop.jpg",
+    "url": "#",
+    "description": "Ceramic mug for campfire cocoa."
+  }
+]
