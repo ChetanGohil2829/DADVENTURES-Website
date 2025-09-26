@@ -1,0 +1,148 @@
+
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Admin • DADVENTURES</title>
+<link rel="stylesheet" href="css/main.css"/>
+<script defer src="js/app.js"></script>
+<script defer src="js/admin.js"></script>
+</head><body>
+
+<header class="header">
+  <div class="header-inner container">
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <div class="site-title">DADVENTURES</div>
+    </div>
+    <div class="spacer"></div>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="events.html">Events</a>
+      <a href="shop.html">Shop</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button class="hamburger" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="events.html">Events</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
+<section class="hero container">
+  <h1>Admin Dashboard</h1>
+  <p class="muted">Private analytics & controls (demo data). Link remains where it is.</p>
+</section>
+<section class="container admin-wrap">
+  <aside class="sidebar">
+    <a href="#" class="active" data-section="analytics">Analytics</a>
+    <a href="#" data-section="mission">Mission</a>
+    <a href="#" data-section="debug">Debug</a>
+    <a href="#" data-section="appearance">Appearance</a>
+    <a href="#" data-section="maintenance">Maintenance</a>
+  </aside>
+  <main>
+    <div id="section-analytics" class="section">
+      <div class="widgets">
+        <div class="widget" id="w-visitors">
+          <h3>Visitors</h3>
+          <canvas id="chart-visitors" width="600" height="220"></canvas>
+          <div class="actions">
+            <button class="button" data-export="visitors-csv">Export CSV</button>
+            <button class="button" data-export="visitors-png">Download PNG</button>
+          </div>
+        </div>
+        <div class="widget" id="w-donations">
+          <h3>Donations</h3>
+          <canvas id="chart-donations" width="600" height="220"></canvas>
+          <div class="actions">
+            <button class="button" data-export="donations-csv">Export CSV</button>
+            <button class="button" data-export="donations-png">Download PNG</button>
+          </div>
+        </div>
+        <div class="widget" id="w-sales">
+          <h3>Shop Sales</h3>
+          <canvas id="chart-sales" width="600" height="220"></canvas>
+          <div class="actions">
+            <button class="button" data-export="sales-csv">Export CSV</button>
+            <button class="button" data-export="sales-png">Download PNG</button>
+          </div>
+        </div>
+        <div class="widget" id="w-events">
+          <h3>Event Participation</h3>
+          <canvas id="chart-events" width="600" height="220"></canvas>
+          <div class="actions">
+            <button class="button" data-export="events-csv">Export CSV</button>
+            <button class="button" data-export="events-png">Download PNG</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-mission" class="section hidden">
+      <div class="card" style="grid-column:span 12">
+        <h3>Mission Statement</h3>
+        <textarea id="missionInput" class="input" rows="6">Creating unforgettable father‑child adventures that build confidence, connection, and lasting memories.</textarea>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+          <button class="button" id="saveMission">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="section-debug" class="section hidden">
+      <div class="card">
+        <h3>Debug Checks</h3>
+        <div id="debugResults" class="muted">Run checks to validate links, images, and key components.</div>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <button class="button" id="runChecks">Run</button>
+          <button class="button" id="clearLogs">Clear</button>
+          <button class="button" id="exportCSV">Export CSV</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Logs</h3>
+        <pre id="logBox" style="white-space:pre-wrap;max-height:260px;overflow:auto;background:#0e1121;padding:10px;border-radius:10px;border:1px solid rgba(122,168,255,.1)"></pre>
+      </div>
+    </div>
+
+    <div id="section-appearance" class="section hidden">
+      <div class="card">
+        <h3>Theme</h3>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="button" data-theme="bluepink">Blue/Pink</button>
+          <button class="button" data-theme="gold">Gold/Bronze</button>
+          <button class="button" data-theme="greenorange">Green/Orange</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Logo & Fonts</h3>
+        <p class="muted">Demo only — swap assets by replacing files in <code>assets/</code>.</p>
+      </div>
+    </div>
+
+    <div id="section-maintenance" class="section hidden">
+      <div class="card">
+        <h3>Maintenance Mode</h3>
+        <p class="muted">Toggle to display a site-wide maintenance banner on public pages.</p>
+        <label><input type="checkbox" id="maintToggle"/> Enable maintenance banner</label>
+      </div>
+    </div>
+  </main>
+</section>
+
+<footer class="footer container">
+  <span class="badge">© DADVENTURES</span>
+  <div class="spacer"></div>
+  <div class="socials">
+    <a href="#" aria-label="Facebook">Facebook</a>
+    <a href="#" aria-label="Instagram">Instagram</a>
+    <a href="#" aria-label="TikTok">TikTok</a>
+    <a href="admin.html" aria-label="Admin">Admin</a>
+    <a href="#" aria-label="Sitemap">Sitemap</a>
+  </div>
+</footer>
+
+</body></html>

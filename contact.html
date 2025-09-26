@@ -1,7 +1,7 @@
 
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DADVENTURES • Home</title>
+<title>Contact • DADVENTURES</title>
 <link rel="stylesheet" href="css/main.css"/>
 <script defer src="js/app.js"></script>
 </head><body>
@@ -32,37 +32,19 @@
 </header>
 
 <section class="hero container">
-  <h1>Explore • Bond • Adventure</h1>
-  <p class="muted">Dad & child experiences, events, and a thriving community — designed with a futuristic, elegant touch.</p>
+  <h1>Contact Us</h1>
+  <p class="muted">We’d love to hear from you. The form is aligned and mobile-friendly.</p>
 </section>
-<section class="container grid">
-  <article class="card" style="grid-column:span 8">
-    <h3>Upcoming Events</h3>
-    <img src="assets/images/events.svg" alt="Events"/>
-    <p>See the next adventures with images, locations and countdowns.</p>
-    <p><a href="events.html">Open Events →</a></p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>Shop Preview</h3>
-    <img src="assets/images/shop.svg" alt="Shop"/>
-    <p>Caps, T‑shirts, mugs — demo items included.</p>
-    <p><a href="shop.html">Visit Shop →</a></p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>Blog</h3>
-    <img src="assets/images/blog.svg" alt="Blog"/>
-    <p>Stories and tips for unforgettable bonding.</p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>About</h3>
-    <img src="assets/images/about.svg" alt="About"/>
-    <p>Our mission and values (editable in Admin).</p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>Contact</h3>
-    <img src="assets/images/contact.svg" alt="Contact"/>
-    <p>Reach out — aligned, responsive form.</p>
-  </article>
+<section class="container">
+  <form class="form" id="contactForm" netlify>
+    <input class="input" name="name" placeholder="Name" required/>
+    <input class="input" name="email" type="email" placeholder="Email" required/>
+    <textarea class="full" name="message" rows="5" placeholder="Message" required></textarea>
+    <div class="full" style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="button" type="reset">Reset</button>
+      <button class="button primary" type="submit">Send</button>
+    </div>
+  </form>
 </section>
 
 <footer class="footer container">
@@ -77,4 +59,11 @@
   </div>
 </footer>
 
+<script>
+document.getElementById('contactForm').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  alert('Message sent! (Demo)');
+  e.target.reset();
+});
+</script>
 </body></html>
