@@ -7,153 +7,114 @@
   <link rel="icon" href="assets/images/favicon.svg">
   <link rel="stylesheet" href="assets/styles.css">
   <script defer src="assets/app.js"></script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>.admin-grid{display:grid; gap:16px; grid-template-columns:1fr 1fr}</style>
 </head>
 <body>
-  <header class="header"><nav class="nav"><div class="logo"><img src="assets/images/logo.svg"><div class="title">Admin</div></div><div class="navlinks"><a href="index.html">← Back to site</a></div></nav></header>
+  <header class="header"><nav class="nav"><div class="logo"><img src="assets/images/logo.png"><div class="title">Admin</div></div><div class="navlinks"><a href="index.html">← Back to site</a></div></nav></header>
   <main class="section container">
-    <div class="grid admin-grid">
-      <section class="card">
+    <div id="login-guard" class="card"><div class="p">
+      <h2 class="grad">Admin Login</h2>
+      <p class="small">Sign in to access settings, debug, and analytics.</p>
+      <button class="btn" id="btn-login">Log in</button>
+    </div></div>
+
+    <div id="admin-content" style="display:none">
+      <div class="grid admin-grid">
+        <section class="card">
+          <div class="p">
+            <h2>Front-end Settings</h2>
+            <label>Site Name<input id="s_name"></label>
+            <label>Tagline<input id="s_tag"></label>
+            <label>Font Stack<input id="s_font" placeholder="'Inter', system-ui"></label>
+            <label>Theme<select id="s_theme"></select></label>
+            <label>Accent Scale<input id="s_scale" type="range" min="0.8" max="1.3" step="0.01"></label>
+            <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
+              <button class="btn" id="apply">Apply</button>
+              <button class="btn" id="reset">Reset</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="p">
+            <h2>Debug Panel</h2>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px">
+              <button class="btn" onclick="runChecks()">Run All Checks</button>
+              <button class="btn" onclick="exportCSV()">Export CSV</button>
+              <button class="btn" onclick="clearLog()">Clear</button>
+            </div>
+            <div id="results" class="card" style="max-height:320px; overflow:auto"><table id="tbl"><thead><tr><th>Time</th><th>Check</th><th>Status</th><th>Details</th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card" style="margin-top:16px">
         <div class="p">
-          <h2>Front-end Settings</h2>
-          <p class="small">Changes save to your browser (localStorage). For global updates, mirror the JSON in <code class="mono">/data/settings.json</code>.</p>
-          <label>Site Name<input id="s_name"></label>
-          <label>Tagline<input id="s_tag"></label>
-          <label>Font Stack<input id="s_font" placeholder="'Inter', system-ui"></label>
-          <label>Theme<select id="s_theme"></select></label>
-          <label>Accent Scale<input id="s_scale" type="range" min="0.8" max="1.3" step="0.01"></label>
-          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
-            <button class="btn glow" id="apply">Apply</button>
-            <button class="btn" id="reset">Reset</button>
+          <h2>Seed Data Quick Edit</h2>
+          <details open><summary>Events</summary><textarea id="json_events" rows="8"></textarea></details>
+          <details><summary>Blog</summary><textarea id="json_blog" rows="8"></textarea></details>
+          <details><summary>Shop</summary><textarea id="json_shop" rows="8"></textarea></details>
+          <details><summary>Timeline</summary><textarea id="json_timeline" rows="8"></textarea></details>
+          <div style="margin-top:10px"><button class="btn" onclick="applyJSON()">Apply (Local)</button></div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:16px">
+        <div class="p">
+          <h2>Maintenance Mode</h2>
+          <div style="display:flex; gap:10px">
+            <button class="btn" id="maint-on">Enable</button>
+            <button class="btn" id="maint-off">Disable</button>
           </div>
         </div>
       </section>
 
-      <section class="card">
+      <section class="card" style="margin-top:16px">
         <div class="p">
-          <h2>Debug Panel</h2>
-          <p class="small">Quick health checks and exportable logs.</p>
-          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px">
-            <button class="btn" onclick="runChecks()">Run All Checks</button>
-            <button class="btn" onclick="exportCSV()">Export CSV</button>
-            <button class="btn" onclick="clearLog()">Clear</button>
+          <h2>Analytics Dashboard</h2>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px">
+            <button class="btn" id="anl-refresh">Refresh</button>
+            <button class="btn" id="anl-export">Export CSV</button>
+            <button class="btn" id="anl-clear">Reset</button>
           </div>
-          <div id="results" class="card" style="max-height:320px; overflow:auto"><table id="tbl"><thead><tr><th>Time</th><th>Check</th><th>Status</th><th>Details</th></tr></thead><tbody></tbody></table></div>
+          <div class="grid grid-2">
+            <canvas id="chartPages" width="500" height="240" style="background:#0f1017; border:1px solid var(--ring); border-radius:12px; box-shadow:var(--whiteGlow)"></canvas>
+            <canvas id="chartEvents" width="500" height="240" style="background:#0f1017; border:1px solid var(--ring); border-radius:12px; box-shadow:var(--whiteGlow)"></canvas>
+          </div>
+          <div class="grid grid-2" style="margin-top:12px">
+            <canvas id="chartAudio" width="500" height="240" style="background:#0f1017; border:1px solid var(--ring); border-radius:12px; box-shadow:var(--whiteGlow)"></canvas>
+            <div class="card"><div class="p"><div id="anl-summary" class="small mono"></div></div></div>
+          </div>
         </div>
       </section>
     </div>
-
-    <section class="card" style="margin-top:16px">
-      <div class="p">
-        <h2>Seed Data Quick Edit</h2>
-        <p class="small">Edit the JSON directly (local only). Copy results into <code class="mono">/data/*.json</code> to persist.</p>
-        <details open><summary>Events</summary><textarea id="json_events" rows="8"></textarea></details>
-        <details><summary>Blog</summary><textarea id="json_blog" rows="8"></textarea></details>
-        <details><summary>Shop</summary><textarea id="json_shop" rows="8"></textarea></details>
-        <details><summary>Timeline</summary><textarea id="json_timeline" rows="8"></textarea></details>
-        <div style="margin-top:10px"><button class="btn glow" onclick="applyJSON()">Apply (Local)</button></div>
-      </div>
-    </section>
-
-    <section class="card" style="margin-top:16px">
-      <div class="p">
-        <h2>Maintenance Mode</h2>
-        <p class="small">Enable to show visitors a glowing “Site Under Maintenance” screen.</p>
-        <div style="display:flex; gap:10px">
-          <button class="btn" id="maint-on">Enable</button>
-          <button class="btn" id="maint-off">Disable</button>
-        </div>
-      </div>
-    </section>
   </main>
 
   <script>
+    const guard=document.getElementById('login-guard'); const content=document.getElementById('admin-content'); const btnLogin=document.getElementById('btn-login');
+    function showAdmin(){ guard.style.display='none'; content.style.display='block'; }
+    function needLogin(){ guard.style.display='block'; content.style.display='none'; }
+    if (window.netlifyIdentity){ netlifyIdentity.on('init', user => { user ? showAdmin() : needLogin(); }); netlifyIdentity.on('login', () => { showAdmin(); }); btnLogin.onclick = ()=> netlifyIdentity.open(); netlifyIdentity.init(); } else { showAdmin(); btnLogin.onclick = ()=> alert('Enable Netlify Identity to protect this page.'); }
+
     function $id(x){return document.getElementById(x);}
-    function loadSettingsUI(){
-      const s = State.settings;
-      $id('s_name').value = s.siteName;
-      $id('s_tag').value = s.tagline;
-      $id('s_font').value = s.font;
-      $id('s_scale').value = s.accentScale;
-      const sel = $id('s_theme');
-      sel.innerHTML = s.themes.map(t=>`<option value="${t.id}" ${t.id===s.primaryTheme?'selected':''}>${t.label}</option>`).join('');
-      // Seed editors
-      $id('json_events').value = JSON.stringify(State.events, null, 2);
-      $id('json_blog').value = JSON.stringify(State.blog, null, 2);
-      $id('json_shop').value = JSON.stringify(State.shop, null, 2);
-      $id('json_timeline').value = JSON.stringify(State.timeline, null, 2);
-    }
+    function loadSettingsUI(){ const s = State.settings; $id('s_name').value = s.siteName; $id('s_tag').value = s.tagline; $id('s_font').value = s.font; $id('s_scale').value = s.accentScale; const sel = $id('s_theme'); sel.innerHTML = s.themes.map(t=>`<option value="${t.id}" ${t.id===s.primaryTheme?'selected':''}>${t.label}</option>`).join(''); $id('json_events').value = JSON.stringify(State.events, null, 2); $id('json_blog').value = JSON.stringify(State.blog, null, 2); $id('json_shop').value = JSON.stringify(State.shop, null, 2); $id('json_timeline').value = JSON.stringify(State.timeline, null, 2); }
+    function persist(){ localStorage.setItem('dv_settings_override', JSON.stringify(State.settings)); alert('Saved locally. Refresh the site to view changes.'); }
+    document.addEventListener('click', e=>{ if(e.target && e.target.id==='apply'){ State.settings.siteName=$id('s_name').value; State.settings.tagline=$id('s_tag').value; State.settings.font=$id('s_font').value; State.settings.primaryTheme=$id('s_theme').value; State.settings.accentScale=parseFloat($id('s_scale').value); persist(); } if(e.target && e.target.id==='reset'){ localStorage.removeItem('dv_settings_override'); alert('Local overrides cleared.'); } });
+    function applyJSON(){ try{ State.events=JSON.parse($id('json_events').value); State.blog=JSON.parse($id('json_blog').value); State.shop=JSON.parse($id('json_shop').value); State.timeline=JSON.parse($id('json_timeline').value); alert('Applied locally. Return to site to preview.'); }catch(e){ alert('Invalid JSON: '+e.message); } }
 
-    function persist(){
-      localStorage.setItem('dv_settings_override', JSON.stringify(State.settings));
-      alert('Saved locally. Refresh the site to view changes.');
-    }
-
-    $id('apply').onclick = ()=>{
-      State.settings.siteName = $id('s_name').value;
-      State.settings.tagline = $id('s_tag').value;
-      State.settings.font = $id('s_font').value;
-      State.settings.primaryTheme = $id('s_theme').value;
-      State.settings.accentScale = parseFloat($id('s_scale').value);
-      persist();
-    };
-    $id('reset').onclick = ()=>{
-      localStorage.removeItem('dv_settings_override'); alert('Local overrides cleared.');
-    };
-
-    function applyJSON(){
-      try{
-        State.events = JSON.parse($id('json_events').value);
-        State.blog = JSON.parse($id('json_blog').value);
-        State.shop = JSON.parse($id('json_shop').value);
-        State.timeline = JSON.parse($id('json_timeline').value);
-        alert('Applied locally. Return to site to preview.');
-      }catch(e){ alert('Invalid JSON: '+e.message); }
-    }
-
-    // ---- Debug utilities ----
-    const logRows = [];
-    function addRow(name, ok, details){
-      const now = new Date().toISOString();
-      logRows.push([now, name, ok?'PASS':'FAIL', details || '']);
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td class="small mono">${now}</td><td>${name}</td><td>${ok?'<span style="color:#57e389">PASS</span>':'<span style="color:#ff7a7a">FAIL</span>'}</td><td class="small">${details||''}</td>`;
-      document.querySelector('#tbl tbody').appendChild(tr);
-    }
-    async function runChecks(){
-      document.querySelector('#tbl tbody').innerHTML = '';
-      try{
-        addRow('Load settings', !!State.settings, 'data/settings.json');
-        addRow('Events seeded (≥12)', State.events.length>=12, 'Found: '+State.events.length);
-        addRow('Blog seeded (≥1)', State.blog.length>=1, 'Found: '+State.blog.length);
-        addRow('Shop seeded (≥1)', State.shop.length>=1, 'Found: '+State.shop.length);
-        addRow('Timeline seeded (≥1)', State.timeline.length>=1, 'Found: '+State.timeline.length);
-        const imgs = ['assets/images/logo.svg','assets/images/hero.jpg'];
-        for (const p of imgs){
-          const ok = await fetch(p).then(r=>r.ok).catch(_=>false);
-          addRow('Image exists: '+p, ok, ok?'':'Missing');
-        }
-        addRow('Audio trailer', !!document.querySelector('#ambient'), 'index.html audio');
-        const sw = 'serviceWorker' in navigator;
-        addRow('PWA support (browser)', sw, sw?'SW available':'Not supported');
-      }catch(e){ addRow('Runtime error', false, e.message); }
-    }
-    function exportCSV(){
-      const header = 'time,check,status,details\n';
-      const body = logRows.map(r => r.map(x => `"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n');
-      const blob = new Blob([header+body], {type:'text/csv'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download='debug-log.csv'; a.click();
-      URL.revokeObjectURL(url);
-    }
-    function clearLog(){ document.querySelector('#tbl tbody').innerHTML = ''; }
-
-    // Maintenance toggle
+    const logRows=[]; function addRow(name, ok, details){ const now=new Date().toISOString(); logRows.push([now,name,ok?'PASS':'FAIL',details||'']); const tr=document.createElement('tr'); tr.innerHTML=`<td class="small mono">${now}</td><td>${name}</td><td>${ok?'<span style="color:#57e389">PASS</span>':'<span style="color:#ff7a7a">FAIL</span>'}</td><td class="small">${details||''}</td>`; document.querySelector('#tbl tbody').appendChild(tr); }
+    async function runChecks(){ document.querySelector('#tbl tbody').innerHTML=''; try{ addRow('Load settings', !!State.settings, 'data/settings.json'); addRow('Events seeded (≥12)', State.events.length>=12, 'Found: '+State.events.length); addRow('Blog seeded (≥1)', State.blog.length>=1, 'Found: '+State.blog.length); addRow('Shop seeded (≥1)', State.shop.length>=1, 'Found: '+State.shop.length); addRow('Timeline seeded (≥1)', State.timeline.length>=1, 'Found: '+State.timeline.length); const imgs=['assets/images/logo.png','assets/images/hero.png']; for (const p of imgs){ const ok = await fetch(p).then(r=>r.ok).catch(_=>false); addRow('Image exists: '+p, ok, ok?'':'Missing'); } const sw='serviceWorker' in navigator; addRow('PWA support (browser)', sw, sw?'SW available':'Not supported'); }catch(e){ addRow('Runtime error', false, e.message); } }
+    function exportCSV(){ const header='time,check,status,details\n'; const body=logRows.map(r=> r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\n'); const blob=new Blob([header+body], {type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='debug-log.csv'; a.click(); URL.revokeObjectURL(url); }
+    function clearLog(){ document.querySelector('#tbl tbody').innerHTML=''; }
     document.getElementById('maint-on').onclick = ()=>{ localStorage.setItem('dv_maint','1'); alert('Maintenance enabled'); };
     document.getElementById('maint-off').onclick = ()=>{ localStorage.removeItem('dv_maint'); alert('Maintenance disabled'); };
 
-    window.addEventListener('load', ()=>loadAll().then(loadSettingsUI));
+    function getAnalytics(){ try{ return JSON.parse(localStorage.getItem('dv_analytics')||'[]'); }catch(e){ return []; } }
+    function drawBar(ctx, labels, values, title){ const w=ctx.canvas.width, h=ctx.canvas.height, pad=30; ctx.clearRect(0,0,w,h); ctx.fillStyle='#e5e7f3'; ctx.font='14px system-ui'; ctx.fillText(title, 10, 20); const max=Math.max(1, ...values); const bw=(w-2*pad)/labels.length; labels.forEach((lb,i)=>{ const val=values[i]; const bh=((h-2*pad)*val)/max; const x=pad+i*bw; const y=h-pad-bh; const grad=ctx.createLinearGradient(0,y,0,h); grad.addColorStop(0,'#76a9ff'); grad.addColorStop(1,'#ff74c6'); ctx.fillStyle=grad; ctx.fillRect(x+6, y, bw-12, bh); ctx.fillStyle='#cfd3e6'; ctx.fillText(lb, x+6, h-10); }); }
+    function refreshAnalytics(){ const data=getAnalytics(); const byPage={}, byType={}; let plays=0, pauses=0; data.forEach(e=>{ byPage[e.page]=(byPage[e.page]||0)+1; byType[e.type]=(byType[e.type]||0)+1; if(e.type==='audio_play') plays++; if(e.type==='audio_pause') pauses++; }); const pages=Object.keys(byPage), pageVals=pages.map(k=>byPage[k]); const types=Object.keys(byType), typeVals=types.map(k=>byType[k]); drawBar(document.getElementById('chartPages').getContext('2d'), pages, pageVals, 'Page Activity'); drawBar(document.getElementById('chartEvents').getContext('2d'), types, typeVals, 'Event Types'); drawBar(document.getElementById('chartAudio').getContext('2d'), ['Play','Pause'], [plays, pauses], 'Audio'); document.getElementById('anl-summary').textContent = JSON.stringify({events:data.length, pages:byPage, types:byType}, null, 2); }
+    document.getElementById('anl-refresh').onclick = refreshAnalytics; document.getElementById('anl-clear').onclick = ()=>{ localStorage.removeItem('dv_analytics'); refreshAnalytics(); }; document.getElementById('anl-export').onclick = ()=>{ const arr=getAnalytics(); const header='timestamp,type,page,data\n'; const body=arr.map(a=> [new Date(a.t).toISOString(), a.type, a.page, JSON.stringify(a.data).replace(/"/g,'""')].map(x=>`"${x}"`).join(',')).join('\n'); const blob=new Blob([header+body], {type:'text/csv'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='analytics.csv'; a.click(); URL.revokeObjectURL(url); };
+    window.addEventListener('load', ()=>loadAll().then(loadSettingsUI).then(refreshAnalytics));
   </script>
 </body>
 </html>

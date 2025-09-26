@@ -16,14 +16,16 @@
 
   <header class="header">
     <nav class="nav">
+      <button id="hamb" class="hamb">☰</button>
       <div class="logo">
-        <img src="assets/images/logo.svg" alt="DADVENTURES Logo">
+        <img src="assets/images/logo.png" alt="DADVENTURES Logo">
         <div class="title">DADVENTURES</div>
       </div>
       <div class="navlinks">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#events">Events</a>
+        <a href="#calendar">Calendar</a>
         <a href="#blog">Blog</a>
         <a href="#shop">Shop</a>
         <a href="#donate">Donate</a>
@@ -39,9 +41,28 @@
     </nav>
   </header>
 
+  <div id="drawer" class="drawer">
+    <div class="back"></div>
+    <div class="panel">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#blog">Blog</a>
+      <a href="#shop">Shop</a>
+      <a href="#donate">Donate</a>
+      <a href="#contact">Contact</a>
+      <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener">Join Us</a>
+      <a href="admin-panel.html">Admin</a>
+      <div style="margin-top:12px" class="small">Follow us: <a href="https://instagram.com" target="_blank">Instagram</a> · <a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://tiktok.com" target="_blank">TikTok</a></div>
+    </div>
+  </div>
+
   <div class="trailer">
-    <button id="play" class="btn">Play</button>
-    <input id="vol" type="range" min="0" max="1" step="0.01" value="0.3" aria-label="Volume">
+    <button id="play" class="btn" title="Play/Pause">▶</button>
+    <input id="seek" class="slider" type="range" min="0" max="100" step="1" value="0" aria-label="Seek">
+    <span class="time mono" id="cur">00:00</span>/<span class="time mono" id="dur">00:00</span>
+    <input id="vol" class="slider" type="range" min="0" max="1" step="0.01" value="0.35" aria-label="Volume">
     <audio id="ambient" src="assets/audio/ambient.wav" loop preload="auto"></audio>
     <span class="small">Ambient trailer • continues across pages</span>
   </div>

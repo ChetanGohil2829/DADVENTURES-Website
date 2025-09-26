@@ -1,281 +1,44 @@
 
-const State = {
-  settings: null,
-  events: [],
-  blog: [],
-  shop: [],
-  timeline: [],
-  audio: null,
-  maint: false
-};
-
+const State = { settings:null, events:[], blog:[], shop:[], timeline:[], audio:null, maint:false };
 function $(q, el){ return (el||document).querySelector(q); }
 function $all(q, el){ return [...(el||document).querySelectorAll(q)]; }
 async function loadJSON(path){ const r = await fetch(path); return r.json(); }
+function logEvent(type, data){ const entry = { t: Date.now(), type, data: data||{}, page: location.hash||'#home' }; const arr = JSON.parse(localStorage.getItem('dv_analytics')||'[]'); arr.push(entry); localStorage.setItem('dv_analytics', JSON.stringify(arr)); }
 
 async function loadAll(){
   const sLS = localStorage.getItem('dv_settings_override');
-  const maintLS = localStorage.getItem('dv_maint') === '1';
-  State.maint = maintLS;
+  State.maint = localStorage.getItem('dv_maint') === '1';
   State.settings = sLS ? JSON.parse(sLS) : await loadJSON('data/settings.json');
   document.documentElement.setAttribute('data-theme', State.settings.primaryTheme);
   document.documentElement.style.setProperty('--font', State.settings.font);
-
-  [State.events, State.blog, State.shop, State.timeline] = await Promise.all([
-    loadJSON('data/events.json'),
-    loadJSON('data/blog.json'),
-    loadJSON('data/shop.json'),
-    loadJSON('data/timeline.json')
-  ]);
-
-  initClock();
-  initAudio();
-  render();
-  updateFooterTime();
-  if(State.maint) showMaintenance(true);
+  [State.events, State.blog, State.shop, State.timeline] = await Promise.all([loadJSON('data/events.json'), loadJSON('data/blog.json'), loadJSON('data/shop.json'), loadJSON('data/timeline.json')]);
+  initClock(); initAudio(); initDrawer(); render(); updateFooterTime(); if(State.maint) showMaintenance(true); logEvent('page_load');
 }
-
-function initClock(){
-  const tick = ()=>{
-    const d = new Date();
-    const date = d.toLocaleDateString([], {weekday:'short', day:'2-digit', month:'short', year:'numeric'});
-    const time = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-    const el = $('.clock');
-    if(el) el.textContent = `${date} • ${time}`;
-    const ft = $('#foot-time');
-    if(ft) ft.textContent = d.toLocaleString();
-    requestAnimationFrame(()=>{});
-  };
-  setInterval(tick, 1000);
-  tick();
+function initClock(){ const tick = ()=>{ const d=new Date(); const date=d.toLocaleDateString([], {weekday:'short', day:'2-digit', month:'short', year:'numeric'}); const time=d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); const el=$('.clock'); if(el) el.textContent=`${date} • ${time}`; const ft=$('#foot-time'); if(ft) ft.textContent=d.toLocaleString(); }; setInterval(tick, 1000); tick(); }
+function initAudio(){ State.audio=$('#ambient'); const vol=parseFloat(localStorage.getItem('dv_vol')||'0.35'); State.audio.volume=vol; $('#vol').value=vol;
+  $('#vol').addEventListener('input', e=>{ const v=parseFloat(e.target.value); State.audio.volume=v; localStorage.setItem('dv_vol', v); });
+  const playBtn=$('#play'), seek=$('#seek'), cur=$('#cur'), dur=$('#dur'); const iconPlay='▶', iconPause='⏸'; playBtn.textContent=iconPlay;
+  const fmt = s => `${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+  State.audio.addEventListener('loadedmetadata', ()=>{ seek.max=Math.floor(State.audio.duration||0); dur.textContent=fmt(State.audio.duration||0); });
+  State.audio.addEventListener('timeupdate', ()=>{ seek.value=Math.floor(State.audio.currentTime||0); cur.textContent=fmt(State.audio.currentTime||0); });
+  seek.addEventListener('input', e=>{ State.audio.currentTime=parseInt(e.target.value||'0',10); });
+  playBtn.addEventListener('click', ()=>{ if(State.audio.paused){ State.audio.play(); playBtn.textContent=iconPause; logEvent('audio_play'); } else { State.audio.pause(); playBtn.textContent=iconPlay; logEvent('audio_pause'); } });
 }
-
-function initAudio(){
-  State.audio = $('#ambient');
-  // Restore volume
-  const vol = parseFloat(localStorage.getItem('dv_vol')||'0.3');
-  State.audio.volume = vol;
-  $('#vol').value = vol;
-  $('#vol').addEventListener('input', e=>{
-    const v = parseFloat(e.target.value);
-    State.audio.volume = v; localStorage.setItem('dv_vol', v);
-  });
-  $('#play').addEventListener('click', ()=>{
-    if(State.audio.paused){ State.audio.play(); $('#play').textContent='Pause'; }
-    else { State.audio.pause(); $('#play').textContent='Play'; }
-  });
-}
-
-function navTo(hash){ window.location.hash = hash; render(); }
+function initDrawer(){ const hamb=$('#hamb'), drawer=$('#drawer'), back=$('#drawer .back'); hamb?.addEventListener('click', ()=>{ drawer.classList.add('open'); }); back?.addEventListener('click', ()=>{ drawer.classList.remove('open'); }); $all('#drawer .panel a').forEach(a=> a.addEventListener('click', ()=>{ drawer.classList.remove('open'); })); }
+function navTo(hash){ window.location.hash=hash; render(); logEvent('nav', {to:hash}); }
 function active(h){ return (location.hash || '#home') === h ? 'active' : ''; }
-function fmtDate(iso){ try{ const d = new Date(iso+'T00:00:00'); return d.toLocaleDateString([], {year:'numeric', month:'short', day:'numeric'});}catch(e){return iso} }
-function countdown(dateStr, timeStr){
-  const target = new Date(`${dateStr}T${timeStr || '00:00'}:00`);
-  const diff = target - new Date();
-  if (diff <= 0) return 'Started';
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  return `${d}d ${h}h ${m}m`;
-}
+function fmtDate(iso){ try{ const d=new Date(iso+'T00:00:00'); return d.toLocaleDateString([], {year:'numeric', month:'short', day:'numeric'});}catch(e){return iso} }
+function countdown(dateStr, timeStr){ const t=new Date(`${dateStr}T${timeStr||'00:00'}:00`)-new Date(); if(t<=0) return 'Started'; const d=Math.floor(t/86400000),h=Math.floor((t%86400000)/3600000),m=Math.floor((t%3600000)/60000); return `${d}d ${h}h ${m}m`; }
 
-function renderHero(){
-  const e = State.events[0] || {};
-  return `
-  <section class="container">
-    <div class="grid grid-2">
-      <div class="card">
-        <img src="assets/images/hero.jpg" alt="Hero" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-        <div class="p">
-          <h1>${State.settings.siteName}</h1>
-          <p class="small">${State.settings.tagline}</p>
-          <div class="grid grid-2">
-            <div class="card"><div class="p">Next Event:<br><strong>${e.title||'TBA'}</strong></div></div>
-            <div class="card"><div class="p">When:<br><strong>${e.date?fmtDate(e.date):'—'} ${e.time||''}</strong></div></div>
-            <div class="card"><div class="p">Countdown:<br><strong>${e.date?countdown(e.date, e.time):'—'}</strong></div></div>
-            <div class="card"><div class="p">Location:<br><strong>${e.location||'—'}</strong></div></div>
-          </div>
-          <div style="margin-top:12px">
-            <button class="btn glow" onclick="navTo('#events')">View Events</button>
-            <button class="btn" onclick="navTo('#donate')">Donate</button>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="p">
-          <h2>Quick Links</h2>
-          <div class="grid grid-2">
-            <a class="btn" href="#about">About Us</a>
-            <a class="btn" href="#blog">Blog</a>
-            <a class="btn" href="#shop">Shop</a>
-            <a class="btn" href="#contact">Contact</a>
-          </div>
-          <div style="margin-top:12px">
-            <span class="badge">PWA Ready</span>
-            <span class="badge">SEO Enabled</span>
-            <span class="badge">Admin Panel</span>
-          </div>
-        </div>
-        <img src="assets/images/gallery.jpg" alt="Gallery" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-      </div>
-    </div>
-  </section>`;
-}
-
-function renderEvents(){
-  const today = new Date().toLocaleDateString([], {weekday:'short', day:'2-digit', month:'short', year:'numeric'});
-  const cards = State.events.map(ev => `
-  <div class="card">
-    <img src="${ev.image}" alt="${ev.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-    <div class="p">
-      <h3>${ev.title}</h3>
-      <div class="small">${fmtDate(ev.date)} • ${ev.time} • ${ev.location}</div>
-      <div class="small">Countdown: ${countdown(ev.date, ev.time)}</div>
-      <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-        <a class="btn glow" href="${ev.mapLink}" target="_blank" rel="noopener">Open Map</a>
-        <a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ev.date.replace(/-/g,'')}T${(ev.time||'10:00').replace(':','')}00Z/${ev.date.replace(/-/g,'')}T${(ev.time||'12:00').replace(':','')}00Z&details=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}" target="_blank" rel="noopener">Add to Google Calendar</a>
-      </div>
-      <p style="margin-top:12px">${ev.description}</p>
-    </div>
-  </div>`).join('');
-  return `<section class="section container"><h2>Events</h2><div class="small">Today: ${today}</div><div class="grid grid-3" style="margin-top:10px">${cards}</div></section>`;
-}
-
-function renderBlog(){
-  const cards = State.blog.map(b => `
-  <div class="card">
-    <img src="${b.image}" alt="${b.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-    <div class="p">
-      <h3>${b.title}</h3>
-      <div class="small">${fmtDate(b.date)} • ${b.author}</div>
-      <p>${b.excerpt}</p>
-      <details><summary>Read more</summary><p>${b.content}</p></details>
-    </div>
-  </div>`).join('');
-  return `<section class="section container"><h2>Blog</h2><div class="grid grid-3">${cards}</div></section>`;
-}
-
-function renderAbout(){
-  const items = State.timeline.map(t => `
-    <div class="milestone">
-      <div class="card"><div class="p">
-        <div class="year mono">${t.year}</div>
-        <h3>${t.title}</h3>
-        <p class="small">${t.text}</p>
-      </div></div>
-    </div>`).join('');
-  // Horizontal drag & auto-scroll
-  return `
-  <section class="section container">
-    <div class="card">
-      <img src="assets/images/about.jpg" alt="About" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-      <div class="p">
-        <h2>About Us</h2>
-        <p>DADVENTURES is a community for dads and kids to explore, bond, and grow. Travel our journey below.</p>
-        <div class="timeline-wrap">
-          <div class="timeline-line"></div>
-          <div class="timeline" id="timeline">${items}</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <script>
-    const tl = document.getElementById('timeline');
-    let isDown=false, startX, scrollLeft;
-    tl.addEventListener('mousedown', (e)=>{isDown=true; tl.classList.add('grab'); startX=e.pageX - tl.offsetLeft; scrollLeft=tl.scrollLeft;});
-    tl.addEventListener('mouseleave', ()=> isDown=false);
-    tl.addEventListener('mouseup', ()=> isDown=false);
-    tl.addEventListener('mousemove', (e)=>{ if(!isDown) return; e.preventDefault(); const x = e.pageX - tl.offsetLeft; const walk = (x - startX)*1.2; tl.scrollLeft = scrollLeft - walk; });
-    // touch
-    let tsX=0, tsL=0;
-    tl.addEventListener('touchstart', (e)=>{tsX = e.touches[0].pageX; tsL = tl.scrollLeft;}, {passive:true});
-    tl.addEventListener('touchmove', (e)=>{ const dx = e.touches[0].pageX - tsX; tl.scrollLeft = tsL - dx; }, {passive:true});
-    // auto scroll (pause on hover)
-    let dir=1;
-    setInterval(()=>{ if(!tl.matches(':hover')) tl.scrollLeft += 0.6*dir; if(tl.scrollLeft <= 0 || tl.scrollLeft >= (tl.scrollWidth - tl.clientWidth-2)) dir *= -1; }, 30);
-  </script>`;
-}
-
-function renderShop(){
-  const cards = State.shop.map(s => `
-    <div class="card">
-      <img src="${s.image}" alt="${s.name}" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-      <div class="p">
-        <h3>${s.name}</h3>
-        <div class="small">£${s.price.toFixed(2)}</div>
-        <p>${s.description}</p>
-        <a class="btn glow" href="${s.url}">Buy (demo)</a>
-      </div>
-    </div>`).join('');
-  return `<section class="section container"><h2>Shop</h2><div class="grid grid-3">${cards}</div></section>`;
-}
-
-function renderDonate(){
-  return `
-  <section class="section container">
-    <div class="card">
-      <img src="assets/images/donate.jpg" alt="Donate" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-      <div class="p">
-        <h2>Donate</h2>
-        <p>Your support helps us run inclusive, safe adventures. Try test links below (sandbox).</p>
-        <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn glow" href="#" onclick="alert('Stripe test link placeholder')">Stripe (test)</a>
-          <a class="btn" href="#" onclick="alert('PayPal test link placeholder')">PayPal (test)</a>
-        </div>
-      </div>
-    </div>
-  </section>`;
-}
-
-function renderContact(){
-  return `
-  <section class="section container">
-    <div class="card">
-      <img src="assets/images/contact.jpg" alt="Contact" style="width:100%; aspect-ratio:16/9; object-fit:cover">
-      <div class="p">
-        <h2>Contact Us</h2>
-        <form name="contact" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="contact">
-          <label>Name<input name="name" required></label>
-          <label>Email<input type="email" name="email" required></label>
-          <label>Message<textarea name="message" rows="4" required></textarea></label>
-          <button class="btn glow" type="submit">Send</button>
-        </form>
-      </div>
-    </div>
-  </section>`;
-}
-
-function renderAdminBadge(){
-  return `<a href="admin-panel.html" class="btn" style="position:fixed; right:14px; bottom:14px; z-index:99">Admin</a>`;
-}
-
-function render(){
-  const hash = location.hash || '#home';
-  $all('.navlinks a').forEach(a=>a.classList.remove('active'));
-  $(`.navlinks a[href="${hash}"]`)?.classList.add('active');
-
-  let html = '';
-  if(hash==='#home'){ html += renderHero(); html += renderEvents(); html += renderBlog(); }
-  if(hash==='#events'){ html += renderEvents(); }
-  if(hash==='#blog'){ html += renderBlog(); }
-  if(hash==='#about'){ html += renderAbout(); }
-  if(hash==='#shop'){ html += renderShop(); }
-  if(hash==='#donate'){ html += renderDonate(); }
-  if(hash==='#contact'){ html += renderContact(); }
-
-  $('#app').innerHTML = html + renderAdminBadge();
-}
-
-function updateFooterTime(){
-  const ft = $('#foot-time'); if(ft) ft.textContent = new Date().toLocaleString();
-}
-
-function showMaintenance(on){
-  const m = $('#maint');
-  if(on){ m.classList.add('show'); }
-  else { m.classList.remove('show'); }
-}
-
-window.addEventListener('hashchange', render);
-window.addEventListener('load', loadAll);
+function renderHero(){ const e=State.events[0]||{}; return `<section class="container"><div class="grid grid-2"><div class="card"><img src="assets/images/hero.png" alt="Hero" style="width:100%; aspect-ratio:16/9; object-fit:cover"><div class="p"><h1 class="grad">${State.settings.tagline}</h1><div class="grid grid-2"><div class="card"><div class="p">Next Event:<br><strong>${e.title||'TBA'}</strong></div></div><div class="card"><div class="p">When:<br><strong>${e.date?fmtDate(e.date):'—'} ${e.time||''}</strong></div></div><div class="card"><div class="p">Countdown:<br><strong>${e.date?countdown(e.date, e.time):'—'}</strong></div></div><div class="card"><div class="p">Location:<br><strong>${e.location||'—'}</strong></div></div></div><div style="margin-top:12px"><button class="btn" onclick="navTo('#events')">View Events</button><button class="btn" onclick="navTo('#donate')">Donate</button></div></div></div><div class="card"><div class="p"><h2>Quick Links</h2><div class="grid grid-2"><a class="btn" href="#about">About Us</a><a class="btn" href="#calendar">Calendar</a><a class="btn" href="#blog">Blog</a><a class="btn" href="#shop">Shop</a><a class="btn" href="#contact">Contact</a></div><div style="margin-top:12px"><span class="btn small">PWA Ready</span><span class="btn small">SEO Enabled</span><span class="btn small">Admin Panel</span></div></div><img src="assets/images/gallery.png" alt="Gallery" style="width:100%; aspect-ratio:16/9; object-fit:cover"></div></div></section>`; }
+function renderEvents(){ const today=new Date().toLocaleDateString([], {weekday:'short', day:'2-digit', month:'short', year:'numeric'}); const cards=State.events.map(ev=>`<div class="card"><img src="${ev.image}" alt="${ev.title}" style="width:100%; aspect-ratio:16/9; object-fit:cover"><div class="p"><h3 class="grad">${ev.title}</h3><div class="small">${fmtDate(ev.date)} • ${ev.time} • ${ev.location}</div><div class="small">Countdown: ${countdown(ev.date, ev.time)}</div><div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap"><a class="btn" href="${ev.mapLink}" target="_blank" rel="noopener">Open Map</a><a class="btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ev.date.replace(/-/g,'')}T${(ev.time||'10:00').replace(':','')}00Z/${ev.date.replace(/-/g,'')}T${(ev.time||'12:00').replace(':','')}00Z&details=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}" target="_blank" rel="noopener">Add to Google Calendar</a></div><p style="margin-top:12px">${ev.description}</p></div></div>`).join(''); return `<section class="section container"><h2 class="grad">Events</h2><div class="small">Today: ${today}</div><div class="grid grid-3" style="margin-top:10px">${cards}</div></section>`; }
+function renderBlog(){ const cards=State.blog.map(b=>`<article class="blog-card card"><img src="${b.image}" alt="${b.title}"><div class="p"><div class="meta"><span>${b.author}</span><span class="small">${fmtDate(b.date)}</span></div><div class="title grad">${b.title}</div><p class="excerpt">${b.excerpt}</p><details><summary>Read more</summary><p>${b.content}</p></details></div></article>`).join(''); return `<section class="section container"><h2 class="grad">Blog</h2><div class="grid grid-3">${cards}</div></section>`; }
+function renderAbout(){ const items=State.timeline.map(t=>`<div class="milestone"><div class="card"><div class="p"><div class="year mono">${t.year}</div><h3 class="grad">${t.title}</h3><p class="small">${t.text}</p></div></div></div>`).join(''); return `<section class="section container"><div class="card"><img src="assets/images/about.png" alt="About" style="width:100%; aspect-ratio:16/9; object-fit:cover"><div class="p"><h2 class="grad">About Us</h2><p>DADVENTURES is a community for dads and kids to explore, bond, and grow. Travel our journey below.</p><div class="timeline-wrap"><div class="timeline-line"></div><div class="timeline" id="timeline">${items}</div></div></div></div></section><script>const tl=document.getElementById('timeline');let isDown=false,startX,scrollLeft;tl.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX - tl.offsetLeft;scrollLeft=tl.scrollLeft;});tl.addEventListener('mouseleave',()=> isDown=false);tl.addEventListener('mouseup',()=> isDown=false);tl.addEventListener('mousemove',e=>{ if(!isDown) return; e.preventDefault(); const x=e.pageX - tl.offsetLeft; const walk=(x - startX)*1.1; tl.scrollLeft=scrollLeft - walk; });let tsX=0, tsL=0;tl.addEventListener('touchstart',e=>{tsX=e.touches[0].pageX; tsL=tl.scrollLeft;},{passive:true});tl.addEventListener('touchmove',e=>{ const dx=e.touches[0].pageX - tsX; tl.scrollLeft = tsL - dx; },{passive:true});const io=new IntersectionObserver(entries=>{ entries.forEach(en=>{ en.target.classList.toggle('in-view', en.isIntersecting); }); }, {root: tl, threshold: 0.6}); tl.querySelectorAll('.milestone').forEach(m=> io.observe(m));</script>`; }
+function renderShop(){ const cards=State.shop.map(s=>`<div class="card"><img src="${s.image}" alt="${s.name}" style="width:100%; aspect-ratio:16/9; object-fit:cover"><div class="p"><h3 class="grad">${s.name}</h3><div class="small">£${s.price.toFixed(2)}</div><p>${s.description}</p><a class="btn" href="${s.url}">Buy (demo)</a></div></div>`).join(''); return `<section class="section container"><h2 class="grad">Shop</h2><div class="grid grid-3">${cards}</div></section>`; }
+function renderDonate(){ return `<section class="section container"><div class="card"><img src="assets/images/donate.png" alt="Donate" style="width:100%; aspect-ratio:16/9; object-fit:cover"><div class="p"><h2 class="grad">Donate</h2><p>Your support helps us run inclusive, safe adventures. Try test links below (sandbox).</p><div style="display:flex; gap:10px; flex-wrap:wrap"><a class="btn" href="#" onclick="alert('Stripe test link placeholder')">Stripe (test)</a><a class="btn" href="#" onclick="alert('PayPal test link placeholder')">PayPal (test)</a></div></div></div></section>`; }
+function renderContact(){ return `<section class="section container"><div class="card"><img src="assets/images/contact.png" alt="Contact" style="width:100%; aspect-ratio:16/9; object-fit:cover"><div class="p"><h2 class="grad">Contact Us</h2><form name="contact" method="POST" data-netlify="true"><input type="hidden" name="form-name" value="contact"><label>Name<input name="name" required></label><label>Email<input type="email" name="email" required></label><label>Message<textarea name="message" rows="4" required></textarea></label><button class="btn" type="submit">Send</button></form></div></div></section>`; }
+function renderCalendar(){ let ref=new Date(); const view = ()=>{ const y=ref.getFullYear(), m=ref.getMonth(); const first=new Date(y,m,1), startDay=(first.getDay()+6)%7, days=new Date(y,m+1,0).getDate(); const evs=State.events.filter(ev=>{ const d=new Date(ev.date+'T00:00:00'); return d.getFullYear()===y && d.getMonth()===m; }); const byDay={}; evs.forEach(ev=>{ const dd=new Date(ev.date+'T00:00:00').getDate(); (byDay[dd]=byDay[dd]||[]).push(ev); }); const cells=[]; for(let i=0;i<startDay;i++) cells.push({}); for(let d=1; d<=days; d++) cells.push({day:d, evs: byDay[d]||[]}); const cellsHtml=cells.map(c=>{ if(!c.day) return `<div class="cal-cell"></div>`; const evh=c.evs.map(ev=> `<div class="ev" title="${ev.title}">${ev.time} ${ev.title.split(':')[0]}</div>`).join(''); return `<div class="cal-cell"><div class="d">${String(c.day).padStart(2,'0')}</div>${evh}</div>`; }).join(''); return `<div class="cal-wrap card"><div class="p"><div class="cal-head"><button class="btn" id="cal-prev">◀</button><h3 class="grad">${first.toLocaleString([], {month:'long'})} ${y}</h3><button class="btn" id="cal-next">▶</button></div><div class="cal-grid">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(x=>`<div class="small" style="text-align:center">${x}</div>`).join('')}${cellsHtml}</div></div></div>`; }; setTimeout(()=>{ $('#cal').innerHTML = view(); $('#cal-prev').onclick = ()=>{ ref = new Date(ref.getFullYear(), ref.getMonth()-1, 1); $('#cal').innerHTML = view(); }; $('#cal-next').onclick = ()=>{ ref = new Date(ref.getFullYear(), ref.getMonth()+1, 1); $('#cal').innerHTML = view(); }; },0); return `<section class="section container"><h2 class="grad">Calendar</h2><div id="cal"></div></section>`; }
+function render(){ const hash=location.hash || '#home'; $all('.navlinks a').forEach(a=>a.classList.remove('active')); $(`.navlinks a[href="${hash}"]`)?.classList.add('active'); let html=''; if(hash==='#home'){ html += renderHero()+renderEvents()+renderBlog(); } if(hash==='#events'){ html += renderEvents(); } if(hash==='#blog'){ html += renderBlog(); } if(hash==='#about'){ html += renderAbout(); } if(hash==='#shop'){ html += renderShop(); } if(hash==='#donate'){ html += renderDonate(); } if(hash==='#contact'){ html += renderContact(); } if(hash==='#calendar'){ html += renderCalendar(); } $('#app').innerHTML = html + `<a href="admin-panel.html" class="btn" style="position:fixed; right:14px; bottom:14px; z-index:99">Admin</a>`; }
+function updateFooterTime(){ const ft=$('#foot-time'); if(ft) ft.textContent=new Date().toLocaleString(); }
+function showMaintenance(on){ const m=$('#maint'); if(on){ m.classList.add('show'); } else { m.classList.remove('show'); } }
+window.addEventListener('hashchange', render); window.addEventListener('load', loadAll);
