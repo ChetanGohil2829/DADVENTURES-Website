@@ -1,0 +1,22 @@
+
+/* v4.2.3 enhancements */
+:root{--soft-glow:0 0 12px rgba(122,168,255,.25),0 0 22px rgba(255,102,204,.12);--line:rgba(122,168,255,.15)}
+.card,.panel,.tile,.box{box-shadow:var(--soft-glow)!important;border-color:var(--line)!important}
+.nav,.tabs,.menu{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.nav a,.tabs a,.menu a{border:1px solid var(--line);border-radius:12px;padding:.4rem .7rem}
+.nav a:hover,.tabs a:hover,.menu a:hover{box-shadow:var(--soft-glow)}
+#menuToggle{display:none;border:1px solid var(--line);border-radius:10px;padding:.5rem}
+#mobilePanel{position:fixed;inset:0 40% 0 0;max-width:320px;background:rgba(10,12,24,.98);transform:translateX(-100%);transition:transform .25s ease;z-index:2000;border-right:1px solid var(--line);padding:1rem;overflow-y:auto;height:100vh;padding-top:4rem}
+#mobilePanel.open{transform:none}
+#mobilePanel a{display:block;margin:.6rem 0;padding:.8rem;background:rgba(20,22,38,0.9);border:1px solid var(--line);border-radius:12px}
+@media(max-width:900px){.nav,.tabs,.menu{display:none}#menuToggle{display:inline-flex;flex-direction:column;gap:4px}}
+.footer,.trailer{padding:.6rem 1rem!important}
+.footer a,.trailer a{border:1px solid var(--line);border-radius:10px;padding:.3rem .5rem;margin-left:.4rem}
+.contact-form form,form.contact,#contactForm{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;align-items:center}
+.contact-form form textarea,form.contact textarea,#contactForm textarea{grid-column:span 2}
+.timeline .item,.tl-card{border:1px solid var(--line);border-radius:16px;padding:1rem;background:rgba(12,14,28,.85);transition:box-shadow .2s ease}
+.timeline .item:hover,.tl-card:hover{box-shadow:var(--soft-glow)}
+.dv-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:3000}
+.dv-modal{background:rgba(12,14,28,.98);border:1px solid var(--line);border-radius:16px;padding:1rem;max-width:520px;width:92%}
+.dv-actions{display:flex;gap:.6rem;justify-content:flex-end;margin-top:.6rem}
+.dv-input{width:100%;padding:.6rem;border:1px solid var(--line);border-radius:10px;background:#0f1226;color:#e6e9ff}
