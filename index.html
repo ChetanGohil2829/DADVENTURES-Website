@@ -1,80 +1,82 @@
+<!doctype html>
+<html lang="en" data-theme="glow-blue-pink">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DADVENTURES</title>
+  <meta name="description" content="Family adventures, events, and stories. Explore • Bond • Grow.">
+  <link rel="icon" href="assets/images/favicon.svg">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b0b0f">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <div id="maint"><div class="card"><div class="p"><h2>🚧 Site Under Maintenance</h2><p>Please check back soon.</p></div></div></div>
 
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>DADVENTURES • Home</title>
-<link rel="stylesheet" href="css/main.css"/>
-<script defer src="js/app.js"></script>
-</head><body>
-
-<header class="header">
-  <div class="header-inner container">
-    <div class="logo">
-      <div class="logo-mark"></div>
-      <div class="site-title">DADVENTURES</div>
-    </div>
-    <div class="spacer"></div>
-    <nav class="nav" id="nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="events.html">Events</a>
-      <a href="shop.html">Shop</a>
-      <a href="contact.html">Contact</a>
+  <header class="header">
+    <nav class="nav">
+      <button id="hamb" class="hamb">☰</button>
+      <div class="logo">
+        <img src="assets/images/logo.png" alt="DADVENTURES Logo">
+        <div class="title">DADVENTURES</div>
+      </div>
+      <div class="navlinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#events">Events</a>
+        <a href="#calendar">Calendar</a>
+        <a href="#blog">Blog</a>
+        <a href="#shop">Shop</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact</a>
+        <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener" class="join">Join Us</a>
+      </div>
+      <div class="social">
+        <a href="https://instagram.com" target="_blank" rel="noopener">IG</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">FB</a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener">TT</a>
+      </div>
+      <div class="clock mono" aria-live="polite">—</div>
     </nav>
-    <button class="hamburger" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
-  </div>
-  <div class="mobile-panel" id="mobilePanel" aria-hidden="true">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="events.html">Events</a>
-    <a href="shop.html">Shop</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</header>
+  </header>
 
-<section class="hero container">
-  <h1>Explore • Bond • Adventure</h1>
-  <p class="muted">Dad & child experiences, events, and a thriving community — designed with a futuristic, elegant touch.</p>
-</section>
-<section class="container grid">
-  <article class="card" style="grid-column:span 8">
-    <h3>Upcoming Events</h3>
-    <img src="assets/images/events.svg" alt="Events"/>
-    <p>See the next adventures with images, locations and countdowns.</p>
-    <p><a href="events.html">Open Events →</a></p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>Shop Preview</h3>
-    <img src="assets/images/shop.svg" alt="Shop"/>
-    <p>Caps, T‑shirts, mugs — demo items included.</p>
-    <p><a href="shop.html">Visit Shop →</a></p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>Blog</h3>
-    <img src="assets/images/blog.svg" alt="Blog"/>
-    <p>Stories and tips for unforgettable bonding.</p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>About</h3>
-    <img src="assets/images/about.svg" alt="About"/>
-    <p>Our mission and values (editable in Admin).</p>
-  </article>
-  <article class="card" style="grid-column:span 4">
-    <h3>Contact</h3>
-    <img src="assets/images/contact.svg" alt="Contact"/>
-    <p>Reach out — aligned, responsive form.</p>
-  </article>
-</section>
-
-<footer class="footer container">
-  <span class="badge">© DADVENTURES</span>
-  <div class="spacer"></div>
-  <div class="socials">
-    <a href="#" aria-label="Facebook">Facebook</a>
-    <a href="#" aria-label="Instagram">Instagram</a>
-    <a href="#" aria-label="TikTok">TikTok</a>
-    <a href="admin.html" aria-label="Admin">Admin</a>
-    <a href="#" aria-label="Sitemap">Sitemap</a>
+  <div id="drawer" class="drawer">
+    <div class="back"></div>
+    <div class="panel">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#blog">Blog</a>
+      <a href="#shop">Shop</a>
+      <a href="#donate">Donate</a>
+      <a href="#contact">Contact</a>
+      <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener">Join Us</a>
+      <a href="admin-panel.html">Admin</a>
+      <div style="margin-top:12px" class="small">Follow us: <a href="https://instagram.com" target="_blank">Instagram</a> · <a href="https://facebook.com" target="_blank">Facebook</a> · <a href="https://tiktok.com" target="_blank">TikTok</a></div>
+    </div>
   </div>
-</footer>
 
-</body></html>
+  <div class="trailer">
+    <button id="play" class="btn" title="Play/Pause">▶</button>
+    <input id="seek" class="slider" type="range" min="0" max="100" step="1" value="0" aria-label="Seek">
+    <span class="time mono" id="cur">00:00</span>/<span class="time mono" id="dur">00:00</span>
+    <input id="vol" class="slider" type="range" min="0" max="1" step="0.01" value="0.35" aria-label="Volume">
+    <audio id="ambient" src="assets/audio/ambient.wav" loop preload="auto"></audio>
+    <span class="small">Ambient trailer • continues across pages</span>
+  </div>
+
+  <main id="app"></main>
+
+  <footer class="footer">
+    <div>© <span id="y"></span> DADVENTURES • <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a> • <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a> • <a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a> • <a href="sitemap.xml">Sitemap</a></div>
+    <div class="small">Powered by DADVENTURES • Explore • Bond • Grow • Last updated: <span id="foot-time" class="mono"></span></div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    if ('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js'); }
+  </script>
+</body>
+</html>
